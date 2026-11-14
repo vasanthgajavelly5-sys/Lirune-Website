@@ -1,5 +1,6 @@
 ---
 import config from '../data/config.json';
+import releases from '../data/releases.json';
 
 interface Props {
   currentPath?: string;
@@ -27,6 +28,7 @@ const aboutLinks = [
 ];
 
 const isProductActive = productLinks.some(l => cleanPath === l.href);
+const isReleasesActive = cleanPath === '/downloads';
 const isExploreActive = exploreLinks.some(l => cleanPath === l.href);
 const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
 ---
@@ -50,9 +52,9 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
       </div>
     </a>
 
-    <!-- Desktop Navigation Hierarchy -->
+    <!-- Desktop Navigation Hierarchy: Product | Releases | Explore | About | Buy Me a Coffee -->
     <nav class="desktop-nav" aria-label="Main Navigation">
-      <!-- Product Dropdown -->
+      <!-- 1. Product Dropdown -->
       <div class="nav-item has-dropdown" data-dropdown="product">
         <button
           type="button"
@@ -82,7 +84,58 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
         </div>
       </div>
 
-      <!-- Explore Dropdown -->
+      <!-- 2. Releases Dropdown (Immediately after Product) -->
+      <div class="nav-item has-dropdown" data-dropdown="releases">
+        <button
+          type="button"
+          class:list={['nav-trigger', { active: isReleasesActive }]}
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          <span>Releases</span>
+          <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="dropdown-menu dropdown-menu--releases" role="menu">
+          <div class="dropdown-arrow" aria-hidden="true"></div>
+          <div class="dropdown-list">
+            <!-- Windows Platform Entry -->
+            <a href="/downloads#windows" class="dropdown-link release-dropdown-link" role="menuitem">
+              <div class="release-item-icon windows">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.628h11.377V24H0zm12.623 0H24V24H12.623z"/>
+                </svg>
+              </div>
+              <div class="release-item-info">
+                <div class="release-item-title-row">
+                  <span class="link-label">Windows</span>
+                  <span class="release-badge windows">v{releases.windows.version} Stable</span>
+                </div>
+                <span class="link-desc">Installer (.exe) & Microsoft Store</span>
+              </div>
+            </a>
+
+            <!-- Android Platform Entry -->
+            <a href="/downloads#android" class="dropdown-link release-dropdown-link" role="menuitem">
+              <div class="release-item-icon android">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/>
+                </svg>
+              </div>
+              <div class="release-item-info">
+                <div class="release-item-title-row">
+                  <span class="link-label">Android</span>
+                  <span class="release-badge android">v{releases.android.version} Stable</span>
+                </div>
+                <span class="link-desc">Release APK (GitHub) • Zero Internet</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Explore Dropdown -->
       <div class="nav-item has-dropdown" data-dropdown="explore">
         <button
           type="button"
@@ -112,7 +165,7 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
         </div>
       </div>
 
-      <!-- About Dropdown -->
+      <!-- 4. About Dropdown -->
       <div class="nav-item has-dropdown" data-dropdown="about">
         <button
           type="button"
@@ -141,6 +194,20 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
           </div>
         </div>
       </div>
+
+      <!-- 5. Buy Me a Coffee Button (Immediately after About) -->
+      <a
+        href={config.buyMeACoffeeUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-coffee-btn"
+        title="Support Lirune development on Buy Me a Coffee"
+      >
+        <svg class="coffee-icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 01-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 013.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 01-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 01-4.743.295 37.059 37.059 0 01-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0011.343.376.483.483 0 01.535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.122.637-.553 1.028-1.182 1.171-.577.131-1.165.2-1.756.205-.656.004-1.31-.025-1.966-.022-.699.004-1.556-.06-2.095-.58-.475-.458-.54-1.174-.605-1.793l-.731-7.013-.322-3.094c-.037-.351-.286-.695-.678-.678-.336.015-.718.3-.678.679l.228 2.185.949 9.112c.147 1.344 1.174 2.068 2.446 2.272.742.12 1.503.144 2.257.156.966.016 1.942.053 2.892-.122 1.408-.258 2.465-1.198 2.616-2.657.34-3.332.683-6.663 1.024-9.995l.215-2.087a.484.484 0 01.39-.426c.402-.078.787-.212 1.074-.518.455-.488.546-1.124.385-1.766zm-1.478.772c-.145.137-.363.201-.578.233-2.416.359-4.866.54-7.308.46-1.748-.06-3.477-.254-5.207-.498-.17-.024-.353-.055-.47-.18-.22-.236-.111-.71-.054-.995.052-.26.152-.609.463-.646.484-.057 1.046.148 1.526.22.577.088 1.156.159 1.737.212 2.48.226 5.002.19 7.472-.14.45-.06.899-.13 1.345-.21.399-.072.84-.206 1.08.206.166.281.188.657.162.974a.544.544 0 01-.169.364zm-6.159 3.9c-.862.37-1.84.788-3.109.788a5.884 5.884 0 01-1.569-.217l.877 9.004c.065.78.717 1.38 1.5 1.38 0 0 1.243.065 1.658.065.447 0 1.786-.065 1.786-.065.783 0 1.434-.6 1.499-1.38l.94-9.95a3.996 3.996 0 00-1.322-.238c-.826 0-1.491.284-2.26.613z"/>
+        </svg>
+        <span>Buy Me a Coffee</span>
+      </a>
     </nav>
 
     <!-- Header Actions (Theme Selector & Download CTA) -->
@@ -154,7 +221,7 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
           title="Switch to Light Theme"
           aria-label="Light Theme"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -173,7 +240,7 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
           title="Follow Operating System Theme"
           aria-label="System Theme"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
             <line x1="8" y1="21" x2="16" y2="21"></line>
             <line x1="12" y1="17" x2="12" y2="21"></line>
@@ -186,7 +253,7 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
           title="Switch to Dark Theme"
           aria-label="Dark Theme"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
@@ -241,7 +308,7 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
       </div>
 
       <div class="mobile-drawer-content">
-        <!-- Section: Product -->
+        <!-- Section 1: Product -->
         <div class="mobile-nav-group">
           <div class="mobile-group-title">Product</div>
           {productLinks.map(link => (
@@ -254,7 +321,30 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
           ))}
         </div>
 
-        <!-- Section: Explore -->
+        <!-- Section 2: Releases -->
+        <div class="mobile-nav-group">
+          <div class="mobile-group-title">Releases</div>
+          <a href="/downloads#windows" class="mobile-nav-link mobile-release-link">
+            <div class="mobile-release-lead">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="windows-icon" aria-hidden="true">
+                <path d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.628h11.377V24H0zm12.623 0H24V24H12.623z"/>
+              </svg>
+              <span>Windows</span>
+            </div>
+            <span class="release-badge windows">v{releases.windows.version}</span>
+          </a>
+          <a href="/downloads#android" class="mobile-nav-link mobile-release-link">
+            <div class="mobile-release-lead">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="android-icon" aria-hidden="true">
+                <path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z"/>
+              </svg>
+              <span>Android</span>
+            </div>
+            <span class="release-badge android">v{releases.android.version}</span>
+          </a>
+        </div>
+
+        <!-- Section 3: Explore -->
         <div class="mobile-nav-group">
           <div class="mobile-group-title">Explore</div>
           {exploreLinks.map(link => (
@@ -267,7 +357,7 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
           ))}
         </div>
 
-        <!-- Section: About -->
+        <!-- Section 4: About -->
         <div class="mobile-nav-group">
           <div class="mobile-group-title">About</div>
           {aboutLinks.map(link => (
@@ -280,19 +370,34 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
           ))}
         </div>
 
+        <!-- Section 5: Buy Me a Coffee Support Link -->
+        <div class="mobile-nav-group">
+          <a
+            href={config.buyMeACoffeeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mobile-coffee-link"
+          >
+            <svg class="coffee-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 01-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 013.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 01-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 01-4.743.295 37.059 37.059 0 01-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0011.343.376.483.483 0 01.535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.122.637-.553 1.028-1.182 1.171-.577.131-1.165.2-1.756.205-.656.004-1.31-.025-1.966-.022-.699.004-1.556-.06-2.095-.58-.475-.458-.54-1.174-.605-1.793l-.731-7.013-.322-3.094c-.037-.351-.286-.695-.678-.678-.336.015-.718.3-.678.679l.228 2.185.949 9.112c.147 1.344 1.174 2.068 2.446 2.272.742.12 1.503.144 2.257.156.966.016 1.942.053 2.892-.122 1.408-.258 2.465-1.198 2.616-2.657.34-3.332.683-6.663 1.024-9.995l.215-2.087a.484.484 0 01.39-.426c.402-.078.787-.212 1.074-.518.455-.488.546-1.124.385-1.766zm-1.478.772c-.145.137-.363.201-.578.233-2.416.359-4.866.54-7.308.46-1.748-.06-3.477-.254-5.207-.498-.17-.024-.353-.055-.47-.18-.22-.236-.111-.71-.054-.995.052-.26.152-.609.463-.646.484-.057 1.046.148 1.526.22.577.088 1.156.159 1.737.212 2.48.226 5.002.19 7.472-.14.45-.06.899-.13 1.345-.21.399-.072.84-.206 1.08.206.166.281.188.657.162.974a.544.544 0 01-.169.364zm-6.159 3.9c-.862.37-1.84.788-3.109.788a5.884 5.884 0 01-1.569-.217l.877 9.004c.065.78.717 1.38 1.5 1.38 0 0 1.243.065 1.658.065.447 0 1.786-.065 1.786-.065.783 0 1.434-.6 1.499-1.38l.94-9.95a3.996 3.996 0 00-1.322-.238c-.826 0-1.491.284-2.26.613z"/>
+            </svg>
+            <span>Support on Buy Me a Coffee</span>
+          </a>
+        </div>
+
         <!-- Mobile Theme & CTA Footer -->
         <div class="mobile-drawer-footer">
           <div class="mobile-theme-row">
             <span class="mobile-theme-label">Appearance</span>
             <div class="theme-switch" role="group" aria-label="Mobile Theme Selection">
               <button type="button" class="theme-btn" data-theme-value="light" aria-label="Light Theme">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
               </button>
               <button type="button" class="theme-btn" data-theme-value="system" aria-label="System Theme">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
               </button>
               <button type="button" class="theme-btn" data-theme-value="dark" aria-label="Dark Theme">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
               </button>
             </div>
           </div>
@@ -319,10 +424,10 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
     right: 0;
     z-index: 1000;
     background-color: var(--bg-glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-subtle);
-    transition: background-color var(--t-fast), border-color var(--t-fast);
+    transition: background-color var(--t-normal), border-color var(--t-normal);
   }
 
   .header-inner {
@@ -330,15 +435,16 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
     align-items: center;
     justify-content: space-between;
     height: 72px;
+    gap: var(--sp-4);
   }
 
-  /* Brand */
+  /* Brand Link */
   .brand-link {
     display: flex;
     align-items: center;
     gap: var(--sp-3);
     text-decoration: none;
-    cursor: pointer;
+    flex-shrink: 0;
   }
 
   .brand-icon-wrapper {
@@ -351,12 +457,17 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
     align-items: center;
     justify-content: center;
     box-shadow: var(--shadow-sm);
+    transition: transform var(--t-fast);
+  }
+
+  .brand-link:hover .brand-icon-wrapper {
+    transform: scale(1.05);
   }
 
   .brand-icon {
-    width: 24px;
-    height: 24px;
-    display: block;
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
   }
 
   .brand-text {
@@ -368,8 +479,8 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
   .brand-name {
     font-size: 1.25rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
     color: var(--text-primary);
+    letter-spacing: -0.025em;
   }
 
   .brand-sub {
@@ -385,7 +496,7 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
     gap: var(--sp-1);
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 960px) {
     .desktop-nav {
       display: flex;
     }
@@ -396,67 +507,73 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
   }
 
   .nav-trigger {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
     padding: 8px 14px;
     border-radius: var(--r-md);
-    background: transparent;
-    border: none;
     font-size: 0.92rem;
     font-weight: 500;
     color: var(--text-secondary);
+    background: transparent;
+    border: 1px solid transparent;
     cursor: pointer;
     transition: all var(--t-fast);
   }
 
-  .nav-trigger:hover,
-  .nav-item:hover .nav-trigger,
-  .nav-trigger[aria-expanded="true"] {
+  .nav-trigger:hover {
     color: var(--text-primary);
     background-color: var(--bg-hover);
   }
 
   .nav-trigger.active {
-    color: var(--accent);
+    color: var(--text-primary);
     font-weight: 600;
+  }
+
+  .nav-item.is-open .nav-trigger {
+    color: var(--text-primary);
+    background-color: var(--bg-hover);
+    border-color: var(--border-subtle);
   }
 
   .chevron-icon {
     transition: transform var(--t-fast);
+    color: var(--text-tertiary);
   }
 
-  .nav-item:hover .chevron-icon,
-  .nav-trigger[aria-expanded="true"] .chevron-icon {
+  .nav-item.is-open .chevron-icon {
     transform: rotate(180deg);
+    color: var(--text-primary);
   }
 
-  /* Dropdown Menu */
+  /* Dropdown Menus */
   .dropdown-menu {
     position: absolute;
     top: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%) translateY(4px);
+    left: 0;
     width: 320px;
     background-color: var(--bg-surface);
     border: 1px solid var(--border-default);
-    border-radius: var(--r-lg);
-    box-shadow: var(--shadow-xl);
+    border-radius: var(--r-xl);
     padding: var(--sp-2);
+    box-shadow: var(--shadow-lg);
     opacity: 0;
-    pointer-events: none;
     visibility: hidden;
-    transition: all var(--t-fast);
-    z-index: 1010;
+    transform: translateY(-6px);
+    transition: opacity var(--t-fast), transform var(--t-fast), visibility var(--t-fast);
+    pointer-events: none;
   }
 
-  .nav-item:hover .dropdown-menu,
-  .nav-item:focus-within .dropdown-menu,
+  .dropdown-menu--releases {
+    width: 340px;
+  }
+
   .nav-item.is-open .dropdown-menu {
     opacity: 1;
-    pointer-events: auto;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
+    pointer-events: auto;
   }
 
   .dropdown-list {
@@ -478,14 +595,13 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
     background-color: var(--bg-hover);
   }
 
-  .dropdown-link.active .link-label {
-    color: var(--accent);
-    font-weight: 600;
+  .dropdown-link.active {
+    background-color: var(--accent-subtle);
   }
 
   .link-label {
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 0.92rem;
+    font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 2px;
   }
@@ -493,19 +609,113 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
   .link-desc {
     font-size: 0.78rem;
     color: var(--text-tertiary);
-    line-height: 1.35;
+    line-height: 1.4;
   }
 
-  /* Actions */
+  /* Releases Dropdown Links */
+  .release-dropdown-link {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .release-item-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .release-item-icon.windows {
+    background-color: rgba(96, 165, 250, 0.15);
+    color: var(--color-windows);
+  }
+
+  .release-item-icon.android {
+    background-color: rgba(52, 211, 153, 0.15);
+    color: var(--color-android);
+  }
+
+  .release-item-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .release-item-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 2px;
+  }
+
+  .release-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: var(--r-full);
+    letter-spacing: 0.02em;
+  }
+
+  .release-badge.windows {
+    background-color: rgba(96, 165, 250, 0.16);
+    color: var(--color-windows);
+    border: 1px solid rgba(96, 165, 250, 0.30);
+  }
+
+  .release-badge.android {
+    background-color: rgba(52, 211, 153, 0.16);
+    color: var(--color-android);
+    border: 1px solid rgba(52, 211, 153, 0.30);
+  }
+
+  /* Buy Me a Coffee Button (Restrained, Distinctive) */
+  .nav-coffee-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 14px;
+    margin-left: 4px;
+    border-radius: var(--r-full);
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--color-coffee);
+    background-color: var(--color-coffee-bg);
+    border: 1px solid var(--color-coffee-border);
+    text-decoration: none;
+    transition: all var(--t-fast);
+    white-space: nowrap;
+  }
+
+  .nav-coffee-btn:hover {
+    background-color: var(--color-coffee);
+    color: var(--color-coffee-text);
+    border-color: var(--color-coffee);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(251, 191, 36, 0.25);
+  }
+
+  .coffee-icon {
+    flex-shrink: 0;
+  }
+
+  /* Header Actions */
   .header-actions {
     display: flex;
     align-items: center;
     gap: var(--sp-3);
   }
 
-  /* Theme Switcher Segmented Control */
+  /* Theme Switch Segmented Control */
   .theme-switch {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     background-color: var(--bg-surface);
     border: 1px solid var(--border-default);
@@ -515,14 +725,14 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
   }
 
   .theme-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 28px;
     height: 28px;
     border-radius: var(--r-full);
-    border: none;
     background: transparent;
+    border: none;
     color: var(--text-tertiary);
     cursor: pointer;
     transition: all var(--t-fast);
@@ -533,16 +743,18 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
   }
 
   .theme-btn.active {
-    background-color: var(--bg-hover);
-    color: var(--text-primary);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    background-color: var(--accent);
+    color: var(--text-on-accent);
+    box-shadow: var(--shadow-sm);
   }
 
   .header-cta {
     display: none;
+    padding: 8px 18px;
+    font-size: 0.9rem;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 540px) {
     .header-cta {
       display: inline-flex;
     }
@@ -555,35 +767,39 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
     justify-content: center;
     align-items: center;
     gap: 5px;
-    width: 40px;
-    height: 40px;
-    padding: 8px;
+    width: 44px;
+    height: 44px;
     border-radius: var(--r-md);
-    background: transparent;
-    border: 1px solid var(--border-subtle);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
     cursor: pointer;
-    color: var(--text-primary);
+    padding: 0;
+    transition: background-color var(--t-fast);
   }
 
-  @media (min-width: 900px) {
-    .mobile-menu-btn {
-      display: none;
-    }
+  .mobile-menu-btn:hover {
+    background-color: var(--bg-hover);
   }
 
   .hamburger-bar {
     width: 20px;
     height: 2px;
-    background-color: currentColor;
+    background-color: var(--text-primary);
     border-radius: 2px;
-    transition: all var(--t-fast);
+    transition: transform var(--t-fast);
+  }
+
+  @media (min-width: 960px) {
+    .mobile-menu-btn {
+      display: none;
+    }
   }
 
   /* Mobile Drawer */
   .mobile-drawer {
     position: fixed;
     inset: 0;
-    z-index: 9999;
+    z-index: 2000;
   }
 
   .mobile-drawer[hidden] {
@@ -603,124 +819,164 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
     top: 0;
     right: 0;
     bottom: 0;
-    width: min(340px, 86vw);
+    width: 100%;
+    max-width: 360px;
     background-color: var(--bg-surface);
     border-left: 1px solid var(--border-default);
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
     box-shadow: var(--shadow-xl);
-    animation: drawerSlideIn var(--t-normal) forwards;
-  }
-
-  @keyframes drawerSlideIn {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
   }
 
   .mobile-drawer-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--sp-4) var(--sp-6);
+    padding: 16px 20px;
     border-bottom: 1px solid var(--border-subtle);
   }
 
   .mobile-drawer-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: var(--r-md);
     background: transparent;
     border: 1px solid var(--border-subtle);
-    color: var(--text-secondary);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
   }
 
-  .mobile-drawer-close:hover {
-    color: var(--text-primary);
-    background-color: var(--bg-hover);
-  }
-
   .mobile-drawer-content {
-    flex: 1 1 auto;
-    overflow-y: auto;
-    padding: var(--sp-6);
     display: flex;
     flex-direction: column;
-    gap: var(--sp-6);
+    padding: 16px 20px 32px;
+    gap: 20px;
+    flex: 1 1 auto;
+  }
+
+  .mobile-nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
   .mobile-group-title {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-tertiary);
-    margin-bottom: var(--sp-2);
+    padding: 6px 12px;
   }
 
   .mobile-nav-link {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 14px;
+    min-height: 48px;
+    padding: 10px 14px;
     border-radius: var(--r-md);
     color: var(--text-primary);
-    text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
-    min-height: 44px;
+    text-decoration: none;
     transition: background-color var(--t-fast);
   }
 
-  .mobile-nav-link:hover {
+  .mobile-nav-link:hover,
+  .mobile-nav-link:focus-visible {
     background-color: var(--bg-hover);
   }
 
   .mobile-nav-link.active {
-    color: var(--accent);
     background-color: var(--accent-subtle);
     font-weight: 600;
   }
 
+  .mobile-release-link {
+    background-color: var(--bg-subtle);
+    margin-bottom: 4px;
+  }
+
+  .mobile-release-lead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .windows-icon {
+    color: var(--color-windows);
+  }
+
+  .android-icon {
+    color: var(--color-android);
+  }
+
+  .mobile-coffee-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 10px 14px;
+    border-radius: var(--r-md);
+    color: var(--color-coffee);
+    background-color: var(--color-coffee-bg);
+    border: 1px solid var(--color-coffee-border);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--t-fast);
+  }
+
+  .mobile-coffee-link:hover {
+    background-color: var(--color-coffee);
+    color: var(--color-coffee-text);
+  }
+
   .mobile-drawer-footer {
     margin-top: auto;
-    padding-top: var(--sp-6);
-    border-top: 1px solid var(--border-subtle);
     display: flex;
     flex-direction: column;
-    gap: var(--sp-4);
+    gap: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-subtle);
   }
 
   .mobile-theme-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 4px;
   }
 
   .mobile-theme-label {
-    font-size: 0.85rem;
-    font-weight: 500;
+    font-size: 0.88rem;
+    font-weight: 600;
     color: var(--text-secondary);
   }
 
   .mobile-download-btn {
     width: 100%;
-    min-height: 44px;
+    min-height: 48px;
+    justify-content: center;
+    font-size: 0.95rem;
   }
 </style>
 
 <script>
   function setupHeader() {
-    // 1. Theme Switcher Logic
+    // 1. Theme Setting Sync & Button States
     const themeButtons = document.querySelectorAll<HTMLButtonElement>('.theme-btn');
+    const currentThemeSetting = localStorage.getItem('lirune-theme') || 'system';
 
-    function syncThemeUI(currentSetting: string) {
+    function updateActiveButtons(setting: string) {
       themeButtons.forEach(btn => {
         const val = btn.getAttribute('data-theme-value');
-        if (val === currentSetting) {
+        if (val === setting) {
           btn.classList.add('active');
           btn.setAttribute('aria-pressed', 'true');
         } else {
@@ -730,21 +986,19 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
       });
     }
 
+    updateActiveButtons(currentThemeSetting);
+
     function applyTheme(setting: string) {
       localStorage.setItem('lirune-theme', setting);
       document.documentElement.setAttribute('data-theme-setting', setting);
-
       if (setting === 'system') {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
       } else {
         document.documentElement.setAttribute('data-theme', setting);
       }
-      syncThemeUI(setting);
+      updateActiveButtons(setting);
     }
-
-    const initialSetting = localStorage.getItem('lirune-theme') || 'system';
-    syncThemeUI(initialSetting);
 
     themeButtons.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -828,9 +1082,6 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
     });
   }
 
-  // Run on first load
   setupHeader();
-
-  // Support Astro ViewTransitions if enabled
   document.addEventListener('astro:page-load', setupHeader);
 </script>

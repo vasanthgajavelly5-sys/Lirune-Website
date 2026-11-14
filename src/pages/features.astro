@@ -9,140 +9,322 @@ import config from '../data/config.json';
   canonicalPath="/features"
 >
   <div class="site-container section-spacing">
+    <!-- Header -->
     <div class="section-header section-header--center">
       <span class="badge badge-success">Engine & Capabilities</span>
       <h1>Crafted for the art of reading</h1>
       <p>Lirune combines a high-performance offline rendering engine with deliberate, calm design to create the optimal environment for your personal digital library.</p>
     </div>
 
-    <!-- Feature 1: The Reading Engine (Dual Spreads & Scroll Engine v2) -->
-    <section class="feature-story-block">
-      <div class="feature-story-visual">
-        <div class="device-frame-desktop clickable-shot"
-             data-shot-src="/images/screenshots/win-reader-epub-spread.png"
-             data-shot-title="Windows Two-Page Spread View"
-             data-shot-platform="Windows"
-             data-shot-caption="Lirune Reader Windows dual-page spread providing authentic bookish reading rhythm on wide displays.">
-          <div class="device-header-desktop">
-            <div class="device-dots"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
-            <span class="device-title">Windows — Spread Reading</span>
-            <span style="width: 32px"></span>
+    <!-- Features Narrative Stack -->
+    <div class="features-stack">
+      <!-- Feature 1: Dual Spreads & Scroll Engine v2 -->
+      <section class="feature-block" aria-labelledby="feat-1-title">
+        <div class="feature-content-col">
+          <div class="feature-meta">
+            <span class="feature-index">01</span>
+            <span class="feature-category">Reading Engine</span>
           </div>
-          <img src="/images/screenshots/win-reader-epub-spread.png" alt="Dual-page book spread reading in Windows" width="1080" height="675" loading="lazy" />
-        </div>
-      </div>
-      <div class="feature-story-copy">
-        <div class="feature-num">01 / Engine</div>
-        <h2>Dual-Page Spreads and Virtualized Scrolling</h2>
-        <p>
-          Reading on a wide computer screen should feel like holding an open book, not reading a web document. Lirune calculates aspect ratios automatically to present comfortable two-column spreads with balanced gutters and authentic page turns.
-        </p>
-        <p>
-          On mobile, <strong>Scroll Engine v2</strong> virtualizes chapter DOM nodes to maintain consistent 60fps scrolling across 1,000+ page books while consuming minimal battery and RAM.
-        </p>
-        <div class="feature-pills">
-          <span class="feature-pill">Dual-page spread</span>
-          <span class="feature-pill">Continuous vertical flow</span>
-          <span class="feature-pill">Scroll Engine v2</span>
-          <span class="feature-pill">Fullscreen immersion (F11)</span>
-        </div>
-      </div>
-    </section>
+          <h2 id="feat-1-title" class="feature-heading">Dual-Page Spreads & Virtualized Scrolling</h2>
+          <p class="feature-lead">
+            Reading on a wide computer display should feel like holding an open book, not scrolling a web document. Lirune calculates aspect ratios automatically to present authentic two-column spreads with balanced gutters and genuine page turns.
+          </p>
+          <p class="feature-subtext">
+            On mobile devices, <strong>Scroll Engine v2</strong> virtualizes chapter DOM nodes to sustain steady 60fps scrolling across 1,000+ page books while consuming minimal battery and RAM.
+          </p>
 
-    <!-- Feature 2: Offline Audio Narration (TTS) -->
-    <section class="feature-story-block feature-story-block--reverse">
-      <div class="feature-story-visual">
-        <div class="device-frame-mobile clickable-shot"
-             data-shot-src="/images/screenshots/android-tts-player.png"
-             data-shot-title="Android Text-to-Speech Player"
-             data-shot-platform="Android"
-             data-shot-caption="Offline Text-to-Speech audio narration player in Android with background playback and chapter scrubber.">
-          <div class="device-notch-mobile"></div>
-          <img src="/images/screenshots/android-tts-player.png" alt="Android Text-to-Speech voice narration player" width="400" height="820" loading="lazy" />
-        </div>
-      </div>
-      <div class="feature-story-copy">
-        <div class="feature-num">02 / Narration</div>
-        <h2>Offline Text-to-Speech audio player</h2>
-        <p>
-          Turn any supported book or document into an audio experience without connecting to remote speech synthesis APIs. Lirune interfaces directly with your system's offline voice synthesizer.
-        </p>
-        <p>
-          Enjoy background playback while walking or commuting, complete with lock-screen media controls, adjustable speech rates, voice pitch modulation, and chapter position scrubbing.
-        </p>
-        <div class="feature-pills">
-          <span class="feature-pill">Offline system voices</span>
-          <span class="feature-pill">Background audio service</span>
-          <span class="feature-pill">Speech rate controls</span>
-          <span class="feature-pill">Lock-screen integration</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Feature 3: Navigation, Search & Annotations -->
-    <section class="feature-story-block">
-      <div class="feature-story-visual">
-        <div class="device-frame-desktop clickable-shot"
-             data-shot-src="/images/screenshots/win-reader-search.png"
-             data-shot-title="Full-Text Search Modal"
-             data-shot-platform="Windows"
-             data-shot-caption="Windows full-text search finding keyword instances across the entire book with match previews.">
-          <div class="device-header-desktop">
-            <div class="device-dots"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
-            <span class="device-title">Windows — Full-Text Search</span>
-            <span style="width: 32px"></span>
+          <div class="feature-highlights">
+            <div class="highlight-item">
+              <span class="highlight-bullet">✓</span>
+              <span>Automatic dual-column spreads on wide desktop displays</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-bullet">✓</span>
+              <span>Smooth virtualized continuous vertical flow on Android</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-bullet">✓</span>
+              <span>Immersive distraction-free reading with F11 fullscreen mode</span>
+            </div>
           </div>
-          <img src="/images/screenshots/win-reader-search.png" alt="Full-text search modal in Lirune Reader" width="1080" height="675" loading="lazy" />
-        </div>
-      </div>
-      <div class="feature-story-copy">
-        <div class="feature-num">03 / Discovery</div>
-        <h2>Full-text search, TOC drawer & annotations</h2>
-        <p>
-          Find quotes and references instantly. The built-in search engine indexes book content locally, highlighting exact occurrences and providing context preview snippets so you can jump to chapters in a single click.
-        </p>
-        <p>
-          Organize your reading with a multi-level Table of Contents drawer, persistent bookmarks, and custom notes stored directly in your local library index.
-        </p>
-        <div class="feature-pills">
-          <span class="feature-pill">Contextual search snippets</span>
-          <span class="feature-pill">Multi-level TOC</span>
-          <span class="feature-pill">Highlights & Notes</span>
-          <span class="feature-pill">Reading progress sync</span>
-        </div>
-      </div>
-    </section>
 
-    <!-- Feature 4: Security & Hardening -->
-    <section class="feature-story-block feature-story-block--reverse">
-      <div class="feature-story-visual">
-        <div class="device-frame-desktop clickable-shot"
-             data-shot-src="/images/screenshots/win-settings-reading.png"
-             data-shot-title="Reading Appearance & Security Controls"
-             data-shot-platform="Windows"
-             data-shot-caption="Windows application settings demonstrating strict security sanitization, local storage paths, and appearance choices.">
-          <div class="device-header-desktop">
-            <div class="device-dots"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
-            <span class="device-title">Windows — Appearance & Settings</span>
-            <span style="width: 32px"></span>
+          <div class="feature-tags-wrap" aria-label="Feature capabilities">
+            <span class="feature-pill">Dual-page spread</span>
+            <span class="feature-pill">Continuous vertical flow</span>
+            <span class="feature-pill">Scroll Engine v2</span>
+            <span class="feature-pill">Fullscreen immersion (F11)</span>
           </div>
-          <img src="/images/screenshots/win-reader-toc.png" alt="Table of contents and reading settings" width="1080" height="675" loading="lazy" />
         </div>
-      </div>
-      <div class="feature-story-copy">
-        <div class="feature-num">04 / Security</div>
-        <h2>Defense-in-depth document sanitization</h2>
-        <p>
-          Many ebooks and documents contain embedded HTML, XML scripts, or untrusted archives. Lirune enforces strict defense-in-depth isolation:
-        </p>
-        <ul class="feature-checklist" role="list">
-          <li><strong>DOMPurify HTML Sanitization:</strong> Strips malicious scripts and iframe vectors from FB2, HTML, and Markdown documents.</li>
-          <li><strong>Zip-Slip Protection:</strong> Rejects archives attempting path-traversal attacks beyond extract bounds.</li>
-          <li><strong>512 MB Bounds Check:</strong> Guards against decompression bombs and denial-of-service memory exhaustion.</li>
-          <li><strong>Zero Network Telemetry:</strong> No tracking SDKs, no external analytics pings, no cloud phone-home.</li>
-        </ul>
-      </div>
-    </section>
+
+        <div class="feature-visual-col">
+          <div class="device-frame-desktop clickable-shot"
+               data-shot-src="/images/screenshots/win-reader-epub-spread.png"
+               data-shot-title="Windows Two-Page Spread View"
+               data-shot-platform="Windows"
+               data-shot-caption="Lirune Reader Windows dual-page spread providing authentic bookish reading rhythm on wide displays.">
+            <div class="device-header-desktop">
+              <div class="device-dots"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
+              <span class="device-title">Windows — Spread Reading</span>
+              <span style="width: 32px"></span>
+            </div>
+            <img
+              src="/images/screenshots/win-reader-epub-spread.png"
+              alt="Dual-page book spread reading in Windows"
+              width="1080"
+              height="675"
+              loading="lazy"
+              class="feature-img"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 2: Offline Audio Narration (TTS) -->
+      <section class="feature-block feature-block--reverse" aria-labelledby="feat-2-title">
+        <div class="feature-content-col">
+          <div class="feature-meta">
+            <span class="feature-index">02</span>
+            <span class="feature-category">Narration</span>
+          </div>
+          <h2 id="feat-2-title" class="feature-heading">Offline Text-to-Speech Audio Player</h2>
+          <p class="feature-lead">
+            Turn any supported ebook or document into an audio experience without connecting to remote speech synthesis APIs or cloud services. Lirune interfaces directly with your system's offline voice synthesizer.
+          </p>
+          <p class="feature-subtext">
+            Enjoy background playback while walking or commuting, complete with lock-screen media controls, adjustable speech rates, voice pitch modulation, and chapter position scrubbing.
+          </p>
+
+          <div class="feature-highlights">
+            <div class="highlight-item">
+              <span class="highlight-bullet">✓</span>
+              <span>100% offline system voice synthesis with zero data transmission</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-bullet">✓</span>
+              <span>Android background audio playback with lock-screen controls</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-bullet">✓</span>
+              <span>Fine-grained speech rate (0.5x – 2.5x) and pitch modulation</span>
+            </div>
+          </div>
+
+          <div class="feature-tags-wrap" aria-label="Audio capabilities">
+            <span class="feature-pill">Offline system voices</span>
+            <span class="feature-pill">Background audio service</span>
+            <span class="feature-pill">Speech rate controls</span>
+            <span class="feature-pill">Lock-screen integration</span>
+          </div>
+        </div>
+
+        <div class="feature-visual-col feature-visual-col--mobile">
+          <div class="device-frame-mobile clickable-shot"
+               data-shot-src="/images/screenshots/android-tts-player.png"
+               data-shot-title="Android Text-to-Speech Player"
+               data-shot-platform="Android"
+               data-shot-caption="Offline Text-to-Speech audio narration player in Android with background playback and chapter scrubber.">
+            <div class="device-notch-mobile"></div>
+            <img
+              src="/images/screenshots/android-tts-player.png"
+              alt="Android Text-to-Speech voice narration player"
+              width="400"
+              height="820"
+              loading="lazy"
+              class="feature-img feature-img--mobile"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 3: Navigation, Full-Text Search & Annotations -->
+      <section class="feature-block" aria-labelledby="feat-3-title">
+        <div class="feature-content-col">
+          <div class="feature-meta">
+            <span class="feature-index">03</span>
+            <span class="feature-category">Discovery</span>
+          </div>
+          <h2 id="feat-3-title" class="feature-heading">Full-Text Search, TOC Drawer & Annotations</h2>
+          <p class="feature-lead">
+            Locate quotes and references across thousands of pages instantly. The built-in search engine indexes book content locally, highlighting exact occurrences and providing context preview snippets so you can jump to chapters in a single click.
+          </p>
+          <p class="feature-subtext">
+            Organize your reading with a multi-level Table of Contents drawer, persistent bookmarks, and custom notes stored directly in your local SQLite library database.
+          </p>
+
+          <div class="feature-highlights">
+            <div class="highlight-item">
+              <span class="highlight-bullet">✓</span>
+              <span>Fast local keyword indexing with contextual preview snippets</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-bullet">✓</span>
+              <span>Multi-level Table of Contents with expandable nesting</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-bullet">✓</span>
+              <span>Persistent bookmarks and reading progress preserved locally</span>
+            </div>
+          </div>
+
+          <div class="feature-tags-wrap" aria-label="Search capabilities">
+            <span class="feature-pill">Contextual search snippets</span>
+            <span class="feature-pill">Multi-level TOC</span>
+            <span class="feature-pill">Highlights & Notes</span>
+            <span class="feature-pill">Local SQLite storage</span>
+          </div>
+        </div>
+
+        <div class="feature-visual-col">
+          <div class="device-frame-desktop clickable-shot"
+               data-shot-src="/images/screenshots/win-reader-search.png"
+               data-shot-title="Full-Text Search Modal"
+               data-shot-platform="Windows"
+               data-shot-caption="Windows full-text search finding keyword instances across the entire book with match previews.">
+            <div class="device-header-desktop">
+              <div class="device-dots"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
+              <span class="device-title">Windows — Full-Text Search</span>
+              <span style="width: 32px"></span>
+            </div>
+            <img
+              src="/images/screenshots/win-reader-search.png"
+              alt="Full-text search modal in Lirune Reader"
+              width="1080"
+              height="675"
+              loading="lazy"
+              class="feature-img"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 4: Defense-in-depth Security -->
+      <section class="feature-block feature-block--reverse" aria-labelledby="feat-4-title">
+        <div class="feature-content-col">
+          <div class="feature-meta">
+            <span class="feature-index">04</span>
+            <span class="feature-category">Security Architecture</span>
+          </div>
+          <h2 id="feat-4-title" class="feature-heading">Defense-in-Depth Document Sanitization</h2>
+          <p class="feature-lead">
+            Many ebooks and documents contain embedded HTML, XML scripts, or untrusted archive files. Lirune enforces strict defense-in-depth isolation so malicious files cannot compromise your operating system.
+          </p>
+
+          <div class="feature-security-list">
+            <div class="security-card">
+              <div class="security-card-header">
+                <span class="security-icon">🛡️</span>
+                <strong>DOMPurify HTML Sanitization</strong>
+              </div>
+              <p>Strips malicious inline scripts, event listeners, and iframe attack vectors from FB2, HTML, and Markdown books before rendering.</p>
+            </div>
+            <div class="security-card">
+              <div class="security-card-header">
+                <span class="security-icon">🔒</span>
+                <strong>Zip-Slip Path Traversal Protection</strong>
+              </div>
+              <p>Rejects crafted archives attempting to extract files outside sandbox boundaries during book import.</p>
+            </div>
+            <div class="security-card">
+              <div class="security-card-header">
+                <span class="security-icon">⚡</span>
+                <strong>512 MB File Bounds Check</strong>
+              </div>
+              <p>Guards against zip-bomb decompression attacks and denial-of-service memory exhaustion.</p>
+            </div>
+            <div class="security-card">
+              <div class="security-card-header">
+                <span class="security-icon">🚫</span>
+                <strong>Zero Network Telemetry</strong>
+              </div>
+              <p>No tracking SDKs, no external analytics pings, and android.permission.INTERNET permanently stripped.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-visual-col">
+          <div class="device-frame-desktop clickable-shot"
+               data-shot-src="/images/screenshots/win-reader-toc.png"
+               data-shot-title="Reading Appearance & Table of Contents"
+               data-shot-platform="Windows"
+               data-shot-caption="Windows application settings demonstrating strict security sanitization, local storage paths, and appearance choices.">
+            <div class="device-header-desktop">
+              <div class="device-dots"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
+              <span class="device-title">Windows — Appearance & TOC</span>
+              <span style="width: 32px"></span>
+            </div>
+            <img
+              src="/images/screenshots/win-reader-toc.png"
+              alt="Table of contents and reading settings"
+              width="1080"
+              height="675"
+              loading="lazy"
+              class="feature-img"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 5: Library Management & Customization -->
+      <section class="feature-block" aria-labelledby="feat-5-title">
+        <div class="feature-content-col">
+          <div class="feature-meta">
+            <span class="feature-index">05</span>
+            <span class="feature-category">Personalization</span>
+          </div>
+          <h2 id="feat-5-title" class="feature-heading">Library Organization & Reading Atmosphere</h2>
+          <p class="feature-lead">
+            Curate your reading collection with drag-and-drop import, cover grid browsing, and automatic metadata extraction. Customize your typography down to the pixel for fatigue-free reading sessions.
+          </p>
+          <p class="feature-subtext">
+            Choose from five curated reading color themes (Dark Obsidian, Alabaster Paper, Warm Sepia, Forest Green, and High Contrast OLED), adjust line height, margins, and letter spacing, and bind custom keyboard shortcuts.
+          </p>
+
+          <div class="feature-highlights">
+            <div class="highlight-item">
+              <span class="highlight-bullet">✓</span>
+              <span>5 calibrated reading color themes for day and night comfort</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-bullet">✓</span>
+              <span>Complete typography control: fonts, line spacing, paragraph margins</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-bullet">✓</span>
+              <span>Customizable keyboard shortcut mapping on desktop</span>
+            </div>
+          </div>
+
+          <div class="feature-tags-wrap" aria-label="Library capabilities">
+            <span class="feature-pill">Cover grid library</span>
+            <span class="feature-pill">5 Reading themes</span>
+            <span class="feature-pill">Custom fonts & sizing</span>
+            <span class="feature-pill">Keybinding manager</span>
+          </div>
+        </div>
+
+        <div class="feature-visual-col">
+          <div class="device-frame-desktop clickable-shot"
+               data-shot-src="/images/screenshots/win-library-grid.png"
+               data-shot-title="Windows Library Cover Grid"
+               data-shot-platform="Windows"
+               data-shot-caption="Lirune Reader Windows digital book library displaying rich cover artwork and search filtering.">
+            <div class="device-header-desktop">
+              <div class="device-dots"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
+              <span class="device-title">Windows — Library Grid</span>
+              <span style="width: 32px"></span>
+            </div>
+            <img
+              src="/images/screenshots/win-library-grid.png"
+              alt="Lirune Reader digital book library cover grid"
+              width="1080"
+              height="675"
+              loading="lazy"
+              class="feature-img"
+            />
+          </div>
+        </div>
+      </section>
+    </div>
 
     <!-- Bottom Action CTA -->
     <div class="features-bottom-cta text-center">
@@ -161,103 +343,211 @@ import config from '../data/config.json';
 </BaseLayout>
 
 <style>
-  .feature-story-block {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(36px, 6vw, 72px);
-    align-items: center;
-    margin-bottom: clamp(72px, 10vw, 128px);
+  /* Features Stack Layout */
+  .features-stack {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(56px, 8vw, 88px);
+    margin-bottom: clamp(64px, 8vw, 96px);
   }
 
-  @media (min-width: 900px) {
-    .feature-story-block {
-      grid-template-columns: 1.15fr 0.85fr;
+  /* Two-column Feature Block */
+  .feature-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+  }
+
+  @media (min-width: 992px) {
+    .feature-block {
+      display: grid;
+      grid-template-columns: 42% 58%;
+      gap: clamp(32px, 4vw, 56px);
+      align-items: flex-start; /* CRITICAL: heading starts level with top of screenshot */
     }
 
-    .feature-story-block--reverse {
-      grid-template-columns: 0.85fr 1.15fr;
+    .feature-block--reverse {
+      grid-template-columns: 42% 58%;
     }
 
-    .feature-story-block--reverse .feature-story-visual {
-      order: 2;
-    }
-
-    .feature-story-block--reverse .feature-story-copy {
+    .feature-block--reverse .feature-content-col {
       order: 1;
     }
+
+    .feature-block--reverse .feature-visual-col {
+      order: 2;
+    }
   }
 
-  .feature-num {
+  /* Content Column */
+  .feature-content-col {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .feature-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: var(--sp-2);
+  }
+
+  .feature-index {
     font-family: var(--font-mono);
     font-size: 0.82rem;
     font-weight: 700;
     color: var(--accent-chrome);
-    letter-spacing: 0.06em;
-    margin-bottom: var(--sp-2);
+    letter-spacing: 0.05em;
   }
 
-  .feature-story-copy h2 {
-    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  .feature-category {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+  }
+
+  .feature-heading {
+    font-size: clamp(1.75rem, 2.4vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
     margin-bottom: var(--sp-4);
+    text-wrap: initial; /* Avoid aggressive short wrapping on technical titles */
   }
 
-  .feature-story-copy p {
+  .feature-lead {
     font-size: 1.02rem;
     color: var(--text-secondary);
     line-height: 1.65;
+    margin-bottom: var(--sp-3);
+  }
+
+  .feature-subtext {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
     margin-bottom: var(--sp-4);
   }
 
-  .feature-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-2);
-    margin-top: var(--sp-6);
-  }
-
-  .feature-pill {
-    font-size: 0.82rem;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: var(--r-full);
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-default);
-    color: var(--text-primary);
-  }
-
-  .feature-checklist {
-    list-style: none;
+  /* Feature Checklist Highlights */
+  .feature-highlights {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin-top: var(--sp-4);
+    gap: 8px;
+    margin-bottom: var(--sp-5);
   }
 
-  .feature-checklist li {
-    position: relative;
-    padding-left: 24px;
-    font-size: 0.95rem;
+  .highlight-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 0.92rem;
     color: var(--text-secondary);
     line-height: 1.5;
   }
 
-  .feature-checklist li::before {
-    content: "🛡️";
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 0.85rem;
+  .highlight-bullet {
+    color: var(--status-success);
+    font-weight: 700;
+    font-size: 0.95rem;
+    flex-shrink: 0;
   }
 
-  .feature-checklist strong {
+  /* Tags Wrap */
+  .feature-tags-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-top: auto;
+    padding-top: var(--sp-2);
+  }
+
+  .feature-pill {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: var(--r-full);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
     color: var(--text-primary);
+    white-space: nowrap;
   }
 
+  /* Visual Column */
+  .feature-visual-col {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .feature-visual-col--mobile {
+    justify-content: center;
+  }
+
+  .feature-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0 0 var(--r-md) var(--r-md);
+  }
+
+  .feature-img--mobile {
+    max-height: 520px;
+    width: auto;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: var(--r-lg);
+  }
+
+  /* Security Cards List */
+  .feature-security-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    margin-top: var(--sp-2);
+    margin-bottom: var(--sp-4);
+  }
+
+  .security-card {
+    padding: 12px 16px;
+    border-radius: var(--r-md);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .security-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+    font-size: 0.92rem;
+  }
+
+  .security-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .security-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+
+  /* Bottom CTA */
   .features-bottom-cta {
     background-color: var(--bg-surface);
     border: 1px solid var(--border-default);
     border-radius: var(--r-xl);
-    padding: clamp(40px, 6vw, 64px);
+    padding: clamp(36px, 5vw, 56px);
     box-shadow: var(--shadow-md);
   }
 
@@ -266,7 +556,7 @@ import config from '../data/config.json';
   }
 
   .features-bottom-cta p {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--text-secondary);
     margin-bottom: var(--sp-6);
     margin-left: auto;

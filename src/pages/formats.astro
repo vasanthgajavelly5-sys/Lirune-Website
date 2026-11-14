@@ -14,7 +14,7 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
     <div class="section-header section-header--center">
       <span class="badge badge-success">Compatibility Matrix</span>
       <h1>19 Document & Book Formats</h1>
-      <p>Lirune renders all formats locally on your machine with dedicated rendering engines and zero external servers.</p>
+      <p>Lirune renders all formats locally on your device with dedicated rendering engines and zero external server dependencies.</p>
     </div>
 
     <!-- Search & Filter Controls -->
@@ -27,7 +27,7 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
         <input
           type="search"
           id="format-search-input"
-          placeholder="Filter by format (e.g. epub, pdf, cbz, fb2, docx)..."
+          placeholder="Filter by format or extension (e.g. epub, pdf, cbz, fb2, docx)..."
           class="matrix-search-input"
           aria-label="Filter formats by name or extension"
         />
@@ -48,21 +48,21 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
       </div>
     </div>
 
-    <!-- Formats Grid / Table -->
-    <div class="formats-list" id="formats-container">
+    <!-- Formats 2-Column Responsive Grid -->
+    <div class="formats-grid" id="formats-container">
       {formats.map(f => (
         <article
-          class="format-row surface-card"
+          class="format-card surface-card"
           data-format-id={f.id}
           data-format-category={f.category}
           data-search-terms={`${f.id} ${f.name} ${f.extensions.join(' ')} ${f.category} ${f.engine}`.toLowerCase()}
         >
-          <div class="format-primary">
+          <div class="format-card-top">
             <div class="format-ext-badge">
               {f.extensions[0].replace('.', '').toUpperCase()}
             </div>
-            <div class="format-info">
-              <div class="format-header-meta">
+            <div class="format-meta">
+              <div class="format-title-row">
                 <h3 class="format-name">{f.name}</h3>
                 <span class:list={['status-indicator', f.status.toLowerCase().includes('fully') ? 'status-full' : 'status-partial']}>
                   {f.status}
@@ -76,19 +76,19 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
             </div>
           </div>
 
-          <div class="format-details">
-            <div class="detail-block">
-              <span class="detail-label">Rendering Engine</span>
-              <p class="detail-text">{f.engine}</p>
+          <div class="format-specs">
+            <div class="spec-item">
+              <span class="spec-label">Rendering Engine</span>
+              <p class="spec-val">{f.engine}</p>
             </div>
-            <div class="detail-block">
-              <span class="detail-label">Capabilities</span>
-              <p class="detail-text">{f.details}</p>
+            <div class="spec-item">
+              <span class="spec-label">Capabilities</span>
+              <p class="spec-val">{f.details}</p>
             </div>
             {f.limitations && (
-              <div class="detail-block detail-block--warning">
-                <span class="detail-label">Security & DRM Notice</span>
-                <p class="detail-text">{f.limitations}</p>
+              <div class="spec-item spec-item--notice">
+                <span class="spec-label">Security & DRM Notice</span>
+                <p class="spec-val">{f.limitations}</p>
               </div>
             )}
           </div>
@@ -113,7 +113,7 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
     background-color: var(--bg-surface);
     border: 1px solid var(--border-default);
     border-radius: var(--r-xl);
-    padding: var(--sp-6);
+    padding: var(--sp-5);
     margin-bottom: var(--sp-8);
     display: flex;
     flex-direction: column;
@@ -137,12 +137,12 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
 
   .matrix-search-input {
     width: 100%;
-    padding: 14px 16px 14px 48px;
+    padding: 13px 16px 13px 48px;
     border-radius: var(--r-md);
     background-color: var(--bg-subtle);
     border: 1px solid var(--border-default);
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 0.98rem;
     outline: none;
     transition: all var(--t-fast);
   }
@@ -184,80 +184,97 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
     border-color: transparent;
   }
 
-  /* Formats List */
-  .formats-list {
+  /* Formats 2-Column Responsive Grid */
+  .formats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+  }
+
+  @media (min-width: 860px) {
+    .formats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .format-card {
+    padding: var(--sp-5);
     display: flex;
     flex-direction: column;
     gap: var(--sp-4);
+    height: 100%;
+    transition: border-color var(--t-fast), box-shadow var(--t-fast);
   }
 
-  .format-row {
-    padding: var(--sp-6);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-6);
+  .format-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
   }
 
-  .format-primary {
+  .format-card-top {
     display: flex;
     align-items: flex-start;
     gap: var(--sp-4);
   }
 
   .format-ext-badge {
-    width: 54px;
-    height: 54px;
+    width: 50px;
+    height: 50px;
     border-radius: var(--r-lg);
     background-color: var(--accent-chrome-subtle);
     border: 1px solid var(--border-accent);
     color: var(--accent-chrome);
     font-family: var(--font-mono);
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
 
-  .format-info {
+  .format-meta {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     gap: 6px;
+    min-width: 0;
   }
 
-  .format-header-meta {
+  .format-title-row {
     display: flex;
     align-items: center;
-    gap: var(--sp-3);
+    justify-content: space-between;
+    gap: var(--sp-2);
     flex-wrap: wrap;
   }
 
   .format-name {
-    font-size: 1.2rem;
+    font-size: 1.12rem;
     font-weight: 700;
+    color: var(--text-primary);
   }
 
   .status-indicator {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    padding: 3px 10px;
+    padding: 3px 9px;
     border-radius: var(--r-full);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
   }
 
   .status-full {
-    background-color: rgba(16, 185, 129, 0.12);
+    background-color: rgba(52, 211, 153, 0.15);
     color: var(--status-success);
-    border: 1px solid rgba(16, 185, 129, 0.28);
+    border: 1px solid rgba(52, 211, 153, 0.30);
   }
 
   .status-partial {
-    background-color: rgba(245, 158, 11, 0.12);
+    background-color: rgba(251, 191, 36, 0.15);
     color: var(--status-warning);
-    border: 1px solid rgba(245, 158, 11, 0.28);
+    border: 1px solid rgba(251, 191, 36, 0.30);
   }
 
   .format-tags {
@@ -268,8 +285,8 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
   }
 
   .tag-pill {
-    font-size: 0.78rem;
-    padding: 3px 8px;
+    font-size: 0.76rem;
+    padding: 2px 8px;
     border-radius: var(--r-sm);
     background-color: var(--bg-subtle);
     border: 1px solid var(--border-subtle);
@@ -283,44 +300,52 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
   .extensions-tag {
     font-family: var(--font-mono);
     color: var(--text-primary);
+    font-weight: 600;
   }
 
-  .format-details {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-4);
-    padding-top: var(--sp-4);
-    border-top: 1px solid var(--border-subtle);
-  }
-
-  @media (min-width: 768px) {
-    .format-details {
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-  }
-
-  .detail-block {
+  .format-specs {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: var(--sp-3);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--border-subtle);
+    margin-top: auto;
   }
 
-  .detail-label {
-    font-size: 0.72rem;
+  .spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .spec-label {
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-tertiary);
   }
 
-  .detail-text {
+  .spec-val {
     font-size: 0.88rem;
     color: var(--text-secondary);
     line-height: 1.5;
   }
 
-  .detail-block--warning .detail-label {
+  .spec-item--notice {
+    padding: 8px 12px;
+    border-radius: var(--r-sm);
+    background-color: rgba(251, 191, 36, 0.08);
+    border: 1px solid rgba(251, 191, 36, 0.20);
+  }
+
+  .spec-item--notice .spec-label {
     color: var(--status-warning);
+  }
+
+  .spec-item--notice .spec-val {
+    color: var(--text-primary);
+    font-size: 0.84rem;
   }
 
   /* Empty State */
@@ -331,6 +356,7 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
     flex-direction: column;
     align-items: center;
     gap: var(--sp-3);
+    margin-top: var(--sp-4);
   }
 
   .empty-icon {
@@ -347,7 +373,7 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
   function setupFormatsFilter() {
     const searchInput = document.getElementById('format-search-input') as HTMLInputElement | null;
     const categoryButtons = document.querySelectorAll<HTMLButtonElement>('.category-pill-btn');
-    const formatRows = document.querySelectorAll<HTMLElement>('.format-row');
+    const formatCards = document.querySelectorAll<HTMLElement>('.format-card');
     const emptyState = document.getElementById('formats-empty-state');
     const resetBtn = document.getElementById('reset-filter-btn');
 
@@ -356,18 +382,18 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
 
     function filterRows() {
       let visibleCount = 0;
-      formatRows.forEach(row => {
-        const rowCategory = row.getAttribute('data-format-category') || '';
-        const searchTerms = row.getAttribute('data-search-terms') || '';
+      formatCards.forEach(card => {
+        const rowCategory = card.getAttribute('data-format-category') || '';
+        const searchTerms = card.getAttribute('data-search-terms') || '';
 
         const matchesCategory = activeCategory === 'All' || rowCategory === activeCategory;
         const matchesSearch = searchQuery === '' || searchTerms.includes(searchQuery);
 
         if (matchesCategory && matchesSearch) {
-          row.style.display = '';
+          card.style.display = '';
           visibleCount++;
         } else {
-          row.style.display = 'none';
+          card.style.display = 'none';
         }
       });
 
@@ -398,10 +424,14 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
       if (searchInput) searchInput.value = '';
       searchQuery = '';
       activeCategory = 'All';
-      categoryButtons.forEach(b => {
-        const isAll = b.getAttribute('data-category') === 'All';
-        b.classList.toggle('active', isAll);
-        b.setAttribute('aria-checked', isAll ? 'true' : 'false');
+      categoryButtons.forEach((b, idx) => {
+        if (idx === 0) {
+          b.classList.add('active');
+          b.setAttribute('aria-checked', 'true');
+        } else {
+          b.classList.remove('active');
+          b.setAttribute('aria-checked', 'false');
+        }
       });
       filterRows();
     });

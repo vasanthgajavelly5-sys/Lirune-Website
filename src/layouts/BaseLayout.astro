@@ -1,5 +1,4 @@
 ---
-import AnnouncementBar from '../components/AnnouncementBar.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import ScreenshotLightbox from '../components/ScreenshotLightbox.astro';
@@ -151,7 +150,6 @@ const jsonLd = {
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <AnnouncementBar />
     <SiteHeader currentPath={cleanPath} />
     <main id="main-content">
       <slot />

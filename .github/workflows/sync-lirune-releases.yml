@@ -1,0 +1,91 @@
+name: Synchronize Lirune Releases & Deploy
+
+on:
+  repository_dispatch:
+    types: [lirune-release-published]
+  workflow_dispatch:
+  schedule:
+    # Hourly reconciliation fallback in case a dispatch event was missed
+    - cron: '0 * * * *'
+
+concurrency:
+  group: sync-lirune-releases
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync-and-deploy:
+    name: Sync Releases, Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Website Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci || npm install
+
+      - name: Run Release Synchronisation
+        id: sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LIRUNE_REPO_OWNER: 'vasanthgajavelly5-sys'
+          LIRUNE_REPO_NAME: 'Lirune'
+        run: node scripts/sync-releases.mjs
+
+      - name: Run Release Synchronisation Tests
+        run: node scripts/test-release-sync.mjs
+
+      - name: Build Static Website & Generate Sitemaps
+        run: |
+          npx astro build
+          node scripts/generate-sitemap.js
+
+      - name: Validate Compiled Static Routes
+        run: node scripts/test-routes.js
+
+      - name: Commit Updated Releases Manifest (If Changed)
+        id: git-commit
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain src/data/releases.json)" ]; then
+            git add src/data/releases.json
+            git commit -m "chore(releases): synchronise latest Lirune release manifest [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+            echo "committed=true" >> $GITHUB_OUTPUT
+          else
+            echo "No manifest changes detected."
+            echo "committed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_LIRUNE_READER_1AA95 }}
+          projectId: lirune-reader-1aa95
+          channelId: live
+        continue-on-error: true
+        id: firebase-deploy
+
+      - name: Fallback Firebase Deploy via CLI Token (If Service Account Not Set)
+        if: steps.firebase-deploy.outcome == 'failure' && env.FIREBASE_TOKEN != ''
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+          echo "Attempting fallback deployment with FIREBASE_TOKEN..."
+          npx firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN"
+
+      - name: Verify Live Production Website
+        run: node scripts/verify-live.mjs
