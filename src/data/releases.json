@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-14T15:23:20.007Z",
+  "lastUpdated": "2026-11-14T22:41:57.516Z",
   "windows": {
     "version": "5.6.2",
     "tag": "v5.6.2",
@@ -23,6 +23,25 @@
       "Offline multi-format reader engine without telemetry"
     ]
   },
+  "windowsBeta": {
+    "version": "5.6.5",
+    "tag": "v5.6.5",
+    "channel": "Beta",
+    "name": "Lirune Reader 5.6.5 (Beta) — Universal 23-Format Engine, Security Hardening & UI Polish",
+    "releaseDate": "2026-11-15",
+    "releaseUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/tag/v5.6.5",
+    "installerUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v5.6.5/Lirune.Reader-5.6.5-Setup.exe",
+    "installerFilename": "Lirune.Reader-5.6.5-Setup.exe",
+    "sha256": "f40ce86469f302760a590ae662e6b8c07b49dfaefb8ae099c04f5c4151b61ea6",
+    "requirements": "Windows 10 / 11 (64-bit)",
+    "highlights": [
+      "Universal 23-format engine with 100% acceptance test pass rate across 57 real-world samples",
+      "Native support for Word 95/97, PowerPoint OLE streams, multi-frame TIFF, CHM, and comic archives",
+      "Redesigned keyboard shortcuts toolbar with inline search and compact reading theme swatches",
+      "Comprehensive Zip-Slip defense and strict decompression safety budget",
+      "Completely offline-first architecture with sandboxed document adapters"
+    ]
+  },
   "android": {
     "version": "4.9.3",
     "tag": "v4.9.3",
@@ -39,6 +58,25 @@
       "Android Storage Access Framework (SAF) folder browsing and local SQLite storage",
       "Offline Text-to-Speech (TTS) audio narration",
       "Complete typography customization (line height, margins, letter spacing, font families)"
+    ]
+  },
+  "androidBeta": {
+    "version": "4.9.4",
+    "tag": "v4.9.4",
+    "channel": "Beta",
+    "name": "Lirune Reader v4.9.4 (Beta) — Multi-Format Mobile Engine & Hermes Bytecode Optimization",
+    "releaseDate": "2026-11-15",
+    "releaseUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/tag/v4.9.4",
+    "apkUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v4.9.4/Lirune-Reader-v4.9.4-release.apk",
+    "apkFilename": "Lirune-Reader-v4.9.4-release.apk",
+    "sha256": "46472b2f894f5e3fccfcf20cbeda15ec32c6508a2016717a12eb74089e966e05",
+    "requirements": "Android 8.0 (Oreo) or higher",
+    "highlights": [
+      "Universal 23-format engine for mobile: EPUB, MOBI, DOC, PPT, ODT, RTF, FB2, CBZ, CBR, CBT, TIFF, DJVU",
+      "Pre-compiled Hermes bytecode bundle (13MB) for instant reader launch and fluid navigation",
+      "Full offline isolation: zero internet permissions, local document picking via SAF",
+      "100% acceptance testing pass rate across 57 real-world test samples on Android emulator",
+      "Virtualized 60fps Scroll Engine v2 reading comfort"
     ]
   }
 }
