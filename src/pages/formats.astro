@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FormatCompatibilityTable from '../components/FormatCompatibilityTable.astro';
+---
+
+<BaseLayout
+  title="Supported Formats & Compatibility — Lirune Reader"
+  description="Comprehensive format compatibility matrix for Lirune Reader. Supports 19 formats including EPUB, PDF, MOBI, DOCX, CBZ, and FB2 with security and DRM details."
+>
+  <div class="formats-page">
+    <div class="container">
+      <div class="page-header text-center">
+        <span class="section-label">Compatibility Matrix</span>
+        <h1 class="page-title">Supported Document Formats</h1>
+        <p class="page-subtitle mx-auto">
+          Lirune supports 19 universal document, e-book, and comic archive formats across both Windows and Android. Every format is unpacked and rendered locally with strict security boundaries.
+        </p>
+      </div>
+
+      <!-- Security & DRM Policy Alert -->
+      <div class="card security-notice">
+        <div class="notice-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="notice-text">
+          <h3>DRM & Security Principles</h3>
+          <p>
+            Lirune Reader respects intellectual property and author rights. DRM-protected files (such as Adobe Adept, Apple FairPlay, or Amazon KFX proprietary containers) are cleanly identified and rejected. Lirune never circumvents copy protection. Furthermore, all HTML, FB2, and Markdown documents undergo strict DOMPurify sanitization to neutralize malicious scripts.
+          </p>
+        </div>
+      </div>
+
+      <!-- Interactive Searchable Table -->
+      <FormatCompatibilityTable />
+
+      <!-- Format Categories Summary -->
+      <div class="categories-summary-grid">
+        <div class="card cat-summary-card">
+          <h3>Standard E-Books</h3>
+          <p>EPUB 2 / 3, FictionBook (FB2, FBZ), and MOBI / AZW / AZW3. Full chapter spine navigation, reflowable typography, cover extraction, and metadata indexing.</p>
+        </div>
+        <div class="card cat-summary-card">
+          <h3>Fixed Layout PDF</h3>
+          <p>Full integration with offline PDF.js. Crisp vector text, zoom scaling, two-page layout, jump-to-page, and reading progress tracking.</p>
+        </div>
+        <div class="card cat-summary-card">
+          <h3>Office & Rich Text</h3>
+          <p>Microsoft Word (DOCX, legacy DOC), OpenDocument Text (ODT), and Rich Text (RTF). Clean text extraction and structural heading parsing.</p>
+        </div>
+        <div class="card cat-summary-card">
+          <h3>Comics & Manga</h3>
+          <p>CBZ, CBR, and CB7 comic archives. Natural sorted image page rendering with zoom, pan, and zip-bomb ratio protection.</p>
+        </div>
+        <div class="card cat-summary-card">
+          <h3>Plain Text & Markdown</h3>
+          <p>TXT, MD, and HTML. Auto-encoding detection, CommonMark compliance, and script-stripped local HTML rendering.</p>
+        </div>
+        <div class="card cat-summary-card">
+          <h3>Scanned & Reference</h3>
+          <p>Compiled HTML Help (CHM) and DjVu documents. Preserves internal tables of contents and bitonal scanned document layers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .formats-page {
+    padding-top: var(--sp-12);
+    padding-bottom: var(--sp-20);
+  }
+
+  .text-center { text-align: center; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+
+  .page-header {
+    margin-bottom: var(--sp-10);
+  }
+
+  .page-title {
+    margin-bottom: var(--sp-4);
+  }
+
+  .page-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 720px;
+  }
+
+  .security-notice {
+    display: flex;
+    gap: var(--sp-4);
+    align-items: flex-start;
+    padding: var(--sp-6);
+    background: rgba(141, 183, 204, 0.08);
+    border: 1px solid var(--border-accent);
+    margin-bottom: var(--sp-10);
+  }
+
+  .notice-icon {
+    color: var(--accent-chrome);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .notice-text h3 {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+    color: var(--accent-chrome);
+  }
+
+  .notice-text p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .categories-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--sp-6);
+    margin-top: var(--sp-16);
+  }
+
+  .cat-summary-card {
+    padding: var(--sp-6);
+  }
+
+  .cat-summary-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: var(--sp-2);
+    color: var(--text-primary);
+  }
+
+  .cat-summary-card p {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+</style>

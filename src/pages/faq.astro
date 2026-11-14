@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import config from '../data/config.json';
+---
+
+<BaseLayout
+  title="Frequently Asked Questions (FAQ) — Lirune Reader"
+  description="Answers to common questions about Lirune Reader: pricing, open-source licensing, offline privacy, format support, installation, and data storage."
+>
+  <div class="faq-page">
+    <div class="container">
+      <div class="page-header text-center">
+        <span class="section-label">Help Center</span>
+        <h1 class="page-title">Frequently Asked Questions</h1>
+        <p class="page-subtitle mx-auto">
+          Clear, straightforward answers about how Lirune Reader works, our privacy guarantees, and platform compatibility.
+        </p>
+      </div>
+
+      <!-- FAQ Accordion (all questions) -->
+      <FAQAccordion />
+
+      <!-- Still Have Questions Card -->
+      <div class="faq-contact-card card card-elevated text-center">
+        <h2>Still have questions or need assistance?</h2>
+        <p class="mx-auto">
+          Lirune is an open-source project. If you encounter an unexpected issue or have questions about a specific document format, feel free to open a discussion or issue on GitHub.
+        </p>
+        <div class="contact-btns">
+          <a href={config.githubIssues} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
+            Open an Issue on GitHub
+          </a>
+          <a href="/getting-started" class="btn btn-primary btn-lg">
+            Read User Manual
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .faq-page {
+    padding-top: var(--sp-12);
+    padding-bottom: var(--sp-20);
+  }
+
+  .text-center { text-align: center; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+
+  .page-header {
+    margin-bottom: var(--sp-12);
+  }
+
+  .page-title {
+    margin-bottom: var(--sp-4);
+  }
+
+  .page-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 680px;
+  }
+
+  .faq-contact-card {
+    margin-top: var(--sp-20);
+    padding: clamp(var(--sp-8), 5vw, var(--sp-12));
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .faq-contact-card h2 {
+    font-size: 1.6rem;
+    margin-bottom: var(--sp-3);
+  }
+
+  .faq-contact-card p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: var(--sp-8);
+  }
+
+  .contact-btns {
+    display: flex;
+    justify-content: center;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+  }
+</style>

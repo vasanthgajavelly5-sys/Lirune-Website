@@ -1,0 +1,86 @@
+[
+  {
+    "id": "library",
+    "title": "A library that feels calm and organized",
+    "summary": "Manage your entire personal document collection in clean grid or list views, with automatic cover art extraction, custom collections, and favorites.",
+    "screenshot": "/images/screenshots/win-library-grid.png",
+    "screenshotAlt": "Lirune Reader main library interface showing grid view with book covers and search",
+    "platform": "Windows & Android",
+    "points": [
+      "Auto-generates crisp covers from EPUB, PDF, CBZ, and FB2 metadata",
+      "Instant library search by title or author with Ctrl+K shortcut",
+      "Custom collections and one-click favorites to organize reading queues",
+      "Sort by title, author, date added, or last read"
+    ]
+  },
+  {
+    "id": "reading-comfort",
+    "title": "A reading experience you can adjust your way",
+    "summary": "Tailor typography, line spacing, margins, font sizing, and page layout to your exact reading preferences.",
+    "screenshot": "/images/screenshots/win-settings-reading.png",
+    "screenshotAlt": "Lirune Reader typography and theme configuration screen",
+    "platform": "Windows & Android",
+    "points": [
+      "Refined themes including Dark, OLED Black, Light, Nord, Dracula, and Sepia",
+      "Choose from system fonts, serif book fonts, or monospace",
+      "Customizable line height (1.2 to 2.4) and page margin controls",
+      "Choose between paginated two-page spread, single page, or continuous vertical scroll"
+    ]
+  },
+  {
+    "id": "formats",
+    "title": "More than just EPUB: 19 document formats",
+    "summary": "One unified, private reader for your ebooks, PDFs, office documents, comic archives, and markdown notes.",
+    "screenshot": "/images/screenshots/win-reader-pdf.png",
+    "screenshotAlt": "Lirune Reader integrated PDF viewer with zoom controls and clean layout",
+    "platform": "Windows & Android",
+    "points": [
+      "Standard ebooks: EPUB 2/3, FictionBook (FB2, FBZ), and Kindle (MOBI, AZW, AZW3)",
+      "PDF documents with high-fidelity rendering and zoom controls",
+      "Office documents: Word (DOCX, DOC), OpenDocument (ODT), and Rich Text (RTF)",
+      "Comic book archives: CBZ, CBR, and CB7 with smooth page turning"
+    ]
+  },
+  {
+    "id": "privacy",
+    "title": "Your reading stays strictly personal",
+    "summary": "100% offline-first architecture. No account required, zero telemetry, and your books never leave your device.",
+    "screenshot": "/images/screenshots/win-settings-storage.png",
+    "screenshotAlt": "Lirune Reader local storage management and backup export controls",
+    "platform": "Windows & Android",
+    "points": [
+      "No account registration, no login, and no passwords",
+      "Books and metadata stay in sandboxed local IndexedDB or SQLite storage",
+      "Zero telemetry, tracking pixels, analytics, or remote logging",
+      "Export complete library backups to a single JSON archive anytime"
+    ]
+  },
+  {
+    "id": "study-tools",
+    "title": "Find your place again with study tools",
+    "summary": "Interactive table of contents, in-book text search, bookmarks, highlights, and Markdown annotation export.",
+    "screenshot": "/images/screenshots/win-reader-toc.png",
+    "screenshotAlt": "Lirune Reader table of contents panel and chapter navigation",
+    "platform": "Windows & Android",
+    "points": [
+      "Expandable multi-level table of contents with filterable search",
+      "In-book full-text search with match counters and navigation",
+      "Multi-color highlights and custom notes attached to text spans",
+      "Export annotations and highlights directly to clean Markdown files"
+    ]
+  },
+  {
+    "id": "mobile-engine",
+    "title": "Exclusive Scroll Engine v2 on Android",
+    "summary": "Experience fluid 60fps virtualized continuous scrolling on your phone or tablet, with zero internet permissions.",
+    "screenshot": "/images/screenshots/android-reader-epub.png",
+    "screenshotAlt": "Lirune Reader Android app running continuous scroll reader",
+    "platform": "Android Exclusive",
+    "points": [
+      "Scroll Engine v2 provides unified continuous reading across books",
+      "Network permission permanently stripped: android.permission.INTERNET removed",
+      "Android Storage Access Framework (SAF) folder browsing and direct imports",
+      "Built-in offline text-to-speech audio narration with speed controls"
+    ]
+  }
+]

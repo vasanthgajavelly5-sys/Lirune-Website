@@ -1,0 +1,114 @@
+/* =============================================================
+   LIRUNE WEBSITE — Central Design Token System
+   Extracted directly from Lirune Reader application tokens.
+   ============================================================= */
+
+:root {
+  color-scheme: dark;
+
+  /* Backgrounds */
+  --bg-base:        #11151B;
+  --bg-surface:     #171C24;
+  --bg-elevated:    #1D232D;
+  --bg-card:        #222A35;
+  --bg-overlay:     #29323E;
+  --bg-hover:       rgba(255, 255, 255, 0.05);
+  --bg-active:      rgba(255, 255, 255, 0.09);
+  --bg-glass:       rgba(23, 28, 36, 0.88);
+  --bg-glass-nav:   rgba(17, 21, 27, 0.94);
+  --bg-scrim:       rgba(0, 0, 0, 0.72);
+  --bg-input:       rgba(255, 255, 255, 0.05);
+
+  /* Text */
+  --text-primary:   #E9E7F5;
+  --text-secondary: #9A98B0;
+  --text-tertiary:  #68667A;
+  --text-disabled:  #44424F;
+  --text-on-accent: #11151B;
+
+  /* Accent — Lirune Brand Lilac/Mint & Accessible Chrome Slate */
+  --accent:           #EEECF8;
+  --accent-hover:     #F7F5FF;
+  --accent-active:    #C8C5D8;
+  --accent-subtle:    rgba(238, 236, 248, 0.12);
+  --accent-subtle-h:  rgba(238, 236, 248, 0.20);
+  --accent-glow:      rgba(238, 236, 248, 0.16);
+  --accent-text:      #EEECF8;
+
+  --accent-chrome:        #8DB7CC;
+  --accent-chrome-hover:  #A7C9D9;
+  --accent-chrome-subtle: rgba(141, 183, 204, 0.14);
+
+  /* Status & Platforms */
+  --color-windows:    #0078D7;
+  --color-android:    #3DDC84;
+  --color-store:      #0078D7;
+  --color-coffee:     #FFDD00;
+  --color-coffee-text:#000000;
+  --status-success:   #10B981;
+  --status-warning:   #F59E0B;
+  --status-info:      #60A5FA;
+
+  /* Borders */
+  --border-subtle:  rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-strong:  rgba(255, 255, 255, 0.18);
+  --border-accent:  rgba(141, 183, 204, 0.42);
+  --border-brand:   rgba(238, 236, 248, 0.35);
+
+  /* Shadows */
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.52);
+  --shadow-lg: 0 8px 48px rgba(0, 0, 0, 0.60);
+  --shadow-xl: 0 16px 72px rgba(0, 0, 0, 0.70);
+  --shadow-glow: 0 0 32px rgba(238, 236, 248, 0.15);
+  --shadow-glow-cyan: 0 0 32px rgba(141, 183, 204, 0.18);
+
+  /* Typography */
+  --font-ui: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", system-ui, sans-serif;
+  --font-reading: Georgia, "Times New Roman", "Iowan Old Style", serif;
+  --font-mono: ui-monospace, SFMono-Regular, "Cascadia Code", "Consolas", monospace;
+
+  /* Radii */
+  --r-xs: 2px;
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-2xl: 20px;
+  --r-full: 9999px;
+
+  /* Spacing Scale */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+  --sp-24: 96px;
+
+  /* Layout */
+  --container-max: 1200px;
+  --container-narrow: 880px;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 240ms;
+  --duration-slow: 400ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
+  }
+}

@@ -1,0 +1,211 @@
+---
+import releases from '../data/releases.json';
+---
+
+<section class="latest-release-section" id="latest-release" aria-label="Latest Release Information">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="section-label">Changelog & Updates</span>
+      <h2 class="section-title">What's new in Lirune</h2>
+      <p class="section-subtitle mx-auto">
+        Lirune follows transparent, security-hardened release engineering. Read what has improved in the latest verified public releases.
+      </p>
+    </div>
+
+    <div class="releases-dual-grid">
+      <!-- Windows Latest Release -->
+      <div class="card release-card">
+        <div class="release-badge-row">
+          <span class="badge badge-accent">Windows Desktop</span>
+          <span class="release-date">{releases.windows.releaseDate}</span>
+        </div>
+
+        <h3 class="release-name">{releases.windows.name}</h3>
+        <span class="release-version">Tag: <code>{releases.windows.tag}</code></span>
+
+        <div class="highlights-list-wrap">
+          <h4 class="highlights-title">Key Highlights:</h4>
+          <ul class="highlights-list">
+            {releases.windows.highlights.map(h => (
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="bullet-icon" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="release-card-footer">
+          <a href={releases.windows.installerUrl} class="btn btn-windows btn-sm">
+            Download {releases.windows.installerFilename}
+          </a>
+          <a href={releases.windows.releaseUrl} target="_blank" rel="noopener noreferrer" class="link-gh">
+            View on GitHub →
+          </a>
+        </div>
+      </div>
+
+      <!-- Android Latest Release -->
+      <div class="card release-card">
+        <div class="release-badge-row">
+          <span class="badge badge-success">Android Mobile</span>
+          <span class="release-date">{releases.android.releaseDate}</span>
+        </div>
+
+        <h3 class="release-name">{releases.android.name}</h3>
+        <span class="release-version">Tag: <code>{releases.android.tag}</code></span>
+
+        <div class="highlights-list-wrap">
+          <h4 class="highlights-title">Key Highlights:</h4>
+          <ul class="highlights-list">
+            {releases.android.highlights.map(h => (
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="bullet-icon" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="release-card-footer">
+          <a href={releases.android.apkUrl} class="btn btn-android btn-sm">
+            Download {releases.android.apkFilename}
+          </a>
+          <a href={releases.android.releaseUrl} target="_blank" rel="noopener noreferrer" class="link-gh">
+            View on GitHub →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="release-full-link text-center">
+      <a href="/changelog" class="btn btn-secondary">
+        Browse full version history & changelog
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .latest-release-section {
+    padding-top: var(--sp-16);
+    padding-bottom: var(--sp-16);
+    background: var(--bg-base);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .releases-dual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: var(--sp-8);
+    margin-top: var(--sp-10);
+    margin-bottom: var(--sp-10);
+  }
+
+  .release-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--sp-8);
+  }
+
+  .release-badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--sp-4);
+  }
+
+  .release-date {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+  }
+
+  .release-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: var(--sp-2);
+  }
+
+  .release-version {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--sp-6);
+  }
+
+  .release-version code {
+    background: var(--bg-elevated);
+    padding: 2px 6px;
+    border-radius: var(--r-xs);
+    color: var(--accent-chrome);
+  }
+
+  .highlights-list-wrap {
+    flex-grow: 1;
+    margin-bottom: var(--sp-6);
+  }
+
+  .highlights-title {
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin-bottom: var(--sp-3);
+  }
+
+  .highlights-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .highlights-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-2);
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+  }
+
+  .bullet-icon {
+    color: var(--status-success);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .release-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: var(--sp-5);
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+  }
+
+  .link-gh {
+    font-size: 0.88rem;
+    color: var(--accent-chrome);
+    font-weight: 600;
+  }
+
+  .link-gh:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 480px) {
+    .releases-dual-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,18 @@
+{
+  "name": "lirune-website",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Official product website for Lirune Reader",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "node scripts/fetch-releases.js && astro build && node scripts/generate-sitemap.js",
+    "preview": "astro preview",
+    "fetch:releases": "node scripts/fetch-releases.js",
+    "generate:sitemap": "node scripts/generate-sitemap.js",
+    "test:site": "node scripts/test-routes.js"
+  },
+  "dependencies": {
+    "astro": "^4.16.18"
+  }
+}

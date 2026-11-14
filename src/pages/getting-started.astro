@@ -1,0 +1,309 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import releases from '../data/releases.json';
+---
+
+<BaseLayout
+  title="Getting Started with Lirune Reader — Windows & Android Guide"
+  description="Step-by-step instructions for installing, configuring, and importing your books into Lirune Reader on Windows and Android."
+>
+  <div class="getting-started-page">
+    <div class="container">
+      <div class="page-header text-center">
+        <span class="section-label">User Manual</span>
+        <h1 class="page-title">Getting Started with Lirune</h1>
+        <p class="page-subtitle mx-auto">
+          Clear, step-by-step instructions to install Lirune Reader, import your personal documents, and customize your reading environment.
+        </p>
+      </div>
+
+      <!-- Quick Platform Jump -->
+      <div class="jump-nav">
+        <a href="#guide-windows" class="btn btn-secondary">Windows Desktop Guide ↓</a>
+        <a href="#guide-android" class="btn btn-secondary">Android Mobile Guide ↓</a>
+      </div>
+
+      <!-- Windows Guide -->
+      <section class="guide-block card" id="guide-windows">
+        <div class="guide-header">
+          <div class="guide-badge-group">
+            <span class="badge badge-accent">Windows 10 & 11</span>
+            <h2>Windows Quickstart Guide</h2>
+          </div>
+          <span class="guide-version">Latest Release: v{releases.windows.version}</span>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-badge">Step 1</div>
+          <div class="step-body">
+            <h3>Installation</h3>
+            <p>You can choose between two convenient installation methods:</p>
+            <ul>
+              <li><strong>Microsoft Store (Recommended):</strong> Visit the <a href={releases.windows.storeUrl} target="_blank" rel="noopener noreferrer" class="link-inline">Lirune Reader Store Page</a> and click <em>Install</em>. Updates occur automatically in the background.</li>
+              <li><strong>Direct NSIS Installer:</strong> Download <a href={releases.windows.installerUrl} class="link-inline"><code>{releases.windows.installerFilename}</code></a>, run the setup wizard, and launch Lirune from your Start Menu. If Windows SmartScreen prompts on unsigned GitHub binaries, click <em>More info</em> and <em>Run anyway</em>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-badge">Step 2</div>
+          <div class="step-body">
+            <h3>Importing Your Books</h3>
+            <p>
+              When Lirune starts, you are welcomed by a clean library drop-zone. You can add books immediately:
+            </p>
+            <ul>
+              <li><strong>Drag & Drop:</strong> Drag single files or entire folders containing EPUB, PDF, MOBI, FB2, or CBZ books directly into the application window.</li>
+              <li><strong>File Picker:</strong> Click the <strong>"+" Add Books</strong> button in the top-right toolbar to open the native Windows open file dialog.</li>
+              <li>Lirune will automatically detect formats, parse metadata, extract cover art, and add each title to your library.</li>
+            </ul>
+            <div class="guide-image-wrap">
+              <img src="/images/screenshots/win-library-grid.png" alt="Library with imported books" width="800" height="450" loading="lazy" class="guide-img" />
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-badge">Step 3</div>
+          <div class="step-body">
+            <h3>Reading & Layout Customization</h3>
+            <p>
+              Click any book card to open the reading interface:
+            </p>
+            <ul>
+              <li><strong>Switch Layouts:</strong> Click the quick settings icon in the top toolbar to switch between <em>Two-Page Spread</em>, <em>Single Page</em>, or <em>Continuous Flow Scroll</em>.</li>
+              <li><strong>Adjust Appearance:</strong> Choose between Dark, OLED, Light, Nord, or Sepia themes. Fine-tune your font size, line height, and margins to your liking.</li>
+              <li><strong>Navigation:</strong> Open the Table of Contents drawer by pressing <kbd>T</kbd> or clicking the list icon. Search inside the book with <kbd>/</kbd>.</li>
+              <li><strong>Fullscreen Immersion:</strong> Press <kbd>F11</kbd> to enter distraction-free fullscreen reading.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-badge">Step 4</div>
+          <div class="step-body">
+            <h3>Library Backups</h3>
+            <p>
+              To back up your library metadata, bookmarks, highlights, and collections, open <strong>Settings → Storage & Maintenance</strong> and click <strong>Export Library Backup</strong>. This saves a portable JSON archive that you can restore anytime.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Android Guide -->
+      <section class="guide-block card" id="guide-android">
+        <div class="guide-header">
+          <div class="guide-badge-group">
+            <span class="badge badge-success">Android 8.0+</span>
+            <h2>Android Quickstart Guide</h2>
+          </div>
+          <span class="guide-version">Latest Release: v{releases.android.version}</span>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-badge">Step 1</div>
+          <div class="step-body">
+            <h3>Downloading & Sideloading the APK</h3>
+            <p>
+              Lirune for Android is distributed directly as an optimized, signed release APK:
+            </p>
+            <ol>
+              <li>Download the official APK: <a href={releases.android.apkUrl} class="link-inline"><code>{releases.android.apkFilename}</code></a>.</li>
+              <li>Open your device's <em>Downloads</em> folder and tap the APK file.</li>
+              <li>If Android displays an <em>"Install unknown apps"</em> alert, tap <strong>Settings</strong>, toggle on permission for your browser or file manager, and return to complete installation.</li>
+              <li>Tap <strong>Install</strong>, then tap <strong>Open</strong>.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-badge">Step 2</div>
+          <div class="step-body">
+            <h3>Granting Folder Access via SAF</h3>
+            <p>
+              Lirune respects modern Android security and uses the official Storage Access Framework (SAF):
+            </p>
+            <ul>
+              <li>Lirune will prompt you to select the folder where you store your digital books (e.g., your <code>Documents/Books</code> or <code>Download</code> directory).</li>
+              <li>Select your folder and tap <strong>"Use this folder"</strong>.</li>
+              <li>Lirune will scan the directory for supported formats without needing broad all-files storage permissions.</li>
+            </ul>
+            <div class="guide-image-wrap">
+              <img src="/images/screenshots/android-library.png" alt="Android library interface" width="320" height="500" loading="lazy" class="guide-img phone-size" />
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-step">
+          <div class="step-badge">Step 3</div>
+          <div class="step-body">
+            <h3>Reading with Scroll Engine v2</h3>
+            <p>
+              Tap any book to launch the reader. Lirune Android features exclusive Scroll Engine v2:
+            </p>
+            <ul>
+              <li><strong>Continuous 60fps Scrolling:</strong> Swipe up or down smoothly. Content is dynamically virtualized for lightning-fast memory efficiency.</li>
+              <li><strong>Touch Controls:</strong> Tap the center of the screen to reveal the reading controls header and bottom scrub bar.</li>
+              <li><strong>Text-to-Speech:</strong> Tap the audio button to start offline TTS speech narration. You can regulate speed from 0.75x to 2.0x.</li>
+              <li><strong>Table of Contents:</strong> Swipe in from the left or tap the TOC icon to jump directly across chapters.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .getting-started-page {
+    padding-top: var(--sp-12);
+    padding-bottom: var(--sp-20);
+  }
+
+  .text-center { text-align: center; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+
+  .page-header {
+    margin-bottom: var(--sp-8);
+  }
+
+  .page-title {
+    margin-bottom: var(--sp-4);
+  }
+
+  .page-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 680px;
+  }
+
+  .jump-nav {
+    display: flex;
+    justify-content: center;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-12);
+    flex-wrap: wrap;
+  }
+
+  .guide-block {
+    padding: var(--sp-10);
+    margin-bottom: var(--sp-16);
+    background: var(--bg-surface);
+  }
+
+  .guide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: var(--sp-6);
+    margin-bottom: var(--sp-8);
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+  }
+
+  .guide-badge-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .guide-badge-group h2 {
+    font-size: 1.6rem;
+  }
+
+  .guide-version {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+  }
+
+  .guide-step {
+    display: flex;
+    gap: var(--sp-6);
+    margin-bottom: var(--sp-10);
+  }
+
+  .step-badge {
+    background: var(--accent-subtle);
+    border: 1px solid var(--border-accent);
+    color: var(--accent-text);
+    padding: 6px 14px;
+    border-radius: var(--r-full);
+    font-weight: 700;
+    font-size: 0.85rem;
+    height: fit-content;
+    white-space: nowrap;
+  }
+
+  .step-body {
+    flex-grow: 1;
+  }
+
+  .step-body h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--sp-2);
+  }
+
+  .step-body p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: var(--sp-4);
+  }
+
+  .step-body ul, .step-body ol {
+    padding-left: var(--sp-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: var(--sp-4);
+  }
+
+  .step-body strong {
+    color: var(--text-primary);
+  }
+
+  .link-inline {
+    color: var(--accent-chrome);
+    text-decoration: underline;
+  }
+
+  .guide-image-wrap {
+    margin-top: var(--sp-4);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-default);
+    background: var(--bg-elevated);
+    max-width: 680px;
+  }
+
+  .guide-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .phone-size {
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  kbd {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent-chrome);
+  }
+
+  @media (max-width: 640px) {
+    .guide-step {
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+  }
+</style>

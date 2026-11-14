@@ -1,0 +1,551 @@
+---
+const windowsShots = [
+  {
+    src: "/images/screenshots/win-library-grid.png",
+    thumb: "/images/screenshots/win-library-grid.png",
+    title: "Personal Library — Grid View",
+    caption: "Clean, distraction-free library home showing auto-extracted book covers, reading progress badges, and instant Ctrl+K search."
+  },
+  {
+    src: "/images/screenshots/win-reader-story.png",
+    thumb: "/images/screenshots/win-reader-story.png",
+    title: "Reflowable Story Reader",
+    caption: "FictionBook / EPUB reader running in the default dark theme with elegant typography, chapter headers, and reading progress bar."
+  },
+  {
+    src: "/images/screenshots/win-reader-toc.png",
+    thumb: "/images/screenshots/win-reader-toc.png",
+    title: "Table of Contents Drawer",
+    caption: "Slide-out document navigation panel showing chapter hierarchy with real-time text filter and keyboard focus."
+  },
+  {
+    src: "/images/screenshots/win-reader-pdf.png",
+    thumb: "/images/screenshots/win-reader-pdf.png",
+    title: "Integrated PDF Viewer",
+    caption: "Built-in offline PDF.js engine with crisp page rendering, zoom controls, fit-to-width, and continuous navigation."
+  },
+  {
+    src: "/images/screenshots/win-reader-search.png",
+    thumb: "/images/screenshots/win-reader-search.png",
+    title: "In-Book Full Text Search",
+    caption: "Fast local text search across chapter content with result counters, matching excerpts, and jump navigation."
+  },
+  {
+    src: "/images/screenshots/win-reader-annotations.png",
+    thumb: "/images/screenshots/win-reader-annotations.png",
+    title: "Highlights & Annotations Drawer",
+    caption: "Manage multi-color bookmarks, highlights, and personal notes. Export entire reading annotations directly to Markdown."
+  },
+  {
+    src: "/images/screenshots/win-settings-reading.png",
+    thumb: "/images/screenshots/win-settings-reading.png",
+    title: "Reading Appearance & Themes",
+    caption: "Full control over font scaling, line height, page margins, and reading themes (Nord, Gruvbox, OLED, Sepia, Dracula)."
+  },
+  {
+    src: "/images/screenshots/win-settings-storage.png",
+    thumb: "/images/screenshots/win-settings-storage.png",
+    title: "Local Storage & Backup Manager",
+    caption: "Transparent local data management. Export or restore your entire library database with a single portable backup file."
+  }
+];
+
+const androidShots = [
+  {
+    src: "/images/screenshots/android-library.png",
+    thumb: "/images/screenshots/android-library.png",
+    title: "Android Home Library",
+    caption: "Mobile library browser showcasing book covers, recent reading progress, and fast local filtering."
+  },
+  {
+    src: "/images/screenshots/android-reader-epub.png",
+    thumb: "/images/screenshots/android-reader-epub.png",
+    title: "Scroll Engine v2 Reading View",
+    caption: "Smooth 60fps virtualized continuous scrolling on mobile with responsive serif typography."
+  },
+  {
+    src: "/images/screenshots/android-reader-controls.png",
+    thumb: "/images/screenshots/android-reader-controls.png",
+    title: "Reader Controls Overlay",
+    caption: "Quick access to brightness adjustment, typography scaling, reading themes, and chapter scrubbing."
+  },
+  {
+    src: "/images/screenshots/android-reader-toc.png",
+    thumb: "/images/screenshots/android-reader-toc.png",
+    title: "Mobile Table of Contents",
+    caption: "Touch-optimized chapter list allowing instant jumping across sections with active progress tracking."
+  },
+  {
+    src: "/images/screenshots/android-navigation-drawer.png",
+    thumb: "/images/screenshots/android-navigation-drawer.png",
+    title: "Navigation Drawer",
+    caption: "Slide-out navigation drawer providing fast switching between Library, Favorites, Collections, and Settings."
+  },
+  {
+    src: "/images/screenshots/android-tts-player.png",
+    thumb: "/images/screenshots/android-tts-player.png",
+    title: "Offline Text-to-Speech (TTS)",
+    caption: "Audio narration engine with playback controls, sentence tracking, and speed regulation without internet access."
+  }
+];
+---
+
+<section class="gallery-section" id="screenshots" aria-label="Application Screenshots Showcase">
+  <div class="container">
+    <div class="gallery-header text-center">
+      <span class="section-label">Real Product Interfaces</span>
+      <h2 class="section-title">See Lirune in action</h2>
+      <p class="section-subtitle mx-auto">
+        Genuine screenshots captured from the running Windows desktop and Android applications. What you see is exactly how Lirune looks on your screen.
+      </p>
+
+      <!-- Platform Tabs -->
+      <div class="gallery-tabs" role="tablist" aria-label="Select platform screenshots">
+        <button
+          class="gallery-tab active"
+          role="tab"
+          aria-selected="true"
+          aria-controls="gallery-windows-panel"
+          id="tab-windows"
+        >
+          <svg width="18" height="18" viewBox="0 0 88 88" fill="currentColor" aria-hidden="true">
+            <path d="M0 12.402l35.689-4.86.016 34.423-35.67.203zm35.67 33.529l.026 34.453-35.67-4.887-.026-29.566zm4.326-39.043L87.914 0v41.525l-47.918.278zm47.918 48.749L39.996 88V46.541l47.918.257z"/>
+          </svg>
+          Windows Desktop
+        </button>
+        <button
+          class="gallery-tab"
+          role="tab"
+          aria-selected="false"
+          aria-controls="gallery-android-panel"
+          id="tab-android"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4116 13.8533 8.1 12 8.1s-3.5902.3116-5.1367.8497L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/>
+          </svg>
+          Android Mobile
+        </button>
+      </div>
+    </div>
+
+    <!-- Windows Gallery Panel -->
+    <div
+      class="gallery-panel active"
+      id="gallery-windows-panel"
+      role="tabpanel"
+      aria-labelledby="tab-windows"
+    >
+      <div class="gallery-carousel-wrapper">
+        <button class="carousel-nav-btn prev-btn" id="win-prev-btn" aria-label="Previous screenshot">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="carousel-track" id="win-carousel-track">
+          {windowsShots.map((shot, idx) => (
+            <div class={`carousel-slide ${idx === 0 ? 'active' : ''}`} data-index={idx}>
+              <div class="device-desktop-frame clickable-shot" data-full={shot.src} data-title={shot.title} data-caption={shot.caption}>
+                <div class="device-desktop-header">
+                  <div class="device-desktop-dots">
+                    <span class="device-dot"></span>
+                    <span class="device-dot"></span>
+                    <span class="device-dot"></span>
+                  </div>
+                  <span class="device-desktop-title">Lirune Reader — {shot.title}</span>
+                </div>
+                <img
+                  src={shot.src}
+                  alt={shot.title}
+                  width="1280"
+                  height="800"
+                  loading="lazy"
+                  decoding="async"
+                  class="slide-img"
+                />
+                <div class="shot-zoom-badge" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+                  Click to enlarge
+                </div>
+              </div>
+              <div class="slide-caption">
+                <h3 class="slide-title">{shot.title}</h3>
+                <p class="slide-desc">{shot.caption}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button class="carousel-nav-btn next-btn" id="win-next-btn" aria-label="Next screenshot">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <!-- Thumbnails Selector -->
+      <div class="gallery-thumbs" id="win-thumbs" role="group" aria-label="Windows screenshot thumbnails">
+        {windowsShots.map((shot, idx) => (
+          <button
+            class={`thumb-btn ${idx === 0 ? 'active' : ''}`}
+            data-target-index={idx}
+            aria-label={`View ${shot.title}`}
+          >
+            <img src={shot.thumb} alt="" width="80" height="50" loading="lazy" />
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Android Gallery Panel -->
+    <div
+      class="gallery-panel"
+      id="gallery-android-panel"
+      role="tabpanel"
+      aria-labelledby="tab-android"
+      hidden
+    >
+      <div class="gallery-carousel-wrapper android-carousel-wrap">
+        <button class="carousel-nav-btn prev-btn" id="android-prev-btn" aria-label="Previous Android screenshot">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <div class="carousel-track" id="android-carousel-track">
+          {androidShots.map((shot, idx) => (
+            <div class={`carousel-slide ${idx === 0 ? 'active' : ''}`} data-index={idx}>
+              <div class="device-phone-frame clickable-shot" data-full={shot.src} data-title={shot.title} data-caption={shot.caption}>
+                <div class="device-phone-notch"></div>
+                <img
+                  src={shot.src}
+                  alt={shot.title}
+                  width="320"
+                  height="693"
+                  loading="lazy"
+                  decoding="async"
+                  class="slide-phone-img"
+                />
+                <div class="shot-zoom-badge" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+                  Enlarge
+                </div>
+              </div>
+              <div class="slide-caption text-center">
+                <h3 class="slide-title">{shot.title}</h3>
+                <p class="slide-desc">{shot.caption}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button class="carousel-nav-btn next-btn" id="android-next-btn" aria-label="Next Android screenshot">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <!-- Android Thumbnails -->
+      <div class="gallery-thumbs" id="android-thumbs" role="group" aria-label="Android screenshot thumbnails">
+        {androidShots.map((shot, idx) => (
+          <button
+            class={`thumb-btn thumb-phone ${idx === 0 ? 'active' : ''}`}
+            data-target-index={idx}
+            aria-label={`View ${shot.title}`}
+          >
+            <img src={shot.thumb} alt="" width="36" height="60" loading="lazy" />
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Tab switching
+  const tabWindows = document.getElementById('tab-windows');
+  const tabAndroid = document.getElementById('tab-android');
+  const panelWindows = document.getElementById('gallery-windows-panel');
+  const panelAndroid = document.getElementById('gallery-android-panel');
+
+  if (tabWindows && tabAndroid && panelWindows && panelAndroid) {
+    tabWindows.addEventListener('click', () => {
+      tabWindows.classList.add('active');
+      tabWindows.setAttribute('aria-selected', 'true');
+      tabAndroid.classList.remove('active');
+      tabAndroid.setAttribute('aria-selected', 'false');
+      panelWindows.classList.add('active');
+      panelWindows.removeAttribute('hidden');
+      panelAndroid.classList.remove('active');
+      panelAndroid.setAttribute('hidden', '');
+    });
+
+    tabAndroid.addEventListener('click', () => {
+      tabAndroid.classList.add('active');
+      tabAndroid.setAttribute('aria-selected', 'true');
+      tabWindows.classList.remove('active');
+      tabWindows.setAttribute('aria-selected', 'false');
+      panelAndroid.classList.add('active');
+      panelAndroid.removeAttribute('hidden');
+      panelWindows.classList.remove('active');
+      panelWindows.setAttribute('hidden', '');
+    });
+  }
+
+  // Generic carousel controller
+  function setupCarousel(trackId, prevBtnId, nextBtnId, thumbsId) {
+    const track = document.getElementById(trackId);
+    const prevBtn = document.getElementById(prevBtnId);
+    const nextBtn = document.getElementById(nextBtnId);
+    const thumbs = document.getElementById(thumbsId);
+    if (!track) return;
+
+    const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+    const thumbBtns = thumbs ? Array.from(thumbs.querySelectorAll('.thumb-btn')) : [];
+    let currentIndex = 0;
+
+    function goTo(idx) {
+      if (idx < 0) idx = slides.length - 1;
+      if (idx >= slides.length) idx = 0;
+      currentIndex = idx;
+
+      slides.forEach((s, i) => {
+        s.classList.toggle('active', i === currentIndex);
+      });
+
+      thumbBtns.forEach((b, i) => {
+        b.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+    thumbBtns.forEach((btn, i) => {
+      btn.addEventListener('click', () => goTo(i));
+    });
+
+    // Keyboard navigation
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') goTo(currentIndex - 1);
+      if (e.key === 'ArrowRight') goTo(currentIndex + 1);
+    });
+  }
+
+  setupCarousel('win-carousel-track', 'win-prev-btn', 'win-next-btn', 'win-thumbs');
+  setupCarousel('android-carousel-track', 'android-prev-btn', 'android-next-btn', 'android-thumbs');
+</script>
+
+<style>
+  .gallery-section {
+    padding-top: var(--sp-16);
+    padding-bottom: var(--sp-20);
+    background: var(--bg-base);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .gallery-tabs {
+    display: inline-flex;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    padding: 4px;
+    border-radius: var(--r-full);
+    gap: 4px;
+    margin-top: var(--sp-6);
+    margin-bottom: var(--sp-10);
+  }
+
+  .gallery-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border-radius: var(--r-full);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .gallery-tab:hover {
+    color: var(--text-primary);
+  }
+
+  .gallery-tab.active {
+    background: var(--accent);
+    color: var(--text-on-accent);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .gallery-panel {
+    display: none;
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out);
+  }
+
+  .gallery-panel.active {
+    display: block;
+    opacity: 1;
+  }
+
+  .gallery-carousel-wrapper {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .android-carousel-wrap {
+    max-width: 500px;
+  }
+
+  .carousel-nav-btn {
+    position: absolute;
+    top: 40%;
+    z-index: 10;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bg-glass);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .carousel-nav-btn:hover {
+    background: var(--accent);
+    color: var(--text-on-accent);
+    transform: scale(1.08);
+  }
+
+  .prev-btn {
+    left: -22px;
+  }
+
+  .next-btn {
+    right: -22px;
+  }
+
+  .carousel-track {
+    width: 100%;
+    position: relative;
+  }
+
+  .carousel-slide {
+    display: none;
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out);
+  }
+
+  .carousel-slide.active {
+    display: block;
+    opacity: 1;
+  }
+
+  .clickable-shot {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .shot-zoom-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(17, 21, 27, 0.85);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: var(--r-full);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-out);
+  }
+
+  .clickable-shot:hover .shot-zoom-badge {
+    opacity: 1;
+  }
+
+  .slide-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .slide-phone-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .slide-caption {
+    margin-top: var(--sp-6);
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .slide-title {
+    font-size: 1.25rem;
+    font-weight: 650;
+    margin-bottom: var(--sp-2);
+    color: var(--text-primary);
+  }
+
+  .slide-desc {
+    font-size: 0.98rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .gallery-thumbs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-3);
+    margin-top: var(--sp-8);
+    flex-wrap: wrap;
+  }
+
+  .thumb-btn {
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    padding: 0;
+    opacity: 0.6;
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .thumb-btn:hover {
+    opacity: 0.9;
+    border-color: var(--border-strong);
+  }
+
+  .thumb-btn.active {
+    opacity: 1;
+    border-color: var(--accent-chrome);
+    box-shadow: 0 0 12px rgba(141, 183, 204, 0.35);
+  }
+
+  .thumb-phone {
+    border-radius: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .prev-btn { left: 4px; }
+    .next-btn { right: 4px; }
+    .gallery-tab { padding: 8px 16px; font-size: 0.85rem; }
+  }
+</style>

@@ -1,0 +1,302 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import PlatformDownloadCard from '../components/PlatformDownloadCard.astro';
+import LiveScreenshotGallery from '../components/LiveScreenshotGallery.astro';
+import FeatureSection from '../components/FeatureSection.astro';
+import PrivacySection from '../components/PrivacySection.astro';
+import LatestReleasePanel from '../components/LatestReleasePanel.astro';
+import SupportSection from '../components/SupportSection.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import formats from '../data/formats.json';
+import releases from '../data/releases.json';
+---
+
+<BaseLayout
+  title="Lirune Reader — A calm, private home for your library on Windows and Android"
+  description="Official product website for Lirune Reader. Offline ebook and document reader supporting 19 formats with zero telemetry. Download for Windows and Android."
+>
+  <!-- Hero Section -->
+  <HeroSection />
+
+  <!-- Dual-Platform Download Cards -->
+  <PlatformDownloadCard />
+
+  <!-- Live Screenshots Showcase -->
+  <LiveScreenshotGallery />
+
+  <!-- Feature Introductions -->
+  <FeatureSection />
+
+  <!-- How Lirune Works (3-Step Guide) -->
+  <section class="how-it-works-section" aria-label="How Lirune Works">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-label">Simple & Dependable</span>
+        <h2 class="section-title">How Lirune works</h2>
+        <p class="section-subtitle mx-auto">
+          No sign-ups, no cloud setups, and no background indexing services. Just direct reading on your hardware.
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card card">
+          <div class="step-number">01</div>
+          <h3 class="step-title">Bring your books</h3>
+          <p class="step-desc">
+            Drag and drop files or entire folders on Windows, or select your library folder via Android's Storage Access Framework. Lirune automatically detects formats and extracts cover art.
+          </p>
+          <div class="step-visual">
+            <img src="/images/screenshots/win-library-empty.png" alt="Clean drop-zone interface on Windows" width="400" height="220" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="step-card card">
+          <div class="step-number">02</div>
+          <h3 class="step-title">Organize your library</h3>
+          <p class="step-desc">
+            Create custom collections, tag favorites, filter by author or format, and view reading progress percentages at a glance. All metadata is kept locally in private storage.
+          </p>
+          <div class="step-visual">
+            <img src="/images/screenshots/win-library-grid.png" alt="Organized library grid with cover art" width="400" height="220" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="step-card card">
+          <div class="step-number">03</div>
+          <h3 class="step-title">Read your way</h3>
+          <p class="step-desc">
+            Open documents instantly. Toggle between spreads, single pages, or continuous vertical scroll. Customize your font size, line spacing, margins, and themes for maximum reading comfort.
+          </p>
+          <div class="step-visual">
+            <img src="/images/screenshots/win-reader-story.png" alt="Distraction-free reading view" width="400" height="220" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy & Local-First Section -->
+  <PrivacySection />
+
+  <!-- Supported Formats Preview Strip -->
+  <section class="formats-preview-section" aria-label="Supported Document Formats">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-label">Universal Compatibility</span>
+        <h2 class="section-title">19 document formats, one calm home</h2>
+        <p class="section-subtitle mx-auto">
+          From modern reflowable EPUBs to complex fixed PDFs, Office documents, and comic book archives.
+        </p>
+      </div>
+
+      <div class="format-chips-cloud">
+        {formats.map(fmt => (
+          <a href="/formats" class="format-chip" title={`${fmt.name} (${fmt.extensions.join(', ')})`}>
+            <span class="chip-ext">{fmt.extensions[0]}</span>
+            <span class="chip-name">{fmt.name}</span>
+          </a>
+        ))}
+      </div>
+
+      <div class="format-preview-cta text-center">
+        <a href="/formats" class="btn btn-secondary">
+          View complete compatibility & technical matrix →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Release Panel -->
+  <LatestReleasePanel />
+
+  <!-- Support Lirune / Buy Me a Coffee -->
+  <SupportSection />
+
+  <!-- FAQ Preview -->
+  <section class="faq-preview-section" aria-label="Frequently Asked Questions Preview">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-label">Questions & Answers</span>
+        <h2 class="section-title">Common questions</h2>
+        <p class="section-subtitle mx-auto">
+          Everything you need to know about Lirune's offline design, platform support, and file security.
+        </p>
+      </div>
+
+      <FAQAccordion limit={5} showAllLink={true} />
+    </div>
+  </section>
+
+  <!-- Final Call to Action -->
+  <section class="final-cta-section" aria-label="Download Lirune Today">
+    <div class="container">
+      <div class="final-cta-card card text-center">
+        <h2 class="final-cta-title">Start reading with calm and privacy</h2>
+        <p class="final-cta-subtitle mx-auto">
+          Free and open source for Windows and Android. No accounts, no subscriptions, and zero tracking.
+        </p>
+        <div class="final-cta-buttons">
+          <a href={releases.windows.storeUrl} target="_blank" rel="noopener noreferrer" class="btn btn-windows btn-lg">
+            Get for Windows (Store)
+          </a>
+          <a href={releases.android.apkUrl} class="btn btn-android btn-lg">
+            Download Android APK (v{releases.android.version})
+          </a>
+          <a href="/downloads" class="btn btn-secondary btn-lg">
+            All Download Options
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .text-center { text-align: center; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+
+  /* How It Works */
+  .how-it-works-section {
+    background: var(--bg-base);
+    padding-top: var(--sp-16);
+    padding-bottom: var(--sp-20);
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--sp-8);
+    margin-top: var(--sp-10);
+  }
+
+  .step-card {
+    padding: var(--sp-8);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .step-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-chrome);
+    opacity: 0.8;
+    margin-bottom: var(--sp-3);
+  }
+
+  .step-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: var(--sp-3);
+  }
+
+  .step-desc {
+    font-size: 0.98rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin-bottom: var(--sp-6);
+    flex-grow: 1;
+  }
+
+  .step-visual {
+    border-radius: var(--r-md);
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-elevated);
+  }
+
+  .step-visual img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* Formats Preview */
+  .formats-preview-section {
+    padding-top: var(--sp-16);
+    padding-bottom: var(--sp-20);
+    background: #0E1218;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .format-chips-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--sp-3);
+    max-width: 900px;
+    margin: var(--sp-8) auto;
+  }
+
+  .format-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    padding: 8px 16px;
+    border-radius: var(--r-full);
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .format-chip:hover {
+    border-color: var(--accent-chrome);
+    background: var(--bg-elevated);
+    transform: translateY(-2px);
+  }
+
+  .chip-ext {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--accent-chrome);
+  }
+
+  .chip-name {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+  }
+
+  .format-preview-cta {
+    margin-top: var(--sp-8);
+  }
+
+  /* FAQ Preview */
+  .faq-preview-section {
+    padding-top: var(--sp-16);
+    padding-bottom: var(--sp-20);
+  }
+
+  /* Final CTA */
+  .final-cta-section {
+    padding-bottom: var(--sp-20);
+  }
+
+  .final-cta-card {
+    padding: clamp(var(--sp-10), 6vw, var(--sp-16));
+    background: radial-gradient(circle at top, #1E2633 0%, #131821 100%);
+    border: 1px solid var(--border-strong);
+  }
+
+  .final-cta-title {
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    margin-bottom: var(--sp-4);
+  }
+
+  .final-cta-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin-bottom: var(--sp-8);
+  }
+
+  .final-cta-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+  }
+</style>

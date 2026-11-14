@@ -1,0 +1,73 @@
+---
+import releases from '../data/releases.json';
+---
+
+<aside class="announcement-bar" aria-label="Latest release announcement">
+  <div class="container announcement-content">
+    <span class="announcement-pill">Release</span>
+    <span class="announcement-text">
+      Lirune Reader for Windows <strong>v{releases.windows.version}</strong> and Android <strong>v{releases.android.version}</strong> are available.
+    </span>
+    <a href="/downloads" class="announcement-link">
+      Get latest downloads
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</aside>
+
+<style>
+  .announcement-bar {
+    background: #141922;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.85rem;
+    padding: 6px 0;
+    color: var(--text-secondary);
+  }
+
+  .announcement-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .announcement-pill {
+    background: var(--accent-subtle);
+    color: var(--accent-text);
+    border: 1px solid var(--border-accent);
+    padding: 2px 8px;
+    border-radius: var(--r-full);
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .announcement-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .announcement-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--accent-chrome);
+    font-weight: 600;
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .announcement-link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .announcement-bar {
+      font-size: 0.78rem;
+      padding: 8px 0;
+    }
+  }
+</style>

@@ -1,0 +1,125 @@
+---
+import AnnouncementBar from '../components/AnnouncementBar.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import ScreenshotLightbox from '../components/ScreenshotLightbox.astro';
+import config from '../data/config.json';
+import releases from '../data/releases.json';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+}
+
+const {
+  title = "Lirune Reader — A calm, private home for your library",
+  description = "Official website of Lirune Reader: the free, open-source, offline ebook and document reader for Windows and Android. Supports 19 formats with zero telemetry.",
+  canonicalPath = Astro.url.pathname,
+  image = "/images/branding/lirune-logo-1080.png"
+} = Astro.props;
+
+const canonicalUrl = new URL(canonicalPath, config.siteUrl).href;
+const fullImageUrl = new URL(image, config.siteUrl).href;
+
+// JSON-LD Structured Data
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${config.siteUrl}/#website`,
+      "url": config.siteUrl,
+      "name": "Lirune Reader",
+      "description": config.description,
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${config.siteUrl}/#app-windows`,
+      "name": "Lirune Reader for Windows",
+      "operatingSystem": "Windows 10, Windows 11",
+      "applicationCategory": "EBookApplication",
+      "softwareVersion": releases.windows.version,
+      "datePublished": releases.windows.releaseDate,
+      "downloadUrl": releases.windows.installerUrl,
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": config.author
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${config.siteUrl}/#app-android`,
+      "name": "Lirune Reader for Android",
+      "operatingSystem": "Android 8.0+",
+      "applicationCategory": "EBookApplication",
+      "softwareVersion": releases.android.version,
+      "datePublished": releases.android.releaseDate,
+      "downloadUrl": releases.android.apkUrl,
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": config.author
+      }
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/images/branding/lirune-icon.png" />
+    <meta name="theme-color" content="#11151B" />
+    <meta name="color-scheme" content="dark" />
+
+    <!-- SEO & Metadata -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullImageUrl} />
+    <meta property="og:site_name" content="Lirune Reader" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullImageUrl} />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <AnnouncementBar />
+    <SiteHeader />
+    <main id="main-content">
+      <slot />
+    </main>
+    <SiteFooter />
+    <ScreenshotLightbox />
+  </body>
+</html>

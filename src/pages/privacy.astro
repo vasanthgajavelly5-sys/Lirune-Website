@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy & Local Architecture — Lirune Reader"
+  description="Transparent breakdown of Lirune Reader's offline-first architecture, local storage locations, and strict zero-telemetry policy."
+>
+  <div class="privacy-page">
+    <div class="container container-narrow">
+      <div class="page-header">
+        <span class="section-label">Data Architecture</span>
+        <h1 class="page-title">Privacy & Data Sovereignty</h1>
+        <p class="page-subtitle">
+          Last revised: October 2026 • Effective for Lirune Reader Windows v5.x & Android v4.x
+        </p>
+      </div>
+
+      <div class="privacy-body">
+        <section class="policy-section">
+          <h2>Core Privacy Principle</h2>
+          <p>
+            Lirune Reader was designed with an uncompromising philosophy: <strong>your reading belongs entirely to you</strong>. Digital books are personal artifacts. Where you stop reading, which sentences you highlight, and what notes you write are private thoughts that should never be monitored, monetized, or transmitted across a network.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>1. Zero Telemetry & No Accounts</h2>
+          <p>
+            Lirune Reader does not require you to create an account, log in with third-party providers (Google, Apple, Facebook), or enter an email address.
+          </p>
+          <ul>
+            <li>No analytics SDKs (such as Google Analytics, Firebase Analytics, Mixpanel, or Amplitude) exist in the application.</li>
+            <li>No crash-reporting telemetry is collected automatically.</li>
+            <li>No tracking pixels, session replay scripts, or telemetry pings are embedded.</li>
+          </ul>
+        </section>
+
+        <section class="policy-section">
+          <h2>2. Where Data Is Stored on Your Device</h2>
+          <p>All application data remains sandboxed within your local operating system environment:</p>
+          <ul>
+            <li>
+              <strong>Windows Desktop:</strong> Book metadata, cover thumbnails, reading progress, and annotations are stored in a local IndexedDB database within your user profile directory (<code>%APPDATA%\Lirune Reader</code> or the isolated Windows Store package container). Book files themselves are kept in managed local storage or read directly from the paths you opened.
+            </li>
+            <li>
+              <strong>Android:</strong> Metadata and reading states are stored in a local SQLite database managed by the app. Book files are accessed via the Android Storage Access Framework (SAF) within the specific directory you select.
+            </li>
+          </ul>
+        </section>
+
+        <section class="policy-section">
+          <h2>3. Network Permissions & Inability to Transmit</h2>
+          <p>
+            To provide technical certainty rather than just promises, Lirune implements OS-level architectural barriers:
+          </p>
+          <ul>
+            <li>
+              <strong>Android Internet Permission Stripped:</strong> Production release builds of Lirune Reader permanently remove the <code>android.permission.INTERNET</code> permission from the Android manifest. The Android operating system physically forbids the app from opening network sockets, sending HTTP requests, or communicating externally.
+            </li>
+            <li>
+              <strong>Windows Content Security Policy (CSP):</strong> The Windows application enforces a strict Content Security Policy forbidding connections to remote APIs. Documents are rendered inside isolated, sandboxed iframes.
+            </li>
+            <li>
+              <strong>External Links:</strong> If you explicitly click an external link (such as "Buy Me a Coffee" or "Report Issue on GitHub"), Lirune does not process the link internally; it safely delegates the URL to your system default web browser (via Electron <code>shell.openExternal</code> on Windows or React Native <code>Linking.openURL</code> on Android).
+            </li>
+          </ul>
+        </section>
+
+        <section class="policy-section">
+          <h2>4. Content Security & File Sanitization</h2>
+          <p>
+            Opening untrusted files from the internet carries potential security risks. To protect your system:
+          </p>
+          <ul>
+            <li><strong>HTML & FB2 Sanitization:</strong> All HTML, FB2, and Markdown content is sanitized through DOMPurify, removing <code>&lt;script&gt;</code> tags, executable handlers (<code>onload</code>, <code>onerror</code>), and external tracking beacons.</li>
+            <li><strong>Archive Safety (Zip-Slip):</strong> Lirune enforces strict path traversal checks on EPUB, CBZ, and FBZ archives to ensure compressed files cannot escape their target directory.</li>
+            <li><strong>Decompression Bounds:</strong> A 512 MB file bounds check prevents malicious zip-bomb attacks from exhausting system RAM.</li>
+          </ul>
+        </section>
+
+        <section class="policy-section">
+          <h2>5. Website Privacy vs. Application Privacy</h2>
+          <p>
+            It is important to distinguish between the Lirune software application and this website (<code>https://lirune-reader.web.app</code>):
+          </p>
+          <ul>
+            <li><strong>The Applications:</strong> 100% offline. Zero network activity, zero analytics, zero data transmission.</li>
+            <li><strong>This Website:</strong> This website is hosted statically on Google Firebase Hosting. Like all web hosting providers, standard HTTP request logs (IP address, user agent, requested URL) are processed by Google Cloud edge servers to deliver the site files and enforce DDoS security. This website contains no advertising trackers or third-party cookies.</li>
+          </ul>
+        </section>
+
+        <section class="policy-section">
+          <h2>6. Data Portability & Export</h2>
+          <p>
+            You own your reading data. In Lirune Settings under <em>Storage & Maintenance</em>, you can click <strong>Export Library Backup</strong> at any time to export your entire catalog, reading positions, and notes into an unencrypted, portable JSON file. You can also export your reading highlights directly to standard Markdown files.
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .privacy-page {
+    padding-top: var(--sp-12);
+    padding-bottom: var(--sp-20);
+  }
+
+  .page-header {
+    margin-bottom: var(--sp-12);
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: var(--sp-6);
+  }
+
+  .page-title {
+    margin-bottom: var(--sp-2);
+  }
+
+  .page-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-tertiary);
+  }
+
+  .privacy-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-10);
+  }
+
+  .policy-section h2 {
+    font-size: 1.4rem;
+    margin-bottom: var(--sp-3);
+    color: var(--text-primary);
+  }
+
+  .policy-section p {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin-bottom: var(--sp-4);
+  }
+
+  .policy-section ul {
+    padding-left: var(--sp-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    font-size: 0.98rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .policy-section strong {
+    color: var(--text-primary);
+  }
+
+  .policy-section code {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-chrome);
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found (404) — Lirune Reader"
+  description="The requested page could not be found on the official Lirune Reader website."
+>
+  <div class="not-found-page">
+    <div class="container text-center">
+      <div class="not-found-card card mx-auto">
+        <span class="error-code">404</span>
+        <h1 class="error-title">Page not found</h1>
+        <p class="error-desc mx-auto">
+          The page you are looking for may have been moved, removed, or never existed in the library catalog.
+        </p>
+
+        <div class="error-actions">
+          <a href="/" class="btn btn-primary btn-lg">Return to Homepage</a>
+          <a href="/downloads" class="btn btn-secondary btn-lg">View Downloads</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found-page {
+    padding-top: var(--sp-20);
+    padding-bottom: var(--sp-24);
+  }
+
+  .text-center { text-align: center; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+
+  .not-found-card {
+    padding: clamp(var(--sp-8), 6vw, var(--sp-16));
+    max-width: 640px;
+    background: var(--bg-surface);
+  }
+
+  .error-code {
+    display: inline-block;
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--accent-chrome);
+    opacity: 0.8;
+    margin-bottom: var(--sp-4);
+  }
+
+  .error-title {
+    font-size: 2rem;
+    margin-bottom: var(--sp-3);
+  }
+
+  .error-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 440px;
+    margin-bottom: var(--sp-8);
+  }
+
+  .error-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+  }
+</style>

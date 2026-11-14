@@ -1,0 +1,50 @@
+[
+  {
+    "q": "What is Lirune Reader?",
+    "a": "Lirune Reader is a free, private, and open-source ebook and document reading application for Windows and Android. It is designed as a calm, distraction-free home for your digital library, supporting 19 formats including EPUB, PDF, MOBI, FB2, Word documents, comic archives, and plain text."
+  },
+  {
+    "q": "Is Lirune free and open-source?",
+    "a": "Yes. Lirune Reader is 100% free software released under the GNU General Public License v3.0 (GPL-3.0). The full source code is publicly accessible on GitHub. There are no subscriptions, paywalls, or premium tiers."
+  },
+  {
+    "q": "Does Lirune require an account or internet connection?",
+    "a": "No. Lirune requires no account creation, no sign-up, and no internet access. The reader operates completely offline. On Android, the application release build permanently strips the `android.permission.INTERNET` permission, guaranteeing that your reading activity and files can never leave your device."
+  },
+  {
+    "q": "Where are my books and reading progress stored?",
+    "a": "All files, reading bookmarks, progress indicators, highlights, and preferences remain strictly on your local device. On Windows, metadata is managed in sandboxed IndexedDB storage and local directories. On Android, data is managed via local SQLite and the Android Storage Access Framework (SAF)."
+  },
+  {
+    "q": "Which formats are supported?",
+    "a": "Lirune supports 19 universal formats: EPUB (.epub), PDF (.pdf), MOBI (.mobi, .azw, .azw3), FictionBook (.fb2, .fbz), Microsoft Word (.docx, .doc), OpenDocument Text (.odt), Rich Text Format (.rtf), Plain Text (.txt), Markdown (.md), HTML (.html, .htm), Comic Archives (.cbz, .cbr, .cb7), Microsoft Help (.chm), and DjVu (.djvu)."
+  },
+  {
+    "q": "Does Lirune support DRM-protected books?",
+    "a": "No. Lirune Reader respects author and publisher copyright and does not circumvent Digital Rights Management (DRM) or proprietary container encryption (such as Adobe Adept or Kindle KFX DRM). Encrypted files will be cleanly identified and rejected."
+  },
+  {
+    "q": "How do I install Lirune on Windows?",
+    "a": "You can install Lirune Reader directly from the Microsoft Store (Product ID: 9PDNFZ146HDX) for automatic updates and verified installation. Alternatively, you can download the standalone Windows NSIS installer (.exe) or APPX package from our official GitHub Releases page."
+  },
+  {
+    "q": "Why do I see a Windows SmartScreen prompt on direct installers?",
+    "a": "Lirune is an independent open-source project. If Microsoft SmartScreen shows an unrecognized app warning on direct downloads from GitHub, you can click 'More info' and select 'Run anyway', or simply install directly from the Microsoft Store where the application is pre-certified."
+  },
+  {
+    "q": "How do I install Lirune on Android?",
+    "a": "Download the official APK (e.g., Lirune-Reader-v4.9.3-release.apk) from the Downloads page or GitHub Releases. When prompted, permit 'Install unknown apps' in your device settings for your browser or file manager, and tap Install."
+  },
+  {
+    "q": "How can I back up my reading data?",
+    "a": "In Lirune Settings under 'Storage & Maintenance', click 'Export Library Backup'. This exports your book metadata, collections, favorites, bookmarks, and notes into a single portable JSON file. You can restore this file at any time on another device."
+  },
+  {
+    "q": "Where can I report bugs or request new features?",
+    "a": "All bug reports, feature discussions, and issue tracking occur on the official GitHub repository at https://github.com/vasanthgajavelly5-sys/Lirune/issues."
+  },
+  {
+    "q": "How can I support Lirune's development?",
+    "a": "Lirune is developed and maintained independently by Vasanth Gajavelly. If Lirune has improved your digital reading experience, you can voluntarily support continued development via Buy Me a Coffee at https://buymeacoffee.com/vasanthgajavelly or by starring the repository on GitHub."
+  }
+]

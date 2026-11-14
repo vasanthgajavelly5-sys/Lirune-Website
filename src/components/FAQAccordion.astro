@@ -1,0 +1,106 @@
+---
+import allFaqs from '../data/faq.json';
+
+interface Props {
+  limit?: number;
+  showAllLink?: boolean;
+}
+
+const { limit, showAllLink = false } = Astro.props;
+const faqs = limit ? allFaqs.slice(0, limit) : allFaqs;
+---
+
+<div class="faq-accordion-component">
+  <div class="faq-list">
+    {faqs.map((item, idx) => (
+      <details class="faq-item" open={idx === 0}>
+        <summary class="faq-question">
+          <span class="q-text">{item.q}</span>
+          <span class="faq-arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </summary>
+        <div class="faq-answer">
+          <p>{item.a}</p>
+        </div>
+      </details>
+    ))}
+  </div>
+
+  {showAllLink && (
+    <div class="faq-footer-link text-center">
+      <a href="/faq" class="btn btn-secondary">
+        View all frequently asked questions →
+      </a>
+    </div>
+  )}
+</div>
+
+<style>
+  .faq-accordion-component {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+
+  .faq-item {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  }
+
+  .faq-item[open] {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-5) var(--sp-6);
+    font-size: 1.1rem;
+    font-weight: 650;
+    color: var(--text-primary);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-tertiary);
+    transition: transform var(--duration-normal) var(--ease-out), color var(--duration-fast) var(--ease-out);
+  }
+
+  .faq-item[open] .faq-arrow {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+
+  .faq-answer {
+    padding: 0 var(--sp-6) var(--sp-6) var(--sp-6);
+    color: var(--text-secondary);
+    line-height: 1.65;
+    font-size: 1rem;
+  }
+
+  .faq-footer-link {
+    margin-top: var(--sp-10);
+  }
+
+  .text-center { text-align: center; }
+</style>

@@ -1,0 +1,303 @@
+---
+import formats from '../data/formats.json';
+---
+
+<div class="format-table-component" id="format-matrix">
+  <!-- Controls -->
+  <div class="format-controls">
+    <div class="format-search-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input
+        type="text"
+        id="format-search-input"
+        placeholder="Filter by format or extension (e.g. epub, pdf, mobi, docx)..."
+        aria-label="Filter formats"
+        class="format-search-input"
+      />
+    </div>
+
+    <div class="format-category-pills" role="radiogroup" aria-label="Format category filter">
+      <button class="cat-pill active" data-category="all" role="radio" aria-checked="true">All (19)</button>
+      <button class="cat-pill" data-category="Standard E-Books" role="radio" aria-checked="false">E-Books</button>
+      <button class="cat-pill" data-category="Fixed Layout Documents" role="radio" aria-checked="false">PDF</button>
+      <button class="cat-pill" data-category="Office Documents" role="radio" aria-checked="false">Office</button>
+      <button class="cat-pill" data-category="Comic Books & Manga" role="radio" aria-checked="false">Comics</button>
+      <button class="cat-pill" data-category="Plain Text & Markup" role="radio" aria-checked="false">Text & MD</button>
+    </div>
+  </div>
+
+  <!-- Format Table Desktop -->
+  <div class="table-responsive">
+    <table class="format-table" id="formats-table">
+      <thead>
+        <tr>
+          <th scope="col">Format</th>
+          <th scope="col">Extensions</th>
+          <th scope="col">Category</th>
+          <th scope="col">Layout Type</th>
+          <th scope="col">Status</th>
+          <th scope="col">Reader Engine & Architecture</th>
+          <th scope="col">Security & Boundaries</th>
+        </tr>
+      </thead>
+      <tbody>
+        {formats.map(fmt => (
+          <tr class="format-row" data-name={fmt.name.toLowerCase()} data-exts={fmt.extensions.join(' ').toLowerCase()} data-category={fmt.category}>
+            <td class="col-format">
+              <strong>{fmt.name}</strong>
+            </td>
+            <td class="col-exts">
+              {fmt.extensions.map(ext => (
+                <code class="ext-tag">{ext}</code>
+              ))}
+            </td>
+            <td class="col-cat">{fmt.category}</td>
+            <td class="col-layout">{fmt.layout}</td>
+            <td class="col-status">
+              <span class={`status-pill ${fmt.status === 'Fully supported' ? 'status-full' : 'status-limited'}`}>
+                {fmt.status}
+              </span>
+            </td>
+            <td class="col-engine">
+              <span class="engine-title">{fmt.engine}</span>
+              <p class="engine-details">{fmt.details}</p>
+            </td>
+            <td class="col-limits">
+              <p class="limits-text">{fmt.limitations}</p>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div id="no-formats-msg" class="no-results hidden" aria-live="polite">
+    No format matches your query. Try searching for "epub", "pdf", "docx", or "cbz".
+  </div>
+</div>
+
+<script>
+  const searchInput = document.getElementById('format-search-input') as HTMLInputElement;
+  const categoryPills = document.querySelectorAll('.cat-pill');
+  const rows = document.querySelectorAll('.format-row');
+  const noMsg = document.getElementById('no-formats-msg');
+
+  let activeCategory = 'all';
+  let searchQuery = '';
+
+  function filterTable() {
+    let visibleCount = 0;
+    rows.forEach(row => {
+      const el = row as HTMLElement;
+      const name = el.getAttribute('data-name') || '';
+      const exts = el.getAttribute('data-exts') || '';
+      const cat = el.getAttribute('data-category') || '';
+
+      const matchesCat = (activeCategory === 'all' || cat === activeCategory);
+      const matchesSearch = !searchQuery || name.includes(searchQuery) || exts.includes(searchQuery) || cat.toLowerCase().includes(searchQuery);
+
+      if (matchesCat && matchesSearch) {
+        el.style.display = '';
+        visibleCount++;
+      } else {
+        el.style.display = 'none';
+      }
+    });
+
+    if (noMsg) {
+      noMsg.classList.toggle('hidden', visibleCount > 0);
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = (e.target as HTMLInputElement).value.toLowerCase().trim();
+      filterTable();
+    });
+  }
+
+  categoryPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      categoryPills.forEach(p => {
+        p.classList.remove('active');
+        p.setAttribute('aria-checked', 'false');
+      });
+      pill.classList.add('active');
+      pill.setAttribute('aria-checked', 'true');
+      activeCategory = pill.getAttribute('data-category') || 'all';
+      filterTable();
+    });
+  });
+</script>
+
+<style>
+  .format-table-component {
+    margin-top: var(--sp-8);
+  }
+
+  .format-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-6);
+  }
+
+  .format-search-wrap {
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+  }
+
+  .format-search-input {
+    width: 100%;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    padding: 12px 14px 12px 42px;
+    border-radius: var(--r-lg);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    transition: border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .format-search-input:focus {
+    border-color: var(--accent-chrome);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(141, 183, 204, 0.15);
+  }
+
+  .format-category-pills {
+    display: flex;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+  }
+
+  .cat-pill {
+    padding: 6px 14px;
+    border-radius: var(--r-full);
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .cat-pill:hover {
+    color: var(--text-primary);
+    background: var(--bg-elevated);
+  }
+
+  .cat-pill.active {
+    background: var(--accent);
+    color: var(--text-on-accent);
+    border-color: transparent;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-xl);
+    background: var(--bg-surface);
+  }
+
+  .format-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.92rem;
+  }
+
+  .format-table th {
+    background: var(--bg-elevated);
+    padding: 14px 18px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .format-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+
+  .format-row:hover {
+    background: var(--bg-hover);
+  }
+
+  .ext-tag {
+    display: inline-block;
+    background: var(--bg-elevated);
+    padding: 2px 6px;
+    border-radius: var(--r-xs);
+    font-size: 0.8rem;
+    color: var(--accent-chrome);
+    margin-right: 4px;
+    margin-bottom: 2px;
+  }
+
+  .status-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: var(--r-full);
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .status-full {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--status-success);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+
+  .status-limited {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--status-warning);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+
+  .engine-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .engine-details {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  .limits-text {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    line-height: 1.4;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: var(--sp-12);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    background: var(--bg-surface);
+    border-radius: var(--r-xl);
+    border: 1px dashed var(--border-strong);
+    margin-top: var(--sp-6);
+  }
+
+  .no-results.hidden {
+    display: none;
+  }
+</style>
