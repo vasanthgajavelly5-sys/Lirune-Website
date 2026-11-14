@@ -1,140 +1,412 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FormatCompatibilityTable from '../components/FormatCompatibilityTable.astro';
+import formats from '../data/formats.json';
+
+const categories = ['All', ...new Set(formats.map(f => f.category))];
 ---
 
 <BaseLayout
   title="Supported Formats & Compatibility — Lirune Reader"
-  description="Comprehensive format compatibility matrix for Lirune Reader. Supports 19 formats including EPUB, PDF, MOBI, DOCX, CBZ, and FB2 with security and DRM details."
+  description="Comprehensive compatibility matrix of all 19 document, ebook, and comic formats supported by Lirune Reader on Windows and Android."
+  canonicalPath="/formats"
 >
-  <div class="formats-page">
-    <div class="container">
-      <div class="page-header text-center">
-        <span class="section-label">Compatibility Matrix</span>
-        <h1 class="page-title">Supported Document Formats</h1>
-        <p class="page-subtitle mx-auto">
-          Lirune supports 19 universal document, e-book, and comic archive formats across both Windows and Android. Every format is unpacked and rendered locally with strict security boundaries.
-        </p>
+  <div class="site-container section-spacing">
+    <div class="section-header section-header--center">
+      <span class="badge badge-success">Compatibility Matrix</span>
+      <h1>19 Document & Book Formats</h1>
+      <p>Lirune renders all formats locally on your machine with dedicated rendering engines and zero external servers.</p>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="matrix-controls-card">
+      <div class="search-input-wrap">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="search"
+          id="format-search-input"
+          placeholder="Filter by format (e.g. epub, pdf, cbz, fb2, docx)..."
+          class="matrix-search-input"
+          aria-label="Filter formats by name or extension"
+        />
       </div>
 
-      <!-- Security & DRM Policy Alert -->
-      <div class="card security-notice">
-        <div class="notice-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </div>
-        <div class="notice-text">
-          <h3>DRM & Security Principles</h3>
-          <p>
-            Lirune Reader respects intellectual property and author rights. DRM-protected files (such as Adobe Adept, Apple FairPlay, or Amazon KFX proprietary containers) are cleanly identified and rejected. Lirune never circumvents copy protection. Furthermore, all HTML, FB2, and Markdown documents undergo strict DOMPurify sanitization to neutralize malicious scripts.
-          </p>
-        </div>
+      <div class="category-pills" role="radiogroup" aria-label="Format Category Filter">
+        {categories.map((cat, idx) => (
+          <button
+            type="button"
+            class:list={['category-pill-btn', { active: idx === 0 }]}
+            data-category={cat}
+            role="radio"
+            aria-checked={idx === 0 ? 'true' : 'false'}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
+    </div>
 
-      <!-- Interactive Searchable Table -->
-      <FormatCompatibilityTable />
+    <!-- Formats Grid / Table -->
+    <div class="formats-list" id="formats-container">
+      {formats.map(f => (
+        <article
+          class="format-row surface-card"
+          data-format-id={f.id}
+          data-format-category={f.category}
+          data-search-terms={`${f.id} ${f.name} ${f.extensions.join(' ')} ${f.category} ${f.engine}`.toLowerCase()}
+        >
+          <div class="format-primary">
+            <div class="format-ext-badge">
+              {f.extensions[0].replace('.', '').toUpperCase()}
+            </div>
+            <div class="format-info">
+              <div class="format-header-meta">
+                <h3 class="format-name">{f.name}</h3>
+                <span class:list={['status-indicator', f.status.toLowerCase().includes('fully') ? 'status-full' : 'status-partial']}>
+                  {f.status}
+                </span>
+              </div>
+              <div class="format-tags">
+                <span class="tag-pill">{f.category}</span>
+                <span class="tag-pill layout-tag">{f.layout}</span>
+                <span class="tag-pill extensions-tag">{f.extensions.join(', ')}</span>
+              </div>
+            </div>
+          </div>
 
-      <!-- Format Categories Summary -->
-      <div class="categories-summary-grid">
-        <div class="card cat-summary-card">
-          <h3>Standard E-Books</h3>
-          <p>EPUB 2 / 3, FictionBook (FB2, FBZ), and MOBI / AZW / AZW3. Full chapter spine navigation, reflowable typography, cover extraction, and metadata indexing.</p>
-        </div>
-        <div class="card cat-summary-card">
-          <h3>Fixed Layout PDF</h3>
-          <p>Full integration with offline PDF.js. Crisp vector text, zoom scaling, two-page layout, jump-to-page, and reading progress tracking.</p>
-        </div>
-        <div class="card cat-summary-card">
-          <h3>Office & Rich Text</h3>
-          <p>Microsoft Word (DOCX, legacy DOC), OpenDocument Text (ODT), and Rich Text (RTF). Clean text extraction and structural heading parsing.</p>
-        </div>
-        <div class="card cat-summary-card">
-          <h3>Comics & Manga</h3>
-          <p>CBZ, CBR, and CB7 comic archives. Natural sorted image page rendering with zoom, pan, and zip-bomb ratio protection.</p>
-        </div>
-        <div class="card cat-summary-card">
-          <h3>Plain Text & Markdown</h3>
-          <p>TXT, MD, and HTML. Auto-encoding detection, CommonMark compliance, and script-stripped local HTML rendering.</p>
-        </div>
-        <div class="card cat-summary-card">
-          <h3>Scanned & Reference</h3>
-          <p>Compiled HTML Help (CHM) and DjVu documents. Preserves internal tables of contents and bitonal scanned document layers.</p>
-        </div>
-      </div>
+          <div class="format-details">
+            <div class="detail-block">
+              <span class="detail-label">Rendering Engine</span>
+              <p class="detail-text">{f.engine}</p>
+            </div>
+            <div class="detail-block">
+              <span class="detail-label">Capabilities</span>
+              <p class="detail-text">{f.details}</p>
+            </div>
+            {f.limitations && (
+              <div class="detail-block detail-block--warning">
+                <span class="detail-label">Security & DRM Notice</span>
+                <p class="detail-text">{f.limitations}</p>
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Empty State -->
+    <div class="formats-empty surface-card" id="formats-empty-state" hidden>
+      <div class="empty-icon">🔍</div>
+      <h3>No formats match your query</h3>
+      <p>Try searching for a different extension like <code>epub</code>, <code>pdf</code>, <code>cbz</code>, or <code>fb2</code>.</p>
+      <button type="button" class="btn btn-secondary" id="reset-filter-btn">
+        <span>Reset Filters</span>
+      </button>
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .formats-page {
-    padding-top: var(--sp-12);
-    padding-bottom: var(--sp-20);
-  }
-
-  .text-center { text-align: center; }
-  .mx-auto { margin-left: auto; margin-right: auto; }
-
-  .page-header {
-    margin-bottom: var(--sp-10);
-  }
-
-  .page-title {
-    margin-bottom: var(--sp-4);
-  }
-
-  .page-subtitle {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
-    max-width: 720px;
-  }
-
-  .security-notice {
+  .matrix-controls-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-xl);
+    padding: var(--sp-6);
+    margin-bottom: var(--sp-8);
     display: flex;
+    flex-direction: column;
     gap: var(--sp-4);
-    align-items: flex-start;
-    padding: var(--sp-6);
-    background: rgba(141, 183, 204, 0.08);
-    border: 1px solid var(--border-accent);
-    margin-bottom: var(--sp-10);
+    box-shadow: var(--shadow-sm);
   }
 
-  .notice-icon {
-    color: var(--accent-chrome);
-    flex-shrink: 0;
-    margin-top: 2px;
+  .search-input-wrap {
+    position: relative;
+    width: 100%;
   }
 
-  .notice-text h3 {
-    font-size: 1.1rem;
-    margin-bottom: 4px;
-    color: var(--accent-chrome);
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    pointer-events: none;
   }
 
-  .notice-text p {
-    font-size: 0.92rem;
+  .matrix-search-input {
+    width: 100%;
+    padding: 14px 16px 14px 48px;
+    border-radius: var(--r-md);
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+    transition: all var(--t-fast);
+  }
+
+  .matrix-search-input:focus {
+    border-color: var(--focus-ring);
+    background-color: var(--bg-surface);
+    box-shadow: 0 0 0 3px var(--accent-chrome-subtle);
+  }
+
+  .category-pills {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+  }
+
+  .category-pill-btn {
+    padding: 6px 14px;
+    border-radius: var(--r-full);
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
     color: var(--text-secondary);
-    line-height: 1.5;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--t-fast);
   }
 
-  .categories-summary-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: var(--sp-6);
-    margin-top: var(--sp-16);
+  .category-pill-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--border-default);
   }
 
-  .cat-summary-card {
+  .category-pill-btn.active {
+    background-color: var(--accent);
+    color: var(--text-on-accent);
+    font-weight: 600;
+    border-color: transparent;
+  }
+
+  /* Formats List */
+  .formats-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+
+  .format-row {
     padding: var(--sp-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
   }
 
-  .cat-summary-card h3 {
-    font-size: 1.15rem;
-    margin-bottom: var(--sp-2);
+  .format-primary {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-4);
+  }
+
+  .format-ext-badge {
+    width: 54px;
+    height: 54px;
+    border-radius: var(--r-lg);
+    background-color: var(--accent-chrome-subtle);
+    border: 1px solid var(--border-accent);
+    color: var(--accent-chrome);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .format-info {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .format-header-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+  }
+
+  .format-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .status-indicator {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: var(--r-full);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .status-full {
+    background-color: rgba(16, 185, 129, 0.12);
+    color: var(--status-success);
+    border: 1px solid rgba(16, 185, 129, 0.28);
+  }
+
+  .status-partial {
+    background-color: rgba(245, 158, 11, 0.12);
+    color: var(--status-warning);
+    border: 1px solid rgba(245, 158, 11, 0.28);
+  }
+
+  .format-tags {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+  }
+
+  .tag-pill {
+    font-size: 0.78rem;
+    padding: 3px 8px;
+    border-radius: var(--r-sm);
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-tertiary);
+  }
+
+  .layout-tag {
+    color: var(--text-secondary);
+  }
+
+  .extensions-tag {
+    font-family: var(--font-mono);
     color: var(--text-primary);
   }
 
-  .cat-summary-card p {
-    font-size: 0.92rem;
-    line-height: 1.5;
+  .format-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  @media (min-width: 768px) {
+    .format-details {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+  }
+
+  .detail-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .detail-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+  }
+
+  .detail-text {
+    font-size: 0.88rem;
     color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .detail-block--warning .detail-label {
+    color: var(--status-warning);
+  }
+
+  /* Empty State */
+  .formats-empty {
+    text-align: center;
+    padding: clamp(48px, 6vw, 72px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+
+  .empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--sp-2);
+  }
+
+  .formats-empty[hidden] {
+    display: none;
   }
 </style>
+
+<script>
+  function setupFormatsFilter() {
+    const searchInput = document.getElementById('format-search-input') as HTMLInputElement | null;
+    const categoryButtons = document.querySelectorAll<HTMLButtonElement>('.category-pill-btn');
+    const formatRows = document.querySelectorAll<HTMLElement>('.format-row');
+    const emptyState = document.getElementById('formats-empty-state');
+    const resetBtn = document.getElementById('reset-filter-btn');
+
+    let activeCategory = 'All';
+    let searchQuery = '';
+
+    function filterRows() {
+      let visibleCount = 0;
+      formatRows.forEach(row => {
+        const rowCategory = row.getAttribute('data-format-category') || '';
+        const searchTerms = row.getAttribute('data-search-terms') || '';
+
+        const matchesCategory = activeCategory === 'All' || rowCategory === activeCategory;
+        const matchesSearch = searchQuery === '' || searchTerms.includes(searchQuery);
+
+        if (matchesCategory && matchesSearch) {
+          row.style.display = '';
+          visibleCount++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      if (emptyState) {
+        emptyState.hidden = visibleCount > 0;
+      }
+    }
+
+    searchInput?.addEventListener('input', (e) => {
+      searchQuery = (e.target as HTMLInputElement).value.trim().toLowerCase();
+      filterRows();
+    });
+
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryButtons.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-checked', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-checked', 'true');
+        activeCategory = btn.getAttribute('data-category') || 'All';
+        filterRows();
+      });
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      activeCategory = 'All';
+      categoryButtons.forEach(b => {
+        const isAll = b.getAttribute('data-category') === 'All';
+        b.classList.toggle('active', isAll);
+        b.setAttribute('aria-checked', isAll ? 'true' : 'false');
+      });
+      filterRows();
+    });
+  }
+
+  setupFormatsFilter();
+  document.addEventListener('astro:page-load', setupFormatsFilter);
+</script>

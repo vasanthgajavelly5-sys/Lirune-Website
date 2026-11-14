@@ -1,165 +1,346 @@
----
-// Screenshot Lightbox Modal Component
----
+<div
+  id="screenshot-lightbox"
+  class="lightbox-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Screenshot Fullscreen Preview"
+  aria-hidden="true"
+>
+  <div class="lightbox-scrim" id="lightbox-scrim"></div>
 
-<div id="screenshot-lightbox" class="lightbox-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Screenshot zoom viewer">
-  <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
   <div class="lightbox-container">
-    <button class="lightbox-close-btn" id="lightbox-close-btn" aria-label="Close image viewer">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-    <div class="lightbox-content">
-      <img id="lightbox-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="" class="lightbox-image" />
-      <div class="lightbox-caption">
-        <h3 id="lightbox-title" class="lightbox-title"></h3>
-        <p id="lightbox-desc" class="lightbox-desc"></p>
+    <div class="lightbox-header">
+      <div class="lightbox-meta">
+        <span class="lightbox-tag" id="lightbox-tag">Windows</span>
+        <span class="lightbox-title" id="lightbox-title">Screenshot Title</span>
       </div>
+      <button
+        type="button"
+        class="lightbox-btn lightbox-close-btn"
+        id="lightbox-close-btn"
+        aria-label="Close fullscreen view (Escape)"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="lightbox-content">
+      <button
+        type="button"
+        class="lightbox-btn lightbox-nav-btn lightbox-prev"
+        id="lightbox-prev-btn"
+        aria-label="Previous screenshot (Left arrow)"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="lightbox-image-wrap">
+        <img
+          id="lightbox-img"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+          alt="Lirune application screenshot full preview"
+          class="lightbox-image"
+        />
+      </div>
+
+      <button
+        type="button"
+        class="lightbox-btn lightbox-nav-btn lightbox-next"
+        id="lightbox-next-btn"
+        aria-label="Next screenshot (Right arrow)"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <div class="lightbox-footer">
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+      <div class="lightbox-counter" id="lightbox-counter">1 / 26</div>
     </div>
   </div>
 </div>
 
-<script>
-  const lightbox = document.getElementById('screenshot-lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxTitle = document.getElementById('lightbox-title');
-  const lightboxDesc = document.getElementById('lightbox-desc');
-  const closeBtn = document.getElementById('lightbox-close-btn');
-  const backdrop = document.getElementById('lightbox-backdrop');
-
-  function openLightbox(src, title, caption) {
-    if (!lightbox || !lightboxImg) return;
-    lightboxImg.setAttribute('src', src);
-    lightboxImg.setAttribute('alt', title || 'Screenshot');
-    if (lightboxTitle) lightboxTitle.textContent = title || '';
-    if (lightboxDesc) lightboxDesc.textContent = caption || '';
-
-    lightbox.classList.add('is-open');
-    lightbox.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('lightbox-locked');
-    closeBtn?.focus();
-  }
-
-  function closeLightbox() {
-    if (!lightbox) return;
-    lightbox.classList.remove('is-open');
-    lightbox.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('lightbox-locked');
-  }
-
-  // Attach to all elements with class .clickable-shot
-  document.addEventListener('click', (e) => {
-    const target = (e.target as HTMLElement).closest('.clickable-shot');
-    if (target) {
-      const src = target.getAttribute('data-full');
-      const title = target.getAttribute('data-title');
-      const caption = target.getAttribute('data-caption');
-      if (src) openLightbox(src, title, caption);
-    }
-  });
-
-  closeBtn?.addEventListener('click', closeLightbox);
-  backdrop?.addEventListener('click', closeLightbox);
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox?.classList.contains('is-open')) {
-      closeLightbox();
-    }
-  });
-</script>
-
 <style>
-  .lightbox-modal {
-    display: none;
+  .lightbox-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
     align-items: center;
     justify-content: center;
+    padding: var(--sp-4);
     opacity: 0;
-    transition: opacity var(--duration-normal) var(--ease-out);
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity var(--t-fast), visibility var(--t-fast);
   }
 
-  .lightbox-modal.is-open {
-    display: flex;
+  .lightbox-overlay.is-open {
     opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
   }
 
-  .lightbox-backdrop {
+  .lightbox-scrim {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(8, 10, 14, 0.94);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    inset: 0;
+    background-color: var(--bg-scrim);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .lightbox-container {
     position: relative;
-    z-index: 2;
-    max-width: min(1200px, 94vw);
-    max-height: 94vh;
+    z-index: 10;
+    width: 100%;
+    max-width: 1200px;
+    max-height: 92vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow-xl);
+    overflow: hidden;
+    animation: lightboxZoomIn var(--t-fast) forwards;
   }
 
-  .lightbox-close-btn {
-    position: absolute;
-    top: -48px;
-    right: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+  @keyframes lightboxZoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .lightbox-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-subtle);
+    background-color: var(--bg-elevated);
+  }
+
+  .lightbox-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+
+  .lightbox-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: var(--r-sm);
+    background-color: var(--accent-chrome-subtle);
+    color: var(--accent);
+  }
+
+  .lightbox-title {
+    font-size: 0.95rem;
+    font-weight: 600;
     color: var(--text-primary);
+  }
+
+  .lightbox-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all var(--duration-fast) var(--ease-out);
+    border-radius: var(--r-md);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--t-fast);
   }
 
-  .lightbox-close-btn:hover {
-    background: var(--accent);
-    color: var(--text-on-accent);
-    transform: scale(1.08);
+  .lightbox-btn:hover {
+    background-color: var(--bg-hover);
+    border-color: var(--border-strong);
+    transform: scale(1.05);
+  }
+
+  .lightbox-close-btn {
+    width: 36px;
+    height: 36px;
   }
 
   .lightbox-content {
+    position: relative;
+    flex: 1 1 auto;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: var(--sp-4);
-    max-height: 85vh;
+    justify-content: center;
+    padding: var(--sp-4);
+    min-height: 280px;
+    max-height: 72vh;
+    background-color: var(--bg-subtle);
+    overflow: hidden;
+  }
+
+  .lightbox-image-wrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .lightbox-image {
     max-width: 100%;
-    max-height: 72vh;
+    max-height: 68vh;
+    width: auto;
+    height: auto;
     object-fit: contain;
-    border-radius: var(--r-lg);
-    box-shadow: var(--shadow-xl);
-    border: 1px solid var(--border-strong);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-lg);
   }
 
-  .lightbox-caption {
-    text-align: center;
-    max-width: 700px;
+  .lightbox-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-full);
+    z-index: 20;
+    box-shadow: var(--shadow-md);
   }
 
-  .lightbox-title {
-    font-size: 1.15rem;
-    font-weight: 650;
-    color: var(--text-primary);
-    margin-bottom: 4px;
+  .lightbox-prev {
+    left: 20px;
   }
 
-  .lightbox-desc {
-    font-size: 0.92rem;
+  .lightbox-next {
+    right: 20px;
+  }
+
+  .lightbox-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background-color: var(--bg-elevated);
+    border-top: 1px solid var(--border-subtle);
+    font-size: 0.85rem;
     color: var(--text-secondary);
   }
+
+  .lightbox-counter {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+    margin-left: var(--sp-4);
+  }
 </style>
+
+<script>
+  interface ShotData {
+    src: string;
+    title: string;
+    platform: string;
+    caption: string;
+  }
+
+  let shotsRegistry: ShotData[] = [];
+  let currentIndex = 0;
+  let lastActiveElement: HTMLElement | null = null;
+
+  function initLightbox() {
+    const lightbox = document.getElementById('screenshot-lightbox') as HTMLElement | null;
+    const scrim = document.getElementById('lightbox-scrim') as HTMLElement | null;
+    const closeBtn = document.getElementById('lightbox-close-btn') as HTMLButtonElement | null;
+    const prevBtn = document.getElementById('lightbox-prev-btn') as HTMLButtonElement | null;
+    const nextBtn = document.getElementById('lightbox-next-btn') as HTMLButtonElement | null;
+    const imgEl = document.getElementById('lightbox-img') as HTMLImageElement | null;
+    const titleEl = document.getElementById('lightbox-title') as HTMLElement | null;
+    const tagEl = document.getElementById('lightbox-tag') as HTMLElement | null;
+    const captionEl = document.getElementById('lightbox-caption') as HTMLElement | null;
+    const counterEl = document.getElementById('lightbox-counter') as HTMLElement | null;
+
+    if (!lightbox || !imgEl) return;
+
+    // Scan page for clickable screenshots
+    const triggers = Array.from(document.querySelectorAll<HTMLElement>('.clickable-shot, [data-shot-src]'));
+    shotsRegistry = triggers.map(t => ({
+      src: t.getAttribute('data-shot-src') || (t.querySelector('img') as HTMLImageElement)?.src || '',
+      title: t.getAttribute('data-shot-title') || 'Lirune Interface',
+      platform: t.getAttribute('data-shot-platform') || 'Lirune',
+      caption: t.getAttribute('data-shot-caption') || ''
+    })).filter(s => s.src.length > 0);
+
+    function updateView(idx: number) {
+      if (shotsRegistry.length === 0) return;
+      currentIndex = (idx + shotsRegistry.length) % shotsRegistry.length;
+      const data = shotsRegistry[currentIndex];
+      imgEl!.src = data.src;
+      imgEl!.alt = `${data.platform} — ${data.title}`;
+      if (titleEl) titleEl.textContent = data.title;
+      if (tagEl) tagEl.textContent = data.platform;
+      if (captionEl) captionEl.textContent = data.caption || `${data.title} in the running ${data.platform} application.`;
+      if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${shotsRegistry.length}`;
+    }
+
+    function open(idx: number, triggerEl?: HTMLElement) {
+      lastActiveElement = triggerEl || (document.activeElement as HTMLElement);
+      updateView(idx);
+      lightbox!.classList.add('is-open');
+      lightbox!.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeBtn?.focus();
+    }
+
+    function close() {
+      lightbox!.classList.remove('is-open');
+      lightbox!.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lastActiveElement?.focus();
+    }
+
+    // Attach click listeners to all triggers
+    triggers.forEach((trigger, idx) => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        open(idx, trigger);
+      });
+      trigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(idx, trigger);
+        }
+      });
+    });
+
+    closeBtn?.addEventListener('click', close);
+    scrim?.addEventListener('click', close);
+    prevBtn?.addEventListener('click', () => updateView(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => updateView(currentIndex + 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') updateView(currentIndex - 1);
+      else if (e.key === 'ArrowRight') updateView(currentIndex + 1);
+    });
+
+    // Expose global open helper
+    (window as any).__openLiruneLightbox = open;
+  }
+
+  initLightbox();
+  document.addEventListener('astro:page-load', initLightbox);
+</script>

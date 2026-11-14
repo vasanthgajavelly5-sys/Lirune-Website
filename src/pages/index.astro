@@ -1,302 +1,855 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HeroSection from '../components/HeroSection.astro';
-import PlatformDownloadCard from '../components/PlatformDownloadCard.astro';
-import LiveScreenshotGallery from '../components/LiveScreenshotGallery.astro';
-import FeatureSection from '../components/FeatureSection.astro';
-import PrivacySection from '../components/PrivacySection.astro';
-import LatestReleasePanel from '../components/LatestReleasePanel.astro';
-import SupportSection from '../components/SupportSection.astro';
-import FAQAccordion from '../components/FAQAccordion.astro';
-import formats from '../data/formats.json';
+import config from '../data/config.json';
 import releases from '../data/releases.json';
+import formats from '../data/formats.json';
 ---
 
 <BaseLayout
   title="Lirune Reader — A calm, private home for your library on Windows and Android"
-  description="Official product website for Lirune Reader. Offline ebook and document reader supporting 19 formats with zero telemetry. Download for Windows and Android."
+  description="Lirune is a free, open-source, offline ebook and document reader for Windows and Android. Supports 19 formats with zero telemetry and total privacy."
+  canonicalPath="/"
 >
   <!-- Hero Section -->
-  <HeroSection />
+  <section class="hero-section">
+    <div class="site-container hero-inner">
+      <div class="hero-copy">
+        <div class="hero-badge-strip">
+          <span class="hero-badge">
+            <span class="badge-dot"></span> Offline-First Document Reader
+          </span>
+          <span class="hero-badge hero-badge-secondary">GPL-3.0 Open Source</span>
+        </div>
 
-  <!-- Dual-Platform Download Cards -->
-  <PlatformDownloadCard />
+        <h1 class="hero-title">
+          A calm, private sanctuary for your digital library.
+        </h1>
 
-  <!-- Live Screenshots Showcase -->
-  <LiveScreenshotGallery />
-
-  <!-- Feature Introductions -->
-  <FeatureSection />
-
-  <!-- How Lirune Works (3-Step Guide) -->
-  <section class="how-it-works-section" aria-label="How Lirune Works">
-    <div class="container">
-      <div class="section-header text-center">
-        <span class="section-label">Simple & Dependable</span>
-        <h2 class="section-title">How Lirune works</h2>
-        <p class="section-subtitle mx-auto">
-          No sign-ups, no cloud setups, and no background indexing services. Just direct reading on your hardware.
+        <p class="hero-subtitle">
+          Designed specifically for reading on <strong>Windows</strong> and <strong>Android</strong>. Read EPUB, PDF, comic books, and 16 other formats completely offline with zero telemetry, local indexation, and true device ownership.
         </p>
+
+        <div class="hero-actions">
+          <a href="/downloads" class="btn btn-primary btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Get Lirune Free</span>
+          </a>
+
+          <a href={config.microsoftStoreUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.628h11.377V24H0zm12.623 0H24V24H12.623z"/>
+            </svg>
+            <span>Microsoft Store</span>
+          </a>
+
+          <a href="/features" class="btn btn-subtle btn-lg">
+            <span>Explore features →</span>
+          </a>
+        </div>
+
+        <div class="hero-meta-strip">
+          <div class="hero-meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Windows v{releases.windows.version} (Store & Installer)</span>
+          </div>
+          <div class="hero-meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Android v{releases.android.version} (Zero-permission APK)</span>
+          </div>
+        </div>
       </div>
 
-      <div class="steps-grid">
-        <div class="step-card card">
-          <div class="step-number">01</div>
-          <h3 class="step-title">Bring your books</h3>
-          <p class="step-desc">
-            Drag and drop files or entire folders on Windows, or select your library folder via Android's Storage Access Framework. Lirune automatically detects formats and extracts cover art.
-          </p>
-          <div class="step-visual">
-            <img src="/images/screenshots/win-library-empty.png" alt="Clean drop-zone interface on Windows" width="400" height="220" loading="lazy" />
+      <!-- Hero Visual Composition (Real Screenshots in Device Frames) -->
+      <div class="hero-showcase">
+        <!-- Desktop Monitor Mockup -->
+        <div class="device-frame-desktop hero-desktop-frame clickable-shot"
+             data-shot-src="/images/screenshots/win-library-grid.png"
+             data-shot-title="Windows Library Grid View"
+             data-shot-platform="Windows"
+             data-shot-caption="Lirune Reader for Windows showcasing the personal digital library in high-resolution grid mode.">
+          <div class="device-header-desktop">
+            <div class="device-dots">
+              <span class="device-dot"></span>
+              <span class="device-dot"></span>
+              <span class="device-dot"></span>
+            </div>
+            <span class="device-title">Lirune Reader — Windows 11</span>
+            <span style="width: 32px"></span>
           </div>
+          <img
+            src="/images/screenshots/win-library-grid.png"
+            alt="Lirune Reader for Windows displaying digital book library grid"
+            width="1280"
+            height="800"
+            class="device-img"
+            loading="eager"
+          />
         </div>
 
-        <div class="step-card card">
-          <div class="step-number">02</div>
-          <h3 class="step-title">Organize your library</h3>
-          <p class="step-desc">
-            Create custom collections, tag favorites, filter by author or format, and view reading progress percentages at a glance. All metadata is kept locally in private storage.
-          </p>
-          <div class="step-visual">
-            <img src="/images/screenshots/win-library-grid.png" alt="Organized library grid with cover art" width="400" height="220" loading="lazy" />
+        <!-- Floating Mobile Smartphone Mockup -->
+        <div class="device-frame-mobile hero-mobile-frame clickable-shot"
+             data-shot-src="/images/screenshots/android-reader-epub.png"
+             data-shot-title="Android Scroll Engine v2 Reading"
+             data-shot-platform="Android"
+             data-shot-caption="Lirune Reader for Android running Scroll Engine v2 with refined typography and zero telemetry.">
+          <div class="device-notch-mobile"></div>
+          <img
+            src="/images/screenshots/android-reader-epub.png"
+            alt="Lirune Reader for Android reading an EPUB ebook with Scroll Engine v2"
+            width="400"
+            height="820"
+            class="device-img"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Value Differentiators Strip -->
+  <section class="value-strip section-spacing--dense">
+    <div class="site-container">
+      <div class="value-grid">
+        <div class="value-col">
+          <div class="value-header">
+            <span class="value-num">01</span>
+            <h2 class="value-title">Offline by Design</h2>
           </div>
+          <p class="value-text">
+            No accounts, no cloud sync lock-in, and zero telemetry. On Android, network permission is permanently removed from production builds.
+          </p>
         </div>
 
-        <div class="step-card card">
-          <div class="step-number">03</div>
-          <h3 class="step-title">Read your way</h3>
-          <p class="step-desc">
-            Open documents instantly. Toggle between spreads, single pages, or continuous vertical scroll. Customize your font size, line spacing, margins, and themes for maximum reading comfort.
+        <div class="value-col">
+          <div class="value-header">
+            <span class="value-num">02</span>
+            <h2 class="value-title">19 Formats Supported</h2>
+          </div>
+          <p class="value-text">
+            Read EPUB, PDF, CBZ/CBR comics, FB2 fiction, MOBI, and office documents through specialized, hardened local rendering engines.
           </p>
-          <div class="step-visual">
-            <img src="/images/screenshots/win-reader-story.png" alt="Distraction-free reading view" width="400" height="220" loading="lazy" />
+        </div>
+
+        <div class="value-col">
+          <div class="value-header">
+            <span class="value-num">03</span>
+            <h2 class="value-title">Tailored Reading UI</h2>
+          </div>
+          <p class="value-text">
+            Windows dual-page spreads, Android Scroll Engine v2 continuous flow, offline Text-to-Speech narration, and comprehensive typography tuning.
+          </p>
+        </div>
+
+        <div class="value-col">
+          <div class="value-header">
+            <span class="value-num">04</span>
+            <h2 class="value-title">Free & Open Source</h2>
+          </div>
+          <p class="value-text">
+            Published under the GNU General Public License v3.0. Inspect the source code, verify privacy guarantees, or build your own binaries.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dual-Platform Experience Showcase (Asymmetric Editorial Section) -->
+  <section class="platform-showcase-section section-spacing">
+    <div class="site-container">
+      <div class="section-header section-header--center">
+        <h2>Designed with respect for both platforms</h2>
+        <p>Built as dedicated applications that embrace the unique strengths of Windows desktop and Android mobile.</p>
+      </div>
+
+      <!-- Windows Experience Row -->
+      <div class="showcase-split-row">
+        <div class="showcase-visual">
+          <div class="device-frame-desktop clickable-shot"
+               data-shot-src="/images/screenshots/win-reader-epub-spread.png"
+               data-shot-title="Windows Dual-Page Spread View"
+               data-shot-platform="Windows"
+               data-shot-caption="Dual-page book spread in Lirune Reader Windows, providing an authentic hardbound book reading feel.">
+            <div class="device-header-desktop">
+              <div class="device-dots">
+                <span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span>
+              </div>
+              <span class="device-title">Windows — Two-Page Spread</span>
+              <span style="width: 32px"></span>
+            </div>
+            <img
+              src="/images/screenshots/win-reader-epub-spread.png"
+              alt="Windows Dual-page book spread reading view in Lirune Reader"
+              width="1080"
+              height="675"
+              class="device-img"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div class="showcase-copy">
+          <span class="showcase-eyebrow windows">Windows 10 & 11 Experience</span>
+          <h3 class="showcase-heading">Dual-page spreads and distraction-free desktop immersion</h3>
+          <p class="showcase-desc">
+            Experience literature on large desktop displays just like a real hardbound volume. Lirune automatically calculates aspect ratios for seamless dual-page book spreads or single-column continuous scroll.
+          </p>
+          <ul class="showcase-bullets" role="list">
+            <li>Auto-hiding navigation chrome and fullscreen reading mode (F11)</li>
+            <li>Instant full-text search with preview snippets and page jumps</li>
+            <li>Integrated PDF.js high-fidelity document viewer with thumbnail drawer</li>
+            <li>Customizable keyboard shortcuts for rapid page turning and navigation</li>
+          </ul>
+          <div class="showcase-actions">
+            <a href="/downloads" class="btn btn-secondary">
+              <span>Windows download options</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Android Experience Row -->
+      <div class="showcase-split-row showcase-split-row--reverse">
+        <div class="showcase-visual">
+          <div class="device-frame-mobile clickable-shot"
+               data-shot-src="/images/screenshots/android-tts-player.png"
+               data-shot-title="Android Offline TTS Narration"
+               data-shot-platform="Android"
+               data-shot-caption="Lirune Reader for Android offline Text-to-Speech narration player with voice rate and playback controls.">
+            <div class="device-notch-mobile"></div>
+            <img
+              src="/images/screenshots/android-tts-player.png"
+              alt="Android Text-to-Speech narration player in Lirune Reader"
+              width="400"
+              height="820"
+              class="device-img"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div class="showcase-copy">
+          <span class="showcase-eyebrow android">Android 8.0+ Experience</span>
+          <h3 class="showcase-heading">Scroll Engine v2 and offline audio narration</h3>
+          <p class="showcase-desc">
+            Engineered for one-handed mobile reading on the go. Scroll Engine v2 virtualizes document chapters to deliver unified 60fps continuous scrolling with zero stutter, even on multi-thousand-page volumes.
+          </p>
+          <ul class="showcase-bullets" role="list">
+            <li>Offline Text-to-Speech (TTS) voice narration with background playback</li>
+            <li>Storage Access Framework (SAF) integration for direct folder access</li>
+            <li>Quick bottom control bar for instant font size, margin, and brightness tuning</li>
+            <li>Zero internet permissions: battery-friendly and completely private</li>
+          </ul>
+          <div class="showcase-actions">
+            <a href="/downloads" class="btn btn-secondary">
+              <span>Android release APK</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Privacy & Local-First Section -->
-  <PrivacySection />
-
-  <!-- Supported Formats Preview Strip -->
-  <section class="formats-preview-section" aria-label="Supported Document Formats">
-    <div class="container">
-      <div class="section-header text-center">
-        <span class="section-label">Universal Compatibility</span>
-        <h2 class="section-title">19 document formats, one calm home</h2>
-        <p class="section-subtitle mx-auto">
-          From modern reflowable EPUBs to complex fixed PDFs, Office documents, and comic book archives.
-        </p>
+  <!-- Interactive Screenshot Gallery Preview Strip -->
+  <section class="gallery-preview-section section-spacing">
+    <div class="site-container">
+      <div class="section-header">
+        <h2>Genuine running interface gallery</h2>
+        <p>Real unedited captures from the running Windows and Android applications.</p>
       </div>
 
-      <div class="format-chips-cloud">
-        {formats.map(fmt => (
-          <a href="/formats" class="format-chip" title={`${fmt.name} (${fmt.extensions.join(', ')})`}>
-            <span class="chip-ext">{fmt.extensions[0]}</span>
-            <span class="chip-name">{fmt.name}</span>
-          </a>
-        ))}
+      <div class="gallery-strip-grid">
+        <div class="gallery-card clickable-shot"
+             data-shot-src="/images/screenshots/win-reader-pdf.png"
+             data-shot-title="PDF Document Viewer"
+             data-shot-platform="Windows"
+             data-shot-caption="High-fidelity PDF document rendering in Lirune Reader Windows with sidebar thumbnail drawer.">
+          <img src="/images/screenshots/win-reader-pdf.png" alt="PDF reader interface" width="600" height="375" loading="lazy" />
+          <div class="gallery-card-meta">
+            <span class="gallery-tag">Windows</span>
+            <span class="gallery-name">PDF High-Fidelity Viewer</span>
+          </div>
+        </div>
+
+        <div class="gallery-card clickable-shot"
+             data-shot-src="/images/screenshots/win-reader-story.png"
+             data-shot-title="FB2 Fiction Story Mode"
+             data-shot-platform="Windows"
+             data-shot-caption="FB2 fiction story mode with strict DOMPurify HTML sanitization and bookish typography.">
+          <img src="/images/screenshots/win-reader-story.png" alt="FB2 fiction reader" width="600" height="375" loading="lazy" />
+          <div class="gallery-card-meta">
+            <span class="gallery-tag">Windows</span>
+            <span class="gallery-name">FB2 Fiction Story Mode</span>
+          </div>
+        </div>
+
+        <div class="gallery-card clickable-shot"
+             data-shot-src="/images/screenshots/android-reader-controls.png"
+             data-shot-title="Android Quick Reading Controls"
+             data-shot-platform="Android"
+             data-shot-caption="Quick bottom reading controls drawer in Android for font size, line height, and theme selection.">
+          <img src="/images/screenshots/android-reader-controls.png" alt="Android reading controls drawer" width="600" height="375" loading="lazy" />
+          <div class="gallery-card-meta">
+            <span class="gallery-tag">Android</span>
+            <span class="gallery-name">Quick Reading Controls</span>
+          </div>
+        </div>
+
+        <div class="gallery-card clickable-shot"
+             data-shot-src="/images/screenshots/win-reader-annotations.png"
+             data-shot-title="Annotations & Bookmarks Drawer"
+             data-shot-platform="Windows"
+             data-shot-caption="Windows annotations drawer managing reading progress, highlights, and custom book notes.">
+          <img src="/images/screenshots/win-reader-annotations.png" alt="Annotations and notes drawer" width="600" height="375" loading="lazy" />
+          <div class="gallery-card-meta">
+            <span class="gallery-tag">Windows</span>
+            <span class="gallery-name">Annotations & Bookmarks</span>
+          </div>
+        </div>
       </div>
 
-      <div class="format-preview-cta text-center">
-        <a href="/formats" class="btn btn-secondary">
-          View complete compatibility & technical matrix →
+      <div class="gallery-cta-wrap">
+        <a href="/screenshots" class="btn btn-secondary">
+          <span>View all 26 application screenshots →</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Latest Release Panel -->
-  <LatestReleasePanel />
+  <!-- Supported Formats Highlights Strip -->
+  <section class="formats-preview-section section-spacing--dense">
+    <div class="site-container">
+      <div class="formats-preview-box">
+        <div class="formats-preview-header">
+          <div>
+            <span class="badge badge-success">Local Rendering</span>
+            <h2 class="formats-title">19 Supported Document & Book Formats</h2>
+            <p class="formats-desc">Every format rendered entirely on your device with security sanitization and zero external servers.</p>
+          </div>
+          <a href="/formats" class="btn btn-secondary">
+            <span>Explore Compatibility Matrix →</span>
+          </a>
+        </div>
 
-  <!-- Support Lirune / Buy Me a Coffee -->
-  <SupportSection />
-
-  <!-- FAQ Preview -->
-  <section class="faq-preview-section" aria-label="Frequently Asked Questions Preview">
-    <div class="container">
-      <div class="section-header text-center">
-        <span class="section-label">Questions & Answers</span>
-        <h2 class="section-title">Common questions</h2>
-        <p class="section-subtitle mx-auto">
-          Everything you need to know about Lirune's offline design, platform support, and file security.
-        </p>
+        <div class="format-badges-grid">
+          {formats.slice(0, 12).map(f => (
+            <div class="format-badge-item">
+              <span class="format-ext">{f.extensions[0].replace('.', '').toUpperCase()}</span>
+              <span class="format-name">{f.name}</span>
+            </div>
+          ))}
+        </div>
       </div>
-
-      <FAQAccordion limit={5} showAllLink={true} />
     </div>
   </section>
 
-  <!-- Final Call to Action -->
-  <section class="final-cta-section" aria-label="Download Lirune Today">
-    <div class="container">
-      <div class="final-cta-card card text-center">
-        <h2 class="final-cta-title">Start reading with calm and privacy</h2>
-        <p class="final-cta-subtitle mx-auto">
-          Free and open source for Windows and Android. No accounts, no subscriptions, and zero tracking.
+  <!-- Privacy Manifesto Section -->
+  <section class="privacy-manifesto-section section-spacing">
+    <div class="site-container site-container--narrow">
+      <div class="privacy-box">
+        <div class="privacy-icon-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <h2 class="privacy-title">Your books remain entirely yours.</h2>
+        <p class="privacy-text">
+          Many modern reading apps have turned into digital storefronts that track reading speed, log page turns, and harvest personal libraries.
         </p>
-        <div class="final-cta-buttons">
-          <a href={releases.windows.storeUrl} target="_blank" rel="noopener noreferrer" class="btn btn-windows btn-lg">
-            Get for Windows (Store)
-          </a>
-          <a href={releases.android.apkUrl} class="btn btn-android btn-lg">
-            Download Android APK (v{releases.android.version})
-          </a>
-          <a href="/downloads" class="btn btn-secondary btn-lg">
-            All Download Options
+        <p class="privacy-text">
+          Lirune was built on a different principle: <strong>digital reading should be quiet, local, and private</strong>. All metadata, bookmarks, annotations, and library records are stored exclusively in local SQLite or JSON files on your own filesystem. No remote accounts, no tracking beacons, and no data mining.
+        </p>
+        <div class="privacy-actions">
+          <a href="/privacy" class="btn btn-subtle">
+            <span>Read full Privacy Architecture →</span>
           </a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="final-cta-section section-spacing">
+    <div class="site-container site-container--narrow text-center">
+      <h2 class="final-cta-title">Ready for a calm, private reading home?</h2>
+      <p class="final-cta-desc">
+        Download Lirune Reader today for Windows or Android. Free, open-source, and offline forever.
+      </p>
+      <div class="final-cta-actions">
+        <a href="/downloads" class="btn btn-primary btn-lg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Get Latest Downloads</span>
+        </a>
+        <a href={config.microsoftStoreUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
+          <span>Microsoft Store ↗</span>
+        </a>
+        <a href={config.githubRepo} target="_blank" rel="noopener noreferrer" class="btn btn-subtle btn-lg">
+          <span>Inspect GitHub Code ↗</span>
+        </a>
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .text-center { text-align: center; }
-  .mx-auto { margin-left: auto; margin-right: auto; }
-
-  /* How It Works */
-  .how-it-works-section {
-    background: var(--bg-base);
-    padding-top: var(--sp-16);
-    padding-bottom: var(--sp-20);
+  /* =============================================================
+     HERO SECTION
+     ============================================================= */
+  .hero-section {
+    padding-top: clamp(48px, 6vw, 84px);
+    padding-bottom: clamp(64px, 8vw, 112px);
+    position: relative;
+    overflow: hidden;
   }
 
-  .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: var(--sp-8);
-    margin-top: var(--sp-10);
-  }
-
-  .step-card {
-    padding: var(--sp-8);
+  .hero-inner {
     display: flex;
     flex-direction: column;
+    gap: clamp(48px, 6vw, 72px);
   }
 
-  .step-number {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--accent-chrome);
-    opacity: 0.8;
-    margin-bottom: var(--sp-3);
-  }
-
-  .step-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-    margin-bottom: var(--sp-3);
-  }
-
-  .step-desc {
-    font-size: 0.98rem;
-    color: var(--text-secondary);
-    line-height: 1.55;
-    margin-bottom: var(--sp-6);
-    flex-grow: 1;
-  }
-
-  .step-visual {
-    border-radius: var(--r-md);
-    overflow: hidden;
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-elevated);
-  }
-
-  .step-visual img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-  }
-
-  /* Formats Preview */
-  .formats-preview-section {
-    padding-top: var(--sp-16);
-    padding-bottom: var(--sp-20);
-    background: #0E1218;
-    border-top: 1px solid var(--border-subtle);
-    border-bottom: 1px solid var(--border-subtle);
-  }
-
-  .format-chips-cloud {
+  .hero-copy {
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-badge-strip {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-4);
     flex-wrap: wrap;
     justify-content: center;
-    gap: var(--sp-3);
-    max-width: 900px;
-    margin: var(--sp-8) auto;
   }
 
-  .format-chip {
+  .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-default);
-    padding: 8px 16px;
+    padding: 6px 14px;
     border-radius: var(--r-full);
-    transition: all var(--duration-fast) var(--ease-out);
-  }
-
-  .format-chip:hover {
-    border-color: var(--accent-chrome);
-    background: var(--bg-elevated);
-    transform: translateY(-2px);
-  }
-
-  .chip-ext {
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: 0.85rem;
+    background-color: var(--accent-chrome-subtle);
     color: var(--accent-chrome);
+    border: 1px solid var(--border-accent);
+    font-size: 0.82rem;
+    font-weight: 600;
   }
 
-  .chip-name {
-    font-size: 0.88rem;
+  .hero-badge-secondary {
+    background-color: var(--bg-surface);
     color: var(--text-secondary);
+    border-color: var(--border-default);
   }
 
-  .format-preview-cta {
-    margin-top: var(--sp-8);
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: currentColor;
   }
 
-  /* FAQ Preview */
-  .faq-preview-section {
-    padding-top: var(--sp-16);
-    padding-bottom: var(--sp-20);
-  }
-
-  /* Final CTA */
-  .final-cta-section {
-    padding-bottom: var(--sp-20);
-  }
-
-  .final-cta-card {
-    padding: clamp(var(--sp-10), 6vw, var(--sp-16));
-    background: radial-gradient(circle at top, #1E2633 0%, #131821 100%);
-    border: 1px solid var(--border-strong);
-  }
-
-  .final-cta-title {
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
+  .hero-title {
     margin-bottom: var(--sp-4);
+    color: var(--text-primary);
   }
 
-  .final-cta-subtitle {
-    font-size: 1.15rem;
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.28rem);
     color: var(--text-secondary);
-    max-width: 600px;
+    line-height: 1.6;
     margin-bottom: var(--sp-8);
   }
 
-  .final-cta-buttons {
+  .hero-actions {
     display: flex;
+    align-items: center;
     justify-content: center;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--sp-6);
+  }
+
+  .btn-lg {
+    padding: 14px 26px;
+    font-size: 1rem;
+    border-radius: var(--r-md);
+  }
+
+  .hero-meta-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-6);
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+  }
+
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Hero Showcase Visual */
+  .hero-showcase {
+    position: relative;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  .hero-desktop-frame {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .hero-mobile-frame {
+    position: absolute;
+    bottom: -32px;
+    right: 24px;
+    width: clamp(180px, 24vw, 260px);
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  @media (max-width: 640px) {
+    .hero-mobile-frame {
+      display: none;
+    }
+  }
+
+  /* =============================================================
+     VALUE STRIP (01, 02, 03, 04)
+     ============================================================= */
+  .value-strip {
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    background-color: var(--bg-surface);
+  }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: clamp(24px, 4vw, 40px);
+  }
+
+  .value-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+
+  .value-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-3);
+  }
+
+  .value-num {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-chrome);
+  }
+
+  .value-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .value-text {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  /* =============================================================
+     PLATFORM SHOWCASE ASYMMETRIC ROWS
+     ============================================================= */
+  .showcase-split-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+    margin-bottom: clamp(64px, 8vw, 100px);
+  }
+
+  @media (min-width: 900px) {
+    .showcase-split-row {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    .showcase-split-row--reverse {
+      grid-template-columns: 0.85fr 1.15fr;
+    }
+
+    .showcase-split-row--reverse .showcase-visual {
+      order: 2;
+    }
+    .showcase-split-row--reverse .showcase-copy {
+      order: 1;
+    }
+  }
+
+  .showcase-eyebrow {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--sp-2);
+  }
+
+  .showcase-eyebrow.windows { color: var(--color-windows); }
+  .showcase-eyebrow.android { color: var(--color-android); }
+
+  .showcase-heading {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    margin-bottom: var(--sp-4);
+  }
+
+  .showcase-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--sp-6);
+  }
+
+  .showcase-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: var(--sp-6);
+  }
+
+  .showcase-bullets li {
+    position: relative;
+    padding-left: 24px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+
+  .showcase-bullets li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--status-success);
+    font-weight: 700;
+  }
+
+  /* =============================================================
+     GALLERY PREVIEW STRIP
+     ============================================================= */
+  .gallery-strip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--sp-6);
+    margin-bottom: var(--sp-8);
+  }
+
+  .gallery-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--t-fast);
+  }
+
+  .gallery-card:hover {
+    border-color: var(--border-default);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .gallery-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .gallery-card-meta {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+
+  .gallery-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: var(--r-sm);
+    background-color: var(--accent-chrome-subtle);
+    color: var(--accent);
+  }
+
+  .gallery-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .gallery-cta-wrap {
+    text-align: center;
+  }
+
+  /* =============================================================
+     FORMATS PREVIEW BOX
+     ============================================================= */
+  .formats-preview-box {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-xl);
+    padding: clamp(32px, 5vw, 48px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .formats-preview-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+    margin-bottom: var(--sp-8);
+  }
+
+  @media (min-width: 768px) {
+    .formats-preview-header {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .formats-title {
+    font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+    margin-top: var(--sp-2);
+    margin-bottom: var(--sp-2);
+  }
+
+  .formats-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .format-badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--sp-3);
+  }
+
+  .format-badge-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 14px;
+    border-radius: var(--r-md);
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+    transition: all var(--t-fast);
+  }
+
+  .format-badge-item:hover {
+    border-color: var(--border-strong);
+    background-color: var(--bg-hover);
+  }
+
+  .format-ext {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent-chrome);
+  }
+
+  .format-name {
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* =============================================================
+     PRIVACY MANIFESTO BOX
+     ============================================================= */
+  .privacy-box {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-xl);
+    padding: clamp(32px, 6vw, 56px);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
     align-items: center;
     gap: var(--sp-4);
+  }
+
+  .privacy-icon-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--accent-chrome-subtle);
+    color: var(--accent-chrome);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .privacy-title {
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+  }
+
+  .privacy-text {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    max-width: 60ch;
+  }
+
+  /* =============================================================
+     FINAL CTA
+     ============================================================= */
+  .text-center {
+    text-align: center;
+  }
+
+  .final-cta-title {
+    font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+    margin-bottom: var(--sp-4);
+  }
+
+  .final-cta-desc {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--sp-8);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .final-cta-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-3);
     flex-wrap: wrap;
   }
 </style>

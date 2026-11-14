@@ -1,374 +1,531 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const windowsShots = [
+interface ScreenshotItem {
+  src: string;
+  title: string;
+  platform: 'Windows' | 'Android';
+  category: 'Library' | 'Reader' | 'Settings';
+  desc: string;
+}
+
+const screenshots: ScreenshotItem[] = [
+  // Windows - Library & Shell
   {
-    src: "/images/screenshots/win-library-grid.png",
-    title: "Library Grid View",
-    category: "Library",
-    caption: "Main library overview displaying book covers, reading progress badges, and Ctrl+K search."
+    src: '/images/screenshots/win-library-grid.png',
+    title: 'Windows Library Grid View',
+    platform: 'Windows',
+    category: 'Library',
+    desc: 'Library browsing with rendered book covers, author metadata, reading progress indicators, and sorting controls.'
   },
   {
-    src: "/images/screenshots/win-library-empty.png",
-    title: "First Launch & Drop-Zone",
-    category: "Library",
-    caption: "Clean start screen guiding users to drag and drop books or folders directly into Lirune."
+    src: '/images/screenshots/win-library-empty.png',
+    title: 'Windows Empty State & Drop Zone',
+    platform: 'Windows',
+    category: 'Library',
+    desc: 'Clean drag-and-drop import zone with clear format cues for adding new digital books.'
+  },
+  // Windows - Readers
+  {
+    src: '/images/screenshots/win-reader-epub-spread.png',
+    title: 'Two-Page Book Spread',
+    platform: 'Windows',
+    category: 'Reader',
+    desc: 'Dual-page book spread delivering an authentic hardbound book reading experience on wide displays.'
   },
   {
-    src: "/images/screenshots/win-reader-story.png",
-    title: "Reflowable Story Reader",
-    category: "Reader",
-    caption: "Reflowable reading mode with elegant typography, chapter headers, and reading progress."
+    src: '/images/screenshots/win-reader-epub-single.png',
+    title: 'Single-Column Continuous Flow',
+    platform: 'Windows',
+    category: 'Reader',
+    desc: 'Focused single-column reading with customizable line length and generous typographic margins.'
   },
   {
-    src: "/images/screenshots/win-reader-epub-spread.png",
-    title: "Two-Page Book Spread",
-    category: "Reader",
-    caption: "Dual-page spread view recreating the natural feel of an open book on desktop screens."
+    src: '/images/screenshots/win-reader-pdf.png',
+    title: 'High-Fidelity PDF Viewer',
+    platform: 'Windows',
+    category: 'Reader',
+    desc: 'Offline PDF.js integration with page zoom, fit-to-width, and document thumbnail drawer.'
   },
   {
-    src: "/images/screenshots/win-reader-flow-scroll.png",
-    title: "Continuous Vertical Flow",
-    category: "Reader",
-    caption: "Smooth vertical scrolling mode without artificial page turns."
+    src: '/images/screenshots/win-reader-story.png',
+    title: 'FB2 Fiction Story Mode',
+    platform: 'Windows',
+    category: 'Reader',
+    desc: 'FictionBook 2 renderer with DOMPurify script sanitization and comfortable serif reading font.'
   },
   {
-    src: "/images/screenshots/win-reader-pdf.png",
-    title: "PDF Document Viewer",
-    category: "Reader",
-    caption: "Integrated offline PDF.js viewer with zoom controls and fit-to-width."
+    src: '/images/screenshots/win-reader-cbz.png',
+    title: 'CBZ / CBR Graphic Novel Viewer',
+    platform: 'Windows',
+    category: 'Reader',
+    desc: 'Full-bleed comic book archive rendering with zero image compression degradation.'
   },
   {
-    src: "/images/screenshots/win-reader-cbz.png",
-    title: "Comic Book Archive Reader",
-    category: "Formats",
-    caption: "High-resolution image archive viewer supporting CBZ, CBR, and CB7 formats."
+    src: '/images/screenshots/win-reader-docx.png',
+    title: 'DOCX Document Reader',
+    platform: 'Windows',
+    category: 'Reader',
+    desc: 'Microsoft Word document parser rendering clean, formatted chapters offline.'
   },
   {
-    src: "/images/screenshots/win-reader-docx.png",
-    title: "Word Document Reader",
-    category: "Formats",
-    caption: "Clean, reflowable rendering of Microsoft Word documents (.docx) without office bloat."
+    src: '/images/screenshots/win-reader-toc.png',
+    title: 'Table of Contents Navigation',
+    platform: 'Windows',
+    category: 'Reader',
+    desc: 'Sidebar drawer listing multi-level chapters with one-click page jumps.'
   },
   {
-    src: "/images/screenshots/win-reader-toc.png",
-    title: "Table of Contents Drawer",
-    category: "Navigation",
-    caption: "Slide-out navigation drawer with filterable chapter titles and position tracking."
+    src: '/images/screenshots/win-reader-search.png',
+    title: 'Full-Text Search Modal',
+    platform: 'Windows',
+    category: 'Reader',
+    desc: 'In-book keyword search with preview snippets and direct result navigation.'
   },
   {
-    src: "/images/screenshots/win-reader-search.png",
-    title: "In-Book Text Search",
-    category: "Search",
-    caption: "Fast in-book text search with match counters and jump navigation."
+    src: '/images/screenshots/win-reader-annotations.png',
+    title: 'Annotations & Bookmarks Drawer',
+    platform: 'Windows',
+    category: 'Reader',
+    desc: 'Local highlights, bookmarks, and user reading notes stored safely on the filesystem.'
   },
   {
-    src: "/images/screenshots/win-reader-annotations.png",
-    title: "Highlights & Annotations",
-    category: "Study",
-    caption: "Highlights drawer with multi-color highlights, notes, and Markdown export."
+    src: '/images/screenshots/win-quick-settings.png',
+    title: 'Quick Appearance Menu',
+    platform: 'Windows',
+    category: 'Settings',
+    desc: 'Instant in-reader controls for font size, line height, background theme, and margin widths.'
+  },
+  // Windows - Settings Tabs
+  {
+    src: '/images/screenshots/win-settings-general.png',
+    title: 'General Settings',
+    platform: 'Windows',
+    category: 'Settings',
+    desc: 'Startup view selection, theme preference, and default library sorting rules.'
   },
   {
-    src: "/images/screenshots/win-quick-settings.png",
-    title: "Quick Appearance Settings",
-    category: "Settings",
-    caption: "Instant access to layout switches, font scaling, and theme presets."
+    src: '/images/screenshots/win-settings-reading.png',
+    title: 'Reading Experience Settings',
+    platform: 'Windows',
+    category: 'Settings',
+    desc: 'Configurable page-turn transitions, font smoothing, and text alignment preferences.'
   },
   {
-    src: "/images/screenshots/win-settings-reading.png",
-    title: "Typography & Theme Settings",
-    category: "Settings",
-    caption: "Granular controls for line height, page margins, reading themes, and font families."
+    src: '/images/screenshots/win-settings-storage.png',
+    title: 'Local Storage & Cache Manager',
+    platform: 'Windows',
+    category: 'Settings',
+    desc: 'Inspect SQLite database location, image cache usage, and local indexing paths.'
   },
   {
-    src: "/images/screenshots/win-settings-storage.png",
-    title: "Storage & Backup Maintenance",
-    category: "Settings",
-    caption: "Manage local data storage, database size, and export complete library backups."
+    src: '/images/screenshots/win-settings-shortcuts.png',
+    title: 'Keyboard Shortcuts Reference',
+    platform: 'Windows',
+    category: 'Settings',
+    desc: 'Complete keymapping for keyboard-only reading navigation and fullscreen toggle.'
   },
   {
-    src: "/images/screenshots/win-settings-shortcuts.png",
-    title: "Keyboard Shortcuts Reference",
-    category: "Settings",
-    caption: "Comprehensive cheat sheet for keyboard navigation and reader commands."
+    src: '/images/screenshots/win-settings-about.png',
+    title: 'About & Open Source Credits',
+    platform: 'Windows',
+    category: 'Settings',
+    desc: 'Application version, GPL-3.0 copyleft terms, and third-party library attributions.'
+  },
+  // Android Screenshots
+  {
+    src: '/images/screenshots/android-library.png',
+    title: 'Android Mobile Library',
+    platform: 'Android',
+    category: 'Library',
+    desc: 'Modern edge-to-edge Android library with cover thumbnails and reading progress chips.'
   },
   {
-    src: "/images/screenshots/win-settings-about.png",
-    title: "About & Open Source Credits",
-    category: "Settings",
-    caption: "Software version, author credentials, GPL-3.0 license, and Buy Me a Coffee link."
+    src: '/images/screenshots/android-reader-epub.png',
+    title: 'Scroll Engine v2 EPUB Reader',
+    platform: 'Android',
+    category: 'Reader',
+    desc: 'Smooth 60fps continuous virtualized vertical scrolling with serif typography.'
+  },
+  {
+    src: '/images/screenshots/android-reader-controls.png',
+    title: 'Android Reading Controls Bar',
+    platform: 'Android',
+    category: 'Settings',
+    desc: 'Quick bottom sheet for font sizing, theme palette selection, and screen brightness.'
+  },
+  {
+    src: '/images/screenshots/android-reader-toc.png',
+    title: 'Android Table of Contents Sheet',
+    platform: 'Android',
+    category: 'Reader',
+    desc: 'Sliding bottom sheet displaying chapter titles and reading progress percentages.'
+  },
+  {
+    src: '/images/screenshots/android-reader-bookmark.png',
+    title: 'Android Bookmark Creation',
+    platform: 'Android',
+    category: 'Reader',
+    desc: 'One-tap bookmarking with custom labels saved to the local device SQLite store.'
+  },
+  {
+    src: '/images/screenshots/android-navigation-drawer.png',
+    title: 'Android Navigation Drawer',
+    platform: 'Android',
+    category: 'Library',
+    desc: 'Slide-out navigation drawer providing fast access to categories, recents, and settings.'
+  },
+  {
+    src: '/images/screenshots/android-tts-player.png',
+    title: 'Offline Text-to-Speech Narration',
+    platform: 'Android',
+    category: 'Reader',
+    desc: 'Audio narration bar with play/pause, voice speech rate slider, and background service.'
+  },
+  {
+    src: '/images/screenshots/android-import-discovery.png',
+    title: 'Storage Access Framework Import',
+    platform: 'Android',
+    category: 'Library',
+    desc: 'Select local document folders directly using Android SAF without blanket storage permissions.'
   }
 ];
 
-const androidShots = [
-  {
-    src: "/images/screenshots/android-library.png",
-    title: "Android Home Library",
-    category: "Library",
-    caption: "Mobile library screen showing book covers, reading progress, and quick search."
-  },
-  {
-    src: "/images/screenshots/android-reader-epub.png",
-    title: "Scroll Engine v2",
-    category: "Reader",
-    caption: "Fluid 60fps virtualized continuous scrolling on mobile screens."
-  },
-  {
-    src: "/images/screenshots/android-reader-controls.png",
-    title: "Touch Reader Controls",
-    category: "Reader",
-    caption: "Overlay controls for brightness, font scaling, theme presets, and chapter scrubbing."
-  },
-  {
-    src: "/images/screenshots/android-reader-toc.png",
-    title: "Interactive TOC Drawer",
-    category: "Navigation",
-    caption: "Touch-friendly table of contents with chapter jumping and progress indicators."
-  },
-  {
-    src: "/images/screenshots/android-reader-bookmark.png",
-    title: "Bookmarks & Reading History",
-    category: "Study",
-    caption: "Keep track of bookmarked pages, reading sessions, and progress milestones."
-  },
-  {
-    src: "/images/screenshots/android-navigation-drawer.png",
-    title: "App Navigation Drawer",
-    category: "Navigation",
-    caption: "Slide-out drawer providing fast switching between Library, Favorites, and Settings."
-  },
-  {
-    src: "/images/screenshots/android-tts-player.png",
-    title: "Offline Text-to-Speech Narration",
-    category: "Audio",
-    caption: "Audio playback player with playback controls and speech rate adjustment."
-  },
-  {
-    src: "/images/screenshots/android-import-discovery.png",
-    title: "Document Discovery via SAF",
-    category: "Import",
-    caption: "Storage Access Framework folder browsing without requiring broad storage permissions."
-  }
-];
+const platforms = ['All', 'Windows', 'Android'];
+const categories = ['All', 'Reader', 'Library', 'Settings'];
 ---
 
 <BaseLayout
   title="Live Application Screenshots — Lirune Reader"
-  description="Explore the authentic visual gallery of Lirune Reader. Real screenshots from Windows desktop and Android applications in the official default theme."
+  description="Inspect 26 genuine screenshots captured from the running Windows and Android Lirune Reader applications in full resolution."
+  canonicalPath="/screenshots"
 >
-  <div class="screenshots-page">
-    <div class="container">
-      <div class="page-header text-center">
-        <span class="section-label">Visual Gallery</span>
-        <h1 class="page-title">Live Application Showcase</h1>
-        <p class="page-subtitle mx-auto">
-          Every image below is captured directly from running builds of Lirune Reader on Windows and Android. No mockups or artificial designs.
-        </p>
+  <div class="site-container section-spacing">
+    <div class="section-header section-header--center">
+      <span class="badge badge-success">Authentic UI</span>
+      <h1>Application Screenshots</h1>
+      <p>Real, unedited captures from the running Windows and Android builds. Click any screenshot for a full-resolution preview.</p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="gallery-filter-card">
+      <div class="filter-group">
+        <span class="filter-group-label">Platform:</span>
+        <div class="filter-buttons" id="platform-filters">
+          {platforms.map((p, idx) => (
+            <button
+              type="button"
+              class:list={['filter-btn', { active: idx === 0 }]}
+              data-platform={p}
+            >
+              {p}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <!-- Windows Screenshots Section -->
-      <section class="gallery-block">
-        <div class="block-header">
-          <div class="header-tag">
-            <svg width="22" height="22" viewBox="0 0 88 88" fill="currentColor" aria-hidden="true">
-              <path d="M0 12.402l35.689-4.86.016 34.423-35.67.203zm35.67 33.529l.026 34.453-35.67-4.887-.026-29.566zm4.326-39.043L87.914 0v41.525l-47.918.278zm47.918 48.749L39.996 88V46.541l47.918.257z"/>
-            </svg>
-            <h2>Windows Desktop Gallery</h2>
-          </div>
-          <p>Captured on Windows 11 in default dark mode.</p>
-        </div>
-
-        <div class="gallery-grid-desktop">
-          {windowsShots.map(shot => (
-            <div class="gallery-item-desktop card clickable-shot" data-full={shot.src} data-title={shot.title} data-caption={shot.caption}>
-              <div class="device-desktop-frame">
-                <div class="device-desktop-header">
-                  <div class="device-desktop-dots">
-                    <span class="device-dot"></span>
-                    <span class="device-dot"></span>
-                    <span class="device-dot"></span>
-                  </div>
-                  <span class="device-desktop-title">Lirune — {shot.title}</span>
-                </div>
-                <img src={shot.src} alt={shot.title} width="800" height="500" loading="lazy" />
-                <div class="shot-zoom-badge">Click to enlarge</div>
-              </div>
-              <div class="item-meta">
-                <span class="badge badge-accent item-cat">{shot.category}</span>
-                <h3 class="item-title">{shot.title}</h3>
-                <p class="item-caption">{shot.caption}</p>
-              </div>
-            </div>
+      <div class="filter-group">
+        <span class="filter-group-label">Category:</span>
+        <div class="filter-buttons" id="category-filters">
+          {categories.map((c, idx) => (
+            <button
+              type="button"
+              class:list={['filter-btn', { active: idx === 0 }]}
+              data-category={c}
+            >
+              {c}
+            </button>
           ))}
         </div>
-      </section>
+      </div>
+    </div>
 
-      <!-- Android Screenshots Section -->
-      <section class="gallery-block">
-        <div class="block-header">
-          <div class="header-tag">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4116 13.8533 8.1 12 8.1s-3.5902.3116-5.1367.8497L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/>
-            </svg>
-            <h2>Android Mobile Gallery</h2>
-          </div>
-          <p>Captured on Android 14 in default dark appearance.</p>
-        </div>
-
-        <div class="gallery-grid-mobile">
-          {androidShots.map(shot => (
-            <div class="gallery-item-mobile card clickable-shot" data-full={shot.src} data-title={shot.title} data-caption={shot.caption}>
-              <div class="device-phone-frame">
-                <div class="device-phone-notch"></div>
-                <img src={shot.src} alt={shot.title} width="320" height="693" loading="lazy" />
-                <div class="shot-zoom-badge">Enlarge</div>
-              </div>
-              <div class="item-meta text-center">
-                <span class="badge badge-success item-cat">{shot.category}</span>
-                <h3 class="item-title">{shot.title}</h3>
-                <p class="item-caption">{shot.caption}</p>
-              </div>
+    <!-- Screenshots Grid -->
+    <div class="screenshots-masonry-grid" id="screenshots-grid">
+      {screenshots.map(s => (
+        <article
+          class="shot-card surface-card clickable-shot"
+          data-platform={s.platform}
+          data-category={s.category}
+          data-shot-src={s.src}
+          data-shot-title={s.title}
+          data-shot-platform={s.platform}
+          data-shot-caption={s.desc}
+          tabindex="0"
+          role="button"
+          aria-label={`Open ${s.platform} screenshot: ${s.title}`}
+        >
+          <div class="shot-img-wrap">
+            <img
+              src={s.src}
+              alt={`${s.platform} — ${s.title}`}
+              width="600"
+              height="380"
+              loading="lazy"
+              class="shot-thumb"
+            />
+            <div class="shot-hover-overlay" aria-hidden="true">
+              <span class="hover-zoom-icon">🔍 Click to enlarge</span>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+
+          <div class="shot-meta">
+            <div class="shot-tags">
+              <span class:list={['shot-platform-tag', s.platform.toLowerCase()]}>{s.platform}</span>
+              <span class="shot-category-tag">{s.category}</span>
+            </div>
+            <h3 class="shot-title">{s.title}</h3>
+            <p class="shot-desc">{s.desc}</p>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .screenshots-page {
-    padding-top: var(--sp-12);
-    padding-bottom: var(--sp-20);
-  }
-
-  .text-center { text-align: center; }
-  .mx-auto { margin-left: auto; margin-right: auto; }
-
-  .page-header {
-    margin-bottom: var(--sp-16);
-  }
-
-  .page-title {
-    margin-bottom: var(--sp-4);
-  }
-
-  .page-subtitle {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
-    max-width: 680px;
-  }
-
-  .gallery-block {
-    margin-bottom: var(--sp-20);
-  }
-
-  .block-header {
-    border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: var(--sp-4);
-    margin-bottom: var(--sp-10);
+  .gallery-filter-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-xl);
+    padding: var(--sp-6);
+    margin-bottom: var(--sp-8);
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: var(--sp-2);
+    flex-direction: column;
+    gap: var(--sp-4);
+    box-shadow: var(--shadow-sm);
   }
 
-  .header-tag {
+  @media (min-width: 768px) {
+    .gallery-filter-card {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .filter-group {
     display: flex;
     align-items: center;
     gap: var(--sp-3);
+    flex-wrap: wrap;
   }
 
-  .header-tag svg {
-    color: var(--accent-chrome);
-  }
-
-  .block-header h2 {
-    font-size: 1.6rem;
-  }
-
-  .block-header p {
-    font-size: 0.92rem;
+  .filter-group-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     color: var(--text-tertiary);
   }
 
-  .gallery-grid-desktop {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-    gap: var(--sp-8);
+  .filter-buttons {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
   }
 
-  .gallery-item-desktop {
-    padding: var(--sp-5);
+  .filter-btn {
+    padding: 6px 14px;
+    border-radius: var(--r-full);
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--t-fast);
+  }
+
+  .filter-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--border-default);
+  }
+
+  .filter-btn.active {
+    background-color: var(--accent);
+    color: var(--text-on-accent);
+    font-weight: 600;
+    border-color: transparent;
+  }
+
+  /* Screenshots Grid */
+  .screenshots-masonry-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+  }
+
+  @media (min-width: 640px) {
+    .screenshots-masonry-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .screenshots-masonry-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .shot-card {
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-    cursor: pointer;
-    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+    border: 1px solid var(--border-subtle);
+    transition: all var(--t-fast);
   }
 
-  .gallery-item-desktop:hover {
+  .shot-card:hover {
+    border-color: var(--border-default);
     transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
   }
 
-  .item-meta {
-    margin-top: var(--sp-4);
+  .shot-img-wrap {
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-subtle);
+    overflow: hidden;
   }
 
-  .item-cat {
-    margin-bottom: var(--sp-2);
+  .shot-thumb {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--t-normal);
   }
 
-  .item-title {
-    font-size: 1.15rem;
-    font-weight: 650;
-    margin-bottom: 4px;
+  .shot-card:hover .shot-thumb {
+    transform: scale(1.03);
+  }
+
+  .shot-hover-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(15, 18, 23, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--t-fast);
+  }
+
+  .shot-card:hover .shot-hover-overlay {
+    opacity: 1;
+  }
+
+  .hover-zoom-icon {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 6px 12px;
+    border-radius: var(--r-full);
+    backdrop-filter: blur(4px);
+  }
+
+  .shot-meta {
+    padding: var(--sp-4);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1 1 auto;
+  }
+
+  .shot-tags {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .shot-platform-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: var(--r-sm);
+  }
+
+  .shot-platform-tag.windows {
+    background-color: rgba(0, 120, 215, 0.15);
+    color: var(--color-windows);
+  }
+
+  .shot-platform-tag.android {
+    background-color: rgba(61, 220, 132, 0.15);
+    color: var(--color-android);
+  }
+
+  .shot-category-tag {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: var(--r-sm);
+    background-color: var(--bg-subtle);
+    color: var(--text-tertiary);
+  }
+
+  .shot-title {
+    font-size: 1rem;
+    font-weight: 600;
     color: var(--text-primary);
   }
 
-  .item-caption {
-    font-size: 0.88rem;
+  .shot-desc {
+    font-size: 0.82rem;
     color: var(--text-secondary);
     line-height: 1.45;
   }
-
-  .gallery-grid-mobile {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: var(--sp-8);
-  }
-
-  .gallery-item-mobile {
-    padding: var(--sp-6);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    transition: transform var(--duration-fast) var(--ease-out);
-  }
-
-  .gallery-item-mobile:hover {
-    transform: translateY(-3px);
-  }
-
-  .shot-zoom-badge {
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    background: rgba(17, 21, 27, 0.85);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: var(--text-primary);
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: var(--r-full);
-    opacity: 0;
-    transition: opacity var(--duration-fast) var(--ease-out);
-  }
-
-  .clickable-shot:hover .shot-zoom-badge {
-    opacity: 1;
-  }
 </style>
+
+<script>
+  function setupGalleryFilters() {
+    const platformBtns = document.querySelectorAll<HTMLButtonElement>('#platform-filters .filter-btn');
+    const categoryBtns = document.querySelectorAll<HTMLButtonElement>('#category-filters .filter-btn');
+    const cards = document.querySelectorAll<HTMLElement>('.shot-card');
+
+    let activePlatform = 'All';
+    let activeCategory = 'All';
+
+    function filterCards() {
+      cards.forEach(card => {
+        const plat = card.getAttribute('data-platform') || '';
+        const cat = card.getAttribute('data-category') || '';
+
+        const matchesPlat = activePlatform === 'All' || plat === activePlatform;
+        const matchesCat = activeCategory === 'All' || cat === activeCategory;
+
+        if (matchesPlat && matchesCat) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    platformBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        platformBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activePlatform = btn.getAttribute('data-platform') || 'All';
+        filterCards();
+      });
+    });
+
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCategory = btn.getAttribute('data-category') || 'All';
+        filterCards();
+      });
+    });
+  }
+
+  setupGalleryFilters();
+  document.addEventListener('astro:page-load', setupGalleryFilters);
+</script>

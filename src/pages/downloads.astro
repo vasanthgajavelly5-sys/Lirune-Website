@@ -1,499 +1,462 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import releases from '../data/releases.json';
 import config from '../data/config.json';
+import releases from '../data/releases.json';
 ---
 
 <BaseLayout
   title="Downloads Hub — Lirune Reader for Windows & Android"
-  description="Official download hub for Lirune Reader. Install from Microsoft Store, download standalone Windows installer, or get the direct Android APK."
+  description="Download the latest verified public stable releases of Lirune Reader for Windows (v5.6.2) and Android (v4.9.3) with SHA-256 checksums and Microsoft Store links."
+  canonicalPath="/downloads"
 >
-  <div class="downloads-page">
-    <div class="container">
-      <div class="page-header text-center">
-        <span class="section-label">Official Releases</span>
-        <h1 class="page-title">Download Lirune Reader</h1>
-        <p class="page-subtitle mx-auto">
-          Free, private, and open-source software for Windows and Android. No accounts, no subscriptions, and zero tracking.
+  <div class="site-container section-spacing">
+    <div class="section-header section-header--center">
+      <span class="badge badge-success">Official Releases</span>
+      <h1>Download Lirune Reader</h1>
+      <p>Free, open-source, and offline forever. Choose your platform below for verified public installation packages.</p>
+    </div>
+
+    <!-- Dual Platform Download Cards -->
+    <div class="downloads-split-grid">
+      <!-- Windows Platform Card -->
+      <section class="download-card surface-card" aria-labelledby="win-download-heading">
+        <div class="download-card-header">
+          <div class="platform-icon-wrap windows">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.628h11.377V24H0zm12.623 0H24V24H12.623z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="platform-badge-row">
+              <span class="platform-tag windows">Windows</span>
+              <span class="version-label">v{releases.windows.version} Stable</span>
+            </div>
+            <h2 id="win-download-heading" class="platform-title">Lirune for Windows</h2>
+          </div>
+        </div>
+
+        <p class="download-card-desc">
+          Full desktop immersion with two-page book spreads, PDF.js renderer, instant search, and customizable keyboard shortcuts.
         </p>
-      </div>
 
-      <!-- Quick Platform Jump Links -->
-      <div class="platform-jump-bar">
-        <a href="#windows" class="jump-link">Windows Desktop (v{releases.windows.version})</a>
-        <a href="#android" class="jump-link">Android Mobile (v{releases.android.version})</a>
-        <a href="#source" class="jump-link">Source Code & Git</a>
-        <a href="#verification" class="jump-link">SHA-256 Checksums</a>
-      </div>
-
-      <!-- Windows Section -->
-      <section class="download-section card" id="windows">
-        <div class="section-badge-bar">
-          <div class="platform-title-group">
-            <div class="platform-icon windows-icon">
-              <svg width="28" height="28" viewBox="0 0 88 88" fill="currentColor" aria-hidden="true">
-                <path d="M0 12.402l35.689-4.86.016 34.423-35.67.203zm35.67 33.529l.026 34.453-35.67-4.887-.026-29.566zm4.326-39.043L87.914 0v41.525l-47.918.278zm47.918 48.749L39.996 88V46.541l47.918.257z"/>
-              </svg>
-            </div>
-            <div>
-              <h2>Lirune for Windows</h2>
-              <span class="release-tag">Version {releases.windows.version} • Published {releases.windows.releaseDate}</span>
-            </div>
+        <div class="download-spec-list">
+          <div class="spec-row">
+            <span class="spec-label">Compatibility:</span>
+            <span class="spec-value">{releases.windows.requirements}</span>
           </div>
-          <span class="badge badge-accent">64-bit Architecture</span>
-        </div>
-
-        <div class="download-grid-two">
-          <!-- Option 1: Microsoft Store -->
-          <div class="option-box featured-option">
-            <div class="option-header">
-              <span class="option-pill">Recommended</span>
-              <h3>Microsoft Store</h3>
-              <p>Automatic background updates, sandbox verification, and seamless installation.</p>
-            </div>
-            <a
-              href={releases.windows.storeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-windows btn-lg option-btn"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zm-9 9h7v7H4v-7zm9 0h7v7h-7v-7z"/>
-              </svg>
-              Get from Microsoft Store
-            </a>
-            <span class="store-id-text">Product ID: <code>{releases.windows.storeId}</code></span>
+          <div class="spec-row">
+            <span class="spec-label">Architecture:</span>
+            <span class="spec-value">x64 (64-bit)</span>
           </div>
-
-          <!-- Option 2: Direct Installer -->
-          <div class="option-box">
-            <div class="option-header">
-              <span class="option-pill neutral">Direct Download</span>
-              <h3>Standalone NSIS Installer</h3>
-              <p>Self-contained Windows executable (.exe). Ideal for offline workstations or portable use.</p>
-            </div>
-            <a
-              href={releases.windows.installerUrl}
-              class="btn btn-secondary btn-lg option-btn"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-              Download {releases.windows.installerFilename}
-            </a>
-            <span class="store-id-text">
-              Also available: <a href={releases.windows.appxUrl} class="link-appx">APPX Package (.appx)</a>
-            </span>
+          <div class="spec-row">
+            <span class="spec-label">License:</span>
+            <span class="spec-value">GNU GPL-3.0</span>
           </div>
         </div>
 
-        <!-- Windows Details & SmartScreen Guide -->
-        <div class="platform-guide">
-          <h4>Windows System Requirements & Notes</h4>
-          <ul>
-            <li><strong>Operating System:</strong> Windows 10 (version 1903 or newer) or Windows 11 (64-bit).</li>
-            <li><strong>Memory & Disk:</strong> 512 MB RAM minimum; approximately 150 MB free disk space.</li>
-            <li><strong>Windows SmartScreen:</strong> Lirune is an independent open-source project. If Microsoft SmartScreen shows an unrecognized application warning on direct GitHub downloads, click <em>"More info"</em> and select <em>"Run anyway"</em>. Alternatively, installing via the Microsoft Store bypasses SmartScreen entirely.</li>
-          </ul>
+        <!-- Download Buttons -->
+        <div class="download-button-stack">
+          <a href={releases.windows.installerUrl} class="btn btn-primary btn-download">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <div class="btn-text-wrap">
+              <span class="btn-main-text">Download Windows Installer</span>
+              <span class="btn-sub-text">{releases.windows.installerFilename}</span>
+            </div>
+          </a>
+
+          <a href={config.microsoftStoreUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-store">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.628h11.377V24H0zm12.623 0H24V24H12.623z"/>
+            </svg>
+            <span>Get from Microsoft Store</span>
+          </a>
+        </div>
+
+        <!-- Checksum Box -->
+        <div class="checksum-box">
+          <div class="checksum-header">
+            <span class="checksum-label">SHA-256 Checksum (Setup.exe)</span>
+            <button type="button" class="copy-checksum-btn" data-checksum={releases.windows.sha256} title="Copy SHA-256">
+              Copy
+            </button>
+          </div>
+          <code class="checksum-code">{releases.windows.sha256}</code>
         </div>
       </section>
 
-      <!-- Android Section -->
-      <section class="download-section card" id="android">
-        <div class="section-badge-bar">
-          <div class="platform-title-group">
-            <div class="platform-icon android-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4116 13.8533 8.1 12 8.1s-3.5902.3116-5.1367.8497L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/>
-              </svg>
-            </div>
-            <div>
-              <h2>Lirune for Android</h2>
-              <span class="release-tag">Version {releases.android.version} • Published {releases.android.releaseDate}</span>
-            </div>
+      <!-- Android Platform Card -->
+      <section class="download-card surface-card" aria-labelledby="android-download-heading">
+        <div class="download-card-header">
+          <div class="platform-icon-wrap android">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-1.0003s.4482-1.0003.9993-1.0003c.5516 0 .9998.4486.9998 1.0003s-.4482 1.0003-.9998 1.0003m-11.046 0c-.5511 0-.9993-.4486-.9993-1.0003s.4482-1.0003.9993-1.0003c.5516 0 .9998.4486.9998 1.0003s-.4482 1.0003-.9998 1.0003m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4116 13.8533 8.084 12 8.084c-1.8533 0-3.5902.3276-5.1378.8657L4.84 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.152 5.676l1.9972 3.4592C2.6889 16.275 0 20.443 0 25.3333h24c0-4.8903-2.689-9.0583-6.1185-16.0119"/>
+            </svg>
           </div>
-          <span class="badge badge-success">Zero Network Permissions</span>
-        </div>
-
-        <div class="download-grid-two">
-          <!-- Android APK Direct -->
-          <div class="option-box featured-option">
-            <div class="option-header">
-              <span class="option-pill">Official Release APK</span>
-              <h3>Standalone Release APK</h3>
-              <p>Direct download of the production signed Android package. Features Scroll Engine v2 and offline TTS.</p>
+          <div>
+            <div class="platform-badge-row">
+              <span class="platform-tag android">Android</span>
+              <span class="version-label">v{releases.android.version} Stable</span>
             </div>
-            <a
-              href={releases.android.apkUrl}
-              class="btn btn-android btn-lg option-btn"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-              Download {releases.android.apkFilename}
-            </a>
-            <span class="store-id-text">Target SDK: Android 34 (API 34) • Min SDK: Android 26</span>
-          </div>
-
-          <!-- Android Release Notes & Changelog -->
-          <div class="option-box">
-            <div class="option-header">
-              <span class="option-pill neutral">GitHub Release</span>
-              <h3>Release Verification & Assets</h3>
-              <p>View complete commit log, build tags, and verified cryptographic signatures on GitHub.</p>
-            </div>
-            <a
-              href={releases.android.releaseUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-secondary btn-lg option-btn"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-              </svg>
-              View Android Release on GitHub
-            </a>
-            <span class="store-id-text">Direct APK hash verified in SHA256SUMS.txt</span>
+            <h2 id="android-download-heading" class="platform-title">Lirune for Android</h2>
           </div>
         </div>
 
-        <!-- Android Sideloading Instructions -->
-        <div class="platform-guide">
-          <h4>Android Sideloading Instructions</h4>
-          <ol class="guide-steps">
-            <li>Download <code>{releases.android.apkFilename}</code> onto your Android device.</li>
-            <li>Tap the downloaded file in your browser or file manager.</li>
-            <li>If prompted with <em>"For your security, your phone is not allowed to install unknown apps"</em>, tap <strong>Settings</strong> and toggle on <strong>"Allow from this source"</strong>.</li>
-            <li>Tap <strong>Install</strong> to complete installation.</li>
-            <li>Launch Lirune Reader. Notice that Lirune asks for no internet permission because network access is permanently stripped from the app manifest.</li>
-          </ol>
-        </div>
-      </section>
+        <p class="download-card-desc">
+          Scroll Engine v2 60fps virtualized reader, offline Text-to-Speech audio narration, and zero internet permissions.
+        </p>
 
-      <!-- SHA-256 Verification Section -->
-      <section class="download-section card" id="verification">
-        <h2>Cryptographic Verification (SHA-256)</h2>
-        <p>You can verify the integrity of downloaded binaries using the SHA-256 checksums published with every official GitHub release.</p>
-
-        <div class="hash-table-wrap">
-          <table class="hash-table">
-            <thead>
-              <tr>
-                <th scope="col">File Asset</th>
-                <th scope="col">SHA-256 Hash</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>{releases.windows.installerFilename}</code></td>
-                <td><code class="hash-code">{releases.windows.sha256}</code></td>
-              </tr>
-              <tr>
-                <td><code>{releases.windows.appxFilename}</code></td>
-                <td><code class="hash-code">{releases.windows.appxSha256}</code></td>
-              </tr>
-              <tr>
-                <td><code>{releases.android.apkFilename}</code></td>
-                <td><code class="hash-code">{releases.android.sha256}</code></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="download-spec-list">
+          <div class="spec-row">
+            <span class="spec-label">Compatibility:</span>
+            <span class="spec-value">{releases.android.requirements}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Permissions:</span>
+            <span class="spec-value">Zero Internet (android.permission.INTERNET removed)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Distribution:</span>
+            <span class="spec-value">Direct Release APK (GitHub)</span>
+          </div>
         </div>
 
-        <div class="powershell-verify-box">
-          <span class="box-label">Verify on Windows (PowerShell):</span>
-          <pre><code>Get-FileHash "{releases.windows.installerFilename}" -Algorithm SHA256</code></pre>
-        </div>
-
-        <div class="powershell-verify-box">
-          <span class="box-label">Verify on Linux / Android Termux:</span>
-          <pre><code>sha256sum {releases.android.apkFilename}</code></pre>
-        </div>
-      </section>
-
-      <!-- Source Code Section -->
-      <section class="download-section card" id="source">
-        <h2>Source Code & Contribution</h2>
-        <p>Lirune Reader is open-source under the GNU General Public License v3.0. You can inspect the entire codebase, audit security, build locally, or contribute.</p>
-
-        <div class="source-actions">
-          <a href={config.githubRepo} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
-            GitHub Repository
+        <!-- Download Buttons -->
+        <div class="download-button-stack">
+          <a href={releases.android.apkUrl} class="btn btn-primary btn-download">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <div class="btn-text-wrap">
+              <span class="btn-main-text">Download Release APK</span>
+              <span class="btn-sub-text">{releases.android.apkFilename}</span>
+            </div>
           </a>
-          <a href={config.githubReleases} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
-            All GitHub Releases
+
+          <a href={releases.android.releaseUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            <span>GitHub Release Assets ↗</span>
           </a>
-          <a href="/licenses" class="btn btn-ghost btn-lg">
-            Review GPL-3.0 License
-          </a>
+        </div>
+
+        <!-- Checksum Box -->
+        <div class="checksum-box">
+          <div class="checksum-header">
+            <span class="checksum-label">SHA-256 Checksum (release.apk)</span>
+            <button type="button" class="copy-checksum-btn" data-checksum={releases.android.sha256} title="Copy SHA-256">
+              Copy
+            </button>
+          </div>
+          <code class="checksum-code">{releases.android.sha256}</code>
         </div>
       </section>
     </div>
+
+    <!-- Installation Instructions Section -->
+    <section class="install-guide-section section-spacing--dense">
+      <div class="section-header">
+        <h2>Installation Instructions</h2>
+        <p>Simple, standard setup procedures for both platforms.</p>
+      </div>
+
+      <div class="install-steps-grid">
+        <div class="surface-card">
+          <h3 class="step-card-title">Windows Setup</h3>
+          <ol class="step-list">
+            <li>
+              <strong>Microsoft Store:</strong> Open the Store link and click "Get" for automated background installation and updates.
+            </li>
+            <li>
+              <strong>Installer (.exe):</strong> Download <code>{releases.windows.installerFilename}</code>, double-click to launch, and follow standard setup wizard prompts.
+            </li>
+            <li>
+              <strong>SmartScreen Notice:</strong> Because Lirune is an independent open-source release, click "More info" $\to$ "Run anyway" if prompted by Windows Defender.
+            </li>
+          </ol>
+        </div>
+
+        <div class="surface-card">
+          <h3 class="step-card-title">Android Setup</h3>
+          <ol class="step-list">
+            <li>
+              <strong>Download APK:</strong> Download <code>{releases.android.apkFilename}</code> directly to your device.
+            </li>
+            <li>
+              <strong>Side-load Permission:</strong> When prompted by your browser or file manager, allow "Install unknown apps" for that app.
+            </li>
+            <li>
+              <strong>First Launch:</strong> Open Lirune Reader and grant folder access via the Android Storage Access Framework (SAF) to your books directory.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
   </div>
 </BaseLayout>
 
 <style>
-  .downloads-page {
-    padding-top: var(--sp-12);
-    padding-bottom: var(--sp-20);
-  }
-
-  .text-center { text-align: center; }
-  .mx-auto { margin-left: auto; margin-right: auto; }
-
-  .page-header {
-    margin-bottom: var(--sp-8);
-  }
-
-  .page-title {
-    margin-bottom: var(--sp-4);
-  }
-
-  .page-subtitle {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
-    max-width: 680px;
-  }
-
-  .platform-jump-bar {
-    display: flex;
-    justify-content: center;
-    gap: var(--sp-3);
-    flex-wrap: wrap;
-    margin-bottom: var(--sp-12);
-  }
-
-  .jump-link {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-default);
-    padding: 6px 16px;
-    border-radius: var(--r-full);
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    transition: all var(--duration-fast) var(--ease-out);
-  }
-
-  .jump-link:hover {
-    color: var(--accent);
-    border-color: var(--accent-chrome);
-    background: var(--bg-elevated);
-  }
-
-  .download-section {
-    padding: var(--sp-8);
-    margin-bottom: var(--sp-12);
-    background: var(--bg-surface);
-  }
-
-  .section-badge-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: var(--sp-6);
-    margin-bottom: var(--sp-8);
-    flex-wrap: wrap;
-    gap: var(--sp-4);
-  }
-
-  .platform-title-group {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-4);
-  }
-
-  .platform-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: var(--r-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .windows-icon {
-    background: rgba(0, 120, 215, 0.15);
-    color: #0078D7;
-  }
-
-  .android-icon {
-    background: rgba(46, 125, 50, 0.15);
-    color: #3DDC84;
-  }
-
-  .platform-title-group h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-
-  .release-tag {
-    font-size: 0.88rem;
-    color: var(--text-tertiary);
-  }
-
-  .download-grid-two {
+  .downloads-split-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+    margin-bottom: var(--sp-12);
+  }
+
+  @media (min-width: 900px) {
+    .downloads-split-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .download-card {
+    padding: clamp(28px, 4vw, 40px);
+    display: flex;
+    flex-direction: column;
     gap: var(--sp-6);
-    margin-bottom: var(--sp-8);
   }
 
-  .option-box {
-    background: var(--bg-elevated);
-    border: 1px solid var(--border-default);
-    border-radius: var(--r-xl);
-    padding: var(--sp-6);
+  .download-card-header {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-4);
   }
 
-  .featured-option {
-    border-color: var(--border-strong);
-    background: linear-gradient(180deg, var(--bg-elevated) 0%, rgba(29, 35, 45, 0.7) 100%);
-  }
-
-  .option-pill {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: var(--r-full);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: var(--accent-subtle);
-    color: var(--accent-text);
-    border: 1px solid var(--border-accent);
-    margin-bottom: var(--sp-3);
-  }
-
-  .option-pill.neutral {
-    background: var(--bg-surface);
-    border-color: var(--border-default);
-    color: var(--text-secondary);
-  }
-
-  .option-header h3 {
-    font-size: 1.25rem;
-    margin-bottom: var(--sp-2);
-  }
-
-  .option-header p {
-    font-size: 0.92rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--sp-6);
-  }
-
-  .option-btn {
-    width: 100%;
-    margin-bottom: var(--sp-4);
-  }
-
-  .store-id-text {
-    font-size: 0.82rem;
-    color: var(--text-tertiary);
-    text-align: center;
-  }
-
-  .store-id-text code {
-    color: var(--accent-chrome);
-    background: var(--bg-surface);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-
-  .link-appx {
-    color: var(--accent-chrome);
-    text-decoration: underline;
-  }
-
-  .platform-guide {
-    border-top: 1px solid var(--border-subtle);
-    padding-top: var(--sp-6);
-  }
-
-  .platform-guide h4 {
-    font-size: 1.05rem;
-    margin-bottom: var(--sp-3);
-    color: var(--text-primary);
-  }
-
-  .platform-guide ul, .guide-steps {
-    padding-left: var(--sp-6);
+  .platform-icon-wrap {
+    width: 54px;
+    height: 54px;
+    border-radius: var(--r-lg);
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .platform-icon-wrap.windows {
+    background-color: rgba(0, 120, 215, 0.12);
+    color: var(--color-windows);
+  }
+
+  .platform-icon-wrap.android {
+    background-color: rgba(61, 220, 132, 0.12);
+    color: var(--color-android);
+  }
+
+  .platform-badge-row {
+    display: flex;
+    align-items: center;
     gap: var(--sp-2);
-    font-size: 0.92rem;
-    color: var(--text-secondary);
-  }
-
-  .platform-guide li strong {
-    color: var(--text-primary);
-  }
-
-  .guide-steps code {
-    background: var(--bg-elevated);
-    padding: 2px 6px;
-    border-radius: 4px;
-    color: var(--accent-chrome);
-  }
-
-  .hash-table-wrap {
-    overflow-x: auto;
-    margin: var(--sp-6) 0;
-  }
-
-  .hash-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-  }
-
-  .hash-table th, .hash-table td {
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--border-subtle);
-    text-align: left;
-  }
-
-  .hash-table th {
-    background: var(--bg-elevated);
-    color: var(--text-tertiary);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-  }
-
-  .hash-code {
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    color: var(--accent-chrome);
-    word-break: break-all;
-  }
-
-  .powershell-verify-box {
-    margin-top: var(--sp-4);
-  }
-
-  .box-label {
-    display: block;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text-tertiary);
     margin-bottom: 4px;
   }
 
-  .powershell-verify-box pre {
-    background: #0B0E13;
-    border: 1px solid var(--border-default);
+  .platform-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: var(--r-sm);
+  }
+
+  .platform-tag.windows {
+    background-color: rgba(0, 120, 215, 0.15);
+    color: var(--color-windows);
+  }
+
+  .platform-tag.android {
+    background-color: rgba(61, 220, 132, 0.15);
+    color: var(--color-android);
+  }
+
+  .version-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+  }
+
+  .platform-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+  }
+
+  .download-card-desc {
+    font-size: 0.98rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  .download-spec-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 18px;
+    border-radius: var(--r-md);
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .spec-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    font-size: 0.86rem;
+    gap: var(--sp-2);
+  }
+
+  .spec-label {
+    color: var(--text-tertiary);
+    font-weight: 500;
+  }
+
+  .spec-value {
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: right;
+  }
+
+  .download-button-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  .btn-download {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--sp-3);
+  }
+
+  .btn-text-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .btn-main-text {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .btn-sub-text {
+    font-size: 0.78rem;
+    font-weight: 400;
+    opacity: 0.85;
+  }
+
+  .btn-store {
+    padding: 12px 20px;
+  }
+
+  /* Checksum Box */
+  .checksum-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
     padding: 12px 16px;
     border-radius: var(--r-md);
-    overflow-x: auto;
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
   }
 
-  .powershell-verify-box code {
-    color: var(--accent-text);
-    font-size: 0.88rem;
-  }
-
-  .source-actions {
+  .checksum-header {
     display: flex;
-    gap: var(--sp-4);
-    flex-wrap: wrap;
-    margin-top: var(--sp-6);
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .checksum-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-tertiary);
+  }
+
+  .copy-checksum-btn {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: var(--r-sm);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--t-fast);
+  }
+
+  .copy-checksum-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+  }
+
+  .checksum-code {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--text-secondary);
+    word-break: break-all;
+    line-height: 1.4;
+  }
+
+  /* Installation Guide */
+  .install-steps-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+  }
+
+  @media (min-width: 768px) {
+    .install-steps-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .step-card-title {
+    font-size: 1.15rem;
+    margin-bottom: var(--sp-4);
+  }
+
+  .step-list {
+    list-style: decimal inside;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  .step-list strong {
+    color: var(--text-primary);
   }
 </style>
+
+<script>
+  function setupCopyChecksum() {
+    const copyButtons = document.querySelectorAll<HTMLButtonElement>('.copy-checksum-btn');
+    copyButtons.forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const checksum = btn.getAttribute('data-checksum');
+        if (!checksum) return;
+        try {
+          await navigator.clipboard.writeText(checksum);
+          const original = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(() => {
+            btn.textContent = original;
+          }, 2000);
+        } catch (err) {}
+      });
+    });
+  }
+
+  setupCopyChecksum();
+  document.addEventListener('astro:page-load', setupCopyChecksum);
+</script>

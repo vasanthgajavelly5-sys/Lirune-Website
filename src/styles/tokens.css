@@ -1,38 +1,40 @@
 /* =============================================================
    LIRUNE WEBSITE — Central Design Token System
-   Extracted directly from Lirune Reader application tokens.
+   Dual-Theme System (Light, Dark, and System Auto-Detection)
+   Editorial typography, Swiss-modernist mathematical spacing,
+   high-contrast accessible color scales.
    ============================================================= */
 
 :root {
-  color-scheme: dark;
+  /* Default Dark Mode (Matching Lirune Reader obsidian default shell) */
+  --theme-mode: "dark";
 
-  /* Backgrounds */
-  --bg-base:        #11151B;
-  --bg-surface:     #171C24;
-  --bg-elevated:    #1D232D;
-  --bg-card:        #222A35;
-  --bg-overlay:     #29323E;
-  --bg-hover:       rgba(255, 255, 255, 0.05);
-  --bg-active:      rgba(255, 255, 255, 0.09);
-  --bg-glass:       rgba(23, 28, 36, 0.88);
-  --bg-glass-nav:   rgba(17, 21, 27, 0.94);
-  --bg-scrim:       rgba(0, 0, 0, 0.72);
+  /* Background Hierarchy */
+  --bg-base:        #0F1217;
+  --bg-surface:     #161B22;
+  --bg-elevated:    #1E242E;
+  --bg-card:        #181D26;
+  --bg-subtle:      #12161D;
+  --bg-overlay:     #252C38;
+  --bg-hover:       rgba(255, 255, 255, 0.06);
+  --bg-active:      rgba(255, 255, 255, 0.10);
+  --bg-glass:       rgba(15, 18, 23, 0.82);
+  --bg-scrim:       rgba(0, 0, 0, 0.75);
   --bg-input:       rgba(255, 255, 255, 0.05);
 
-  /* Text */
-  --text-primary:   #E9E7F5;
-  --text-secondary: #9A98B0;
-  --text-tertiary:  #68667A;
-  --text-disabled:  #44424F;
-  --text-on-accent: #11151B;
+  /* Text & Readability */
+  --text-primary:   #F0EEF8;
+  --text-secondary: #A2A0B8;
+  --text-tertiary:  #706E82;
+  --text-muted:     #8C8A9E;
+  --text-on-accent: #0F1217;
 
-  /* Accent — Lirune Brand Lilac/Mint & Accessible Chrome Slate */
+  /* Accent & Brand */
   --accent:           #EEECF8;
-  --accent-hover:     #F7F5FF;
-  --accent-active:    #C8C5D8;
+  --accent-hover:     #FFFFFF;
+  --accent-active:    #D8D4EE;
   --accent-subtle:    rgba(238, 236, 248, 0.12);
   --accent-subtle-h:  rgba(238, 236, 248, 0.20);
-  --accent-glow:      rgba(238, 236, 248, 0.16);
   --accent-text:      #EEECF8;
 
   --accent-chrome:        #8DB7CC;
@@ -40,43 +42,47 @@
   --accent-chrome-subtle: rgba(141, 183, 204, 0.14);
 
   /* Status & Platforms */
-  --color-windows:    #0078D7;
-  --color-android:    #3DDC84;
-  --color-store:      #0078D7;
-  --color-coffee:     #FFDD00;
-  --color-coffee-text:#000000;
-  --status-success:   #10B981;
-  --status-warning:   #F59E0B;
+  --color-windows:    #60A5FA;
+  --color-android:    #34D399;
+  --color-store:      #60A5FA;
+  --color-coffee:     #FBBF24;
+  --color-coffee-text:#0F1217;
+  --status-success:   #34D399;
+  --status-warning:   #FBBF24;
   --status-info:      #60A5FA;
 
-  /* Borders */
-  --border-subtle:  rgba(255, 255, 255, 0.06);
-  --border-default: rgba(255, 255, 255, 0.10);
-  --border-strong:  rgba(255, 255, 255, 0.18);
-  --border-accent:  rgba(141, 183, 204, 0.42);
+  /* Borders & Hairlines */
+  --border-subtle:  rgba(255, 255, 255, 0.07);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --border-strong:  rgba(255, 255, 255, 0.20);
+  --border-accent:  rgba(141, 183, 204, 0.40);
   --border-brand:   rgba(238, 236, 248, 0.35);
 
-  /* Shadows */
-  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.52);
-  --shadow-lg: 0 8px 48px rgba(0, 0, 0, 0.60);
-  --shadow-xl: 0 16px 72px rgba(0, 0, 0, 0.70);
-  --shadow-glow: 0 0 32px rgba(238, 236, 248, 0.15);
-  --shadow-glow-cyan: 0 0 32px rgba(141, 183, 204, 0.18);
+  /* Focus Indicator */
+  --focus-ring:     #8DB7CC;
+
+  /* Shadows (Depth with soft diffusion) */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.40);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.48);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.58);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.68);
+
+  /* Device Mockup Bezels */
+  --device-bezel:   #232A35;
+  --device-header:  #161B22;
 
   /* Typography */
-  --font-ui: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", system-ui, sans-serif;
-  --font-reading: Georgia, "Times New Roman", "Iowan Old Style", serif;
-  --font-mono: ui-monospace, SFMono-Regular, "Cascadia Code", "Consolas", monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", system-ui, sans-serif;
+  --font-serif: "Iowan Old Style", "Apple Garamond", "Baskerville", "Times New Roman", "Droid Serif", Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, "Cascadia Code", "JetBrains Mono", Consolas, monospace;
 
   /* Radii */
-  --r-xs: 2px;
-  --r-sm: 4px;
-  --r-md: 8px;
-  --r-lg: 12px;
-  --r-xl: 16px;
-  --r-2xl: 20px;
+  --r-xs: 3px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
   --r-full: 9999px;
 
   /* Spacing Scale */
@@ -93,22 +99,84 @@
   --sp-20: 80px;
   --sp-24: 96px;
 
-  /* Layout */
+  /* Containers */
   --container-max: 1200px;
-  --container-narrow: 880px;
+  --container-narrow: 840px;
 
   /* Transitions */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration-fast: 150ms;
-  --duration-normal: 240ms;
-  --duration-slow: 400ms;
+  --t-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --t-normal: 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  --t-slow: 380ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --duration-fast: 0ms;
-    --duration-normal: 0ms;
-    --duration-slow: 0ms;
-  }
+/* =============================================================
+   LIGHT THEME PALETTE
+   Editorial paper atmosphere: calm alabaster reading paper,
+   deep slate ink, rich readability, zero harsh glare.
+   ============================================================= */
+
+html[data-theme="light"] {
+  --theme-mode: "light";
+
+  /* Background Hierarchy */
+  --bg-base:        #F8F8FA;
+  --bg-surface:     #FFFFFF;
+  --bg-elevated:    #F1F2F6;
+  --bg-card:        #FFFFFF;
+  --bg-subtle:      #F0F1F5;
+  --bg-overlay:     #E8E9F0;
+  --bg-hover:       rgba(20, 23, 31, 0.05);
+  --bg-active:      rgba(20, 23, 31, 0.09);
+  --bg-glass:       rgba(248, 248, 250, 0.85);
+  --bg-scrim:       rgba(20, 23, 31, 0.60);
+  --bg-input:       rgba(20, 23, 31, 0.04);
+
+  /* Text & Readability (WCAG AAA compliant contrast) */
+  --text-primary:   #14171F;
+  --text-secondary: #4B5061;
+  --text-tertiary:  #6E7385;
+  --text-muted:     #63687A;
+  --text-on-accent: #FFFFFF;
+
+  /* Accent & Brand */
+  --accent:           #1F4A6A;
+  --accent-hover:     #163750;
+  --accent-active:    #10283A;
+  --accent-subtle:    rgba(31, 74, 106, 0.08);
+  --accent-subtle-h:  rgba(31, 74, 106, 0.14);
+  --accent-text:      #1F4A6A;
+
+  --accent-chrome:        #245579;
+  --accent-chrome-hover:  #1B415D;
+  --accent-chrome-subtle: rgba(36, 85, 121, 0.10);
+
+  /* Status & Platforms */
+  --color-windows:    #0067B8;
+  --color-android:    #0F9D58;
+  --color-store:      #0067B8;
+  --color-coffee:     #D97706;
+  --color-coffee-text:#FFFFFF;
+  --status-success:   #0F9D58;
+  --status-warning:   #D97706;
+  --status-info:      #0067B8;
+
+  /* Borders & Hairlines */
+  --border-subtle:  rgba(20, 23, 31, 0.08);
+  --border-default: rgba(20, 23, 31, 0.14);
+  --border-strong:  rgba(20, 23, 31, 0.22);
+  --border-accent:  rgba(31, 74, 106, 0.38);
+  --border-brand:   rgba(31, 74, 106, 0.30);
+
+  /* Focus Indicator */
+  --focus-ring:     #1F4A6A;
+
+  /* Shadows (Subtle, paper-like ambient occlusion) */
+  --shadow-sm: 0 1px 4px rgba(20, 23, 31, 0.05);
+  --shadow-md: 0 4px 16px rgba(20, 23, 31, 0.07);
+  --shadow-lg: 0 10px 32px rgba(20, 23, 31, 0.09);
+  --shadow-xl: 0 20px 48px rgba(20, 23, 31, 0.12);
+
+  /* Device Mockup Bezels */
+  --device-bezel:   #E2E4EC;
+  --device-header:  #ECEEF5;
 }

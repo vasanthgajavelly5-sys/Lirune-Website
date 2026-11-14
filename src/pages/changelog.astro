@@ -1,386 +1,335 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import config from '../data/config.json';
-
-const windowsChangelog = [
-  {
-    version: "5.6.2",
-    tag: "v5.6.2",
-    date: "October 27, 2026",
-    title: "Security Hardening, FB2 Sanitization & Windows Release",
-    installerUrl: "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v5.6.2/Lirune.Reader-5.6.2-Setup.exe",
-    installerFilename: "Lirune.Reader-5.6.2-Setup.exe",
-    sha256: "7e11f4f8512925aebe125d688cb2f1350078e928d58b105df746df845d354843",
-    changes: [
-      "Strict DOMPurify HTML sanitization for FB2, HTML, and Markdown formats, permanently neutralizing potential script injection",
-      "Unified rounded custom glass dropdowns across all settings tabs matching Lirune's dark aesthetic",
-      "Fullscreen reading immersion with auto-hiding top chrome and navigation pills",
-      "Reinforced Zip-Slip path traversal guards and 512 MB file bounds check on all archive imports",
-      "Updated Microsoft Store submission package and verified SHA-256 signatures"
-    ]
-  },
-  {
-    version: "5.6.1",
-    tag: "v5.6.1",
-    date: "October 25, 2026",
-    title: "Fullscreen Immersion, Quick Themes & Window Controls Fix",
-    installerUrl: "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v5.6.1/Lirune.Reader-5.6.1-Setup.exe",
-    installerFilename: "Lirune.Reader-5.6.1-Setup.exe",
-    changes: [
-      "Fixed window caption control alignment on high-DPI Windows displays",
-      "Added quick theme selector in reader bottom bar",
-      "Enhanced keyboard shortcut responsiveness for Table of Contents toggle (T)",
-      "Improved EPUB spine navigation caching"
-    ]
-  },
-  {
-    version: "5.6.0",
-    tag: "v5.6.0",
-    date: "October 22, 2026",
-    title: "Fullscreen TOC, Toolbar Actions Capsule & Congestion Prevention",
-    installerUrl: "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v5.6.0/Lirune.Reader-5.6.0-Setup.exe",
-    installerFilename: "Lirune.Reader-5.6.0-Setup.exe",
-    changes: [
-      "Introduced floating toolbar actions capsule with backdrop blur",
-      "Fixed TOC overlay layout during window resize operations",
-      "Resolved background import queue congestion during multi-file folder drops",
-      "Performance optimization for large 5,000-chapter EPUB volumes"
-    ]
-  },
-  {
-    version: "5.5.0",
-    tag: "v5.5.0",
-    date: "October 15, 2026",
-    title: "UI Polish, Glass Dropdowns & Windows Store Release",
-    installerUrl: "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v5.5.0/Lirune.Reader-5.5.0-Setup.exe",
-    installerFilename: "Lirune.Reader-5.5.0-Setup.exe",
-    changes: [
-      "First official Microsoft Store release under Product ID 9PDNFZ146HDX",
-      "Refined dark theme tokens and ambient glow finish",
-      "Integrated PDF.js zoom controls and page number jump box",
-      "Added Markdown annotation export utility"
-    ]
-  }
-];
-
-const androidChangelog = [
-  {
-    version: "4.9.3",
-    tag: "v4.9.3",
-    date: "October 28, 2026",
-    title: "Scroll Engine v2 Exclusivity & Hardened Zero-Permission Release",
-    apkUrl: "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v4.9.3/Lirune-Reader-v4.9.3-release.apk",
-    apkFilename: "Lirune-Reader-v4.9.3-release.apk",
-    sha256: "f347c0658964e06467cba09d95d5dc7f66631f48b5615f7ac358e041d2a686c0",
-    changes: [
-      "Scroll Engine v2 is now the exclusive, unified continuous-scroll engine across Lirune Android. Retired legacy v1 engine.",
-      "Zero internet permissions: android.permission.INTERNET permanently stripped from production release builds.",
-      "Android Storage Access Framework (SAF) folder browsing and direct SQLite storage.",
-      "Offline Text-to-Speech (TTS) audio narration with speed regulation.",
-      "Fine-grained typography controls (font scaling, line spacing, margins, font families)."
-    ]
-  },
-  {
-    version: "4.9.0",
-    tag: "v4.9.0",
-    date: "October 20, 2026",
-    title: "Reader Engine Upgrade, Typography Suite & Store Hardening",
-    apkUrl: "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v4.9.0/Lirune-Reader-v4.9.0-release.apk",
-    apkFilename: "Lirune-Reader-v4.9.0-release.apk",
-    changes: [
-      "Complete typography customization suite with live preview",
-      "Added Buy Me a Coffee link in About tab delegating to system browser safely",
-      "Improved SAF file picker resilience across Samsung and Pixel devices",
-      "Fixed cover extraction for FictionBook (.fb2) archives"
-    ]
-  },
-  {
-    version: "4.8.0",
-    tag: "v4.8.0",
-    date: "October 10, 2026",
-    title: "Scroll Mode, First Frame & Reading Comfort",
-    apkUrl: "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v4.8.0/Lirune-Reader-v4.8.0-release.apk",
-    apkFilename: "Lirune-Reader-4.8.0.apk",
-    changes: [
-      "Initial implementation of virtualized continuous scroll engine",
-      "Added fast first-frame rendering for large books",
-      "Enhanced dark theme contrast for AMOLED screens",
-      "Fixed chapter position restoration on app relaunch"
-    ]
-  }
-];
+import releases from '../data/releases.json';
 ---
 
 <BaseLayout
   title="What's New & Release Changelog — Lirune Reader"
-  description="Full release history and changelog for Lirune Reader Windows and Android. Detailed records of bug fixes, features, and security hardening."
+  description="Chronological release notes and security improvements for Lirune Reader on Windows and Android."
+  canonicalPath="/changelog"
 >
-  <div class="changelog-page">
-    <div class="container">
-      <div class="page-header text-center">
-        <span class="section-label">Version History</span>
-        <h1 class="page-title">What's New in Lirune</h1>
-        <p class="page-subtitle mx-auto">
-          Lirune maintains separate release channels for Windows and Android. Below is the verified changelog of all public stable releases.
-        </p>
-      </div>
+  <div class="site-container site-container--narrow section-spacing">
+    <div class="section-header">
+      <span class="badge badge-success">Release History</span>
+      <h1>Changelog & Milestones</h1>
+      <p>Tracking release versions, security hardening, and feature improvements across Windows and Android channels.</p>
+    </div>
 
-      <!-- Windows Changelog Section -->
-      <section class="changelog-section" id="windows-history">
-        <div class="channel-header">
-          <div class="channel-title">
-            <svg width="24" height="24" viewBox="0 0 88 88" fill="currentColor" aria-hidden="true">
-              <path d="M0 12.402l35.689-4.86.016 34.423-35.67.203zm35.67 33.529l.026 34.453-35.67-4.887-.026-29.566zm4.326-39.043L87.914 0v41.525l-47.918.278zm47.918 48.749L39.996 88V46.541l47.918.257z"/>
-            </svg>
-            <h2>Windows Release Channel</h2>
-          </div>
-          <a href={config.githubReleases} target="_blank" rel="noopener noreferrer" class="link-gh">
-            View on GitHub Releases →
-          </a>
+    <div class="changelog-timeline">
+      <!-- Release 1: Windows 5.6.2 -->
+      <article class="timeline-item">
+        <div class="timeline-dot-wrap">
+          <span class="timeline-dot windows"></span>
         </div>
-
-        <div class="timeline">
-          {windowsChangelog.map((rel, idx) => (
-            <article class="timeline-item">
-              <div class="timeline-dot" aria-hidden="true"></div>
-              <div class="card timeline-card">
-                <div class="card-meta-bar">
-                  <span class="badge badge-accent">Version {rel.version}</span>
-                  <time class="release-time">{rel.date}</time>
-                </div>
-                <h3 class="entry-title">{rel.title}</h3>
-
-                <ul class="changes-list">
-                  {rel.changes.map(ch => (
-                    <li>{ch}</li>
-                  ))}
-                </ul>
-
-                {rel.sha256 && (
-                  <div class="sha-box">
-                    <span class="sha-label">SHA-256 Checksum:</span>
-                    <code>{rel.sha256}</code>
-                  </div>
-                )}
-
-                <div class="entry-footer">
-                  <a href={rel.installerUrl} class="btn btn-windows btn-sm">
-                    Download {rel.installerFilename}
-                  </a>
-                </div>
+        <div class="timeline-content surface-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-tags">
+                <span class="platform-tag windows">Windows</span>
+                <span class="version-tag">v{releases.windows.version}</span>
+                <span class="badge badge-success">Latest Stable</span>
               </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <!-- Android Changelog Section -->
-      <section class="changelog-section" id="android-history">
-        <div class="channel-header">
-          <div class="channel-title">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4116 13.8533 8.1 12 8.1s-3.5902.3116-5.1367.8497L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396"/>
-            </svg>
-            <h2>Android Release Channel</h2>
+              <h2 class="timeline-title">{releases.windows.name}</h2>
+            </div>
+            <time class="timeline-date">{releases.windows.releaseDate}</time>
           </div>
-          <a href={config.githubReleases} target="_blank" rel="noopener noreferrer" class="link-gh">
-            View on GitHub Releases →
-          </a>
+
+          <div class="timeline-body">
+            <h3>Highlights & Fixes</h3>
+            <ul class="changelog-list" role="list">
+              {releases.windows.highlights.map(h => (
+                <li>{h}</li>
+              ))}
+            </ul>
+
+            <div class="timeline-actions">
+              <a href={releases.windows.releaseUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                <span>View on GitHub ↗</span>
+              </a>
+              <a href={releases.windows.installerUrl} class="btn btn-subtle">
+                <span>Download Installer ({releases.windows.installerFilename})</span>
+              </a>
+            </div>
+          </div>
         </div>
+      </article>
 
-        <div class="timeline">
-          {androidChangelog.map((rel, idx) => (
-            <article class="timeline-item">
-              <div class="timeline-dot" aria-hidden="true"></div>
-              <div class="card timeline-card">
-                <div class="card-meta-bar">
-                  <span class="badge badge-success">Version {rel.version}</span>
-                  <time class="release-time">{rel.date}</time>
-                </div>
-                <h3 class="entry-title">{rel.title}</h3>
-
-                <ul class="changes-list">
-                  {rel.changes.map(ch => (
-                    <li>{ch}</li>
-                  ))}
-                </ul>
-
-                {rel.sha256 && (
-                  <div class="sha-box">
-                    <span class="sha-label">SHA-256 Checksum:</span>
-                    <code>{rel.sha256}</code>
-                  </div>
-                )}
-
-                <div class="entry-footer">
-                  <a href={rel.apkUrl} class="btn btn-android btn-sm">
-                    Download {rel.apkFilename}
-                  </a>
-                </div>
+      <!-- Release 2: Android 4.9.3 -->
+      <article class="timeline-item">
+        <div class="timeline-dot-wrap">
+          <span class="timeline-dot android"></span>
+        </div>
+        <div class="timeline-content surface-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-tags">
+                <span class="platform-tag android">Android</span>
+                <span class="version-tag">v{releases.android.version}</span>
+                <span class="badge badge-success">Latest Stable</span>
               </div>
-            </article>
-          ))}
+              <h2 class="timeline-title">{releases.android.name}</h2>
+            </div>
+            <time class="timeline-date">{releases.android.releaseDate}</time>
+          </div>
+
+          <div class="timeline-body">
+            <h3>Highlights & Fixes</h3>
+            <ul class="changelog-list" role="list">
+              {releases.android.highlights.map(h => (
+                <li>{h}</li>
+              ))}
+            </ul>
+
+            <div class="timeline-actions">
+              <a href={releases.android.releaseUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                <span>View on GitHub ↗</span>
+              </a>
+              <a href={releases.android.apkUrl} class="btn btn-subtle">
+                <span>Download Release APK ({releases.android.apkFilename})</span>
+              </a>
+            </div>
+          </div>
         </div>
-      </section>
+      </article>
+
+      <!-- Milestone Archive: Windows 5.6.0 -->
+      <article class="timeline-item">
+        <div class="timeline-dot-wrap">
+          <span class="timeline-dot"></span>
+        </div>
+        <div class="timeline-content surface-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-tags">
+                <span class="platform-tag windows">Windows</span>
+                <span class="version-tag">v5.6.0</span>
+              </div>
+              <h2 class="timeline-title">PDF.js Integration & Zip-Slip Protection</h2>
+            </div>
+            <time class="timeline-date">2026-10-15</time>
+          </div>
+          <div class="timeline-body">
+            <ul class="changelog-list" role="list">
+              <li>Integrated native offline PDF.js viewer with page thumbnail preview drawer.</li>
+              <li>Enforced Zip-Slip archive path-traversal validation for EPUB and CBZ files.</li>
+              <li>Implemented 512 MB file bounds check to protect against decompression memory bombs.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Milestone Archive: Android 4.9.0 -->
+      <article class="timeline-item">
+        <div class="timeline-dot-wrap">
+          <span class="timeline-dot"></span>
+        </div>
+        <div class="timeline-content surface-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-tags">
+                <span class="platform-tag android">Android</span>
+                <span class="version-tag">v4.9.0</span>
+              </div>
+              <h2 class="timeline-title">Scroll Engine v2 Virtualization & TTS Audio Player</h2>
+            </div>
+            <time class="timeline-date">2026-10-12</time>
+          </div>
+          <div class="timeline-body">
+            <ul class="changelog-list" role="list">
+              <li>Introduced Scroll Engine v2 virtualizing large book chapters to sustain 60fps vertical flow.</li>
+              <li>Added offline Text-to-Speech audio player with speech rate modulation and background service.</li>
+              <li>Integrated Android Storage Access Framework (SAF) folder picker.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="changelog-footer-card surface-card text-center">
+      <h3>Looking for older historical releases?</h3>
+      <p>Browse all past git tags, source code snapshots, and historical assets directly on GitHub.</p>
+      <a href={config.githubReleases} target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+        <span>Browse GitHub Releases Archive ↗</span>
+      </a>
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .changelog-page {
-    padding-top: var(--sp-12);
-    padding-bottom: var(--sp-20);
-  }
-
-  .text-center { text-align: center; }
-  .mx-auto { margin-left: auto; margin-right: auto; }
-
-  .page-header {
-    margin-bottom: var(--sp-16);
-  }
-
-  .page-title {
-    margin-bottom: var(--sp-4);
-  }
-
-  .page-subtitle {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
-    max-width: 680px;
-  }
-
-  .changelog-section {
-    margin-bottom: var(--sp-20);
-  }
-
-  .channel-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: var(--sp-4);
-    margin-bottom: var(--sp-10);
-    flex-wrap: wrap;
-    gap: var(--sp-3);
-  }
-
-  .channel-title {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-3);
-  }
-
-  .channel-title svg {
-    color: var(--accent-chrome);
-  }
-
-  .channel-title h2 {
-    font-size: 1.5rem;
-  }
-
-  .link-gh {
-    color: var(--accent-chrome);
-    font-size: 0.92rem;
-    font-weight: 600;
-  }
-
-  .link-gh:hover {
-    color: var(--accent);
-    text-decoration: underline;
-  }
-
-  .timeline {
+  .changelog-timeline {
     position: relative;
-    padding-left: var(--sp-8);
     display: flex;
     flex-direction: column;
-    gap: var(--sp-10);
+    gap: var(--sp-8);
+    margin-bottom: var(--sp-12);
   }
 
-  .timeline::before {
-    content: '';
+  .changelog-timeline::before {
+    content: "";
     position: absolute;
-    left: 8px;
-    top: 14px;
-    bottom: 14px;
+    top: 24px;
+    bottom: 24px;
+    left: 19px;
     width: 2px;
-    background: var(--border-default);
+    background-color: var(--border-default);
+    z-index: 1;
   }
 
   .timeline-item {
     position: relative;
+    display: flex;
+    gap: var(--sp-6);
+    z-index: 2;
+  }
+
+  .timeline-dot-wrap {
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    padding-top: var(--sp-6);
+    flex-shrink: 0;
   }
 
   .timeline-dot {
-    position: absolute;
-    left: calc(var(--sp-8) * -1 + 4px);
-    top: 24px;
-    width: 10px;
-    height: 10px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    background: var(--accent-chrome);
-    border: 2px solid var(--bg-base);
+    background-color: var(--bg-surface);
+    border: 3px solid var(--border-strong);
+    box-shadow: 0 0 0 4px var(--bg-base);
   }
 
-  .timeline-card {
-    padding: var(--sp-8);
+  .timeline-dot.windows {
+    border-color: var(--color-windows);
   }
 
-  .card-meta-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--sp-4);
-    flex-wrap: wrap;
-    gap: var(--sp-2);
+  .timeline-dot.android {
+    border-color: var(--color-android);
   }
 
-  .release-time {
-    font-size: 0.88rem;
-    color: var(--text-tertiary);
+  .timeline-content {
+    flex: 1 1 auto;
+    padding: clamp(24px, 4vw, 36px);
   }
 
-  .entry-title {
-    font-size: 1.35rem;
-    margin-bottom: var(--sp-4);
-  }
-
-  .changes-list {
-    padding-left: var(--sp-6);
+  .timeline-header {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-3);
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.55;
-    margin-bottom: var(--sp-6);
+    gap: var(--sp-2);
+    padding-bottom: var(--sp-4);
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: var(--sp-4);
   }
 
-  .sha-box {
-    background: #0B0E13;
-    border: 1px solid var(--border-subtle);
-    padding: var(--sp-4);
-    border-radius: var(--r-md);
-    margin-bottom: var(--sp-6);
-    overflow-x: auto;
+  @media (min-width: 640px) {
+    .timeline-header {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
   }
 
-  .sha-label {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-tertiary);
-    margin-bottom: 2px;
+  .timeline-tags {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-bottom: 6px;
+    flex-wrap: wrap;
   }
 
-  .sha-box code {
+  .platform-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: var(--r-sm);
+  }
+
+  .platform-tag.windows {
+    background-color: rgba(0, 120, 215, 0.15);
+    color: var(--color-windows);
+  }
+
+  .platform-tag.android {
+    background-color: rgba(61, 220, 132, 0.15);
+    color: var(--color-android);
+  }
+
+  .version-tag {
     font-family: var(--font-mono);
-    font-size: 0.82rem;
-    color: var(--accent-chrome);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
   }
 
-  .entry-footer {
-    border-top: 1px solid var(--border-subtle);
-    padding-top: var(--sp-4);
+  .timeline-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .timeline-date {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+  }
+
+  .timeline-body h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin-bottom: var(--sp-3);
+  }
+
+  .changelog-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: var(--sp-6);
+  }
+
+  .changelog-list li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .changelog-list li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    top: 0;
+    color: var(--accent-chrome);
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .timeline-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    flex-wrap: wrap;
+  }
+
+  .changelog-footer-card {
+    padding: var(--sp-8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+
+  .changelog-footer-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .changelog-footer-card p {
+    color: var(--text-secondary);
+    max-width: 520px;
   }
 </style>

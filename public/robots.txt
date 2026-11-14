@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lirune-reader.web.app/sitemap-index.xml
+Sitemap: https://lirune-reader-1aa95.web.app/sitemap-index.xml

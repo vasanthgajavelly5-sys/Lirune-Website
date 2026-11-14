@@ -1,339 +1,283 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import config from '../data/config.json';
 ---
 
 <BaseLayout
   title="Features & Capabilities — Lirune Reader"
-  description="Explore the full capabilities of Lirune Reader for Windows and Android: library management, typography controls, spread layouts, 19 formats, and study annotations."
+  description="Explore the offline reading capabilities of Lirune Reader for Windows and Android: dual-page spreads, Scroll Engine v2, offline TTS, and 19 format rendering."
+  canonicalPath="/features"
 >
-  <div class="features-page">
-    <div class="container">
-      <div class="page-header text-center">
-        <span class="section-label">Feature Directory</span>
-        <h1 class="page-title">Every feature, designed for reading</h1>
-        <p class="page-subtitle mx-auto">
-          Lirune avoids feature bloat and focuses strictly on what makes an ebook reader pleasurable, responsive, and respectful of your data.
-        </p>
+  <div class="site-container section-spacing">
+    <div class="section-header section-header--center">
+      <span class="badge badge-success">Engine & Capabilities</span>
+      <h1>Crafted for the art of reading</h1>
+      <p>Lirune combines a high-performance offline rendering engine with deliberate, calm design to create the optimal environment for your personal digital library.</p>
+    </div>
+
+    <!-- Feature 1: The Reading Engine (Dual Spreads & Scroll Engine v2) -->
+    <section class="feature-story-block">
+      <div class="feature-story-visual">
+        <div class="device-frame-desktop clickable-shot"
+             data-shot-src="/images/screenshots/win-reader-epub-spread.png"
+             data-shot-title="Windows Two-Page Spread View"
+             data-shot-platform="Windows"
+             data-shot-caption="Lirune Reader Windows dual-page spread providing authentic bookish reading rhythm on wide displays.">
+          <div class="device-header-desktop">
+            <div class="device-dots"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
+            <span class="device-title">Windows — Spread Reading</span>
+            <span style="width: 32px"></span>
+          </div>
+          <img src="/images/screenshots/win-reader-epub-spread.png" alt="Dual-page book spread reading in Windows" width="1080" height="675" loading="lazy" />
+        </div>
       </div>
-
-      <!-- Feature 1: Library Management -->
-      <section class="feature-block">
-        <div class="feature-grid">
-          <div class="feature-info">
-            <span class="badge badge-accent">Library & Organization</span>
-            <h2>A library that stays organized without effort</h2>
-            <p>
-              Importing books into Lirune doesn't lock you into a proprietary cloud catalog. Lirune inspects your files directly on your device, caches high-resolution cover artwork, and lets you browse however you prefer.
-            </p>
-            <ul class="feature-check-list">
-              <li><strong>Grid and List Views:</strong> Seamlessly toggle between visual book cover cards and detailed metadata list view.</li>
-              <li><strong>Custom Collections:</strong> Group books into custom reading lists, categories, or projects.</li>
-              <li><strong>Favorites & Queue:</strong> Mark books with a heart to keep your current reading list at top priority.</li>
-              <li><strong>Instant Filtering:</strong> Search titles and authors in real-time with zero latency.</li>
-            </ul>
-          </div>
-          <div class="feature-media">
-            <div class="device-desktop-frame clickable-shot" data-full="/images/screenshots/win-library-grid.png" data-title="Library Management" data-caption="Library grid with cover art, progress bars, and search">
-              <img src="/images/screenshots/win-library-grid.png" alt="Library management screen" width="800" height="500" loading="lazy" />
-              <div class="shot-zoom-badge">Click to enlarge</div>
-            </div>
-          </div>
+      <div class="feature-story-copy">
+        <div class="feature-num">01 / Engine</div>
+        <h2>Dual-Page Spreads and Virtualized Scrolling</h2>
+        <p>
+          Reading on a wide computer screen should feel like holding an open book, not reading a web document. Lirune calculates aspect ratios automatically to present comfortable two-column spreads with balanced gutters and authentic page turns.
+        </p>
+        <p>
+          On mobile, <strong>Scroll Engine v2</strong> virtualizes chapter DOM nodes to maintain consistent 60fps scrolling across 1,000+ page books while consuming minimal battery and RAM.
+        </p>
+        <div class="feature-pills">
+          <span class="feature-pill">Dual-page spread</span>
+          <span class="feature-pill">Continuous vertical flow</span>
+          <span class="feature-pill">Scroll Engine v2</span>
+          <span class="feature-pill">Fullscreen immersion (F11)</span>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Feature 2: Reader Layouts & Display -->
-      <section class="feature-block">
-        <div class="feature-grid reversed">
-          <div class="feature-info">
-            <span class="badge badge-accent">Reading Engine</span>
-            <h2>Spreads, single pages, and continuous scroll</h2>
-            <p>
-              Different books require different reading flows. Novels often read best in paginated spreads, while technical manuals and articles benefit from smooth continuous scrolling.
-            </p>
-            <ul class="feature-check-list">
-              <li><strong>Two-Page Spread (Auto):</strong> Automatically displays two pages side-by-side on wide desktop displays, just like an open physical book.</li>
-              <li><strong>Single Page Paginated:</strong> Clean, centered single page with keyboard or click paging.</li>
-              <li><strong>Continuous Flow Scroll:</strong> Virtualized continuous vertical scrolling for effortless reading without artificial page breaks.</li>
-              <li><strong>Reading Progress Bar:</strong> Minimalist bottom progress bar indicating current chapter, overall position, and percentage.</li>
-            </ul>
-          </div>
-          <div class="feature-media">
-            <div class="device-desktop-frame clickable-shot" data-full="/images/screenshots/win-reader-epub-spread.png" data-title="Two-Page Spread Layout" data-caption="Two-page spread reading mode on desktop">
-              <img src="/images/screenshots/win-reader-epub-spread.png" alt="Two-page spread reading mode" width="800" height="500" loading="lazy" />
-              <div class="shot-zoom-badge">Click to enlarge</div>
-            </div>
-          </div>
+    <!-- Feature 2: Offline Audio Narration (TTS) -->
+    <section class="feature-story-block feature-story-block--reverse">
+      <div class="feature-story-visual">
+        <div class="device-frame-mobile clickable-shot"
+             data-shot-src="/images/screenshots/android-tts-player.png"
+             data-shot-title="Android Text-to-Speech Player"
+             data-shot-platform="Android"
+             data-shot-caption="Offline Text-to-Speech audio narration player in Android with background playback and chapter scrubber.">
+          <div class="device-notch-mobile"></div>
+          <img src="/images/screenshots/android-tts-player.png" alt="Android Text-to-Speech voice narration player" width="400" height="820" loading="lazy" />
         </div>
-      </section>
+      </div>
+      <div class="feature-story-copy">
+        <div class="feature-num">02 / Narration</div>
+        <h2>Offline Text-to-Speech audio player</h2>
+        <p>
+          Turn any supported book or document into an audio experience without connecting to remote speech synthesis APIs. Lirune interfaces directly with your system's offline voice synthesizer.
+        </p>
+        <p>
+          Enjoy background playback while walking or commuting, complete with lock-screen media controls, adjustable speech rates, voice pitch modulation, and chapter position scrubbing.
+        </p>
+        <div class="feature-pills">
+          <span class="feature-pill">Offline system voices</span>
+          <span class="feature-pill">Background audio service</span>
+          <span class="feature-pill">Speech rate controls</span>
+          <span class="feature-pill">Lock-screen integration</span>
+        </div>
+      </div>
+    </section>
 
-      <!-- Feature 3: Navigation & Table of Contents -->
-      <section class="feature-block">
-        <div class="feature-grid">
-          <div class="feature-info">
-            <span class="badge badge-accent">Navigation</span>
-            <h2>Never lose your place in long volumes</h2>
-            <p>
-              Lirune builds an interactive, multi-tier Table of Contents from your book's internal navigation documents (NCX or NAV XHTML in EPUB, bookmarks in PDF, and heading trees in DOCX/FB2).
-            </p>
-            <ul class="feature-check-list">
-              <li><strong>Filterable TOC Drawer:</strong> Search chapter titles directly in the drawer to find specific sections instantly.</li>
-              <li><strong>Current Position Tracking:</strong> The active chapter is highlighted automatically as you scroll or turn pages.</li>
-              <li><strong>Keyboard Navigation:</strong> Jump chapters with <kbd>T</kbd>, navigate search with <kbd>/</kbd>, and toggle fullscreen with <kbd>F11</kbd>.</li>
-            </ul>
+    <!-- Feature 3: Navigation, Search & Annotations -->
+    <section class="feature-story-block">
+      <div class="feature-story-visual">
+        <div class="device-frame-desktop clickable-shot"
+             data-shot-src="/images/screenshots/win-reader-search.png"
+             data-shot-title="Full-Text Search Modal"
+             data-shot-platform="Windows"
+             data-shot-caption="Windows full-text search finding keyword instances across the entire book with match previews.">
+          <div class="device-header-desktop">
+            <div class="device-dots"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
+            <span class="device-title">Windows — Full-Text Search</span>
+            <span style="width: 32px"></span>
           </div>
-          <div class="feature-media">
-            <div class="device-desktop-frame clickable-shot" data-full="/images/screenshots/win-reader-toc.png" data-title="Table of Contents Drawer" data-caption="Interactive TOC with chapter filter">
-              <img src="/images/screenshots/win-reader-toc.png" alt="Table of Contents drawer open" width="800" height="500" loading="lazy" />
-              <div class="shot-zoom-badge">Click to enlarge</div>
-            </div>
-          </div>
+          <img src="/images/screenshots/win-reader-search.png" alt="Full-text search modal in Lirune Reader" width="1080" height="675" loading="lazy" />
         </div>
-      </section>
+      </div>
+      <div class="feature-story-copy">
+        <div class="feature-num">03 / Discovery</div>
+        <h2>Full-text search, TOC drawer & annotations</h2>
+        <p>
+          Find quotes and references instantly. The built-in search engine indexes book content locally, highlighting exact occurrences and providing context preview snippets so you can jump to chapters in a single click.
+        </p>
+        <p>
+          Organize your reading with a multi-level Table of Contents drawer, persistent bookmarks, and custom notes stored directly in your local library index.
+        </p>
+        <div class="feature-pills">
+          <span class="feature-pill">Contextual search snippets</span>
+          <span class="feature-pill">Multi-level TOC</span>
+          <span class="feature-pill">Highlights & Notes</span>
+          <span class="feature-pill">Reading progress sync</span>
+        </div>
+      </div>
+    </section>
 
-      <!-- Feature 4: Typography & Themes -->
-      <section class="feature-block">
-        <div class="feature-grid reversed">
-          <div class="feature-info">
-            <span class="badge badge-accent">Visual Comfort</span>
-            <h2>Typography tuned for long reading sessions</h2>
-            <p>
-              Reading fatigue is caused by poor contrast, bad margins, and rigid type. Lirune gives you total control over how words appear on screen.
-            </p>
-            <ul class="feature-check-list">
-              <li><strong>6 Handcrafted Themes:</strong> Dark (default), Pure OLED Black, Clean Light, Nord Frost, Warm Sepia, and Dracula.</li>
-              <li><strong>Font Flexibility:</strong> Choose from high-legibility book serifs, modern system sans, or code-friendly monospace.</li>
-              <li><strong>Responsive Sizing:</strong> Smooth font scale slider, line height adjustment (1.2 to 2.4), and margin spacing.</li>
-              <li><strong>Separation of Chrome & Book:</strong> Application controls remain quiet and neutral, letting the book styling shine.</li>
-            </ul>
+    <!-- Feature 4: Security & Hardening -->
+    <section class="feature-story-block feature-story-block--reverse">
+      <div class="feature-story-visual">
+        <div class="device-frame-desktop clickable-shot"
+             data-shot-src="/images/screenshots/win-settings-reading.png"
+             data-shot-title="Reading Appearance & Security Controls"
+             data-shot-platform="Windows"
+             data-shot-caption="Windows application settings demonstrating strict security sanitization, local storage paths, and appearance choices.">
+          <div class="device-header-desktop">
+            <div class="device-dots"><span class="device-dot"></span><span class="device-dot"></span><span class="device-dot"></span></div>
+            <span class="device-title">Windows — Appearance & Settings</span>
+            <span style="width: 32px"></span>
           </div>
-          <div class="feature-media">
-            <div class="device-desktop-frame clickable-shot" data-full="/images/screenshots/win-settings-reading.png" data-title="Reading Appearance" data-caption="Typography and theme configuration panel">
-              <img src="/images/screenshots/win-settings-reading.png" alt="Reading settings and themes" width="800" height="500" loading="lazy" />
-              <div class="shot-zoom-badge">Click to enlarge</div>
-            </div>
-          </div>
+          <img src="/images/screenshots/win-reader-toc.png" alt="Table of contents and reading settings" width="1080" height="675" loading="lazy" />
         </div>
-      </section>
+      </div>
+      <div class="feature-story-copy">
+        <div class="feature-num">04 / Security</div>
+        <h2>Defense-in-depth document sanitization</h2>
+        <p>
+          Many ebooks and documents contain embedded HTML, XML scripts, or untrusted archives. Lirune enforces strict defense-in-depth isolation:
+        </p>
+        <ul class="feature-checklist" role="list">
+          <li><strong>DOMPurify HTML Sanitization:</strong> Strips malicious scripts and iframe vectors from FB2, HTML, and Markdown documents.</li>
+          <li><strong>Zip-Slip Protection:</strong> Rejects archives attempting path-traversal attacks beyond extract bounds.</li>
+          <li><strong>512 MB Bounds Check:</strong> Guards against decompression bombs and denial-of-service memory exhaustion.</li>
+          <li><strong>Zero Network Telemetry:</strong> No tracking SDKs, no external analytics pings, no cloud phone-home.</li>
+        </ul>
+      </div>
+    </section>
 
-      <!-- Feature 5: In-Book Search & Annotations -->
-      <section class="feature-block">
-        <div class="feature-grid">
-          <div class="feature-info">
-            <span class="badge badge-accent">Study & Research</span>
-            <h2>Search inside chapters, take notes, export to Markdown</h2>
-            <p>
-              Turn Lirune into your personal research workstation. Annotate quotes, highlight key ideas, and export your thinking without proprietary cloud sync.
-            </p>
-            <ul class="feature-check-list">
-              <li><strong>In-Book Search:</strong> Instant chapter search with exact match counters and quick prev/next jumping.</li>
-              <li><strong>Multi-Color Highlights:</strong> Highlight text in yellow, green, blue, pink, or purple.</li>
-              <li><strong>Sticky Notes:</strong> Add markdown-friendly personal thoughts attached directly to text locations.</li>
-              <li><strong>Markdown Export:</strong> Export your highlights, bookmarks, and notes to clean <code>.md</code> files.</li>
-            </ul>
-          </div>
-          <div class="feature-media">
-            <div class="device-desktop-frame clickable-shot" data-full="/images/screenshots/win-reader-search.png" data-title="In-Book Search" data-caption="Fast local text search across chapter content">
-              <img src="/images/screenshots/win-reader-search.png" alt="In-book search modal" width="800" height="500" loading="lazy" />
-              <div class="shot-zoom-badge">Click to enlarge</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Feature 6: Android Mobile Architecture -->
-      <section class="feature-block">
-        <div class="feature-grid reversed">
-          <div class="feature-info">
-            <span class="badge badge-success">Android Exclusive</span>
-            <h2>Scroll Engine v2 & zero network permissions</h2>
-            <p>
-              Lirune for Android was rebuilt with a dedicated continuous scroll engine and hardened OS security.
-            </p>
-            <ul class="feature-check-list">
-              <li><strong>Scroll Engine v2:</strong> Unified virtualized continuous scrolling running at 60fps with zero stutter.</li>
-              <li><strong>No Internet Permission:</strong> The <code>android.permission.INTERNET</code> permission is stripped from production release builds. The OS physically prevents network calls.</li>
-              <li><strong>Storage Access Framework:</strong> Connect SD cards or custom download folders without granting global storage access.</li>
-              <li><strong>Offline Text-to-Speech:</strong> Built-in audio narration engine reads books aloud without third-party cloud APIs.</li>
-            </ul>
-          </div>
-          <div class="feature-media">
-            <div class="device-phone-frame clickable-shot" data-full="/images/screenshots/android-reader-epub.png" data-title="Android Scroll Engine v2" data-caption="Continuous scroll reading view on Android">
-              <div class="device-phone-notch"></div>
-              <img src="/images/screenshots/android-reader-epub.png" alt="Android reader interface" width="320" height="693" loading="lazy" />
-              <div class="shot-zoom-badge">Enlarge</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Call to Action -->
-      <div class="features-cta text-center card card-elevated">
-        <h2>Experience Lirune today</h2>
-        <p class="mx-auto">Download the latest stable release for Windows or Android.</p>
-        <div class="cta-btns">
-          <a href="/downloads#windows" class="btn btn-windows btn-lg">Download for Windows</a>
-          <a href="/downloads#android" class="btn btn-android btn-lg">Download for Android</a>
-        </div>
+    <!-- Bottom Action CTA -->
+    <div class="features-bottom-cta text-center">
+      <h2>Ready to experience Lirune?</h2>
+      <p>Download Lirune Reader for Windows or Android and bring calm back to your personal library.</p>
+      <div class="features-cta-actions">
+        <a href="/downloads" class="btn btn-primary btn-lg">
+          <span>Get Latest Downloads</span>
+        </a>
+        <a href="/formats" class="btn btn-secondary btn-lg">
+          <span>View Supported Formats (19)</span>
+        </a>
       </div>
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .features-page {
-    padding-top: var(--sp-12);
-    padding-bottom: var(--sp-20);
+  .feature-story-block {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(36px, 6vw, 72px);
+    align-items: center;
+    margin-bottom: clamp(72px, 10vw, 128px);
   }
 
-  .text-center { text-align: center; }
-  .mx-auto { margin-left: auto; margin-right: auto; }
+  @media (min-width: 900px) {
+    .feature-story-block {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
 
-  .page-header {
-    margin-bottom: var(--sp-16);
+    .feature-story-block--reverse {
+      grid-template-columns: 0.85fr 1.15fr;
+    }
+
+    .feature-story-block--reverse .feature-story-visual {
+      order: 2;
+    }
+
+    .feature-story-block--reverse .feature-story-copy {
+      order: 1;
+    }
   }
 
-  .page-title {
+  .feature-num {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent-chrome);
+    letter-spacing: 0.06em;
+    margin-bottom: var(--sp-2);
+  }
+
+  .feature-story-copy h2 {
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
     margin-bottom: var(--sp-4);
   }
 
-  .page-subtitle {
-    font-size: 1.2rem;
+  .feature-story-copy p {
+    font-size: 1.02rem;
     color: var(--text-secondary);
-    max-width: 680px;
+    line-height: 1.65;
+    margin-bottom: var(--sp-4);
   }
 
-  .feature-block {
-    padding: var(--sp-12) 0;
-    border-bottom: 1px solid var(--border-subtle);
-  }
-
-  .feature-block:last-of-type {
-    border-bottom: none;
-  }
-
-  .feature-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.15fr;
-    gap: var(--sp-12);
-    align-items: center;
-  }
-
-  .feature-grid.reversed {
-    grid-template-columns: 1.15fr 1fr;
-  }
-
-  .feature-grid.reversed .feature-info {
-    order: 2;
-  }
-
-  .feature-grid.reversed .feature-media {
-    order: 1;
-  }
-
-  .feature-info h2 {
-    font-size: clamp(1.6rem, 2.8vw, 2.2rem);
-    margin: var(--sp-3) 0 var(--sp-4);
-  }
-
-  .feature-info p {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    margin-bottom: var(--sp-6);
-  }
-
-  .feature-check-list {
-    list-style: none;
+  .feature-pills {
     display: flex;
-    flex-direction: column;
-    gap: var(--sp-3);
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-top: var(--sp-6);
   }
 
-  .feature-check-list li {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
-    padding-left: var(--sp-4);
-    border-left: 2px solid var(--accent-chrome);
-  }
-
-  .feature-check-list li strong {
-    color: var(--text-primary);
-  }
-
-  .feature-media {
-    position: relative;
-  }
-
-  .clickable-shot {
-    cursor: pointer;
-    position: relative;
-    transition: transform var(--duration-fast) var(--ease-out);
-  }
-
-  .clickable-shot:hover {
-    transform: translateY(-2px);
-  }
-
-  .shot-zoom-badge {
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    background: rgba(17, 21, 27, 0.85);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: var(--text-primary);
-    font-size: 0.75rem;
+  .feature-pill {
+    font-size: 0.82rem;
     font-weight: 600;
     padding: 6px 12px;
     border-radius: var(--r-full);
-    opacity: 0;
-    transition: opacity var(--duration-fast) var(--ease-out);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
   }
 
-  .clickable-shot:hover .shot-zoom-badge {
-    opacity: 1;
+  .feature-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: var(--sp-4);
   }
 
-  .features-cta {
-    margin-top: var(--sp-16);
-    padding: var(--sp-12);
+  .feature-checklist li {
+    position: relative;
+    padding-left: 24px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
   }
 
-  .features-cta h2 {
+  .feature-checklist li::before {
+    content: "🛡️";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.85rem;
+  }
+
+  .feature-checklist strong {
+    color: var(--text-primary);
+  }
+
+  .features-bottom-cta {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-xl);
+    padding: clamp(40px, 6vw, 64px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .features-bottom-cta h2 {
     margin-bottom: var(--sp-3);
   }
 
-  .features-cta p {
+  .features-bottom-cta p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
     margin-bottom: var(--sp-6);
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .cta-btns {
+  .features-cta-actions {
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: var(--sp-4);
+    gap: var(--sp-3);
     flex-wrap: wrap;
-  }
-
-  kbd {
-    background: var(--bg-elevated);
-    border: 1px solid var(--border-default);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    color: var(--accent-chrome);
-  }
-
-  @media (max-width: 900px) {
-    .feature-grid, .feature-grid.reversed {
-      grid-template-columns: 1fr;
-      gap: var(--sp-8);
-    }
-    .feature-grid.reversed .feature-info {
-      order: 1;
-    }
-    .feature-grid.reversed .feature-media {
-      order: 2;
-    }
   }
 </style>

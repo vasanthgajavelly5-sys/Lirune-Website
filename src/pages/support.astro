@@ -5,191 +5,157 @@ import config from '../data/config.json';
 
 <BaseLayout
   title="Support Lirune Reader — Buy Me a Coffee & Community"
-  description="Support the ongoing development of Lirune Reader. Buy Me a Coffee, star the repository, report bugs, or contribute code."
+  description="Support the ongoing development of Lirune Reader through Buy Me a Coffee, GitHub contributions, format testing, and feedback."
+  canonicalPath="/support"
 >
-  <div class="support-page">
-    <div class="container container-narrow">
-      <div class="page-header text-center">
-        <span class="section-label">Community & Sustainability</span>
-        <h1 class="page-title">Support Lirune Reader</h1>
-        <p class="page-subtitle mx-auto">
-          Lirune is independently developed and maintained with care. Here is how you can support its continued growth.
-        </p>
+  <div class="site-container site-container--narrow section-spacing">
+    <div class="section-header">
+      <span class="badge badge-success">Community & Support</span>
+      <h1>Support Lirune Reader</h1>
+      <p>Lirune is an independent, non-commercial open-source project. Here is how you can support ongoing development and keep it sustainable.</p>
+    </div>
+
+    <!-- Buy Me a Coffee Feature Card -->
+    <section class="coffee-card surface-card">
+      <div class="coffee-badge">☕ Support Creator</div>
+      <h2>Buy Me a Coffee</h2>
+      <p class="coffee-desc">
+        If Lirune has given you a calm and reliable home for your books, consider supporting development directly. Contributions help cover developer tooling, test devices, and ongoing maintenance.
+      </p>
+      <div class="coffee-action-row">
+        <a href={config.buyMeACoffeeUrl} target="_blank" rel="noopener noreferrer" class="btn btn-coffee">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.216 6.415l-.132-.666c-.119-.597-.384-1.144-.77-1.58-.387-.437-.878-.755-1.428-.925C17.336 3.074 16.762 3 16.182 3H4.116c-.57 0-1.135.071-1.682.235-.55.166-1.043.483-1.434.92-.39.435-.658.983-.777 1.58-.12.597-.12 1.21-.12 1.83v7.45c0 1.25.438 2.45 1.233 3.39.795.94 1.905 1.54 3.125 1.69 1.11.13 2.23.2 3.35.2h4.56c1.12 0 2.24-.07 3.35-.2 1.22-.15 2.33-.75 3.12-1.69.8-.94 1.24-2.14 1.24-3.39v-2.11c.96-.13 1.86-.59 2.53-1.29.68-.7 1.07-1.63 1.09-2.61.02-.97-.33-1.92-.99-2.64-.67-.71-1.57-1.18-2.54-1.32zm-.72 4.41c-.24.25-.56.41-.91.46-.35.05-.71 0-1.01-.15l-.1-.05V6.83l.1-.05c.3-.15.66-.2 1.01-.15.35.05.67.21.91.46.24.25.38.58.39.93.01.35-.11.69-.39.93zM4 5h12v9c0 .8-.32 1.57-.88 2.12-.56.56-1.32.88-2.12.88H7c-.8 0-1.56-.32-2.12-.88C4.32 15.57 4 14.8 4 14V5z"/>
+          </svg>
+          <span>Buy Me a Coffee (vasanthgajavelly) ↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Other Ways to Contribute -->
+    <div class="support-grid">
+      <div class="support-card surface-card">
+        <div class="support-icon">⭐</div>
+        <h3>Star on GitHub</h3>
+        <p>Starring the repository helps increase visibility so more readers can discover a private, offline reading alternative.</p>
+        <a href={config.githubRepo} target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <span>Star Lirune on GitHub ↗</span>
+        </a>
       </div>
 
-      <!-- Main Buy Me a Coffee Block -->
-      <section class="support-main-card card text-center">
-        <div class="coffee-icon-bubble mx-auto">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M10 3v2M14 3v2M5 8h14l-1.2 10.1A3.3 3.3 0 0 1 14.5 21h-5a3.3 3.3 0 0 1-3.3-2.9L5 8Z"/>
-            <path d="M19 10h1a2 2 0 0 1 0 4h-1M8 11v4M12 11v4M16 11v4"/>
-          </svg>
-        </div>
+      <div class="support-card surface-card">
+        <div class="support-icon">🐛</div>
+        <h3>Report Bugs & Edge Cases</h3>
+        <p>Found a document that renders incorrectly or a UI layout bug? Submit an issue with sample files so we can fix it.</p>
+        <a href={config.githubIssues} target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <span>Open GitHub Issue ↗</span>
+        </a>
+      </div>
 
-        <h2>Buy Me a Coffee</h2>
-        <p class="support-explainer mx-auto">
-          Lirune is completely free software with no subscriptions, in-app purchases, or ads. If Lirune has made your reading experience calmer and more enjoyable, consider buying a coffee to support development time, device testing, and maintenance.
-        </p>
+      <div class="support-card surface-card">
+        <div class="support-icon">💻</div>
+        <h3>Contribute Code</h3>
+        <p>Lirune is written with standard TypeScript, Electron, React Native, and web technologies. Pull requests are welcomed.</p>
+        <a href={config.githubRepo} target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <span>View Contribution Guide ↗</span>
+        </a>
+      </div>
 
-        <div class="coffee-cta-wrap">
-          <a
-            href={config.buyMeACoffeeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-coffee btn-lg"
-            aria-label="Support Lirune Reader on Buy Me a Coffee"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M10 3v2M14 3v2M5 8h14l-1.2 10.1A3.3 3.3 0 0 1 14.5 21h-5a3.3 3.3 0 0 1-3.3-2.9L5 8Z"/>
-              <path d="M19 10h1a2 2 0 0 1 0 4h-1M8 11v4M12 11v4M16 11v4"/>
-            </svg>
-            Support on Buy Me a Coffee
-          </a>
-        </div>
-        <span class="official-url-tag">Official Link: <code>{config.buyMeACoffeeUrl}</code></span>
-      </section>
-
-      <!-- Other Ways to Help -->
-      <section class="ways-to-help-section">
-        <h2>Other Meaningful Ways to Support</h2>
-
-        <div class="help-grid">
-          <div class="card help-card">
-            <h3>Star the Repository</h3>
-            <p>Starring Lirune on GitHub increases the project's discoverability among readers and open-source software enthusiasts worldwide.</p>
-            <a href={config.githubRepo} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
-              Star on GitHub →
-            </a>
-          </div>
-
-          <div class="card help-card">
-            <h3>Report Bugs & Edge Cases</h3>
-            <p>Encountered a malformed EPUB, broken comic archive, or visual glitch? Open an issue with reproduction details so we can fix it.</p>
-            <a href={config.githubIssues} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
-              Open an Issue →
-            </a>
-          </div>
-
-          <div class="card help-card">
-            <h3>Suggest Improvements</h3>
-            <p>Have ideas for reader typography, shortcuts, or format improvements? We actively review thoughtful, reader-focused feedback.</p>
-            <a href={config.githubIssues} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
-              Feature Requests →
-            </a>
-          </div>
-
-          <div class="card help-card">
-            <h3>Contribute Code</h3>
-            <p>Lirune follows strict modernization and test gates. If you are a developer, check out our contributing guidelines and submit a PR.</p>
-            <a href={config.githubRepo} target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
-              Contributing Guide →
-            </a>
-          </div>
-        </div>
-      </section>
+      <div class="support-card surface-card">
+        <div class="support-icon">🗣️</div>
+        <h3>Share with Readers</h3>
+        <p>Tell friends, book clubs, and colleagues who value distraction-free reading and digital privacy about Lirune.</p>
+        <a href="/" class="btn btn-secondary">
+          <span>Share Lirune Homepage →</span>
+        </a>
+      </div>
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .support-page {
-    padding-top: var(--sp-12);
-    padding-bottom: var(--sp-20);
-  }
-
-  .text-center { text-align: center; }
-  .mx-auto { margin-left: auto; margin-right: auto; }
-
-  .page-header {
-    margin-bottom: var(--sp-12);
-  }
-
-  .page-title {
-    margin-bottom: var(--sp-4);
-  }
-
-  .page-subtitle {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
-    max-width: 600px;
-  }
-
-  .support-main-card {
-    padding: clamp(var(--sp-8), 6vw, var(--sp-16));
-    background: linear-gradient(180deg, var(--bg-surface) 0%, #151A22 100%);
-    border: 1px solid var(--border-strong);
-    margin-bottom: var(--sp-16);
-  }
-
-  .coffee-icon-bubble {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background: rgba(255, 221, 0, 0.14);
-    color: var(--color-coffee);
+  .coffee-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--r-xl);
+    padding: clamp(32px, 6vw, 48px);
+    margin-bottom: var(--sp-10);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: var(--sp-6);
-    border: 1px solid rgba(255, 221, 0, 0.3);
+    flex-direction: column;
+    gap: var(--sp-4);
+    box-shadow: var(--shadow-md);
   }
 
-  .support-main-card h2 {
-    font-size: 1.8rem;
-    margin-bottom: var(--sp-3);
+  .coffee-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-coffee);
   }
 
-  .support-explainer {
+  .coffee-card h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+
+  .coffee-desc {
     font-size: 1.05rem;
-    line-height: 1.6;
     color: var(--text-secondary);
+    line-height: 1.6;
     max-width: 600px;
-    margin-bottom: var(--sp-8);
   }
 
-  .coffee-cta-wrap {
-    margin-bottom: var(--sp-4);
+  .coffee-action-row {
+    margin-top: var(--sp-2);
   }
 
-  .official-url-tag {
-    font-size: 0.82rem;
-    color: var(--text-tertiary);
+  .btn-coffee {
+    background-color: var(--color-coffee);
+    color: var(--color-coffee-text);
+    font-weight: 700;
+    padding: 14px 24px;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
   }
 
-  .official-url-tag code {
-    background: var(--bg-elevated);
-    padding: 2px 6px;
-    border-radius: 4px;
-    color: var(--accent-chrome);
+  .btn-coffee:hover {
+    background-color: #F59E0B;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
   }
 
-  .ways-to-help-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: var(--sp-6);
-  }
-
-  .help-grid {
+  /* Support Grid */
+  .support-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: 1fr;
     gap: var(--sp-6);
   }
 
-  .help-card {
+  @media (min-width: 640px) {
+    .support-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .support-card {
     padding: var(--sp-6);
     display: flex;
     flex-direction: column;
+    gap: var(--sp-3);
   }
 
-  .help-card h3 {
+  .support-icon {
+    font-size: 1.8rem;
+  }
+
+  .support-card h3 {
     font-size: 1.15rem;
-    margin-bottom: var(--sp-2);
   }
 
-  .help-card p {
+  .support-card p {
     font-size: 0.92rem;
     color: var(--text-secondary);
-    line-height: 1.5;
-    margin-bottom: var(--sp-4);
-    flex-grow: 1;
+    line-height: 1.55;
+    flex: 1 1 auto;
+    margin-bottom: var(--sp-2);
   }
 </style>

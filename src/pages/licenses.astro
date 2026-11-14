@@ -2,250 +2,196 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import config from '../data/config.json';
 
-const thirdPartyLibraries = [
-  {
-    name: "PDF.js",
-    license: "Apache-2.0",
-    url: "https://github.com/mozilla/pdf.js",
-    purpose: "Offline PDF document parsing and canvas rendering engine."
-  },
-  {
-    name: "EPUB.js",
-    license: "BSD-2-Clause",
-    url: "https://github.com/futurepress/epub.js",
-    purpose: "EPUB spine unpacking, pagination, and reader rendering."
-  },
-  {
-    name: "JSZip",
-    license: "MIT / GPLv3",
-    url: "https://github.com/Stuk/jszip",
-    purpose: "In-memory ZIP archive decompression for EPUB, DOCX, ODT, CBZ, and FBZ containers."
-  },
-  {
-    name: "DOMPurify",
-    license: "Apache-2.0 / MPL-2.0",
-    url: "https://github.com/cure53/DOMPurify",
-    purpose: "Strict HTML sanitization for FB2, HTML, and Markdown content."
-  },
-  {
-    name: "libarchive-wasm",
-    license: "BSD-2-Clause",
-    url: "https://github.com/RobLoach/libarchive-wasm",
-    purpose: "WebAssembly port of libarchive for RAR (CBR) and 7z (CB7) comic archive decompression."
-  },
-  {
-    name: "Electron",
-    license: "MIT",
-    url: "https://github.com/electron/electron",
-    purpose: "Cross-platform desktop application runtime for Windows."
-  },
-  {
-    name: "React Native & Expo",
-    license: "MIT",
-    url: "https://github.com/facebook/react-native",
-    purpose: "Cross-platform mobile UI framework powering Lirune Android."
-  }
+const thirdPartyNotices = [
+  { name: 'PDF.js', license: 'Apache-2.0', desc: 'Mozilla PDF parsing and rendering engine' },
+  { name: 'DOMPurify', license: 'Apache-2.0 / MPL-2.0', desc: 'Strict HTML sanitization for FB2, HTML, and Markdown' },
+  { name: 'JSZip', license: 'MIT', desc: 'Archive decompression and Zip-Slip protection' },
+  { name: 'SQLite', license: 'Public Domain', desc: 'Embedded relational database for local library storage' },
+  { name: 'epubjs', license: 'FreeBSD', desc: 'EPUB 2 / 3 container parsing and spine mapping' }
 ];
 ---
 
 <BaseLayout
   title="Open Source Licenses & Third-Party Notices — Lirune Reader"
-  description="Licensing information for Lirune Reader under the GNU General Public License v3.0, including third-party open-source library attributions."
+  description="Lirune Reader is free software licensed under the GNU General Public License v3.0 (GPL-3.0). Review copyleft rights and third-party notices."
+  canonicalPath="/licenses"
 >
-  <div class="licenses-page">
-    <div class="container container-narrow">
-      <div class="page-header">
-        <span class="section-label">Open Source Compliance</span>
-        <h1 class="page-title">Licenses & Attribution</h1>
-        <p class="page-subtitle">
-          Lirune Reader is free software developed by Vasanth Gajavelly.
-        </p>
+  <div class="site-container site-container--narrow section-spacing">
+    <div class="section-header">
+      <span class="badge badge-success">Open Source</span>
+      <h1>Licenses & Legal Notices</h1>
+      <p>Lirune Reader is committed to copyleft software freedom, transparent source code, and respect for open-source libraries.</p>
+    </div>
+
+    <!-- GPL-3.0 License Summary -->
+    <section class="license-block surface-card">
+      <div class="license-header">
+        <div>
+          <span class="license-badge">GPL-3.0</span>
+          <h2>GNU General Public License v3.0</h2>
+        </div>
+        <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <span>Read Full License Text ↗</span>
+        </a>
       </div>
 
-      <!-- Main Project License -->
-      <section class="license-block card">
-        <div class="license-badge-bar">
-          <span class="badge badge-accent">Main License</span>
-          <h2>GNU General Public License v3.0 (GPL-3.0-only)</h2>
+      <p class="license-desc">
+        Copyright © 2026 Vasanth Gajavelly. Lirune Reader is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+      </p>
+
+      <div class="license-freedoms">
+        <div class="freedom-item">
+          <h3>Freedom 0</h3>
+          <p>The freedom to run the program as you wish, for any purpose.</p>
         </div>
-
-        <p class="copyright-notice">
-          <strong>{config.copyright}</strong>
-        </p>
-
-        <p class="license-summary">
-          Lirune Reader is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-        </p>
-        <p class="license-summary">
-          This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-        </p>
-
-        <div class="license-actions">
-          <a href={config.githubRepo} target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-            Inspect Full Source Code on GitHub →
-          </a>
+        <div class="freedom-item">
+          <h3>Freedom 1</h3>
+          <p>The freedom to study how the program works, and change it so it does your computing as you wish.</p>
         </div>
-      </section>
+        <div class="freedom-item">
+          <h3>Freedom 2</h3>
+          <p>The freedom to redistribute copies so you can help your neighbor.</p>
+        </div>
+        <div class="freedom-item">
+          <h3>Freedom 3</h3>
+          <p>The freedom to distribute copies of your modified versions to others.</p>
+        </div>
+      </div>
+    </section>
 
-      <!-- Third-Party Notices -->
-      <section class="third-party-section">
-        <h2>Third-Party Open Source Components</h2>
-        <p class="third-party-intro">
-          Lirune Reader stands on the shoulders of the open-source community. We gratefully acknowledge and attribute the following open-source libraries used within the desktop and mobile applications:
-        </p>
+    <!-- Third-Party Notices -->
+    <section class="third-party-section">
+      <h2>Third-Party Open Source Notices</h2>
+      <p>Lirune Reader incorporates several outstanding open-source libraries and rendering engines:</p>
 
-        <div class="third-party-grid">
-          {thirdPartyLibraries.map(lib => (
-            <div class="card lib-card">
-              <div class="lib-header">
-                <h3>{lib.name}</h3>
-                <span class="badge">{lib.license}</span>
-              </div>
-              <p class="lib-purpose">{lib.purpose}</p>
-              <a href={lib.url} target="_blank" rel="noopener noreferrer" class="lib-link">
-                Repository / Upstream →
-              </a>
+      <div class="notices-list">
+        {thirdPartyNotices.map(n => (
+          <div class="notice-card surface-card">
+            <div class="notice-header">
+              <h3 class="notice-name">{n.name}</h3>
+              <span class="notice-license">{n.license}</span>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <!-- Trademark Disclaimer -->
-      <section class="trademark-section card card-elevated">
-        <h3>Trademarks Notice</h3>
-        <p>
-          "Lirune" and the Lirune logo are trademarks of Vasanth Gajavelly. Microsoft, Windows, and the Microsoft Store are registered trademarks of Microsoft Corporation. Android is a trademark of Google LLC. EPUB is a registered trademark of the World Wide Web Consortium (W3C). All other trademarks, service marks, and company names are the property of their respective owners.
-        </p>
-      </section>
-    </div>
+            <p class="notice-desc">{n.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
   </div>
 </BaseLayout>
 
 <style>
-  .licenses-page {
-    padding-top: var(--sp-12);
-    padding-bottom: var(--sp-20);
-  }
-
-  .page-header {
-    margin-bottom: var(--sp-10);
-    border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: var(--sp-6);
-  }
-
-  .page-title {
-    margin-bottom: var(--sp-2);
-  }
-
-  .page-subtitle {
-    font-size: 1.05rem;
-    color: var(--text-secondary);
-  }
-
   .license-block {
-    padding: var(--sp-8);
-    margin-bottom: var(--sp-16);
-    background: var(--bg-surface);
-  }
-
-  .license-badge-bar {
+    padding: clamp(28px, 5vw, 44px);
+    margin-bottom: var(--sp-12);
     display: flex;
     flex-direction: column;
-    gap: var(--sp-2);
-    margin-bottom: var(--sp-4);
-  }
-
-  .license-badge-bar h2 {
-    font-size: 1.45rem;
-  }
-
-  .copyright-notice {
-    font-size: 1.1rem;
-    color: var(--text-primary);
-    margin-bottom: var(--sp-4);
-  }
-
-  .license-summary {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--text-secondary);
-    margin-bottom: var(--sp-4);
-  }
-
-  .license-actions {
-    margin-top: var(--sp-6);
-  }
-
-  .third-party-section {
-    margin-bottom: var(--sp-16);
-  }
-
-  .third-party-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: var(--sp-3);
-  }
-
-  .third-party-intro {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    margin-bottom: var(--sp-8);
-  }
-
-  .third-party-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--sp-6);
   }
 
-  .lib-card {
-    padding: var(--sp-6);
+  .license-header {
     display: flex;
     flex-direction: column;
+    gap: var(--sp-4);
+    padding-bottom: var(--sp-4);
+    border-bottom: 1px solid var(--border-subtle);
   }
 
-  .lib-header {
+  @media (min-width: 640px) {
+    .license-header {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .license-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: var(--r-sm);
+    background-color: var(--accent-chrome-subtle);
+    color: var(--accent-chrome);
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .license-desc {
+    font-size: 0.98rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  .license-freedoms {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--sp-4);
+  }
+
+  .freedom-item {
+    padding: 14px 18px;
+    border-radius: var(--r-md);
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--sp-2);
+    flex-direction: column;
+    gap: 4px;
   }
 
-  .lib-header h3 {
-    font-size: 1.15rem;
+  .freedom-item h3 {
+    font-size: 0.9rem;
+    color: var(--accent);
   }
 
-  .lib-purpose {
-    font-size: 0.88rem;
+  .freedom-item p {
+    font-size: 0.84rem;
     color: var(--text-secondary);
     line-height: 1.45;
-    margin-bottom: var(--sp-4);
-    flex-grow: 1;
   }
 
-  .lib-link {
-    font-size: 0.85rem;
-    color: var(--accent-chrome);
-    font-weight: 550;
+  /* Third-party notices */
+  .third-party-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
   }
 
-  .lib-link:hover {
-    color: var(--accent);
-    text-decoration: underline;
+  .notices-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
   }
 
-  .trademark-section {
-    padding: var(--sp-6);
+  .notice-card {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
-  .trademark-section h3 {
-    font-size: 1rem;
-    margin-bottom: var(--sp-2);
-    color: var(--text-primary);
+  .notice-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  .trademark-section p {
-    font-size: 0.85rem;
-    line-height: 1.5;
+  .notice-name {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .notice-license {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: var(--r-sm);
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-default);
     color: var(--text-tertiary);
+  }
+
+  .notice-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
   }
 </style>

@@ -3,25 +3,28 @@ import releases from '../data/releases.json';
 ---
 
 <aside class="announcement-bar" aria-label="Latest release announcement">
-  <div class="container announcement-content">
+  <div class="site-container announcement-content">
     <span class="announcement-pill">Release</span>
     <span class="announcement-text">
-      Lirune Reader for Windows <strong>v{releases.windows.version}</strong> and Android <strong>v{releases.android.version}</strong> are available.
+      Lirune Reader for Windows <strong>v{releases.windows.version}</strong> & Android <strong>v{releases.android.version}</strong> now available.
     </span>
     <a href="/downloads" class="announcement-link">
-      Get latest downloads
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <span>Get downloads</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
     </a>
   </div>
 </aside>
 
 <style>
   .announcement-bar {
-    background: #141922;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    font-size: 0.85rem;
-    padding: 6px 0;
+    background-color: var(--bg-surface);
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 0.82rem;
+    padding: 7px 0;
     color: var(--text-secondary);
+    transition: background-color var(--t-fast), border-color var(--t-fast);
   }
 
   .announcement-content {
@@ -34,8 +37,8 @@ import releases from '../data/releases.json';
   }
 
   .announcement-pill {
-    background: var(--accent-subtle);
-    color: var(--accent-text);
+    background-color: var(--accent-chrome-subtle);
+    color: var(--accent-chrome);
     border: 1px solid var(--border-accent);
     padding: 2px 8px;
     border-radius: var(--r-full);
@@ -54,20 +57,15 @@ import releases from '../data/releases.json';
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    color: var(--accent-chrome);
+    color: var(--accent);
     font-weight: 600;
-    transition: color var(--duration-fast) var(--ease-out);
+    text-decoration: none;
+    transition: all var(--t-fast);
   }
 
   .announcement-link:hover {
-    color: var(--accent);
+    color: var(--accent-hover);
     text-decoration: underline;
-  }
-
-  @media (max-width: 640px) {
-    .announcement-bar {
-      font-size: 0.78rem;
-      padding: 8px 0;
-    }
+    text-underline-offset: 3px;
   }
 </style>

@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DIST_DIR = path.resolve(__dirname, '../dist');
-const SITE_URL = 'https://lirune-reader.web.app';
+const SITE_URL = 'https://lirune-reader-1aa95.web.app';
 
 const routes = [
   { path: '', priority: '1.0', changefreq: 'weekly' },

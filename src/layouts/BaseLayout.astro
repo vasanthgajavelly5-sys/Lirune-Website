@@ -12,16 +12,20 @@ interface Props {
   description?: string;
   canonicalPath?: string;
   image?: string;
+  type?: string;
 }
 
 const {
   title = "Lirune Reader — A calm, private home for your library",
   description = "Official website of Lirune Reader: the free, open-source, offline ebook and document reader for Windows and Android. Supports 19 formats with zero telemetry.",
   canonicalPath = Astro.url.pathname,
-  image = "/images/branding/lirune-logo-1080.png"
+  image = "/images/branding/og-preview.png",
+  type = "website"
 } = Astro.props;
 
-const canonicalUrl = new URL(canonicalPath, config.siteUrl).href;
+// Normalise canonical URL (no trailing slash for non-root paths)
+const cleanPath = canonicalPath === '/' ? '/' : canonicalPath.replace(/\/+$/, '');
+const canonicalUrl = new URL(cleanPath, config.siteUrl).href;
 const fullImageUrl = new URL(image, config.siteUrl).href;
 
 // JSON-LD Structured Data
@@ -35,6 +39,17 @@ const jsonLd = {
       "name": "Lirune Reader",
       "description": config.description,
       "inLanguage": "en-US"
+    },
+    {
+      "@type": "Organization",
+      "@id": `${config.siteUrl}/#organization`,
+      "name": "Lirune",
+      "url": config.siteUrl,
+      "logo": `${config.siteUrl}/images/branding/lirune-icon.png`,
+      "sameAs": [
+        config.githubRepo,
+        config.microsoftStoreUrl
+      ]
     },
     {
       "@type": "SoftwareApplication",
@@ -87,23 +102,44 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/images/branding/lirune-icon.png" />
-    <meta name="theme-color" content="#11151B" />
-    <meta name="color-scheme" content="dark" />
+    
+    <!-- Theme & System Color Scheme (Prevent FOUT) -->
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0F1217" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F8F8FA" media="(prefers-color-scheme: light)" />
+
+    <script is:inline>
+      (function() {
+        try {
+          const stored = localStorage.getItem('lirune-theme') || 'system';
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = stored === 'system' ? (prefersDark ? 'dark' : 'light') : stored;
+          document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.setAttribute('data-theme-setting', stored);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.setAttribute('data-theme-setting', 'system');
+        }
+      })();
+    </script>
 
     <!-- SEO & Metadata -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content={type} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={fullImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Lirune Reader" />
 
-    <!-- Twitter Card -->
+    <!-- Twitter / X Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonicalUrl} />
     <meta name="twitter:title" content={title} />
@@ -114,12 +150,30 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <AnnouncementBar />
-    <SiteHeader />
+    <SiteHeader currentPath={cleanPath} />
     <main id="main-content">
       <slot />
     </main>
     <SiteFooter />
     <ScreenshotLightbox />
+
+    <!-- Live Theme Switcher Runtime (System Listener & State Sync) -->
+    <script is:inline>
+      (function() {
+        // Listen for OS theme changes when user is in 'system' mode
+        try {
+          const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+          mediaQuery.addEventListener('change', function(e) {
+            const currentSetting = localStorage.getItem('lirune-theme') || 'system';
+            if (currentSetting === 'system') {
+              const newTheme = e.matches ? 'dark' : 'light';
+              document.documentElement.setAttribute('data-theme', newTheme);
+            }
+          });
+        } catch (err) {}
+      })();
+    </script>
   </body>
 </html>
