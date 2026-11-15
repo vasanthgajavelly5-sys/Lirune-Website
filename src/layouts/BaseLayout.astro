@@ -15,6 +15,7 @@ interface Props {
   canonicalPath?: string;
   image?: string;
   type?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -22,7 +23,8 @@ const {
   description = "Official website of Lirune Reader: the free, open-source, offline ebook and document reader for Windows and Android. 50+ formats supported with zero telemetry.",
   canonicalPath = Astro.url.pathname,
   image = "/images/branding/og-preview.png",
-  type = "website"
+  type = "website",
+  noindex = false
 } = Astro.props;
 
 // Normalise canonical URL (no trailing slash for non-root paths)
@@ -133,7 +135,11 @@ const jsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    )}
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content={type} />

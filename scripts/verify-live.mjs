@@ -13,13 +13,12 @@ const routes = [
   '/licenses',
   '/support',
   '/robots.txt',
-  '/sitemap-index.xml',
-  '/sitemap-0.xml',
+  '/sitemap.xml',
   '/images/branding/og-preview.png',
   '/images/branding/lirune-icon.png'
 ];
 
-const host = 'lirune-reader-1aa95.web.app';
+const host = process.env.VERIFY_HOST || 'lirune-reader.web.app';
 
 async function fetchUrl(path) {
   return new Promise((resolve, reject) => {
@@ -31,7 +30,8 @@ async function fetchUrl(path) {
           path,
           statusCode: res.statusCode,
           headers: res.headers,
-          bodyLength: data.length
+          bodyLength: data.length,
+          body: data
         });
       });
     });
@@ -59,6 +59,19 @@ async function run() {
         console.log(`       x-frame-options:        ${res.headers['x-frame-options']}`);
         console.log(`       content-type:           ${res.headers['content-type']}`);
       }
+      if (route === '/robots.txt') {
+        const hasCorrectSitemap = res.body.includes('Sitemap: https://lirune-reader.web.app/sitemap.xml');
+        const hasNoIndex = !res.body.includes('sitemap-index.xml');
+        console.log(`       robots.txt correct sitemap: ${hasCorrectSitemap}`);
+        console.log(`       robots.txt no obsolete index: ${hasNoIndex}`);
+        if (!hasCorrectSitemap || !hasNoIndex) {
+          console.warn(`       [WARN] robots.txt on https://${host} does not yet match latest configuration (pending deployment).`);
+        }
+      }
+      if (route === '/sitemap.xml') {
+        const isXml = res.body.includes('<urlset') && res.body.includes('https://lirune-reader.web.app/');
+        console.log(`       sitemap.xml is valid urlset: ${isXml}`);
+      }
     } catch (err) {
       console.error(`[ERR] ${route}: ${err.message}`);
       success = false;
@@ -74,7 +87,7 @@ async function run() {
   }
 
   console.log(`\n========================================`);
-  console.log(success ? 'LIVE PRODUCTION SITE FULLY VERIFIED!' : 'VERIFICATION ENCOUNTERED ISSUES');
+  console.log(success ? `LIVE SITE CHECK COMPLETE FOR https://${host}` : 'VERIFICATION ENCOUNTERED ISSUES');
   console.log(`========================================`);
   if (!success) process.exit(1);
 }

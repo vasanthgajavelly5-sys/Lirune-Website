@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DIST = path.resolve(__dirname, '../dist');
+const CANONICAL_DOMAIN = 'https://lirune-reader.web.app';
 
 const expectedPages = [
   'index.html',
@@ -46,7 +47,7 @@ for (const page of expectedPages) {
 }
 
 // 2. Check metadata & HTML structure on each page
-console.log('\n2. Checking SEO metadata and structured data:');
+console.log('\n2. Checking SEO metadata, canonical URLs and structured data:');
 for (const page of expectedPages) {
   const fullPath = path.join(DIST, page);
   if (!fs.existsSync(fullPath)) continue;
@@ -57,6 +58,33 @@ for (const page of expectedPages) {
   assert(/<link\s+rel=["']canonical["']/i.test(html), `Has canonical link: ${page}`);
   assert(/<meta\s+property=["']og:image["']/i.test(html), `Has Open Graph image: ${page}`);
 
+  // Canonical tag must use CANONICAL_DOMAIN and must NOT contain secondary domain
+  const canonicalMatch = /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i.exec(html) ||
+                         /<link\s+href=["']([^"']+)["']\s+rel=["']canonical["']/i.exec(html);
+  assert(canonicalMatch !== null, `Found canonical link tag in ${page}`);
+  if (canonicalMatch) {
+    const canonicalHref = canonicalMatch[1];
+    assert(canonicalHref.startsWith(CANONICAL_DOMAIN), `Canonical uses ${CANONICAL_DOMAIN}: ${page} (${canonicalHref})`);
+    assert(!canonicalHref.includes('lirune-reader-1aa95.web.app'), `Canonical does NOT reference 1aa95 domain: ${page}`);
+  }
+
+  // og:url check
+  const ogUrlMatch = /<meta\s+property=["']og:url["']\s+content=["']([^"']+)["']/i.exec(html) ||
+                     /<meta\s+content=["']([^"']+)["']\s+property=["']og:url["']/i.exec(html);
+  assert(ogUrlMatch !== null, `Found og:url in ${page}`);
+  if (ogUrlMatch) {
+    const ogUrl = ogUrlMatch[1];
+    assert(ogUrl.startsWith(CANONICAL_DOMAIN), `og:url uses canonical domain: ${page} (${ogUrl})`);
+    assert(!ogUrl.includes('lirune-reader-1aa95.web.app'), `og:url does NOT reference 1aa95 domain: ${page}`);
+  }
+
+  // robots meta tag check: 404 must be noindex, others must be index
+  if (page === '404.html') {
+    assert(/<meta\s+name=["']robots["']\s+content=["']noindex,\s*nofollow["']/i.test(html), '404.html has robots noindex, nofollow');
+  } else {
+    assert(/<meta\s+name=["']robots["']\s+content=["']index,\s*follow/i.test(html), `Public page ${page} has robots index, follow`);
+  }
+
   if (page === 'index.html') {
     const jsonLdMatch = /<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/i.exec(html);
     assert(jsonLdMatch !== null, 'Homepage includes JSON-LD structured data');
@@ -65,6 +93,8 @@ for (const page of expectedPages) {
         const parsed = JSON.parse(jsonLdMatch[1]);
         assert(parsed['@context'] === 'https://schema.org', 'Structured data has schema.org context');
         assert(Array.isArray(parsed['@graph']), 'Structured data contains @graph array');
+        const jsonText = JSON.stringify(parsed);
+        assert(!jsonText.includes('lirune-reader-1aa95.web.app'), 'Structured data does NOT reference 1aa95 domain');
       } catch (err) {
         assert(false, `Structured data JSON parse error: ${err.message}`);
       }
@@ -93,13 +123,62 @@ for (const imgUrl of imageMatches) {
 }
 
 // 4. Check sitemap and robots.txt
-console.log('\n4. Checking discoverability assets:');
-assert(fs.existsSync(path.join(DIST, 'robots.txt')), 'robots.txt exists');
-assert(fs.existsSync(path.join(DIST, 'sitemap-index.xml')), 'sitemap-index.xml exists');
-assert(fs.existsSync(path.join(DIST, 'sitemap-0.xml')), 'sitemap-0.xml exists');
+console.log('\n4. Checking discoverability assets (Sitemap & Robots.txt):');
+const sitemapPath = path.join(DIST, 'sitemap.xml');
+assert(fs.existsSync(sitemapPath), 'Canonical sitemap.xml exists');
 
-const robotsContent = fs.readFileSync(path.join(DIST, 'robots.txt'), 'utf-8');
-assert(robotsContent.includes('sitemap-index.xml'), 'robots.txt references sitemap-index.xml');
+// Verify obsolete sitemaps do NOT exist
+assert(!fs.existsSync(path.join(DIST, 'sitemap-index.xml')), 'Obsolete sitemap-index.xml is absent');
+assert(!fs.existsSync(path.join(DIST, 'sitemap-0.xml')), 'Obsolete sitemap-0.xml is absent');
+
+if (fs.existsSync(sitemapPath)) {
+  const sitemapContent = fs.readFileSync(sitemapPath, 'utf-8');
+  assert(sitemapContent.startsWith('<?xml version="1.0" encoding="UTF-8"?>'), 'sitemap.xml has UTF-8 XML declaration');
+  assert(sitemapContent.includes('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'), 'sitemap.xml uses standard urlset schema');
+  assert(!sitemapContent.includes('<sitemapindex'), 'sitemap.xml is a urlset, not a sitemap index');
+
+  // Extract all <loc>
+  const locRegex = /<loc>(https?:\/\/[^<]+)<\/loc>/g;
+  const locs = [];
+  let locMatch;
+  while ((locMatch = locRegex.exec(sitemapContent)) !== null) {
+    locs.push(locMatch[1]);
+  }
+
+  assert(locs.length === 11, `sitemap.xml contains exactly 11 canonical routes (found ${locs.length})`);
+
+  for (const loc of locs) {
+    assert(loc.startsWith(CANONICAL_DOMAIN), `Sitemap loc uses ${CANONICAL_DOMAIN}: ${loc}`);
+    assert(!loc.includes('lirune-reader-1aa95.web.app'), `Sitemap loc does NOT use 1aa95 domain: ${loc}`);
+    assert(!loc.includes('404'), `Sitemap loc does NOT contain 404 page: ${loc}`);
+
+    // Map loc back to disk file
+    const urlObj = new URL(loc);
+    const cleanPath = urlObj.pathname === '/' ? 'index.html' : `${urlObj.pathname.replace(/^\//, '').replace(/\/$/, '')}/index.html`;
+    const targetFile = path.join(DIST, cleanPath);
+    assert(fs.existsSync(targetFile), `Sitemap route resolves to real static page on disk: ${loc} -> ${cleanPath}`);
+  }
+
+  // Validate lastmod format
+  const lastmodRegex = /<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/g;
+  let lastmodCount = 0;
+  while (lastmodRegex.exec(sitemapContent) !== null) {
+    lastmodCount++;
+  }
+  assert(lastmodCount === locs.length, `Every sitemap URL has a valid YYYY-MM-DD lastmod (${lastmodCount}/${locs.length})`);
+}
+
+// Check robots.txt
+const robotsPath = path.join(DIST, 'robots.txt');
+assert(fs.existsSync(robotsPath), 'robots.txt exists');
+if (fs.existsSync(robotsPath)) {
+  const robotsContent = fs.readFileSync(robotsPath, 'utf-8');
+  assert(robotsContent.includes('User-agent: *'), 'robots.txt contains User-agent: *');
+  assert(robotsContent.includes('Allow: /'), 'robots.txt contains Allow: /');
+  assert(robotsContent.includes(`Sitemap: ${CANONICAL_DOMAIN}/sitemap.xml`), `robots.txt references ${CANONICAL_DOMAIN}/sitemap.xml`);
+  assert(!robotsContent.includes('sitemap-index.xml'), 'robots.txt does NOT reference sitemap-index.xml');
+  assert(!robotsContent.includes('sitemap-0.xml'), 'robots.txt does NOT reference sitemap-0.xml');
+}
 
 // 5. Check internal navigation links
 console.log('\n5. Checking internal hyperlinks:');
