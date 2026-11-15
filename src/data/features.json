@@ -29,16 +29,16 @@
   },
   {
     "id": "formats",
-    "title": "More than just EPUB: 19 document formats",
-    "summary": "One unified, private reader for your ebooks, PDFs, office documents, comic archives, and markdown notes.",
+    "title": "50+ formats supported. One reader. Every document.",
+    "summary": "Read ebooks, documents, presentations, comics and images in one private, offline-first reader.",
     "screenshot": "/images/screenshots/win-reader-pdf.png",
     "screenshotAlt": "Lirune Reader integrated PDF viewer with zoom controls and clean layout",
     "platform": "Windows & Android",
     "points": [
-      "Standard ebooks: EPUB 2/3, FictionBook (FB2, FBZ), and Kindle (MOBI, AZW, AZW3)",
-      "PDF documents with high-fidelity rendering and zoom controls",
-      "Office documents: Word (DOCX, DOC), OpenDocument (ODT), and Rich Text (RTF)",
-      "Comic book archives: CBZ, CBR, and CB7 with smooth page turning"
+      "Standard ebooks: EPUB 2/3, KEPUB, FictionBook (FB2, FBZ), and Kindle (MOBI)",
+      "PDF documents with high-fidelity rendering, text layer, and zoom controls",
+      "Office documents, spreadsheets & presentations: DOCX, DOC, ODT, RTF, XLSX, XLS, ODS, PPTX, PPT, ODP",
+      "Comic book archives & high-resolution images: CBZ, CBR, CBT, CB7, JPG, PNG, WEBP, GIF, BMP, SVG, TIFF, AVIF, HEIC, HEIF"
     ]
   },
   {

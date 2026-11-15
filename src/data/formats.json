@@ -1,223 +1,856 @@
 [
   {
     "id": "epub",
-    "name": "Electronic Publication",
-    "extensions": [".epub"],
-    "category": "Standard E-Books",
-    "layout": "Reflowable / Paginated & Continuous Scroll",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Fully supported",
-    "engine": "EPUB 2 / 3 Spine Pagination & Scroll Engine v2",
-    "details": "Full support for EPUB 2 and 3 standards. Includes interactive table of contents, pagination, continuous vertical scroll, chapter progress, and responsive typography.",
-    "limitations": "DRM-protected (encrypted) files are rejected. Adobe Adept and proprietary container protections are not circumvented."
-  },
-  {
-    "id": "pdf",
-    "name": "Portable Document Format",
-    "extensions": [".pdf"],
-    "category": "Fixed Layout Documents",
-    "layout": "Fixed Page Layout",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Fully supported",
-    "engine": "Offline PDF.js Engine",
-    "details": "Integrated offline PDF viewer with crisp page rendering, zoom controls, fit-to-width, jump-to-page, and reading position remembrance.",
-    "limitations": "Encrypted or password-protected PDF files must be decrypted prior to reading."
-  },
-  {
-    "id": "mobi",
-    "name": "Mobipocket / Kindle",
-    "extensions": [".mobi", ".azw", ".azw3"],
-    "category": "Kindle Formats",
+    "name": "EPUB E-Book",
+    "extensions": [
+      ".epub"
+    ],
+    "category": "E-Books & Literature",
     "layout": "Reflowable",
     "windows": "Fully supported",
     "android": "Fully supported",
     "status": "Fully supported",
-    "engine": "PalmDOC & KF8 Record Parser",
-    "details": "Unpacks uncompressed PalmDOC and KF8 container records, extracting formatted chapter text and embedded cover art.",
-    "limitations": "Kindle KFX format and Amazon DRM-protected books are not supported."
+    "classification": "primary",
+    "engine": "EpubReaderAdapter (Desktop) / EpubReaderView (Android)",
+    "details": "Full native parsing and reader support for EPUB E-Book. Metadata extraction: OPF metadata (title, author, publisher, rights, description, language, dates). Cover: OPF manifest cover-image or first image in spine fallback.",
+    "limitations": "Complex proprietary EPUB 3 JavaScript widgets disabled by offline security sandbox"
+  },
+  {
+    "id": "mobi",
+    "name": "Kindle / MOBI Document",
+    "extensions": [
+      ".mobi"
+    ],
+    "category": "E-Books & Literature",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "MobiAdapter (Desktop) / MobiReaderView (Android)",
+    "details": "Full native parsing and reader support for Kindle / MOBI Document. Metadata extraction: PDB/MOBI header + EXTH records 100 (author), 101 (publisher), 103 (description), 503 (title). Cover: EXTH cover record or first embedded image from PalmDOC image records.",
+    "limitations": "KF8/AZW3 CSS layout fidelity simplified into standardized reflowable HTML sections"
+  },
+  {
+    "id": "kepub",
+    "name": "Kobo EPUB",
+    "extensions": [
+      ".kepub.epub",
+      ".kepub"
+    ],
+    "category": "E-Books & Literature",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "EpubReaderAdapter (Desktop) / EpubReaderView (Android)",
+    "details": "Full native parsing and reader support for Kobo EPUB. Metadata extraction: OPF package metadata extraction identical to standard EPUB. Cover: OPF manifest cover-image item.",
+    "limitations": "Kobo proprietary store sync metadata ignored in offline mode"
   },
   {
     "id": "fb2",
     "name": "FictionBook 2",
-    "extensions": [".fb2"],
-    "category": "Structured E-Books",
+    "extensions": [
+      ".fb2"
+    ],
+    "category": "E-Books & Literature",
     "layout": "Reflowable",
     "windows": "Fully supported",
     "android": "Fully supported",
     "status": "Fully supported",
-    "engine": "XML Parser with DOMPurify XSS Sanitization",
-    "details": "Parses FictionBook XML markup, cover images, chapter hierarchy, epigraphs, and footnotes with strict XSS sanitization.",
-    "limitations": "Malformatted XML tags are repaired automatically; corrupt binary payloads are ignored."
+    "classification": "primary",
+    "engine": "Fb2Adapter (Desktop) / Fb2ReaderView (Android)",
+    "details": "Full native parsing and reader support for FictionBook 2. Metadata extraction: <description><title-info> tags (book-title, author, genre, annotation, coverpage). Cover: <coverpage><image xlink:href=\"...\"> base64 binary block extraction.",
+    "limitations": "Custom inline stylesheets in FB2 poems/epigraphs normalized to active reader theme"
   },
   {
     "id": "fbz",
-    "name": "Zipped FictionBook 2",
-    "extensions": [".fbz"],
-    "category": "Structured E-Books",
+    "name": "Compressed FictionBook (FBZ)",
+    "extensions": [
+      ".fbz"
+    ],
+    "category": "E-Books & Literature",
     "layout": "Reflowable",
     "windows": "Fully supported",
     "android": "Fully supported",
     "status": "Fully supported",
-    "engine": "Zip Extraction & FB2 XML Engine",
-    "details": "Decompresses zip-contained FictionBook documents and renders the internal FB2 payload safely.",
-    "limitations": "Zip-bomb bounds check enforced (max 512 MB decompressed ratio)."
-  },
-  {
-    "id": "docx",
-    "name": "Microsoft Word Document",
-    "extensions": [".docx"],
-    "category": "Office Documents",
-    "layout": "Reflowable",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Fully supported",
-    "engine": "OpenXML Document Unpacker",
-    "details": "Extracts document body paragraphs, heading hierarchies, tables, bold/italic formatting, and clean typography.",
-    "limitations": "Complex Word macros, OLE embedded objects, and tracked change markups are stripped for clean reading."
-  },
-  {
-    "id": "doc",
-    "name": "Legacy Microsoft Word",
-    "extensions": [".doc"],
-    "category": "Office Documents",
-    "layout": "Reflowable",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Supported with limitations",
-    "engine": "OLE2 Compound Document Parser",
-    "details": "Reads stream records from legacy binary Word 97-2003 documents and extracts readable text paragraphs.",
-    "limitations": "Complex legacy binary drawing objects and equations may not retain exact desktop Word pagination."
-  },
-  {
-    "id": "odt",
-    "name": "OpenDocument Text",
-    "extensions": [".odt"],
-    "category": "Office Documents",
-    "layout": "Reflowable",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Fully supported",
-    "engine": "OASIS OpenDocument XML Unpacker",
-    "details": "Unpacks standard ODF ZIP packages, parsing content.xml styles, headings, lists, and formatted paragraphs.",
-    "limitations": "Complex frame drawings or macros are safely omitted."
-  },
-  {
-    "id": "rtf",
-    "name": "Rich Text Format",
-    "extensions": [".rtf"],
-    "category": "Office Documents",
-    "layout": "Reflowable",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Fully supported",
-    "engine": "Control-Word Tokenizer & Parser",
-    "details": "Parses RTF control words, font tables, character encodings, bold, italics, alignment, and unicode escapes.",
-    "limitations": "Embedded binary OLE payloads and executable RTF exploits are permanently neutralized."
-  },
-  {
-    "id": "txt",
-    "name": "Plain Text Document",
-    "extensions": [".txt"],
-    "category": "Plain Text & Markup",
-    "layout": "Reflowable",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Fully supported",
-    "engine": "Universal Text Decoder",
-    "details": "Auto-detects UTF-8, UTF-16, and ASCII encodings. Renders with comfortable margins, line wrapping, and reader theme customization.",
-    "limitations": "Plain text contains no inherent chapter metadata or embedded images."
-  },
-  {
-    "id": "md",
-    "name": "Markdown Document",
-    "extensions": [".md", ".markdown"],
-    "category": "Plain Text & Markup",
-    "layout": "Reflowable",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Fully supported",
-    "engine": "CommonMark Parser with DOMPurify",
-    "details": "Renders CommonMark markdown, code blocks, tables, lists, task lists, and blockquotes with full styling and theme support.",
-    "limitations": "Inline raw script execution is strictly disabled."
-  },
-  {
-    "id": "html",
-    "name": "Hypertext Document",
-    "extensions": [".html", ".htm"],
-    "category": "Plain Text & Markup",
-    "layout": "Reflowable",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Fully supported",
-    "engine": "Sanitized HTML Reader",
-    "details": "Loads local single-file HTML or packaged web documents with CSS stylesheets and imagery.",
-    "limitations": "External scripts, tracking beacons, and remote network calls are blocked by strict Content Security Policy."
-  },
-  {
-    "id": "cbz",
-    "name": "Comic Book Archive (ZIP)",
-    "extensions": [".cbz"],
-    "category": "Comic Books & Manga",
-    "layout": "Image Archive",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Fully supported",
-    "engine": "Archive Image Sequence Unpacker",
-    "details": "Extracts high-resolution JPG, PNG, WEBP, and AVIF image pages in sorted natural order. Supports fit-to-screen and navigation.",
-    "limitations": "Requires standard image files inside archive; archives without images are gracefully reported."
-  },
-  {
-    "id": "cbr",
-    "name": "Comic Book Archive (RAR)",
-    "extensions": [".cbr"],
-    "category": "Comic Books & Manga",
-    "layout": "Image Archive",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Fully supported",
-    "engine": "WASM Archive Decompressor",
-    "details": "Extracts RAR-compressed comic archives and renders sequential high-resolution pages.",
-    "limitations": "Encrypted or password-protected RAR archives cannot be unpacked."
-  },
-  {
-    "id": "cb7",
-    "name": "Comic Book Archive (7z)",
-    "extensions": [".cb7"],
-    "category": "Comic Books & Manga",
-    "layout": "Image Archive",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Fully supported",
-    "engine": "Libarchive WASM 7-Zip Unpacker",
-    "details": "Supports LZMA and LZMA2 compressed 7z comic archives with high compression ratio decompression.",
-    "limitations": "Multi-volume split archives (.7z.001) must be joined before reading."
-  },
-  {
-    "id": "chm",
-    "name": "Compiled HTML Help",
-    "extensions": [".chm"],
-    "category": "Reference & Scanned",
-    "layout": "Reflowable / Structured",
-    "windows": "Fully supported",
-    "android": "Fully supported",
-    "status": "Supported with limitations",
-    "engine": "ITSF Archive Unpacker & HTML Parser",
-    "details": "Decompresses Microsoft Compiled HTML Help (ITSF) archives, extracting the table of contents and HTML topics.",
-    "limitations": "ActiveX controls and legacy IE-specific scripts inside old CHM files are sanitized and ignored."
+    "classification": "primary",
+    "engine": "Fb2Adapter (Desktop) / Fb2ReaderView (Android)",
+    "details": "Full native parsing and reader support for Compressed FictionBook (FBZ). Metadata extraction: Inherited from inner FB2 document description. Cover: Inner FB2 coverpage binary block.",
+    "limitations": "Multi-book FBZ archives open the first encountered .fb2 entry"
   },
   {
     "id": "djvu",
     "name": "DjVu Document",
-    "extensions": [".djvu", ".djv"],
-    "category": "Reference & Scanned",
-    "layout": "Scanned Document / Layered",
+    "extensions": [
+      ".djvu"
+    ],
+    "category": "E-Books & Literature",
+    "layout": "Fixed / Visual",
     "windows": "Fully supported",
     "android": "Fully supported",
-    "status": "Supported with limitations",
-    "engine": "AT&T DjVu Layered Parser",
-    "details": "Renders high-compression layered scanned pages, separate text layers, and monochrome background/foreground bitonal bitmaps.",
-    "limitations": "Rare proprietary JB2 compression extensions may fall back to document text layer."
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "DjvuAdapter (Desktop) / DjvuReaderView (Android)",
+    "details": "Full native parsing and reader support for DjVu Document. Metadata extraction: DJVU INFO chunk metadata and page count. Cover: First page bitmap preview.",
+    "limitations": "Hidden OCR text layer search is basic; high-DPI zoom requires memory pagination"
+  },
+  {
+    "id": "chm",
+    "name": "Compiled HTML Help (CHM)",
+    "extensions": [
+      ".chm"
+    ],
+    "category": "E-Books & Literature",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ChmAdapter (Desktop) / ChmReaderView (Android)",
+    "details": "Full native parsing and reader support for Compiled HTML Help (CHM). Metadata extraction: #SYSTEM and #WINDOWS internal stream properties + /#STRINGS. Cover: Default topic first image or generated title palette thumbnail.",
+    "limitations": "Proprietary MS HTML Help index files (.hhk) may have partial hierarchy fidelity"
+  },
+  {
+    "id": "pdf",
+    "name": "Portable Document Format",
+    "extensions": [
+      ".pdf"
+    ],
+    "category": "Documents & Office",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "PdfAdapter (Desktop) / PdfReaderView (Android)",
+    "details": "Full native parsing and reader support for Portable Document Format. Metadata extraction: PDF Info dictionary + XMP metadata (Title, Author, Subject, Creator, Producer). Cover: First page rendered canvas thumbnail.",
+    "limitations": "Form field filling and interactive digital signatures not supported (read-only)"
+  },
+  {
+    "id": "txt",
+    "name": "Plain Text Document",
+    "extensions": [
+      ".txt"
+    ],
+    "category": "Documents & Office",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "TextAdapter (Desktop) / TxtReaderView (Android)",
+    "details": "Full native parsing and reader support for Plain Text Document. Metadata extraction: Filename and file byte stats; first line heading heuristic. Cover: Title-derived typographic palette thumbnail.",
+    "limitations": "Lacks structural chapter TOC unless formatted with standardized line dividers"
+  },
+  {
+    "id": "md",
+    "name": "Markdown Document",
+    "extensions": [
+      ".md"
+    ],
+    "category": "Documents & Office",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "MarkdownAdapter (Desktop) / MdReaderView (Android)",
+    "details": "Full native parsing and reader support for Markdown Document. Metadata extraction: YAML frontmatter metadata block (title, author, date, tags). Cover: First markdown image reference or typographic badge.",
+    "limitations": "Complex LaTeX math blocks rendered as preformatted code blocks"
+  },
+  {
+    "id": "docx",
+    "name": "Microsoft Word (DOCX)",
+    "extensions": [
+      ".docx"
+    ],
+    "category": "Documents & Office",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "DocxAdapter (Desktop) / DocxReaderView (Android)",
+    "details": "Full native parsing and reader support for Microsoft Word (DOCX). Metadata extraction: docProps/core.xml (dc:title, dc:creator, cp:lastModifiedBy). Cover: docProps/thumbnail.wmf/.jpeg or first embedded media image.",
+    "limitations": "Complex Word floating shape canvas and WordArt rendered inline"
+  },
+  {
+    "id": "doc",
+    "name": "Microsoft Word 97-2003 (DOC)",
+    "extensions": [
+      ".doc"
+    ],
+    "category": "Documents & Office",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "DocAdapter (Desktop) / DocReaderView (Android)",
+    "details": "Full native parsing and reader support for Microsoft Word 97-2003 (DOC). Metadata extraction: SummaryInformation stream (PIDSI_TITLE, PIDSI_AUTHOR, PIDSI_SUBJECT). Cover: Typographic document card with Word icon badge.",
+    "limitations": "Proprietary binary drawing shapes and complex tables rendered as sequential text runs"
+  },
+  {
+    "id": "odt",
+    "name": "OpenDocument Text (ODT)",
+    "extensions": [
+      ".odt"
+    ],
+    "category": "Documents & Office",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "OdtAdapter (Desktop) / OdtReaderView (Android)",
+    "details": "Full native parsing and reader support for OpenDocument Text (ODT). Metadata extraction: meta.xml (dc:title, dc:creator, meta:document-statistic). Cover: Thumbnails/thumbnail.png or first Pictures/ embedded graphic.",
+    "limitations": "Frames with absolute page positioning rendered sequentially in flow order"
+  },
+  {
+    "id": "rtf",
+    "name": "Rich Text Format (RTF)",
+    "extensions": [
+      ".rtf"
+    ],
+    "category": "Documents & Office",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "RtfAdapter (Desktop) / RtfReaderView (Android)",
+    "details": "Full native parsing and reader support for Rich Text Format (RTF). Metadata extraction: {\\info {\\title ...}{\\author ...}} control groups. Cover: Typographic badge thumbnail.",
+    "limitations": "Complex RTF drawing objects (\\do) and nested tables flattened"
+  },
+  {
+    "id": "xps",
+    "name": "XML Paper Specification (XPS)",
+    "extensions": [
+      ".xps"
+    ],
+    "category": "Documents & Office",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "XpsAdapter (Desktop) / XpsReaderView (Android)",
+    "details": "Full native parsing and reader support for XML Paper Specification (XPS). Metadata extraction: docProps/core.xml (title, creator, description). Cover: First page rendered SVG preview.",
+    "limitations": "Proprietary OpenType obfuscated font GUIDs may fall back to system sans-serif"
+  },
+  {
+    "id": "csv",
+    "name": "Comma-Separated Values",
+    "extensions": [
+      ".csv"
+    ],
+    "category": "Spreadsheets & Tables",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ExpansionAdapters.CsvAdapter (Desktop) / SpreadsheetReaderView (Android)",
+    "details": "Full native parsing and reader support for Comma-Separated Values. Metadata extraction: File statistics, row count, column count, header row names. Cover: Tabular green-accent grid badge.",
+    "limitations": "Single sheet representation without formula computation"
+  },
+  {
+    "id": "tsv",
+    "name": "Tab-Separated Values",
+    "extensions": [
+      ".tsv"
+    ],
+    "category": "Spreadsheets & Tables",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ExpansionAdapters.TsvAdapter (Desktop) / SpreadsheetReaderView (Android)",
+    "details": "Full native parsing and reader support for Tab-Separated Values. Metadata extraction: Row and column counts, header labels. Cover: Tabular grid badge with TSV label.",
+    "limitations": "Single sheet layout"
+  },
+  {
+    "id": "xlsx",
+    "name": "Microsoft Excel (XLSX)",
+    "extensions": [
+      ".xlsx"
+    ],
+    "category": "Spreadsheets & Tables",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "SpreadsheetAdapter (Desktop) / SpreadsheetReaderView (Android)",
+    "details": "Full native parsing and reader support for Microsoft Excel (XLSX). Metadata extraction: docProps/core.xml + workbook sheet names. Cover: Multi-sheet workbook preview badge with sheet tabs.",
+    "limitations": "Displays calculated values; live Excel formula calculation engine not executed"
+  },
+  {
+    "id": "xls",
+    "name": "Microsoft Excel 97-2003 (XLS)",
+    "extensions": [
+      ".xls"
+    ],
+    "category": "Spreadsheets & Tables",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "LegacySpreadsheetAdapter (Desktop) / SpreadsheetReaderView (Android)",
+    "details": "Full native parsing and reader support for Microsoft Excel 97-2003 (XLS). Metadata extraction: SummaryInformation stream + BIFF8 sheet directory table. Cover: Green Excel legacy badge with sheet count.",
+    "limitations": "Legacy charts and pivot tables omitted; cell values and strings rendered accurately"
+  },
+  {
+    "id": "ods",
+    "name": "OpenDocument Spreadsheet (ODS)",
+    "extensions": [
+      ".ods"
+    ],
+    "category": "Spreadsheets & Tables",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "SpreadsheetAdapter (Desktop) / SpreadsheetReaderView (Android)",
+    "details": "Full native parsing and reader support for OpenDocument Spreadsheet (ODS). Metadata extraction: meta.xml (title, creator, date) + sheet list. Cover: ODS grid badge thumbnail.",
+    "limitations": "Complex formula matrices display stored text values"
+  },
+  {
+    "id": "xlsm",
+    "name": "Macro-Enabled Excel Workbook (XLSM)",
+    "extensions": [
+      ".xlsm"
+    ],
+    "category": "Spreadsheets & Tables",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "SpreadsheetAdapter (Desktop) / SpreadsheetReaderView (Android)",
+    "details": "Full native parsing and reader support for Macro-Enabled Excel Workbook (XLSM). Metadata extraction: docProps/core.xml properties. Cover: Workbook badge with macro-inert shield indicator.",
+    "limitations": "Macros are completely inert; user macros cannot run"
+  },
+  {
+    "id": "xltx",
+    "name": "Microsoft Excel Template (XLTX)",
+    "extensions": [
+      ".xltx"
+    ],
+    "category": "Spreadsheets & Tables",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "SpreadsheetAdapter (Desktop) / SpreadsheetReaderView (Android)",
+    "details": "Full native parsing and reader support for Microsoft Excel Template (XLTX). Metadata extraction: Core properties and sheet names. Cover: Template grid card badge.",
+    "limitations": "Saved formulas display pre-calculated default values"
+  },
+  {
+    "id": "xlsb",
+    "name": "Microsoft Excel Binary Workbook (XLSB)",
+    "extensions": [
+      ".xlsb"
+    ],
+    "category": "Spreadsheets & Tables",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ExpansionAdapters.XlsbAdapter (Desktop) / SpreadsheetReaderView (Android)",
+    "details": "Full native parsing and reader support for Microsoft Excel Binary Workbook (XLSB). Metadata extraction: Workbook sheet list and record counts. Cover: Excel binary grid card badge.",
+    "limitations": "Cell comments and advanced chart shapes not displayed"
+  },
+  {
+    "id": "pptx",
+    "name": "Microsoft PowerPoint (PPTX)",
+    "extensions": [
+      ".pptx"
+    ],
+    "category": "Presentations & Slides",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "PresentationAdapter (Desktop) / PresentationReaderView (Android)",
+    "details": "Full native parsing and reader support for Microsoft PowerPoint (PPTX). Metadata extraction: docProps/core.xml + slide count. Cover: First slide rendered thumbnail or embedded slide thumbnail.",
+    "limitations": "Rendered as structured slide cards with text, headings, and images; complex animations and transitions omitted"
+  },
+  {
+    "id": "ppt",
+    "name": "Microsoft PowerPoint 97-2003 (PPT)",
+    "extensions": [
+      ".ppt"
+    ],
+    "category": "Presentations & Slides",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "LegacyOfficeAdapter (Desktop) / DocReaderView (Android)",
+    "details": "Full native parsing and reader support for Microsoft PowerPoint 97-2003 (PPT). Metadata extraction: SummaryInformation properties (title, subject, author). Cover: PowerPoint legacy orange badge thumbnail.",
+    "limitations": "Legacy binary drawing shapes simplified into clean slide text sections"
+  },
+  {
+    "id": "odp",
+    "name": "OpenDocument Presentation (ODP)",
+    "extensions": [
+      ".odp"
+    ],
+    "category": "Presentations & Slides",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "PresentationAdapter (Desktop) / PresentationReaderView (Android)",
+    "details": "Full native parsing and reader support for OpenDocument Presentation (ODP). Metadata extraction: meta.xml properties + page count. Cover: Thumbnails/thumbnail.png or first slide preview.",
+    "limitations": "Slide card view without vector shape morphing animations"
+  },
+  {
+    "id": "ppsx",
+    "name": "PowerPoint Slide Show (PPSX)",
+    "extensions": [
+      ".ppsx"
+    ],
+    "category": "Presentations & Slides",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "PresentationAdapter (Desktop) / PresentationReaderView (Android)",
+    "details": "Full native parsing and reader support for PowerPoint Slide Show (PPSX). Metadata extraction: Slide count and core metadata. Cover: First slide card thumbnail.",
+    "limitations": "Displays slides sequentially as reader cards"
+  },
+  {
+    "id": "cbz",
+    "name": "Comic Book Archive (CBZ)",
+    "extensions": [
+      ".cbz"
+    ],
+    "category": "Comics & Manga",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "CbzAdapter (Desktop) / CbzReaderView (Android)",
+    "details": "Full native parsing and reader support for Comic Book Archive (CBZ). Metadata extraction: ComicInfo.xml metadata (series, issue, writer, penciller, volume) or filename stats. Cover: First sorted raster image file extracted as thumbnail.",
+    "limitations": "Encrypted ZIP archives require password entry or are rejected"
+  },
+  {
+    "id": "cbr",
+    "name": "Comic Book Archive (CBR)",
+    "extensions": [
+      ".cbr"
+    ],
+    "category": "Comics & Manga",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ArchiveComicAdapter (Desktop) / CbrReaderView (Android)",
+    "details": "Full native parsing and reader support for Comic Book Archive (CBR). Metadata extraction: ComicInfo.xml within archive or file entry count. Cover: First sequential image in archive.",
+    "limitations": "Android RarExtractor currently supports uncompressed and RAR4 standard streams; RAR5 solid archives have documented limitations"
+  },
+  {
+    "id": "cbt",
+    "name": "Comic Book Archive (CBT)",
+    "extensions": [
+      ".cbt"
+    ],
+    "category": "Comics & Manga",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ArchiveComicAdapter (Desktop) / CbrReaderView (Android)",
+    "details": "Full native parsing and reader support for Comic Book Archive (CBT). Metadata extraction: Entry count and filenames. Cover: First image file extracted from TAR archive.",
+    "limitations": "Sparse TAR records normalized"
+  },
+  {
+    "id": "cb7",
+    "name": "Comic Book Archive (CB7)",
+    "extensions": [
+      ".cb7"
+    ],
+    "category": "Comics & Manga",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ArchiveComicAdapter (Desktop) / CbrReaderView (Android)",
+    "details": "Full native parsing and reader support for Comic Book Archive (CB7). Metadata extraction: Archive header entry count. Cover: First image entry in archive.",
+    "limitations": "Complex multi-volume solid 7Z archives not supported offline"
+  },
+  {
+    "id": "jpg",
+    "name": "JPEG Image",
+    "extensions": [
+      ".jpg",
+      ".jpeg"
+    ],
+    "category": "High-Resolution Images",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ImageAdapter (Desktop) / ImageReaderView (Android)",
+    "details": "Full native parsing and reader support for JPEG Image. Metadata extraction: EXIF metadata header sniffing (orientation, dimensions). Cover: Native image thumbnail scaling.",
+    "limitations": "Single image document view"
+  },
+  {
+    "id": "png",
+    "name": "Portable Network Graphics (PNG)",
+    "extensions": [
+      ".png"
+    ],
+    "category": "High-Resolution Images",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ImageAdapter (Desktop) / ImageReaderView (Android)",
+    "details": "Full native parsing and reader support for Portable Network Graphics (PNG). Metadata extraction: IHDR chunk dimensions, tEXt/zTXt metadata. Cover: Native PNG thumbnail.",
+    "limitations": "Single image document view"
+  },
+  {
+    "id": "webp",
+    "name": "WebP Image",
+    "extensions": [
+      ".webp"
+    ],
+    "category": "High-Resolution Images",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ImageAdapter (Desktop) / ImageReaderView (Android)",
+    "details": "Full native parsing and reader support for WebP Image. Metadata extraction: VP8/VP8X chunk dimensions and features. Cover: Direct WebP thumbnail.",
+    "limitations": "Animated WebP displays the primary frame in static reader mode"
+  },
+  {
+    "id": "gif",
+    "name": "Graphics Interchange Format (GIF)",
+    "extensions": [
+      ".gif"
+    ],
+    "category": "High-Resolution Images",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ImageAdapter (Desktop) / ImageReaderView (Android)",
+    "details": "Full native parsing and reader support for Graphics Interchange Format (GIF). Metadata extraction: Logical screen descriptor dimensions. Cover: Direct GIF thumbnail.",
+    "limitations": "Animated GIFs play in an offline loop without scrub controls"
+  },
+  {
+    "id": "bmp",
+    "name": "Windows Bitmap (BMP)",
+    "extensions": [
+      ".bmp"
+    ],
+    "category": "High-Resolution Images",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ImageAdapter (Desktop) / ImageReaderView (Android)",
+    "details": "Full native parsing and reader support for Windows Bitmap (BMP). Metadata extraction: DIB header dimensions and bit depth. Cover: Direct BMP thumbnail.",
+    "limitations": "Uncompressed high-resolution BMPs consume memory proportional to resolution"
+  },
+  {
+    "id": "svg",
+    "name": "Scalable Vector Graphics (SVG)",
+    "extensions": [
+      ".svg"
+    ],
+    "category": "High-Resolution Images",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ImageAdapter (Desktop) / ImageReaderView (Android)",
+    "details": "Full native parsing and reader support for Scalable Vector Graphics (SVG). Metadata extraction: <title> and <desc> elements. Cover: Vector rendered badge thumbnail.",
+    "limitations": "Embedded animations (<animate>) disabled by offline security sanitizer"
+  },
+  {
+    "id": "tiff",
+    "name": "Tagged Image File Format (TIFF)",
+    "extensions": [
+      ".tiff",
+      ".tif"
+    ],
+    "category": "High-Resolution Images",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ImageAdapter (Desktop) / ImageReaderView (Android)",
+    "details": "Full native parsing and reader support for Tagged Image File Format (TIFF). Metadata extraction: IFD tags (image width, length, compression, resolution). Cover: First IFD rendered thumbnail.",
+    "limitations": "Multi-page TIFF documents currently display the primary image frame"
+  },
+  {
+    "id": "avif",
+    "name": "AV1 Image File Format (AVIF)",
+    "extensions": [
+      ".avif"
+    ],
+    "category": "High-Resolution Images",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ImageAdapter (Desktop) / ImageReaderView (Android)",
+    "details": "Full native parsing and reader support for AV1 Image File Format (AVIF). Metadata extraction: ISOBMFF meta box dimensions. Cover: Direct AVIF thumbnail.",
+    "limitations": "Android 10/11 devices without hardware AV1 decoder require platform codec fallback"
+  },
+  {
+    "id": "heic",
+    "name": "High Efficiency Image Container (HEIC)",
+    "extensions": [
+      ".heic"
+    ],
+    "category": "High-Resolution Images",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ImageAdapter (Desktop) / ImageReaderView (Android)",
+    "details": "Full native parsing and reader support for High Efficiency Image Container (HEIC). Metadata extraction: ISOBMFF EXIF box extraction. Cover: Extracted primary frame thumbnail.",
+    "limitations": "Apple live photo video tracks ignored (displays primary high-res still)"
+  },
+  {
+    "id": "heif",
+    "name": "High Efficiency Image Format (HEIF)",
+    "extensions": [
+      ".heif"
+    ],
+    "category": "High-Resolution Images",
+    "layout": "Fixed / Visual",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ImageAdapter (Desktop) / ImageReaderView (Android)",
+    "details": "Full native parsing and reader support for High Efficiency Image Format (HEIF). Metadata extraction: ISOBMFF meta properties. Cover: Extracted primary frame thumbnail.",
+    "limitations": "Multi-frame image sequences display the primary still frame"
+  },
+  {
+    "id": "html",
+    "name": "HTML Document",
+    "extensions": [
+      ".html",
+      ".htm"
+    ],
+    "category": "Web Archives & HTML",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "HtmlAdapter (Desktop) / HtmlReaderView (Android)",
+    "details": "Full native parsing and reader support for HTML Document. Metadata extraction: <head><title> and <meta name=\"author\"> tags. Cover: First <img> element or styled HTML badge thumbnail.",
+    "limitations": "Interactive web forms and client-side JavaScript apps rendered as static documents"
+  },
+  {
+    "id": "mht",
+    "name": "MHTML Web Archive",
+    "extensions": [
+      ".mht",
+      ".mhtml"
+    ],
+    "category": "Web Archives & HTML",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ExpansionAdapters.MhtAdapter (Desktop) / EmailReaderView (Android)",
+    "details": "Full native parsing and reader support for MHTML Web Archive. Metadata extraction: Subject, Date, and From MIME headers. Cover: First embedded image part or web archive card badge.",
+    "limitations": "Dynamic web scripts embedded in saved archives disabled for privacy"
+  },
+  {
+    "id": "xml",
+    "name": "XML Document",
+    "extensions": [
+      ".xml"
+    ],
+    "category": "Structured Text & Data",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ExpansionAdapters.XmlAdapter (Desktop) / StructuredTextReaderView (Android)",
+    "details": "Full native parsing and reader support for XML Document. Metadata extraction: Root element tag name and XML attributes. Cover: Code/XML structured badge thumbnail.",
+    "limitations": "Display mode presents syntax-highlighted hierarchical tree rather than arbitrary XSLT layouts"
+  },
+  {
+    "id": "json",
+    "name": "JSON Document",
+    "extensions": [
+      ".json"
+    ],
+    "category": "Structured Text & Data",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ExpansionAdapters.JsonAdapter (Desktop) / StructuredTextReaderView (Android)",
+    "details": "Full native parsing and reader support for JSON Document. Metadata extraction: Top-level key count and schema keys. Cover: Code bracket badge thumbnail.",
+    "limitations": "Files larger than 20MB load with virtualization"
+  },
+  {
+    "id": "yaml",
+    "name": "YAML Document",
+    "extensions": [
+      ".yaml",
+      ".yml"
+    ],
+    "category": "Structured Text & Data",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ExpansionAdapters.YamlAdapter (Desktop) / StructuredTextReaderView (Android)",
+    "details": "Full native parsing and reader support for YAML Document. Metadata extraction: Top-level dictionary keys. Cover: YAML document badge thumbnail.",
+    "limitations": "Multi-document streams separated by \"---\" rendered sequentially"
+  },
+  {
+    "id": "log",
+    "name": "Log File",
+    "extensions": [
+      ".log"
+    ],
+    "category": "Structured Text & Data",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ExpansionAdapters.LogAdapter (Desktop) / StructuredTextReaderView (Android)",
+    "details": "Full native parsing and reader support for Log File. Metadata extraction: Line count, timestamp range (first and last log entries). Cover: Terminal log badge thumbnail.",
+    "limitations": "Files > 50MB view latest windowed segments"
+  },
+  {
+    "id": "eml",
+    "name": "Email Message (EML)",
+    "extensions": [
+      ".eml"
+    ],
+    "category": "Email, Contacts & Calendars",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ExpansionAdapters.EmlAdapter (Desktop) / EmailReaderView (Android)",
+    "details": "Full native parsing and reader support for Email Message (EML). Metadata extraction: From, To, Cc, Subject, Date headers. Cover: Email letter envelope badge thumbnail.",
+    "limitations": "S/MIME encrypted email bodies require external certificate configuration"
+  },
+  {
+    "id": "vcf",
+    "name": "vCard Contact (VCF)",
+    "extensions": [
+      ".vcf"
+    ],
+    "category": "Email, Contacts & Calendars",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ExpansionAdapters.VcfAdapter (Desktop) / VCardCalendarReaderView (Android)",
+    "details": "Full native parsing and reader support for vCard Contact (VCF). Metadata extraction: FN (full name), ORG (organization), EMAIL, TEL. Cover: PHOTO property base64 image or avatar initial badge.",
+    "limitations": "Multi-contact address books display contacts as sequential cards"
+  },
+  {
+    "id": "ics",
+    "name": "iCalendar Event (ICS)",
+    "extensions": [
+      ".ics"
+    ],
+    "category": "Email, Contacts & Calendars",
+    "layout": "Reflowable",
+    "windows": "Fully supported",
+    "android": "Fully supported",
+    "status": "Fully supported",
+    "classification": "primary",
+    "engine": "ExpansionAdapters.IcsAdapter (Desktop) / VCardCalendarReaderView (Android)",
+    "details": "Full native parsing and reader support for iCalendar Event (ICS). Metadata extraction: SUMMARY, DTSTART, DTEND, LOCATION, DESCRIPTION. Cover: Calendar page badge with event date indicator.",
+    "limitations": "Read-only schedule inspection; calendar writing requires user system app export"
+  },
+  {
+    "id": "zip",
+    "name": "ZIP Archive Container",
+    "extensions": [
+      ".zip"
+    ],
+    "category": "Archive Containers (Inspection)",
+    "layout": "Archive Container (Inspection)",
+    "windows": "Supported (Container Inspection)",
+    "android": "Supported (Container Inspection)",
+    "status": "Container Capability",
+    "classification": "container",
+    "engine": "Native Archive Inspection Engine",
+    "details": "Archive container inspected for book and document import; not a direct reading format",
+    "limitations": "Archive container only; directly opened archives inspect internal entries rather than rendering as a single book."
+  },
+  {
+    "id": "rar",
+    "name": "RAR Archive Container",
+    "extensions": [
+      ".rar"
+    ],
+    "category": "Archive Containers (Inspection)",
+    "layout": "Archive Container (Inspection)",
+    "windows": "Supported (Container Inspection)",
+    "android": "Supported (Container Inspection)",
+    "status": "Container Capability",
+    "classification": "container",
+    "engine": "Native Archive Inspection Engine",
+    "details": "Archive container inspected for book and document import; not a direct reading format",
+    "limitations": "Archive container only; directly opened archives inspect internal entries rather than rendering as a single book."
+  },
+  {
+    "id": "7z",
+    "name": "7-Zip Archive Container",
+    "extensions": [
+      ".7z"
+    ],
+    "category": "Archive Containers (Inspection)",
+    "layout": "Archive Container (Inspection)",
+    "windows": "Supported (Container Inspection)",
+    "android": "Supported (Container Inspection)",
+    "status": "Container Capability",
+    "classification": "container",
+    "engine": "Native Archive Inspection Engine",
+    "details": "Archive container inspected for book and document import; not a direct reading format",
+    "limitations": "Archive container only; directly opened archives inspect internal entries rather than rendering as a single book."
   }
 ]

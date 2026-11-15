@@ -1,0 +1,234 @@
+/* =============================================================
+   LIRUNE WEBSITE — Coherent Motion & Transition Design System
+   Fluid, connected, purposeful, calm.
+   Zero gratuitous loops; every movement serves comprehension.
+   Full prefers-reduced-motion compliance.
+   ============================================================= */
+
+/* Page View Transitions */
+::view-transition-old(root) {
+  animation: 200ms cubic-bezier(0.65, 0, 0.35, 1) both vt-page-out;
+}
+
+::view-transition-new(root) {
+  animation: 260ms cubic-bezier(0.16, 1, 0.3, 1) both vt-page-in;
+}
+
+@keyframes vt-page-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-3px); }
+}
+
+@keyframes vt-page-in {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Shared Transition Identifiers */
+.site-brand-logo {
+  view-transition-name: site-brand-logo;
+}
+
+.site-nav-list {
+  view-transition-name: site-main-nav;
+}
+
+/* Interactive Motion Patterns */
+
+/* 1. Subtle Button Press Feedback */
+.btn,
+.category-pill-btn,
+.copy-checksum-btn,
+.theme-toggle-btn {
+  transition: transform var(--duration-fast) var(--ease-spring),
+              background-color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+
+.btn:hover,
+.category-pill-btn:hover {
+  transform: translateY(-1.5px);
+}
+
+.btn:active,
+.category-pill-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* 2. Interactive Elevation Cards */
+.platform-card,
+.release-card,
+.feature-card,
+.matrix-controls-card,
+.screenshot-card {
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal) var(--ease-out),
+              background-color var(--duration-fast) var(--ease-out);
+}
+
+.platform-card:hover,
+.release-card:hover,
+.feature-card:hover {
+  transform: translateY(-2.5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-strong);
+}
+
+/* 3. Controlled Scroll Reveal */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-moderate) var(--ease-out),
+              transform var(--duration-moderate) var(--ease-out);
+  will-change: opacity, transform;
+}
+
+[data-reveal="active"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger Children within [data-stagger] */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--duration-moderate) var(--ease-out),
+              transform var(--duration-moderate) var(--ease-out);
+  transition-delay: calc(var(--stagger-i, 0) * 45ms);
+}
+
+[data-stagger="active"] > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 4. Connected Hero Entrance Sequence */
+.hero-badge-wrap {
+  animation: hero-fade-rise 400ms var(--ease-out) 60ms both;
+}
+
+.hero-headline {
+  animation: hero-fade-rise 450ms var(--ease-out) 120ms both;
+}
+
+.hero-subtitle {
+  animation: hero-fade-rise 450ms var(--ease-out) 180ms both;
+}
+
+.hero-cta-group {
+  animation: hero-fade-rise 450ms var(--ease-out) 240ms both;
+}
+
+.hero-preview-frame {
+  animation: hero-preview-rise 600ms var(--ease-out) 300ms both;
+}
+
+@keyframes hero-fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-preview-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 5. Smooth Accordion / Disclosure */
+.faq-item details {
+  transition: border-color var(--duration-fast) var(--ease-out),
+              background-color var(--duration-fast) var(--ease-out);
+}
+
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item .faq-icon {
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+.faq-item details[open] .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  overflow: hidden;
+  animation: accordion-slide 280ms var(--ease-out) both;
+}
+
+@keyframes accordion-slide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 6. Copy Checksum Micro-interaction */
+.copy-checksum-btn.copied {
+  background-color: var(--status-success) !important;
+  color: #0F1217 !important;
+  border-color: var(--status-success) !important;
+  transform: scale(1.02);
+}
+
+/* =============================================================
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   Absolute guarantee of zero disorienting movement when requested
+   ============================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+
+  [data-reveal],
+  [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .btn:hover,
+  .btn:active,
+  .platform-card:hover,
+  .release-card:hover,
+  .feature-card:hover,
+  .category-pill-btn:hover,
+  .category-pill-btn:active {
+    transform: none !important;
+  }
+}

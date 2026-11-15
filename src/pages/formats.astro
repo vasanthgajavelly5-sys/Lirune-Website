@@ -6,19 +6,19 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
 ---
 
 <BaseLayout
-  title="Supported Formats & Compatibility — Lirune Reader"
-  description="Comprehensive compatibility matrix of all 19 document, ebook, and comic formats supported by Lirune Reader on Windows and Android."
+  title="50+ Formats Supported & Compatibility Matrix — Lirune Reader"
+  description="Comprehensive compatibility matrix of 50+ document, ebook, spreadsheet, presentation, comic, and image formats supported by Lirune Reader on Windows and Android."
   canonicalPath="/formats"
 >
   <div class="site-container section-spacing">
-    <div class="section-header section-header--center">
-      <span class="badge badge-success">Compatibility Matrix</span>
-      <h1>19 Document & Book Formats</h1>
-      <p>Lirune renders all formats locally on your device with dedicated rendering engines and zero external server dependencies.</p>
+    <div class="section-header section-header--center" data-reveal>
+      <span class="badge badge-success">50+ Formats Supported</span>
+      <h1>50+ Formats Supported</h1>
+      <p>Read ebooks, documents, presentations, comics and images in one private, offline-first reader. Zero external server dependencies.</p>
     </div>
 
     <!-- Search & Filter Controls -->
-    <div class="matrix-controls-card">
+    <div class="matrix-controls-card" data-reveal>
       <div class="search-input-wrap">
         <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <circle cx="11" cy="11" r="8"></circle>
@@ -49,7 +49,7 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
     </div>
 
     <!-- Formats 2-Column Responsive Grid -->
-    <div class="formats-grid" id="formats-container">
+    <div class="formats-grid" id="formats-container" data-stagger>
       {formats.map(f => (
         <article
           class="format-card surface-card"

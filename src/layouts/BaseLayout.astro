@@ -2,6 +2,7 @@
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import ScreenshotLightbox from '../components/ScreenshotLightbox.astro';
+import { ViewTransitions } from 'astro:transitions';
 import config from '../data/config.json';
 import releases from '../data/releases.json';
 import '../styles/global.css';
@@ -16,7 +17,7 @@ interface Props {
 
 const {
   title = "Lirune Reader — A calm, private home for your library",
-  description = "Official website of Lirune Reader: the free, open-source, offline ebook and document reader for Windows and Android. Supports 19 formats with zero telemetry.",
+  description = "Official website of Lirune Reader: the free, open-source, offline ebook and document reader for Windows and Android. 50+ formats supported with zero telemetry.",
   canonicalPath = Astro.url.pathname,
   image = "/images/branding/og-preview.png",
   type = "website"
@@ -107,8 +108,10 @@ const jsonLd = {
     <meta name="theme-color" content="#0F1217" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#F8F8FA" media="(prefers-color-scheme: light)" />
 
+    <ViewTransitions />
+
     <script is:inline>
-      (function() {
+      function applySavedTheme() {
         try {
           const stored = localStorage.getItem('lirune-theme') || 'system';
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -119,7 +122,9 @@ const jsonLd = {
           document.documentElement.setAttribute('data-theme', 'dark');
           document.documentElement.setAttribute('data-theme-setting', 'system');
         }
-      })();
+      }
+      applySavedTheme();
+      document.addEventListener('astro:after-swap', applySavedTheme);
     </script>
 
     <!-- SEO & Metadata -->
@@ -157,10 +162,72 @@ const jsonLd = {
     <SiteFooter />
     <ScreenshotLightbox />
 
-    <!-- Live Theme Switcher Runtime (System Listener & State Sync) -->
+    <!-- Motion & Interaction Runtime (Scroll Reveals, Copy Feedback & State Sync) -->
     <script is:inline>
       (function() {
-        // Listen for OS theme changes when user is in 'system' mode
+        let observer = null;
+
+        function initMotionSystem() {
+          if (observer) observer.disconnect();
+
+          // Check reduced motion preference
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('[data-reveal]').forEach(el => el.setAttribute('data-reveal', 'active'));
+            document.querySelectorAll('[data-stagger]').forEach(el => el.setAttribute('data-stagger', 'active'));
+            return;
+          }
+
+          // Setup stagger indices
+          document.querySelectorAll('[data-stagger]').forEach(container => {
+            Array.from(container.children).forEach((child, idx) => {
+              child.style.setProperty('--stagger-i', idx);
+            });
+          });
+
+          // IntersectionObserver for scroll reveals
+          observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.setAttribute('data-reveal', 'active');
+                if (entry.target.hasAttribute('data-stagger')) {
+                  entry.target.setAttribute('data-stagger', 'active');
+                }
+                observer.unobserve(entry.target);
+              }
+            });
+          }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+          });
+
+          document.querySelectorAll('[data-reveal], [data-stagger]').forEach(el => observer.observe(el));
+
+          // Interactive copy buttons
+          document.querySelectorAll('.copy-checksum-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+              const hash = btn.getAttribute('data-hash') || '';
+              if (hash && navigator.clipboard) {
+                try {
+                  await navigator.clipboard.writeText(hash);
+                  const originalText = btn.textContent;
+                  btn.classList.add('copied');
+                  btn.textContent = 'Copied!';
+                  setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.textContent = originalText;
+                  }, 2000);
+                } catch (e) {}
+              }
+            });
+          });
+        }
+
+        document.addEventListener('astro:page-load', initMotionSystem);
+        document.addEventListener('astro:before-swap', () => {
+          if (observer) observer.disconnect();
+        });
+
+        // Listen for OS theme changes
         try {
           const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
           mediaQuery.addEventListener('change', function(e) {

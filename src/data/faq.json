@@ -1,7 +1,7 @@
 [
   {
     "q": "What is Lirune Reader?",
-    "a": "Lirune Reader is a free, private, and open-source ebook and document reading application for Windows and Android. It is designed as a calm, distraction-free home for your digital library, supporting 19 formats including EPUB, PDF, MOBI, FB2, Word documents, comic archives, and plain text."
+    "a": "Lirune Reader is a free, private, and open-source ebook and document reading application for Windows and Android. It is designed as a calm, distraction-free home for your digital library, supporting 50+ formats including ebooks, documents, spreadsheets, presentations, comic archives, images, and structured text."
   },
   {
     "q": "Is Lirune free and open-source?",
@@ -17,7 +17,7 @@
   },
   {
     "q": "Which formats are supported?",
-    "a": "Lirune supports 19 universal formats: EPUB (.epub), PDF (.pdf), MOBI (.mobi, .azw, .azw3), FictionBook (.fb2, .fbz), Microsoft Word (.docx, .doc), OpenDocument Text (.odt), Rich Text Format (.rtf), Plain Text (.txt), Markdown (.md), HTML (.html, .htm), Comic Archives (.cbz, .cbr, .cb7), Microsoft Help (.chm), and DjVu (.djvu)."
+    "a": "Lirune supports 50+ canonical format families across Windows and Android: E-books (EPUB, KEPUB, MOBI, FB2, FBZ, DJVU, CHM), Documents (PDF, TXT, MD, DOCX, DOC, ODT, RTF, XPS), Spreadsheets (CSV, TSV, XLSX, XLS, ODS, XLSM, XLTX, XLSB), Presentations (PPTX, PPT, ODP, PPSX), Comics (CBZ, CBR, CBT, CB7), Images (JPG, PNG, WEBP, GIF, BMP, SVG, TIFF, AVIF, HEIC, HEIF), Web (HTML, MHT), Structured Text (XML, JSON, YAML, LOG), and Communications (EML, VCF, ICS). Container archives (ZIP, RAR, 7Z) are also supported for transparent book inspection."
   },
   {
     "q": "Does Lirune support DRM-protected books?",

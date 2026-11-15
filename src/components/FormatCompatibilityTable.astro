@@ -1,8 +1,10 @@
 ---
 import formats from '../data/formats.json';
+
+const categories = ['All', ...new Set(formats.map(f => f.category))];
 ---
 
-<div class="format-table-component" id="format-matrix">
+<div class="format-table-component" id="format-matrix" data-reveal>
   <!-- Controls -->
   <div class="format-controls">
     <div class="format-search-wrap">
@@ -10,19 +12,23 @@ import formats from '../data/formats.json';
       <input
         type="text"
         id="format-search-input"
-        placeholder="Filter by format or extension (e.g. epub, pdf, mobi, docx)..."
+        placeholder="Filter by format or extension (e.g. epub, pdf, mobi, docx, xlsx, pptx)..."
         aria-label="Filter formats"
         class="format-search-input"
       />
     </div>
 
     <div class="format-category-pills" role="radiogroup" aria-label="Format category filter">
-      <button class="cat-pill active" data-category="all" role="radio" aria-checked="true">All (19)</button>
-      <button class="cat-pill" data-category="Standard E-Books" role="radio" aria-checked="false">E-Books</button>
-      <button class="cat-pill" data-category="Fixed Layout Documents" role="radio" aria-checked="false">PDF</button>
-      <button class="cat-pill" data-category="Office Documents" role="radio" aria-checked="false">Office</button>
-      <button class="cat-pill" data-category="Comic Books & Manga" role="radio" aria-checked="false">Comics</button>
-      <button class="cat-pill" data-category="Plain Text & Markup" role="radio" aria-checked="false">Text & MD</button>
+      {categories.map((cat, idx) => (
+        <button
+          class:list={['cat-pill', { active: idx === 0 }]}
+          data-category={cat === 'All' ? 'all' : cat}
+          role="radio"
+          aria-checked={idx === 0 ? 'true' : 'false'}
+        >
+          {cat === 'All' ? 'All (50+)' : cat}
+        </button>
+      ))}
     </div>
   </div>
 

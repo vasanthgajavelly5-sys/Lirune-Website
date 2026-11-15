@@ -11,7 +11,7 @@ const cleanPath = currentPath === '/' ? '/' : currentPath.replace(/\/+$/, '');
 
 const productLinks = [
   { href: '/features', label: 'Features', desc: 'Dual-page spreads, Scroll Engine v2, TTS & annotations' },
-  { href: '/formats', label: 'Supported Formats', desc: '19 document, ebook, and comic book formats' },
+  { href: '/formats', label: 'Supported Formats (50+)', desc: '50+ document, ebook, spreadsheet, and image formats' },
   { href: '/screenshots', label: 'Screenshots', desc: '26 genuine Windows & Android interface captures' }
 ];
 
@@ -43,7 +43,7 @@ const isAboutActive = aboutLinks.some(l => cleanPath === l.href);
           alt="Lirune Icon"
           width="32"
           height="32"
-          class="brand-icon"
+          class="brand-icon site-brand-logo"
         />
       </div>
       <div class="brand-text">

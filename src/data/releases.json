@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-15T07:47:38.909Z",
+  "lastUpdated": "2026-11-15T10:35:48.220Z",
   "windows": {
     "version": "6.0.0",
     "tag": "v6.0.0",
@@ -48,15 +48,15 @@
     "name": "Lirune Reader v5.0.0 — Major Mobile Release: In-Reader Theme Parity & High-Performance Engine",
     "releaseDate": "2026-11-15",
     "releaseUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/tag/android-v5.0.0",
-    "apkUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/android-v5.0.0/Lirune-Reader-v5.0.0-release.apk",
-    "apkFilename": "Lirune-Reader-v5.0.0-release.apk",
-    "sha256": "c0fc888c1744f75c92c2e2ecc29a1f8b7bfcb87cffbed734e3a7ff6206faac68",
+    "apkUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/android-v5.0.0/app-release.apk",
+    "apkFilename": "app-release.apk",
+    "sha256": "4ceaa7d6b999ab23dbe909feaf987cc7d69ca43edfcae5817289ac1b83f27fd1",
     "requirements": "Android 7.0 (Nougat) or higher",
     "highlights": [
       "In-reader Theme Parity across all 15 reading palettes with dynamic sheet token inheritance",
       "Pre-compiled Hermes bytecode bundle (1,583 modules) for instant startup and 60fps scrolling",
       "Zero internet permissions: android.permission.INTERNET permanently stripped from production release builds",
-      "Full format compatibility: EPUB, PDF, MOBI, CBZ, CBR, CBT, FB2, TXT, MD, DOCX, DOC, ODT, RTF, TIFF, DJVU",
+      "50+ Formats Supported: Full live acceptance pass across all canonical e-book, document, sheet, slide, comic, and image formats",
       "Passed all 412 automated test cases with 100% format catalogue parity"
     ]
   },
