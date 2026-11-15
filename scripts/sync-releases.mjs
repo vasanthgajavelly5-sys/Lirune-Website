@@ -107,7 +107,7 @@ export function parseChecksumFile(content) {
  * Clean version string (e.g. 'v5.6.2' -> '5.6.2')
  */
 export function cleanVersion(tag) {
-  return (tag || '').replace(/^v/i, '').trim();
+  return (tag || '').replace(/^(?:android-)?v?/i, '').trim();
 }
 
 /**

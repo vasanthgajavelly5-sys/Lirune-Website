@@ -1,26 +1,26 @@
 {
-  "lastUpdated": "2026-11-14T22:41:57.516Z",
+  "lastUpdated": "2026-11-15T07:47:38.909Z",
   "windows": {
-    "version": "5.6.2",
-    "tag": "v5.6.2",
-    "name": "Lirune Reader 5.6.2 — Security Hardening, FB2 Sanitization & Windows Release",
-    "releaseDate": "2026-10-27",
-    "releaseUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/tag/v5.6.2",
-    "installerUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v5.6.2/Lirune.Reader-5.6.2-Setup.exe",
-    "installerFilename": "Lirune.Reader-5.6.2-Setup.exe",
+    "version": "6.0.0",
+    "tag": "v6.0.0",
+    "name": "Lirune Reader 6.0.0 — Major Release: Deep Reading-Theme Parity, 28 File Formats & Shell Integration",
+    "releaseDate": "2026-11-15",
+    "releaseUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/tag/v6.0.0",
+    "installerUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v6.0.0/Lirune.Reader-6.0.0-Setup.exe",
+    "installerFilename": "Lirune.Reader-6.0.0-Setup.exe",
     "appxUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v5.6.2/Lirune.Reader-5.6.2-Setup.appx",
     "appxFilename": "Lirune.Reader-5.6.2-Setup.appx",
-    "sha256": "7e11f4f8512925aebe125d688cb2f1350078e928d58b105df746df845d354843",
-    "appxSha256": "6d277cf50648819b3e8ce64b53be9ab9606fc6ff604153152a1a75acb2fe59ff",
+    "sha256": "5fa2d29d4bf478259b89ff0c6641a2cf404ce1736b5d2cd75bf6f9e64727a7a5",
+    "appxSha256": "",
     "requirements": "Windows 10 / 11 (64-bit)",
     "storeId": "9PDNFZ146HDX",
     "storeUrl": "https://apps.microsoft.com/detail/9PDNFZ146HDX?gl=IN&hl=en-US",
     "highlights": [
-      "Strict DOMPurify HTML sanitization for FB2, HTML, and Markdown formats",
-      "Unified rounded glass dropdowns across all settings tabs",
-      "Fullscreen reading immersion with auto-hiding navigation bars",
-      "Path traversal (Zip-Slip) guards and 512 MB file bounds check",
-      "Offline multi-format reader engine without telemetry"
+      "Deep Reading-Theme Parity: In-reader Settings and TOC panels strictly inherit active reading palette (all 15 themes)",
+      "28 file formats registered with Windows Explorer, single-instance cold/warm launching",
+      "1-click 'Make Lirune my default reader' button connecting to Windows Default Apps",
+      "100% acceptance testing pass rate across 57 real-world test samples in clean profile",
+      "Completely offline-first architecture with zero telemetry and zero external network calls"
     ]
   },
   "windowsBeta": {
@@ -43,21 +43,21 @@
     ]
   },
   "android": {
-    "version": "4.9.3",
-    "tag": "v4.9.3",
-    "name": "Lirune Reader v4.9.3 — Scroll Engine v2 Exclusivity & Hardened Zero-Permission Release",
-    "releaseDate": "2026-10-28",
-    "releaseUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/tag/v4.9.3",
-    "apkUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v4.9.3/Lirune-Reader-v4.9.3-release.apk",
-    "apkFilename": "Lirune-Reader-v4.9.3-release.apk",
-    "sha256": "f347c0658964e06467cba09d95d5dc7f66631f48b5615f7ac358e041d2a686c0",
-    "requirements": "Android 8.0 (Oreo) or higher",
+    "version": "5.0.0",
+    "tag": "android-v5.0.0",
+    "name": "Lirune Reader v5.0.0 — Major Mobile Release: In-Reader Theme Parity & High-Performance Engine",
+    "releaseDate": "2026-11-15",
+    "releaseUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/tag/android-v5.0.0",
+    "apkUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/android-v5.0.0/Lirune-Reader-v5.0.0-release.apk",
+    "apkFilename": "Lirune-Reader-v5.0.0-release.apk",
+    "sha256": "c0fc888c1744f75c92c2e2ecc29a1f8b7bfcb87cffbed734e3a7ff6206faac68",
+    "requirements": "Android 7.0 (Nougat) or higher",
     "highlights": [
-      "Scroll Engine v2 is now exclusive, delivering unified 60fps virtualized continuous scrolling",
+      "In-reader Theme Parity across all 15 reading palettes with dynamic sheet token inheritance",
+      "Pre-compiled Hermes bytecode bundle (1,583 modules) for instant startup and 60fps scrolling",
       "Zero internet permissions: android.permission.INTERNET permanently stripped from production release builds",
-      "Android Storage Access Framework (SAF) folder browsing and local SQLite storage",
-      "Offline Text-to-Speech (TTS) audio narration",
-      "Complete typography customization (line height, margins, letter spacing, font families)"
+      "Full format compatibility: EPUB, PDF, MOBI, CBZ, CBR, CBT, FB2, TXT, MD, DOCX, DOC, ODT, RTF, TIFF, DJVU",
+      "Passed all 412 automated test cases with 100% format catalogue parity"
     ]
   },
   "androidBeta": {

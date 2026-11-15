@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "lirune-reader-1aa95"
-  }
+  },
+  "targets": {
+    "lirune-reader-1aa95": {
+      "hosting": {
+        "lirune": [
+          "lirune-reader"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
