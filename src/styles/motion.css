@@ -5,22 +5,29 @@
    Full prefers-reduced-motion compliance.
    ============================================================= */
 
-/* Page View Transitions */
+/* =============================================================
+   4. PAGE TRANSITION WRAPPER (VIEW TRANSITIONS API)
+   ============================================================= */
+
+@view-transition {
+  navigation: auto;
+}
+
 ::view-transition-old(root) {
-  animation: 200ms cubic-bezier(0.65, 0, 0.35, 1) both vt-page-out;
+  animation: 200ms var(--easing-exit) both vt-page-out;
 }
 
 ::view-transition-new(root) {
-  animation: 260ms cubic-bezier(0.16, 1, 0.3, 1) both vt-page-in;
+  animation: 260ms var(--easing-enter) both vt-page-in;
 }
 
 @keyframes vt-page-out {
   from { opacity: 1; transform: translateY(0); }
-  to { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 0; transform: translateY(-4px); }
 }
 
 @keyframes vt-page-in {
-  from { opacity: 0; transform: translateY(3px); }
+  from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -33,18 +40,141 @@
   view-transition-name: site-main-nav;
 }
 
-/* Interactive Motion Patterns */
+/* =============================================================
+   1. SCROLL-TRIGGERED REVEAL ANIMATIONS
+   ============================================================= */
 
-/* 1. Subtle Button Press Feedback */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-reveal) var(--easing-enter),
+              transform var(--duration-reveal) var(--easing-enter);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Compatibility with data-reveal attribute */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-reveal) var(--easing-enter),
+              transform var(--duration-reveal) var(--easing-enter);
+  will-change: opacity, transform;
+}
+
+[data-reveal="active"],
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* =============================================================
+   2. STAGGERED CHILDREN
+   ============================================================= */
+
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-reveal) var(--easing-enter),
+              transform var(--duration-reveal) var(--easing-enter);
+  transition-delay: calc(var(--stagger-i, 0) * 50ms);
+  will-change: opacity, transform;
+}
+
+.stagger-children.is-visible > *,
+.stagger-children > *.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Compatibility with data-stagger */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-reveal) var(--easing-enter),
+              transform var(--duration-reveal) var(--easing-enter);
+  transition-delay: calc(var(--stagger-i, 0) * 50ms);
+  will-change: opacity, transform;
+}
+
+[data-stagger="active"] > *,
+[data-stagger].is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* CSS fallback index delays (1-12) */
+.stagger-children > *:nth-child(1), [data-stagger] > *:nth-child(1) { --stagger-i: 0; }
+.stagger-children > *:nth-child(2), [data-stagger] > *:nth-child(2) { --stagger-i: 1; }
+.stagger-children > *:nth-child(3), [data-stagger] > *:nth-child(3) { --stagger-i: 2; }
+.stagger-children > *:nth-child(4), [data-stagger] > *:nth-child(4) { --stagger-i: 3; }
+.stagger-children > *:nth-child(5), [data-stagger] > *:nth-child(5) { --stagger-i: 4; }
+.stagger-children > *:nth-child(6), [data-stagger] > *:nth-child(6) { --stagger-i: 5; }
+.stagger-children > *:nth-child(7), [data-stagger] > *:nth-child(7) { --stagger-i: 6; }
+.stagger-children > *:nth-child(8), [data-stagger] > *:nth-child(8) { --stagger-i: 7; }
+.stagger-children > *:nth-child(9), [data-stagger] > *:nth-child(9) { --stagger-i: 8; }
+.stagger-children > *:nth-child(10), [data-stagger] > *:nth-child(10) { --stagger-i: 9; }
+.stagger-children > *:nth-child(11), [data-stagger] > *:nth-child(11) { --stagger-i: 10; }
+.stagger-children > *:nth-child(12), [data-stagger] > *:nth-child(12) { --stagger-i: 11; }
+
+/* =============================================================
+   3. HOVER FEEDBACK UTILITIES
+   ============================================================= */
+
+.hover-lift {
+  transition: transform var(--duration-fast) var(--easing-spring),
+              box-shadow var(--duration-fast) var(--easing-default);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2.5px);
+  box-shadow: var(--shadow-md);
+}
+
+.hover-lift:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.hover-glow {
+  transition: box-shadow var(--duration-normal) var(--easing-default),
+              border-color var(--duration-normal) var(--easing-default);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(141, 183, 204, 0.35);
+  border-color: var(--color-primary);
+}
+
+.hover-scale {
+  transition: transform var(--duration-fast) var(--easing-spring);
+}
+
+.hover-scale:hover {
+  transform: scale(1.025);
+}
+
+.hover-scale:active {
+  transform: scale(0.99);
+}
+
+/* =============================================================
+   INTERACTIVE MOTION PATTERNS & MICRO-INTERACTIONS
+   ============================================================= */
+
+/* Buttons Press Feedback */
 .btn,
 .category-pill-btn,
 .copy-checksum-btn,
 .theme-toggle-btn {
-  transition: transform var(--duration-fast) var(--ease-spring),
-              background-color var(--duration-fast) var(--ease-out),
-              border-color var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out),
-              color var(--duration-fast) var(--ease-out);
+  transition: transform var(--duration-fast) var(--easing-spring),
+              background-color var(--duration-fast) var(--easing-default),
+              border-color var(--duration-fast) var(--easing-default),
+              box-shadow var(--duration-fast) var(--easing-default),
+              color var(--duration-fast) var(--easing-default);
 }
 
 .btn:hover,
@@ -57,16 +187,16 @@
   transform: translateY(0) scale(0.98);
 }
 
-/* 2. Interactive Elevation Cards */
+/* Interactive Elevation Cards */
 .platform-card,
 .release-card,
 .feature-card,
 .matrix-controls-card,
 .screenshot-card {
-  transition: transform var(--duration-normal) var(--ease-out),
-              box-shadow var(--duration-normal) var(--ease-out),
-              border-color var(--duration-normal) var(--ease-out),
-              background-color var(--duration-fast) var(--ease-out);
+  transition: transform var(--duration-normal) var(--easing-default),
+              box-shadow var(--duration-normal) var(--easing-default),
+              border-color var(--duration-normal) var(--easing-default),
+              background-color var(--duration-fast) var(--easing-default);
 }
 
 .platform-card:hover,
@@ -77,53 +207,25 @@
   border-color: var(--border-strong);
 }
 
-/* 3. Controlled Scroll Reveal */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity var(--duration-moderate) var(--ease-out),
-              transform var(--duration-moderate) var(--ease-out);
-  will-change: opacity, transform;
-}
-
-[data-reveal="active"] {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger Children within [data-stagger] */
-[data-stagger] > * {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity var(--duration-moderate) var(--ease-out),
-              transform var(--duration-moderate) var(--ease-out);
-  transition-delay: calc(var(--stagger-i, 0) * 45ms);
-}
-
-[data-stagger="active"] > * {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 4. Connected Hero Entrance Sequence */
+/* Connected Hero Entrance Sequence */
 .hero-badge-wrap {
-  animation: hero-fade-rise 400ms var(--ease-out) 60ms both;
+  animation: hero-fade-rise 400ms var(--easing-enter) 60ms both;
 }
 
 .hero-headline {
-  animation: hero-fade-rise 450ms var(--ease-out) 120ms both;
+  animation: hero-fade-rise 450ms var(--easing-enter) 120ms both;
 }
 
 .hero-subtitle {
-  animation: hero-fade-rise 450ms var(--ease-out) 180ms both;
+  animation: hero-fade-rise 450ms var(--easing-enter) 180ms both;
 }
 
 .hero-cta-group {
-  animation: hero-fade-rise 450ms var(--ease-out) 240ms both;
+  animation: hero-fade-rise 450ms var(--easing-enter) 240ms both;
 }
 
 .hero-preview-frame {
-  animation: hero-preview-rise 600ms var(--ease-out) 300ms both;
+  animation: hero-preview-rise 600ms var(--easing-enter) 300ms both;
 }
 
 @keyframes hero-fade-rise {
@@ -148,16 +250,16 @@
   }
 }
 
-/* 5. Smooth Accordion / Disclosure */
+/* Accordion / Disclosure */
 .faq-item details {
-  transition: border-color var(--duration-fast) var(--ease-out),
-              background-color var(--duration-fast) var(--ease-out);
+  transition: border-color var(--duration-fast) var(--easing-default),
+              background-color var(--duration-fast) var(--easing-default);
 }
 
 .faq-item summary {
   cursor: pointer;
   list-style: none;
-  transition: color var(--duration-fast) var(--ease-out);
+  transition: color var(--duration-fast) var(--easing-default);
 }
 
 .faq-item summary::-webkit-details-marker {
@@ -165,7 +267,7 @@
 }
 
 .faq-item .faq-icon {
-  transition: transform var(--duration-normal) var(--ease-spring);
+  transition: transform var(--duration-normal) var(--easing-spring);
 }
 
 .faq-item details[open] .faq-icon {
@@ -174,7 +276,7 @@
 
 .faq-content {
   overflow: hidden;
-  animation: accordion-slide 280ms var(--ease-out) both;
+  animation: accordion-slide 280ms var(--easing-enter) both;
 }
 
 @keyframes accordion-slide {
@@ -188,7 +290,7 @@
   }
 }
 
-/* 6. Copy Checksum Micro-interaction */
+/* Copy Checksum Micro-interaction */
 .copy-checksum-btn.copied {
   background-color: var(--status-success) !important;
   color: #0F1217 !important;
@@ -197,9 +299,9 @@
 }
 
 /* =============================================================
-   ACCESSIBILITY: PREFERS-REDUCED-MOTION
-   Absolute guarantee of zero disorienting movement when requested
+   5. ACCESSIBILITY: PREFERS-REDUCED-MOTION (MANDATORY)
    ============================================================= */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -215,13 +317,20 @@
     animation: none !important;
   }
 
+  .reveal,
   [data-reveal],
+  .stagger-children > *,
   [data-stagger] > * {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }
 
+  .hover-lift:hover,
+  .hover-lift:active,
+  .hover-glow:hover,
+  .hover-scale:hover,
+  .hover-scale:active,
   .btn:hover,
   .btn:active,
   .platform-card:hover,

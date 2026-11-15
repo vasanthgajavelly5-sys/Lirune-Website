@@ -15,7 +15,7 @@ import releases from '../data/releases.json';
           <span class="brand-name">Lirune Reader</span>
         </div>
         <p class="footer-tagline">
-          A calm, private home for your library on Windows and Android. Free, open-source, and offline-first with zero tracking.
+          Made with privacy in mind. A calm, private home for your library on Windows and Android. Free, open-source, and offline-first with zero tracking.
         </p>
         <div class="footer-version-pills">
           <span class="version-pill">
@@ -27,8 +27,9 @@ import releases from '../data/releases.json';
         </div>
       </div>
 
-      <!-- Nav Columns -->
+      <!-- 3-Column Nav Grid: Product links | Resources | Social/Legal -->
       <div class="footer-nav-grid">
+        <!-- Column 1: Product -->
         <div class="footer-col">
           <h3 class="footer-col-title">Product</h3>
           <ul class="footer-links" role="list">
@@ -39,18 +40,20 @@ import releases from '../data/releases.json';
           </ul>
         </div>
 
+        <!-- Column 2: Resources -->
         <div class="footer-col">
           <h3 class="footer-col-title">Resources</h3>
           <ul class="footer-links" role="list">
             <li><a href="/getting-started">Getting Started</a></li>
-            <li><a href="/changelog">Changelog & History</a></li>
+            <li><a href="/changelog">Changelog & Releases</a></li>
             <li><a href="/faq">Frequently Asked Questions</a></li>
             <li><a href={config.githubRepo} target="_blank" rel="noopener noreferrer">GitHub Repository ↗</a></li>
           </ul>
         </div>
 
+        <!-- Column 3: Social & Legal -->
         <div class="footer-col">
-          <h3 class="footer-col-title">Trust & Support</h3>
+          <h3 class="footer-col-title">Social & Legal</h3>
           <ul class="footer-links" role="list">
             <li><a href="/privacy">Privacy Architecture</a></li>
             <li><a href="/licenses">GPL-3.0 Licenses</a></li>
@@ -58,6 +61,18 @@ import releases from '../data/releases.json';
             <li><a href={config.buyMeACoffeeUrl} target="_blank" rel="noopener noreferrer">Buy Me a Coffee ↗</a></li>
           </ul>
         </div>
+      </div>
+    </div>
+
+    <!-- Privacy Statement Summary Banner -->
+    <div class="footer-privacy-summary">
+      <div class="privacy-summary-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
+      <div class="privacy-summary-text">
+        <strong>Privacy Statement:</strong> Lirune Reader is built offline-first. It executes zero telemetry, transmits zero analytics or personal data to remote servers, and keeps your entire library strictly on your device.
       </div>
     </div>
 
@@ -87,7 +102,7 @@ import releases from '../data/releases.json';
 
 <style>
   .site-footer {
-    background-color: var(--bg-surface);
+    background-color: var(--color-surface);
     border-top: 1px solid var(--border-subtle);
     padding-top: clamp(48px, 6vw, 80px);
     padding-bottom: clamp(32px, 4vw, 48px);
@@ -97,18 +112,18 @@ import releases from '../data/releases.json';
   .footer-inner {
     display: flex;
     flex-direction: column;
-    gap: clamp(40px, 5vw, 64px);
+    gap: clamp(32px, 4vw, 48px);
   }
 
   .footer-top {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-10);
+    gap: var(--spacing-8);
   }
 
   @media (min-width: 900px) {
     .footer-top {
-      grid-template-columns: 360px 1fr;
+      grid-template-columns: 340px 1fr;
       gap: clamp(48px, 6vw, 96px);
     }
   }
@@ -117,20 +132,20 @@ import releases from '../data/releases.json';
   .footer-brand {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-4);
+    gap: var(--spacing-4);
   }
 
   .brand-link {
     display: flex;
     align-items: center;
-    gap: var(--sp-3);
+    gap: var(--spacing-3);
     text-decoration: none;
   }
 
   .brand-icon-wrapper {
     width: 36px;
     height: 36px;
-    border-radius: var(--r-md);
+    border-radius: var(--radius-md);
     background-color: var(--bg-elevated);
     border: 1px solid var(--border-default);
     display: flex;
@@ -142,12 +157,12 @@ import releases from '../data/releases.json';
     font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: -0.02em;
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .footer-tagline {
     font-size: 0.92rem;
-    color: var(--text-secondary);
+    color: var(--color-secondary);
     line-height: 1.55;
     max-width: 320px;
   }
@@ -155,7 +170,7 @@ import releases from '../data/releases.json';
   .footer-version-pills {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--sp-2);
+    gap: var(--spacing-2);
   }
 
   .version-pill {
@@ -163,12 +178,12 @@ import releases from '../data/releases.json';
     align-items: center;
     gap: 6px;
     padding: 4px 10px;
-    border-radius: var(--r-full);
+    border-radius: var(--radius-full);
     background-color: var(--bg-subtle);
     border: 1px solid var(--border-default);
     font-size: 0.78rem;
     font-weight: 600;
-    color: var(--text-secondary);
+    color: var(--color-secondary);
   }
 
   .pill-dot {
@@ -180,11 +195,18 @@ import releases from '../data/releases.json';
   .pill-dot.windows { background-color: var(--color-windows); }
   .pill-dot.android { background-color: var(--color-android); }
 
-  /* Nav Columns */
+  /* 3-Column Nav Grid (Stacks to 1 column on mobile) */
   .footer-nav-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: var(--sp-8);
+    grid-template-columns: 1fr;
+    gap: var(--spacing-8);
+  }
+
+  @media (min-width: 520px) {
+    .footer-nav-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-6);
+    }
   }
 
   .footer-col-title {
@@ -192,8 +214,8 @@ import releases from '../data/releases.json';
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--text-primary);
-    margin-bottom: var(--sp-4);
+    color: var(--color-text);
+    margin-bottom: var(--spacing-4);
   }
 
   .footer-links {
@@ -205,22 +227,49 @@ import releases from '../data/releases.json';
 
   .footer-links a {
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: var(--color-secondary);
     text-decoration: none;
     transition: color var(--t-fast);
   }
 
   .footer-links a:hover {
-    color: var(--accent);
+    color: var(--color-primary);
+  }
+
+  /* Privacy Statement Summary Box */
+  .footer-privacy-summary {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+    padding: var(--spacing-4) var(--spacing-5);
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+  }
+
+  .privacy-summary-icon {
+    color: var(--color-success);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .privacy-summary-text {
+    font-size: 0.85rem;
+    color: var(--color-secondary);
+    line-height: 1.55;
+  }
+
+  .privacy-summary-text strong {
+    color: var(--color-text);
   }
 
   /* Bottom Bar */
   .footer-bottom {
-    padding-top: var(--sp-6);
+    padding-top: var(--spacing-6);
     border-top: 1px solid var(--border-subtle);
     display: flex;
     flex-direction: column;
-    gap: var(--sp-6);
+    gap: var(--spacing-6);
     justify-content: space-between;
     align-items: flex-start;
   }
@@ -241,13 +290,13 @@ import releases from '../data/releases.json';
   }
 
   .footer-copy a {
-    color: var(--text-secondary);
+    color: var(--color-secondary);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
 
   .footer-copy a:hover {
-    color: var(--text-primary);
+    color: var(--color-text);
   }
 
   .footer-subcopy {
@@ -258,7 +307,7 @@ import releases from '../data/releases.json';
   .footer-badges {
     display: flex;
     align-items: center;
-    gap: var(--sp-3);
+    gap: var(--spacing-3);
   }
 
   .badge-link {
@@ -266,10 +315,10 @@ import releases from '../data/releases.json';
     align-items: center;
     gap: 8px;
     padding: 8px 14px;
-    border-radius: var(--r-md);
+    border-radius: var(--radius-md);
     background-color: var(--bg-elevated);
     border: 1px solid var(--border-default);
-    color: var(--text-primary);
+    color: var(--color-text);
     font-size: 0.82rem;
     font-weight: 600;
     text-decoration: none;

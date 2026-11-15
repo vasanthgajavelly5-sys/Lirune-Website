@@ -6,18 +6,18 @@ import faqData from '../data/faq.json';
 
 <BaseLayout
   title="Frequently Asked Questions (FAQ) — Lirune Reader"
-  description="Answers to common questions about Lirune Reader: offline privacy, format support, DRM limits, local storage, and open source development."
+  description="Answers to common questions about Lirune Reader: offline privacy, 50+ format capabilities, DRM boundaries, local storage, and open source development."
   canonicalPath="/faq"
 >
   <div class="site-container site-container--narrow section-spacing">
-    <div class="section-header">
+    <div class="section-header section-header--center" data-reveal>
       <span class="badge badge-success">Common Questions</span>
       <h1>Frequently Asked Questions</h1>
       <p>Clear, direct answers regarding Lirune's offline architecture, format capabilities, device support, and open source principles.</p>
     </div>
 
     <!-- Search Input for FAQ -->
-    <div class="faq-search-wrap">
+    <div class="faq-search-wrap" data-reveal>
       <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -25,33 +25,47 @@ import faqData from '../data/faq.json';
       <input
         type="search"
         id="faq-search-input"
-        placeholder="Search questions (e.g. offline, drm, sync, formats)..."
+        placeholder="Search questions (e.g. offline, privacy, formats, android, windows)..."
         class="faq-search-input"
         aria-label="Filter frequently asked questions"
       />
     </div>
 
     <!-- Accordion List -->
-    <div class="faq-accordion-list" id="faq-list">
-      {faqData.map((item, idx) => (
-        <details class="faq-accordion-item surface-card" data-faq-text={`${item.question} ${item.answer}`.toLowerCase()}>
-          <summary class="faq-summary">
-            <span class="faq-question-text">{item.question}</span>
-            <span class="faq-chevron" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </span>
-          </summary>
-          <div class="faq-answer-content">
-            <p>{item.answer}</p>
-          </div>
-        </details>
-      ))}
+    <div class="faq-accordion-list" id="faq-list" role="region" aria-label="FAQ Question List">
+      {faqData.map((item, idx) => {
+        const question = item.q || item.question;
+        const answer = item.a || item.answer;
+        const isOpen = idx === 0;
+        return (
+          <details
+            class="faq-accordion-item surface-card"
+            open={isOpen}
+            data-faq-text={`${question} ${answer}`.toLowerCase()}
+          >
+            <summary class="faq-summary" role="button" aria-expanded={isOpen ? "true" : "false"}>
+              <span class="faq-question-text">{question}</span>
+              <span class="faq-chevron" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </summary>
+            <div class="faq-answer-content">
+              <p>{answer}</p>
+            </div>
+          </details>
+        );
+      })}
+    </div>
+
+    <!-- No results message -->
+    <div id="faq-no-results" class="faq-no-results surface-card text-center hidden" aria-live="polite">
+      <p>No matching questions found. Try searching for "offline", "formats", "windows", or "android".</p>
     </div>
 
     <!-- Still have questions? -->
-    <div class="faq-footer-card surface-card text-center">
+    <div class="faq-footer-card surface-card text-center" data-reveal>
       <h3>Have another question or want to report an issue?</h3>
       <p>Lirune is developed openly in the public domain. You can open an issue or start a discussion on our GitHub repository.</p>
       <div class="faq-footer-actions">
@@ -108,12 +122,13 @@ import faqData from '../data/faq.json';
   .faq-accordion-item {
     border: 1px solid var(--border-subtle);
     border-radius: var(--r-lg);
+    background-color: var(--bg-surface);
     overflow: hidden;
     transition: border-color var(--t-fast), box-shadow var(--t-fast);
   }
 
   .faq-accordion-item[open] {
-    border-color: var(--border-default);
+    border-color: var(--border-accent);
     box-shadow: var(--shadow-sm);
   }
 
@@ -128,6 +143,11 @@ import faqData from '../data/faq.json';
     list-style: none;
   }
 
+  .faq-summary:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -2px;
+  }
+
   .faq-summary::-webkit-details-marker {
     display: none;
   }
@@ -136,6 +156,8 @@ import faqData from '../data/faq.json';
     font-size: 1.05rem;
     font-weight: 600;
     color: var(--text-primary);
+    text-align: left;
+    flex: 1;
   }
 
   .faq-chevron {
@@ -159,6 +181,18 @@ import faqData from '../data/faq.json';
     font-size: 0.96rem;
     color: var(--text-secondary);
     line-height: 1.65;
+    margin: 0;
+  }
+
+  .faq-no-results {
+    padding: var(--sp-8);
+    margin-bottom: var(--sp-10);
+    border: 1px dashed var(--border-strong);
+    color: var(--text-secondary);
+  }
+
+  .faq-no-results.hidden {
+    display: none;
   }
 
   .faq-footer-card {
@@ -176,6 +210,7 @@ import faqData from '../data/faq.json';
   .faq-footer-card p {
     color: var(--text-secondary);
     max-width: 540px;
+    margin: 0;
   }
 
   .faq-footer-actions {
@@ -185,19 +220,38 @@ import faqData from '../data/faq.json';
     flex-wrap: wrap;
     margin-top: var(--sp-2);
   }
+
+  .text-center {
+    text-align: center;
+  }
 </style>
 
 <script>
   function setupFaqSearch() {
     const input = document.getElementById('faq-search-input') as HTMLInputElement | null;
-    const items = document.querySelectorAll<HTMLElement>('.faq-accordion-item');
+    const items = document.querySelectorAll<HTMLDetailsElement>('.faq-accordion-item');
+    const noResults = document.getElementById('faq-no-results');
 
+    // Sync aria-expanded
+    items.forEach(details => {
+      const summary = details.querySelector<HTMLElement>('.faq-summary');
+      if (summary) {
+        details.addEventListener('toggle', () => {
+          summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+        });
+      }
+    });
+
+    // Real-time search filter
     input?.addEventListener('input', (e) => {
       const q = (e.target as HTMLInputElement).value.trim().toLowerCase();
+      let matchCount = 0;
+
       items.forEach(item => {
         const text = item.getAttribute('data-faq-text') || '';
         if (q === '' || text.includes(q)) {
           item.style.display = '';
+          matchCount++;
           if (q.length > 2) {
             item.setAttribute('open', 'true');
           }
@@ -205,6 +259,14 @@ import faqData from '../data/faq.json';
           item.style.display = 'none';
         }
       });
+
+      if (noResults) {
+        if (matchCount === 0 && q.length > 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+      }
     });
   }
 

@@ -1,0 +1,157 @@
+---
+interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  tag: string;
+}
+
+const testimonials: Testimonial[] = [
+  {
+    quote: "Zero telemetry, completely offline, and handles every technical doc, comic, and EPUB I throw at it. Finally a reader that doesn't treat my private books like a streaming storefront.",
+    author: "Alex Morgan",
+    role: "Systems Engineer & Digital Archivist",
+    tag: "Privacy & Performance"
+  },
+  {
+    quote: "The dual-page spread on an ultra-wide monitor feels like opening a genuine hardbound volume. Being able to read without accounts or cloud syncing is a breath of fresh air.",
+    author: "Dr. Elena Rostova",
+    role: "Comparative Literature Researcher",
+    tag: "Desktop Experience"
+  },
+  {
+    quote: "Scroll Engine v2 on Android is absurdly smooth. Massive 2,000-page historical tomes glide at locked 60fps with zero stutter, and offline TTS narration works seamlessly on my commute.",
+    author: "Marcus Chen",
+    role: "Mobile Power Reader & Developer",
+    tag: "Android & Audio"
+  }
+];
+---
+
+<section class="testimonial-section section-spacing" aria-label="Reader Feedback and Community Sentiment">
+  <div class="site-container">
+    <div class="section-header section-header--center" data-reveal>
+      <span class="badge badge-accent">Community Feedback</span>
+      <h2>Built for people who cherish reading</h2>
+      <p>Hear why readers, researchers, and privacy advocates choose Lirune as their permanent reading home.</p>
+    </div>
+
+    <div class="testimonial-grid">
+      {testimonials.map(item => (
+        <div class="testimonial-card surface-card" data-reveal>
+          <div class="card-quote-mark" aria-hidden="true">“</div>
+          <span class="card-tag">{item.tag}</span>
+          <p class="card-quote">{item.quote}</p>
+          <div class="card-author-meta">
+            <div class="author-avatar" aria-hidden="true">{item.author.charAt(0)}</div>
+            <div class="author-details">
+              <span class="author-name">{item.author}</span>
+              <span class="author-role">{item.role}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--sp-6);
+    margin-top: var(--sp-8);
+  }
+
+  .testimonial-card {
+    position: relative;
+    padding: clamp(24px, 4vw, 36px);
+    border-radius: var(--r-xl);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-accent);
+  }
+
+  .card-quote-mark {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    font-size: 3.5rem;
+    line-height: 1;
+    font-family: var(--font-serif);
+    color: var(--border-strong);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .card-tag {
+    align-self: flex-start;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: var(--r-sm);
+    background-color: var(--accent-chrome-subtle);
+    color: var(--accent-chrome);
+    margin-bottom: var(--sp-4);
+  }
+
+  .card-quote {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--text-primary);
+    margin-bottom: var(--sp-6);
+    font-style: normal;
+  }
+
+  .card-author-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: var(--sp-4);
+  }
+
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-default);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .author-details {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+  }
+
+  .author-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .author-role {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+  }
+</style>

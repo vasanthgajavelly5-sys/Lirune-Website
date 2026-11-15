@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FeatureSection from '../components/FeatureSection.astro';
 import config from '../data/config.json';
 ---
 
@@ -10,11 +11,14 @@ import config from '../data/config.json';
 >
   <div class="site-container section-spacing">
     <!-- Header -->
-    <div class="section-header section-header--center">
+    <div class="section-header section-header--center" data-reveal>
       <span class="badge badge-success">Engine & Capabilities</span>
       <h1>Crafted for the art of reading</h1>
       <p>Lirune combines a high-performance offline rendering engine with deliberate, calm design to create the optimal environment for your personal digital library.</p>
     </div>
+
+    <!-- Core 6-Feature Cards Grid -->
+    <FeatureSection />
 
     <!-- Features Narrative Stack -->
     <div class="features-stack">

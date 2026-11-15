@@ -6,126 +6,190 @@
    ============================================================= */
 
 :root {
-  /* Default Dark Mode (Matching Lirune Reader obsidian default shell) */
+  /* Default Theme Mode */
   --theme-mode: "dark";
 
+  /* =============================================================
+     TASK B: CORE DESIGN TOKENS (DARK MODE DEFAULT)
+     ============================================================= */
+
+  /* Colors — Dark Theme (Obsidian Shell & Crisp Contrast) */
+  --color-primary:        #8DB7CC;
+  --color-primary-dark:   #1F4A6A;
+  --color-secondary:      #A2A0B8;
+  --color-accent:         #EEECF8;
+  --color-bg:             #0F1217;
+  --color-bg-secondary:   #161B22;
+  --color-surface:        #181D26;
+  --color-text:           #F0EEF8;
+  --color-text-muted:     #8C8A9E;
+  --color-border:         rgba(255, 255, 255, 0.12);
+  --color-success:        #34D399;
+  --color-warning:        #FBBF24;
+  --color-danger:         #F87171;
+
+  /* Typography */
+  --font-family-base:     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", system-ui, sans-serif;
+  --font-family-heading:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", system-ui, sans-serif;
+  --font-family-serif:    "Iowan Old Style", "Apple Garamond", "Baskerville", "Times New Roman", Georgia, serif;
+  --font-family-mono:     ui-monospace, SFMono-Regular, "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+
+  --font-size-xs:         0.75rem;    /* 12px */
+  --font-size-sm:         0.875rem;   /* 14px */
+  --font-size-base:       1rem;       /* 16px */
+  --font-size-lg:         1.125rem;   /* 18px */
+  --font-size-xl:         1.25rem;    /* 20px */
+  --font-size-2xl:        1.5rem;     /* 24px */
+  --font-size-3xl:        1.875rem;   /* 30px */
+  --font-size-4xl:        2.25rem;    /* 36px */
+
+  /* Spacing scale */
+  --spacing-1:            4px;
+  --spacing-2:            8px;
+  --spacing-3:            12px;
+  --spacing-4:            16px;
+  --spacing-6:            24px;
+  --spacing-8:            32px;
+  --spacing-12:           48px;
+  --spacing-16:           64px;
+  --spacing-20:           80px;
+  --spacing-24:           96px;
+
+  /* Border radius */
+  --radius-sm:            6px;
+  --radius-md:            10px;
+  --radius-lg:            14px;
+  --radius-xl:            20px;
+  --radius-full:          9999px;
+
+  /* Shadows (Depth with soft diffusion) */
+  --shadow-sm:            0 2px 8px rgba(0, 0, 0, 0.40);
+  --shadow-md:            0 6px 20px rgba(0, 0, 0, 0.48);
+  --shadow-lg:            0 12px 40px rgba(0, 0, 0, 0.58);
+  --shadow-xl:            0 24px 64px rgba(0, 0, 0, 0.68);
+
+  /* Motion tokens */
+  --duration-instant:     100ms;
+  --duration-fast:        150ms;
+  --duration-normal:      250ms;
+  --duration-moderate:    380ms;
+  --duration-slow:        400ms;
+  --duration-reveal:      600ms;
+
+  --easing-default:       cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-spring:        cubic-bezier(0.34, 1.56, 0.64, 1);
+  --easing-enter:         cubic-bezier(0, 0, 0.2, 1);
+  --easing-exit:          cubic-bezier(0.4, 0, 1, 1);
+
+  /* Shorthand transition timing variables */
+  --ease-out:             cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:          cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring:          var(--easing-spring);
+  --ease-soft:            cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  --t-fast:               var(--duration-fast) var(--easing-default);
+  --t-normal:             var(--duration-normal) var(--easing-default);
+  --t-moderate:           var(--duration-moderate) var(--ease-out);
+  --t-slow:               var(--duration-slow) var(--easing-default);
+  --t-spring:             var(--duration-normal) var(--easing-spring);
+  --t-color:              200ms ease;
+
+  /* =============================================================
+     BACKWARDS-COMPATIBILITY ALIASES & COMPONENT BRIDGES
+     ============================================================= */
+
   /* Background Hierarchy */
-  --bg-base:        #0F1217;
-  --bg-surface:     #161B22;
-  --bg-elevated:    #1E242E;
-  --bg-card:        #181D26;
-  --bg-subtle:      #12161D;
-  --bg-overlay:     #252C38;
-  --bg-hover:       rgba(255, 255, 255, 0.06);
-  --bg-active:      rgba(255, 255, 255, 0.10);
-  --bg-glass:       rgba(15, 18, 23, 0.82);
-  --bg-scrim:       rgba(0, 0, 0, 0.75);
-  --bg-input:       rgba(255, 255, 255, 0.05);
+  --bg-base:              var(--color-bg);
+  --bg-surface:           var(--color-bg-secondary);
+  --bg-elevated:          #1E242E;
+  --bg-card:              var(--color-surface);
+  --bg-subtle:            #12161D;
+  --bg-overlay:           #252C38;
+  --bg-hover:             rgba(255, 255, 255, 0.06);
+  --bg-active:            rgba(255, 255, 255, 0.10);
+  --bg-glass:             rgba(15, 18, 23, 0.82);
+  --bg-scrim:             rgba(0, 0, 0, 0.75);
+  --bg-input:             rgba(255, 255, 255, 0.05);
 
   /* Text & Readability */
-  --text-primary:   #F0EEF8;
-  --text-secondary: #A2A0B8;
-  --text-tertiary:  #706E82;
-  --text-muted:     #8C8A9E;
-  --text-on-accent: #0F1217;
+  --text-primary:         var(--color-text);
+  --text-secondary:       var(--color-secondary);
+  --text-tertiary:        #706E82;
+  --text-muted:           var(--color-text-muted);
+  --text-on-accent:       #0F1217;
 
   /* Accent & Brand */
-  --accent:           #EEECF8;
-  --accent-hover:     #FFFFFF;
-  --accent-active:    #D8D4EE;
-  --accent-subtle:    rgba(238, 236, 248, 0.12);
-  --accent-subtle-h:  rgba(238, 236, 248, 0.20);
-  --accent-text:      #EEECF8;
+  --accent:               var(--color-accent);
+  --accent-hover:         #FFFFFF;
+  --accent-active:        #D8D4EE;
+  --accent-subtle:        rgba(238, 236, 248, 0.12);
+  --accent-subtle-h:      rgba(238, 236, 248, 0.20);
+  --accent-text:          var(--color-accent);
 
-  --accent-chrome:        #8DB7CC;
+  --accent-chrome:        var(--color-primary);
   --accent-chrome-hover:  #A7C9D9;
   --accent-chrome-subtle: rgba(141, 183, 204, 0.14);
 
   /* Status & Platforms */
-  --color-windows:    #60A5FA;
-  --color-android:    #34D399;
-  --color-store:      #60A5FA;
-  --color-coffee:     #FBBF24;
-  --color-coffee-text:#0F1217;
-  --status-success:   #34D399;
-  --status-warning:   #FBBF24;
-  --status-info:      #60A5FA;
+  --color-windows:        #60A5FA;
+  --color-android:        #34D399;
+  --color-store:          #60A5FA;
+  --color-coffee:         #FBBF24;
+  --color-coffee-text:    #0F1217;
+  --color-coffee-bg:      rgba(251, 191, 36, 0.12);
+  --color-coffee-border:  rgba(251, 191, 36, 0.35);
+
+  --status-success:       var(--color-success);
+  --status-warning:       var(--color-warning);
+  --status-info:          #60A5FA;
+  --status-danger:        var(--color-danger);
 
   /* Borders & Hairlines */
-  --border-subtle:  rgba(255, 255, 255, 0.07);
-  --border-default: rgba(255, 255, 255, 0.12);
-  --border-strong:  rgba(255, 255, 255, 0.20);
-  --border-accent:  rgba(141, 183, 204, 0.40);
-  --border-brand:   rgba(238, 236, 248, 0.35);
+  --border-subtle:        rgba(255, 255, 255, 0.07);
+  --border-default:       var(--color-border);
+  --border-strong:        rgba(255, 255, 255, 0.20);
+  --border-accent:        rgba(141, 183, 204, 0.40);
+  --border-brand:         rgba(238, 236, 248, 0.35);
 
   /* Focus Indicator */
-  --focus-ring:     #8DB7CC;
-
-  /* Shadows (Depth with soft diffusion) */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.40);
-  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.48);
-  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.58);
-  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.68);
+  --focus-ring:           var(--color-primary);
 
   /* Device Mockup Bezels */
-  --device-bezel:   #232A35;
-  --device-header:  #161B22;
+  --device-bezel:         #232A35;
+  --device-header:        #161B22;
 
-  /* Typography */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", system-ui, sans-serif;
-  --font-serif: "Iowan Old Style", "Apple Garamond", "Baskerville", "Times New Roman", "Droid Serif", Georgia, serif;
-  --font-mono: ui-monospace, SFMono-Regular, "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  /* Typography aliases */
+  --font-sans:            var(--font-family-base);
+  --font-serif:           var(--font-family-serif);
+  --font-mono:            var(--font-family-mono);
 
-  /* Radii */
-  --r-xs: 3px;
-  --r-sm: 6px;
-  --r-md: 10px;
-  --r-lg: 14px;
-  --r-xl: 20px;
-  --r-2xl: 28px;
-  --r-full: 9999px;
+  /* Radii aliases */
+  --r-xs:                 3px;
+  --r-sm:                 var(--radius-sm);
+  --r-md:                 var(--radius-md);
+  --r-lg:                 var(--radius-lg);
+  --r-xl:                 var(--radius-xl);
+  --r-2xl:                28px;
+  --r-full:               var(--radius-full);
 
-  /* Spacing Scale */
-  --sp-1: 4px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 20px;
-  --sp-6: 24px;
-  --sp-8: 32px;
-  --sp-10: 40px;
-  --sp-12: 48px;
-  --sp-16: 64px;
-  --sp-20: 80px;
-  --sp-24: 96px;
+  /* Spacing Scale aliases */
+  --sp-1:                 var(--spacing-1);
+  --sp-2:                 var(--spacing-2);
+  --sp-3:                 var(--spacing-3);
+  --sp-4:                 var(--spacing-4);
+  --sp-5:                 20px;
+  --sp-6:                 var(--spacing-6);
+  --sp-8:                 var(--spacing-8);
+  --sp-10:                40px;
+  --sp-12:                var(--spacing-12);
+  --sp-16:                var(--spacing-16);
+  --sp-20:                var(--spacing-20);
+  --sp-24:                var(--spacing-24);
 
   /* Containers & Layout Gutters */
-  --container-max: 1240px;
-  --container-narrow: 860px;
-  --page-gutter: clamp(16px, 3.5vw, 32px);
-
-  /* Coffee / Support Token Extensions */
-  --color-coffee-bg: rgba(251, 191, 36, 0.12);
-  --color-coffee-border: rgba(251, 191, 36, 0.35);
-
-  /* Coherent Motion Tokens */
-  --duration-instant: 100ms;
-  --duration-fast: 180ms;
-  --duration-normal: 280ms;
-  --duration-moderate: 420ms;
-  --duration-slow: 600ms;
-
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
-
-  --t-fast: var(--duration-fast) var(--ease-out);
-  --t-normal: var(--duration-normal) var(--ease-out);
-  --t-moderate: var(--duration-moderate) var(--ease-out);
-  --t-slow: var(--duration-slow) var(--ease-out);
-  --t-spring: var(--duration-normal) var(--ease-spring);
-  --t-color: 200ms ease;
+  --container-max:        1240px;
+  --container-narrow:     860px;
+  --page-gutter:          clamp(16px, 3.5vw, 32px);
 }
 
 /* =============================================================
@@ -137,67 +201,100 @@
 html[data-theme="light"] {
   --theme-mode: "light";
 
+  /* Core Colors */
+  --color-primary:        #1F4A6A;
+  --color-primary-dark:   #10283A;
+  --color-secondary:      #4B5061;
+  --color-accent:         #245579;
+  --color-bg:             #F8F8FA;
+  --color-bg-secondary:   #FFFFFF;
+  --color-surface:        #FFFFFF;
+  --color-text:           #14171F;
+  --color-text-muted:     #63687A;
+  --color-border:         rgba(20, 23, 31, 0.14);
+  --color-success:        #0F9D58;
+  --color-warning:        #D97706;
+  --color-danger:         #DC2626;
+
   /* Background Hierarchy */
-  --bg-base:        #F8F8FA;
-  --bg-surface:     #FFFFFF;
-  --bg-elevated:    #F1F2F6;
-  --bg-card:        #FFFFFF;
-  --bg-subtle:      #F0F1F5;
-  --bg-overlay:     #E8E9F0;
-  --bg-hover:       rgba(20, 23, 31, 0.05);
-  --bg-active:      rgba(20, 23, 31, 0.09);
-  --bg-glass:       rgba(248, 248, 250, 0.85);
-  --bg-scrim:       rgba(20, 23, 31, 0.60);
-  --bg-input:       rgba(20, 23, 31, 0.04);
+  --bg-base:              var(--color-bg);
+  --bg-surface:           var(--color-surface);
+  --bg-elevated:          #F1F2F6;
+  --bg-card:              #FFFFFF;
+  --bg-subtle:            #F0F1F5;
+  --bg-overlay:           #E8E9F0;
+  --bg-hover:             rgba(20, 23, 31, 0.05);
+  --bg-active:            rgba(20, 23, 31, 0.09);
+  --bg-glass:             rgba(248, 248, 250, 0.85);
+  --bg-scrim:             rgba(20, 23, 31, 0.60);
+  --bg-input:             rgba(20, 23, 31, 0.04);
 
   /* Text & Readability (WCAG AAA compliant contrast) */
-  --text-primary:   #14171F;
-  --text-secondary: #4B5061;
-  --text-tertiary:  #6E7385;
-  --text-muted:     #63687A;
-  --text-on-accent: #FFFFFF;
+  --text-primary:         var(--color-text);
+  --text-secondary:       var(--color-secondary);
+  --text-tertiary:        #6E7385;
+  --text-muted:           var(--color-text-muted);
+  --text-on-accent:       #FFFFFF;
 
   /* Accent & Brand */
-  --accent:           #1F4A6A;
-  --accent-hover:     #163750;
-  --accent-active:    #10283A;
-  --accent-subtle:    rgba(31, 74, 106, 0.08);
-  --accent-subtle-h:  rgba(31, 74, 106, 0.14);
-  --accent-text:      #1F4A6A;
+  --accent:               #1F4A6A;
+  --accent-hover:         #163750;
+  --accent-active:        #10283A;
+  --accent-subtle:        rgba(31, 74, 106, 0.08);
+  --accent-subtle-h:      rgba(31, 74, 106, 0.14);
+  --accent-text:          #1F4A6A;
 
   --accent-chrome:        #245579;
   --accent-chrome-hover:  #1B415D;
   --accent-chrome-subtle: rgba(36, 85, 121, 0.10);
 
   /* Status & Platforms */
-  --color-windows:    #0067B8;
-  --color-android:    #0F9D58;
-  --color-store:      #0067B8;
-  --color-coffee:     #B45309;
-  --color-coffee-text:#FFFFFF;
-  --color-coffee-bg:   rgba(180, 83, 9, 0.10);
-  --color-coffee-border: rgba(180, 83, 9, 0.28);
-  --status-success:   #0F9D58;
-  --status-warning:   #D97706;
-  --status-info:      #0067B8;
+  --color-windows:        #0067B8;
+  --color-android:        #0F9D58;
+  --color-store:          #0067B8;
+  --color-coffee:         #B45309;
+  --color-coffee-text:    #FFFFFF;
+  --color-coffee-bg:      rgba(180, 83, 9, 0.10);
+  --color-coffee-border:  rgba(180, 83, 9, 0.28);
+
+  --status-success:       var(--color-success);
+  --status-warning:       var(--color-warning);
+  --status-info:          #0067B8;
+  --status-danger:        var(--color-danger);
 
   /* Borders & Hairlines */
-  --border-subtle:  rgba(20, 23, 31, 0.08);
-  --border-default: rgba(20, 23, 31, 0.14);
-  --border-strong:  rgba(20, 23, 31, 0.22);
-  --border-accent:  rgba(31, 74, 106, 0.38);
-  --border-brand:   rgba(31, 74, 106, 0.30);
+  --border-subtle:        rgba(20, 23, 31, 0.08);
+  --border-default:       var(--color-border);
+  --border-strong:        rgba(20, 23, 31, 0.22);
+  --border-accent:        rgba(31, 74, 106, 0.38);
+  --border-brand:         rgba(31, 74, 106, 0.30);
 
   /* Focus Indicator */
-  --focus-ring:     #1F4A6A;
+  --focus-ring:           var(--color-primary);
 
   /* Shadows (Subtle, paper-like ambient occlusion) */
-  --shadow-sm: 0 1px 4px rgba(20, 23, 31, 0.05);
-  --shadow-md: 0 4px 16px rgba(20, 23, 31, 0.07);
-  --shadow-lg: 0 10px 32px rgba(20, 23, 31, 0.09);
-  --shadow-xl: 0 20px 48px rgba(20, 23, 31, 0.12);
+  --shadow-sm:            0 1px 4px rgba(20, 23, 31, 0.05);
+  --shadow-md:            0 4px 16px rgba(20, 23, 31, 0.07);
+  --shadow-lg:            0 10px 32px rgba(20, 23, 31, 0.09);
+  --shadow-xl:            0 20px 48px rgba(20, 23, 31, 0.12);
 
   /* Device Mockup Bezels */
-  --device-bezel:   #E2E4EC;
-  --device-header:  #ECEEF5;
+  --device-bezel:         #E2E4EC;
+  --device-header:        #ECEEF5;
+}
+
+/* System dark mode fallback when data-theme is not explicitly set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-primary:        #8DB7CC;
+    --color-primary-dark:   #1F4A6A;
+    --color-secondary:      #A2A0B8;
+    --color-accent:         #EEECF8;
+    --color-bg:             #0F1217;
+    --color-bg-secondary:   #161B22;
+    --color-surface:        #181D26;
+    --color-text:           #F0EEF8;
+    --color-text-muted:     #8C8A9E;
+    --color-border:         rgba(255, 255, 255, 0.12);
+  }
 }

@@ -46,6 +46,14 @@ import releases from '../data/releases.json';
             <span class="spec-value font-mono">v{releases.windows.version}</span>
           </div>
           <div class="spec-row">
+            <span class="spec-label">Release Date</span>
+            <span class="spec-value">{releases.windows.releaseDate}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">File Size</span>
+            <span class="spec-value font-mono">{releases.windows.fileSize || '119.7 MB'}</span>
+          </div>
+          <div class="spec-row">
             <span class="spec-label">Compatibility</span>
             <span class="spec-value">{releases.windows.requirements}</span>
           </div>
@@ -61,6 +69,16 @@ import releases from '../data/releases.json';
             <span class="spec-label">License</span>
             <span class="spec-value">GNU GPL-3.0 (Copyleft)</span>
           </div>
+        </div>
+
+        <!-- What's New Summary -->
+        <div class="download-highlights-panel">
+          <h3 class="highlights-heading">What's New in v{releases.windows.version}</h3>
+          <ul class="highlights-list" role="list">
+            {releases.windows.highlights.map(item => (
+              <li>{item}</li>
+            ))}
+          </ul>
         </div>
 
         <!-- Clean Download Buttons (Simplified labels) -->
@@ -106,6 +124,10 @@ import releases from '../data/releases.json';
             <p class="verify-instructions">
               To verify on Windows, run in PowerShell:
               <br />
+              <code>Get-FileHash -Algorithm SHA256 {releases.windows.installerFilename}</code>
+              <br />
+              <span class="verify-alt">Or in Command Prompt:</span>
+              <br />
               <code>certutil -hashfile {releases.windows.installerFilename} SHA256</code>
             </p>
           </div>
@@ -141,6 +163,14 @@ import releases from '../data/releases.json';
             <span class="spec-value font-mono">v{releases.android.version}</span>
           </div>
           <div class="spec-row">
+            <span class="spec-label">Release Date</span>
+            <span class="spec-value">{releases.android.releaseDate}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">File Size</span>
+            <span class="spec-value font-mono">{releases.android.fileSize || '74.0 MB'}</span>
+          </div>
+          <div class="spec-row">
             <span class="spec-label">Compatibility</span>
             <span class="spec-value">{releases.android.requirements}</span>
           </div>
@@ -156,6 +186,16 @@ import releases from '../data/releases.json';
             <span class="spec-label">Distribution</span>
             <span class="spec-value">Direct Release APK (GitHub)</span>
           </div>
+        </div>
+
+        <!-- What's New Summary -->
+        <div class="download-highlights-panel">
+          <h3 class="highlights-heading">What's New in v{releases.android.version}</h3>
+          <ul class="highlights-list" role="list">
+            {releases.android.highlights.map(item => (
+              <li>{item}</li>
+            ))}
+          </ul>
         </div>
 
         <!-- Clean Download Buttons (Simplified labels) -->
@@ -199,7 +239,11 @@ import releases from '../data/releases.json';
             </div>
             <code class="checksum-hash">{releases.android.sha256}</code>
             <p class="verify-instructions">
-              To verify on Linux/macOS or Android terminal, run:
+              To verify on PowerShell:
+              <br />
+              <code>Get-FileHash -Algorithm SHA256 {releases.android.apkFilename}</code>
+              <br />
+              <span class="verify-alt">On Linux / macOS / Android terminal:</span>
               <br />
               <code>sha256sum {releases.android.apkFilename}</code>
             </p>

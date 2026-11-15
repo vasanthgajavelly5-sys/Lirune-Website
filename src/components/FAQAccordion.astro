@@ -10,36 +10,55 @@ const { limit, showAllLink = false } = Astro.props;
 const faqs = limit ? allFaqs.slice(0, limit) : allFaqs;
 ---
 
-<div class="faq-accordion-component">
+<div class="faq-accordion-component" aria-label="Frequently Asked Questions Accordion">
   <div class="faq-list">
-    {faqs.map((item, idx) => (
-      <details class="faq-item" open={idx === 0}>
-        <summary class="faq-question">
-          <span class="q-text">{item.q}</span>
-          <span class="faq-arrow" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-          </span>
-        </summary>
-        <div class="faq-answer">
-          <p>{item.a}</p>
-        </div>
-      </details>
-    ))}
+    {faqs.map((item, idx) => {
+      const q = item.q || item.question;
+      const a = item.a || item.answer;
+      return (
+        <details class="faq-item surface-card" open={idx === 0}>
+          <summary class="faq-question" role="button" aria-expanded={idx === 0 ? "true" : "false"}>
+            <span class="q-text">{q}</span>
+            <span class="faq-arrow" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </summary>
+          <div class="faq-answer">
+            <p>{a}</p>
+          </div>
+        </details>
+      );
+    })}
   </div>
 
   {showAllLink && (
     <div class="faq-footer-link text-center">
       <a href="/faq" class="btn btn-secondary">
-        View all frequently asked questions →
+        <span>View all frequently asked questions →</span>
       </a>
     </div>
   )}
 </div>
 
+<script>
+  // Ensure aria-expanded stays synchronized with <details> open states for accessibility
+  document.querySelectorAll<HTMLDetailsElement>('.faq-accordion-component .faq-item').forEach((details) => {
+    const summary = details.querySelector<HTMLElement>('.faq-question');
+    if (!summary) return;
+    
+    details.addEventListener('toggle', () => {
+      summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+    });
+  });
+</script>
+
 <style>
   .faq-accordion-component {
     max-width: 860px;
     margin: 0 auto;
+    width: 100%;
   }
 
   .faq-list {
@@ -53,11 +72,11 @@ const faqs = limit ? allFaqs.slice(0, limit) : allFaqs;
     border: 1px solid var(--border-default);
     border-radius: var(--r-xl);
     overflow: hidden;
-    transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+    transition: border-color var(--t-fast), box-shadow var(--t-fast);
   }
 
   .faq-item[open] {
-    border-color: var(--border-strong);
+    border-color: var(--border-accent);
     box-shadow: var(--shadow-sm);
   }
 
@@ -65,6 +84,7 @@ const faqs = limit ? allFaqs.slice(0, limit) : allFaqs;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: var(--sp-4);
     padding: var(--sp-5) var(--sp-6);
     font-size: 1.1rem;
     font-weight: 650;
@@ -74,8 +94,18 @@ const faqs = limit ? allFaqs.slice(0, limit) : allFaqs;
     user-select: none;
   }
 
+  .faq-question:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: -2px;
+  }
+
   .faq-question::-webkit-details-marker {
     display: none;
+  }
+
+  .q-text {
+    flex: 1;
+    text-align: left;
   }
 
   .faq-arrow {
@@ -83,7 +113,8 @@ const faqs = limit ? allFaqs.slice(0, limit) : allFaqs;
     align-items: center;
     justify-content: center;
     color: var(--text-tertiary);
-    transition: transform var(--duration-normal) var(--ease-out), color var(--duration-fast) var(--ease-out);
+    transition: transform var(--t-normal), color var(--t-fast);
+    flex-shrink: 0;
   }
 
   .faq-item[open] .faq-arrow {
@@ -98,9 +129,15 @@ const faqs = limit ? allFaqs.slice(0, limit) : allFaqs;
     font-size: 1rem;
   }
 
-  .faq-footer-link {
-    margin-top: var(--sp-10);
+  .faq-answer p {
+    margin: 0;
   }
 
-  .text-center { text-align: center; }
+  .faq-footer-link {
+    margin-top: var(--sp-8);
+  }
+
+  .text-center {
+    text-align: center;
+  }
 </style>

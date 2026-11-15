@@ -2,10 +2,11 @@
 @import './motion.css';
 
 /* =============================================================
-   LIRUNE WEBSITE — Global Base Styles
-   Accessibility, responsive typography, Swiss-modern layout.
+   LIRUNE WEBSITE — Global Base Styles & Design Layer
+   CSS Reset, Accessible Typography, Responsive Utilities
    ============================================================= */
 
+/* 1. Modern CSS Reset / Normalize */
 *,
 *::before,
 *::after {
@@ -15,9 +16,9 @@
 }
 
 html {
-  font-family: var(--font-sans);
-  background-color: var(--bg-base);
-  color: var(--text-primary);
+  font-family: var(--font-family-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-size: 16px;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
@@ -27,18 +28,33 @@ html {
   scroll-padding-top: 84px;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-base);
-  color: var(--text-primary);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   overflow-x: hidden;
   transition: background-color var(--t-normal), color var(--t-normal);
 }
 
 main {
   flex: 1 0 auto;
+}
+
+img, picture, svg, video {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
 }
 
 /* =============================================================
@@ -54,7 +70,7 @@ main {
   padding: 10px 18px;
   font-weight: 600;
   font-size: 0.9rem;
-  border-radius: var(--r-md);
+  border-radius: var(--radius-md);
   z-index: 99999;
   text-decoration: none;
   transition: top var(--t-fast);
@@ -66,7 +82,7 @@ main {
   outline-offset: 3px;
 }
 
-/* Focus Visibility */
+/* Accessible Focus Visibility */
 :focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 3px;
@@ -79,7 +95,7 @@ main {
 /* Text Selection */
 ::selection {
   background: var(--accent-chrome-subtle);
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 
 /* Custom Scrollbars */
@@ -88,12 +104,12 @@ main {
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-base);
+  background: var(--color-bg);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--border-strong);
-  border-radius: var(--r-full);
-  border: 2px solid var(--bg-base);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-bg);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-tertiary);
@@ -104,7 +120,8 @@ main {
    ============================================================= */
 
 h1, h2, h3, h4, h5, h6 {
-  color: var(--text-primary);
+  font-family: var(--font-family-heading);
+  color: var(--color-text);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.025em;
@@ -128,11 +145,11 @@ h3 {
 }
 
 h4 {
-  font-size: 1.15rem;
+  font-size: var(--font-size-lg);
 }
 
 p {
-  color: var(--text-secondary);
+  color: var(--color-secondary);
   line-height: 1.65;
   max-width: 68ch;
 }
@@ -143,9 +160,30 @@ a {
   transition: color var(--t-fast);
 }
 
+/* =============================================================
+   CODE & PREFORMATTED STYLES
+   ============================================================= */
+
 code, kbd, samp, pre {
-  font-family: var(--font-mono);
+  font-family: var(--font-family-mono);
   font-size: 0.9em;
+}
+
+code:not(pre code) {
+  background-color: var(--bg-hover);
+  color: var(--color-primary);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+pre {
+  background-color: var(--color-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-4);
+  overflow-x: auto;
+  line-height: 1.5;
 }
 
 .tabular-nums {
@@ -153,9 +191,47 @@ code, kbd, samp, pre {
 }
 
 /* =============================================================
-   LAYOUT CONTAINERS
+   TABLE STYLES
    ============================================================= */
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  margin-top: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+
+th, td {
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+th {
+  font-weight: 600;
+  color: var(--color-text);
+  background-color: var(--bg-subtle);
+}
+
+td {
+  color: var(--color-secondary);
+}
+
+tr:hover td {
+  background-color: var(--bg-hover);
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* =============================================================
+   LAYOUT CONTAINERS & UTILITIES
+   ============================================================= */
+
+.container,
 .site-container {
   width: 100%;
   max-width: var(--container-max);
@@ -167,6 +243,20 @@ code, kbd, samp, pre {
 
 .site-container--narrow {
   max-width: var(--container-narrow);
+}
+
+/* Screen Reader Accessible Classes */
+.visually-hidden,
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 .section-spacing {
@@ -181,7 +271,7 @@ code, kbd, samp, pre {
 
 /* Section Header pattern */
 .section-header {
-  margin-bottom: var(--sp-10);
+  margin-bottom: var(--spacing-10);
 }
 
 .section-header--center {
@@ -192,12 +282,12 @@ code, kbd, samp, pre {
 }
 
 .section-header h2 {
-  margin-bottom: var(--sp-3);
+  margin-bottom: var(--spacing-3);
 }
 
 .section-header p {
   font-size: 1.125rem;
-  color: var(--text-secondary);
+  color: var(--color-secondary);
   margin-left: auto;
   margin-right: auto;
 }
@@ -210,9 +300,9 @@ code, kbd, samp, pre {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--sp-2);
+  gap: var(--spacing-2);
   padding: 12px 22px;
-  border-radius: var(--r-md);
+  border-radius: var(--radius-md);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1;
@@ -242,7 +332,7 @@ code, kbd, samp, pre {
 
 .btn-secondary {
   background-color: var(--bg-surface);
-  color: var(--text-primary);
+  color: var(--color-text);
   border-color: var(--border-default);
 }
 
@@ -254,17 +344,17 @@ code, kbd, samp, pre {
 
 .btn-subtle {
   background-color: transparent;
-  color: var(--text-secondary);
+  color: var(--color-secondary);
 }
 
 .btn-subtle:hover {
-  color: var(--text-primary);
+  color: var(--color-text);
   background-color: var(--bg-hover);
 }
 
 .btn-icon-only {
   padding: 10px;
-  border-radius: var(--r-md);
+  border-radius: var(--radius-md);
   min-width: 42px;
   min-height: 42px;
 }
@@ -275,12 +365,12 @@ code, kbd, samp, pre {
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
-  border-radius: var(--r-full);
+  border-radius: var(--radius-full);
   font-size: 0.8rem;
   font-weight: 600;
   line-height: 1;
   background-color: var(--accent-chrome-subtle);
-  color: var(--text-primary);
+  color: var(--color-text);
   border: 1px solid var(--border-default);
 }
 
@@ -303,7 +393,7 @@ code, kbd, samp, pre {
 .device-frame-desktop {
   background-color: var(--device-bezel);
   border: 1px solid var(--border-default);
-  border-radius: var(--r-lg);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-xl);
   transition: box-shadow var(--t-normal), transform var(--t-normal);
@@ -362,7 +452,7 @@ code, kbd, samp, pre {
   width: 80px;
   height: 16px;
   background-color: #000000;
-  border-radius: var(--r-full);
+  border-radius: var(--radius-full);
   z-index: 10;
 }
 
@@ -379,10 +469,10 @@ code, kbd, samp, pre {
    ============================================================= */
 
 .surface-card {
-  background-color: var(--bg-surface);
+  background-color: var(--color-surface);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--r-lg);
-  padding: var(--sp-6);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
   box-shadow: var(--shadow-sm);
   transition: all var(--t-fast);
 }
@@ -390,19 +480,4 @@ code, kbd, samp, pre {
 .surface-card:hover {
   border-color: var(--border-default);
   box-shadow: var(--shadow-md);
-}
-
-/* =============================================================
-   REDUCED MOTION
-   ============================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
 }

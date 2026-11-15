@@ -5,6 +5,8 @@ import ScreenshotLightbox from '../components/ScreenshotLightbox.astro';
 import { ViewTransitions } from 'astro:transitions';
 import config from '../data/config.json';
 import releases from '../data/releases.json';
+import '../styles/tokens.css';
+import '../styles/motion.css';
 import '../styles/global.css';
 
 interface Props {
@@ -154,7 +156,6 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
     <SiteHeader currentPath={cleanPath} />
     <main id="main-content">
       <slot />
@@ -162,7 +163,7 @@ const jsonLd = {
     <SiteFooter />
     <ScreenshotLightbox />
 
-    <!-- Motion & Interaction Runtime (Scroll Reveals, Copy Feedback & State Sync) -->
+    <!-- Motion & Interaction Runtime (Scroll Reveals, Stagger, and Copy Micro-interactions) -->
     <script is:inline>
       (function() {
         let observer = null;
@@ -170,15 +171,25 @@ const jsonLd = {
         function initMotionSystem() {
           if (observer) observer.disconnect();
 
+          const revealElements = document.querySelectorAll('.reveal, [data-reveal]');
+          const staggerContainers = document.querySelectorAll('.stagger-children, [data-stagger]');
+
           // Check reduced motion preference
           if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.querySelectorAll('[data-reveal]').forEach(el => el.setAttribute('data-reveal', 'active'));
-            document.querySelectorAll('[data-stagger]').forEach(el => el.setAttribute('data-stagger', 'active'));
+            revealElements.forEach(el => {
+              el.classList.add('is-visible');
+              el.setAttribute('data-reveal', 'active');
+            });
+            staggerContainers.forEach(container => {
+              container.classList.add('is-visible');
+              container.setAttribute('data-stagger', 'active');
+              Array.from(container.children).forEach(child => child.classList.add('is-visible'));
+            });
             return;
           }
 
           // Setup stagger indices
-          document.querySelectorAll('[data-stagger]').forEach(container => {
+          staggerContainers.forEach(container => {
             Array.from(container.children).forEach((child, idx) => {
               child.style.setProperty('--stagger-i', idx);
             });
@@ -188,9 +199,12 @@ const jsonLd = {
           observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
               if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
                 entry.target.setAttribute('data-reveal', 'active');
-                if (entry.target.hasAttribute('data-stagger')) {
+                if (entry.target.classList.contains('stagger-children') || entry.target.hasAttribute('data-stagger')) {
+                  entry.target.classList.add('is-visible');
                   entry.target.setAttribute('data-stagger', 'active');
+                  Array.from(entry.target.children).forEach(child => child.classList.add('is-visible'));
                 }
                 observer.unobserve(entry.target);
               }
@@ -200,7 +214,8 @@ const jsonLd = {
             rootMargin: '0px 0px -40px 0px'
           });
 
-          document.querySelectorAll('[data-reveal], [data-stagger]').forEach(el => observer.observe(el));
+          revealElements.forEach(el => observer.observe(el));
+          staggerContainers.forEach(el => observer.observe(el));
 
           // Interactive copy buttons
           document.querySelectorAll('.copy-checksum-btn').forEach(btn => {

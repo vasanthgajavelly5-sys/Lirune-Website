@@ -5,19 +5,19 @@ import releases from '../data/releases.json';
 ---
 
 <BaseLayout
-  title="Getting Started with Lirune Reader — Windows & Android Guide"
+  title="Getting Started with Lirune Reader — Windows & Android 5-Step Guide"
   description="Step-by-step onboarding walkthrough for setting up your personal digital library in Lirune Reader on Windows and Android."
   canonicalPath="/getting-started"
 >
   <div class="site-container site-container--narrow section-spacing">
-    <div class="section-header">
+    <div class="section-header section-header--center" data-reveal>
       <span class="badge badge-success">Onboarding Guide</span>
       <h1>Getting Started with Lirune</h1>
-      <p>A quick walkthrough to help you set up your offline library, import digital documents, and personalize your reading environment.</p>
+      <p>A quick, 5-step walkthrough to help you set up your offline library, import digital documents, and personalize your reading environment on Windows and Android.</p>
     </div>
 
     <!-- Platform Selector Tabs -->
-    <div class="tabs-container">
+    <div class="tabs-container" data-reveal>
       <div class="tabs-nav" role="tablist" aria-label="Platform Setup Guides">
         <button
           type="button"
@@ -30,7 +30,7 @@ import releases from '../data/releases.json';
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.628h11.377V24H0zm12.623 0H24V24H12.623z"/>
           </svg>
-          <span>Windows Guide</span>
+          <span>Windows 6.0.0 Guide</span>
         </button>
         <button
           type="button"
@@ -43,49 +43,78 @@ import releases from '../data/releases.json';
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-1.0003s.4482-1.0003.9993-1.0003c.5516 0 .9998.4486.9998 1.0003s-.4482 1.0003-.9998 1.0003m-11.046 0c-.5511 0-.9993-.4486-.9993-1.0003s.4482-1.0003.9993-1.0003c.5516 0 .9998.4486.9998 1.0003s-.4482 1.0003-.9998 1.0003m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.4116 13.8533 8.084 12 8.084c-1.8533 0-3.5902.3276-5.1378.8657L4.84 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.152 5.676l1.9972 3.4592C2.6889 16.275 0 20.443 0 25.3333h24c0-4.8903-2.689-9.0583-6.1185-16.0119"/>
           </svg>
-          <span>Android Guide</span>
+          <span>Android 5.0.0 Guide</span>
         </button>
       </div>
 
-      <!-- Windows Walkthrough Panel -->
+      <!-- ==================== WINDOWS 5-STEP FLOW ==================== -->
       <div class="tab-panel active" id="panel-windows" role="tabpanel" aria-labelledby="tab-windows">
-        <section class="guide-step surface-card">
-          <div class="step-badge">Step 1</div>
+        <!-- Step 1 -->
+        <section class="guide-step surface-card" data-reveal>
+          <div class="step-badge-col">
+            <span class="step-num">01</span>
+            <div class="step-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </div>
+          </div>
           <div class="step-content">
             <h2>Install Lirune on Windows</h2>
             <p>
-              Install directly from the <strong>Microsoft Store</strong> (recommended for automatic seamless updates) or download the standalone <code>{releases.windows.installerFilename}</code> installer.
+              Install directly from the <strong>Microsoft Store</strong> (recommended for automatic verified background updates) or download the standalone <code>{releases.windows.installerFilename}</code> installer for offline deployment.
             </p>
             <div class="guide-actions">
               <a href={config.microsoftStoreUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                 <span>Microsoft Store Listing ↗</span>
               </a>
-              <a href={releases.windows.installerUrl} class="btn btn-secondary">
-                <span>Download Installer (.exe)</span>
+              <a href="/downloads" class="btn btn-secondary">
+                <span>View Downloads Page</span>
               </a>
             </div>
           </div>
         </section>
 
-        <section class="guide-step surface-card">
-          <div class="step-badge">Step 2</div>
+        <!-- Step 2 -->
+        <section class="guide-step surface-card" data-reveal>
+          <div class="step-badge-col">
+            <span class="step-num">02</span>
+            <div class="step-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                <line x1="12" y1="11" x2="12" y2="17"></line>
+                <line x1="9" y1="14" x2="15" y2="14"></line>
+              </svg>
+            </div>
+          </div>
           <div class="step-content">
             <h2>Add your ebooks and documents</h2>
             <p>
-              Lirune does not copy your original book files into a hidden proprietary vault. You can:
+              Lirune does not copy your original book files into an opaque proprietary vault or cloud bucket. Your files remain yours:
             </p>
             <ul class="guide-bullets" role="list">
-              <li><strong>Drag and drop</strong> any supported file (e.g. <code>.epub</code>, <code>.pdf</code>, <code>.cbz</code>) directly onto the Lirune window.</li>
-              <li>Click the <strong>Add Book</strong> button in the top toolbar to browse your local filesystem.</li>
+              <li><strong>Drag and drop</strong> any supported file (e.g. <code>.epub</code>, <code>.pdf</code>, <code>.cbz</code>, <code>.docx</code>) directly onto the Lirune window.</li>
+              <li>Or click the <strong>Add Book</strong> button in the top toolbar to browse your local drives.</li>
             </ul>
             <p>
-              Cover images, titles, and author metadata are extracted and stored locally in your SQLite library database.
+              Cover images, titles, chapter structure, and author metadata are extracted and stored locally in your SQLite library database.
             </p>
           </div>
         </section>
 
-        <section class="guide-step surface-card">
-          <div class="step-badge">Step 3</div>
+        <!-- Step 3 -->
+        <section class="guide-step surface-card" data-reveal>
+          <div class="step-badge-col">
+            <span class="step-num">03</span>
+            <div class="step-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </div>
+          </div>
           <div class="step-content">
             <h2>Customize your reading environment</h2>
             <p>
@@ -93,78 +122,219 @@ import releases from '../data/releases.json';
             </p>
             <ul class="guide-bullets" role="list">
               <li>Switch between <strong>Two-Page Spread</strong> and <strong>Single-Column Flow</strong>.</li>
-              <li>Toggle between <strong>Obsidian Dark</strong>, <strong>Paper Cream</strong>, and <strong>Sepia</strong> themes.</li>
+              <li>Toggle between <strong>Obsidian Dark</strong>, <strong>Paper Cream</strong>, <strong>Sepia</strong>, and <strong>Nord</strong> themes.</li>
               <li>Press <kbd>F11</kbd> for distraction-free fullscreen reading.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Step 4 -->
+        <section class="guide-step surface-card" data-reveal>
+          <div class="step-badge-col">
+            <span class="step-num">04</span>
+            <div class="step-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+          </div>
+          <div class="step-content">
+            <h2>Organize collections and instant search</h2>
+            <p>
+              Keep large reading lists organized and discover quotes instantly:
+            </p>
+            <ul class="guide-bullets" role="list">
+              <li>Press <kbd>Ctrl+K</kbd> to bring up global library search for instant book filtering.</li>
+              <li>Group books into custom <strong>Collections</strong> or mark them as <strong>Favorites</strong>.</li>
+              <li>Use in-book search <kbd>Ctrl+F</kbd> with contextual preview snippets to jump to quotes in one click.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Step 5 -->
+        <section class="guide-step surface-card" data-reveal>
+          <div class="step-badge-col">
+            <span class="step-num">05</span>
+            <div class="step-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="step-content">
+            <h2>Local storage & portable backups</h2>
+            <p>
+              Your data remains completely under your control with zero cloud dependencies:
+            </p>
+            <ul class="guide-bullets" role="list">
+              <li>Navigate to <strong>Settings &gt; Storage &amp; Maintenance</strong>.</li>
+              <li>Click <strong>Export Library Backup</strong> to export metadata, bookmarks, and reading notes to a single JSON archive.</li>
+              <li>Move or restore your reading records across Windows and Android devices anytime.</li>
             </ul>
           </div>
         </section>
       </div>
 
-      <!-- Android Walkthrough Panel -->
+      <!-- ==================== ANDROID 5-STEP FLOW ==================== -->
       <div class="tab-panel" id="panel-android" role="tabpanel" aria-labelledby="tab-android" hidden>
-        <section class="guide-step surface-card">
-          <div class="step-badge">Step 1</div>
+        <!-- Step 1 -->
+        <section class="guide-step surface-card" data-reveal>
+          <div class="step-badge-col">
+            <span class="step-num">01</span>
+            <div class="step-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </div>
+          </div>
           <div class="step-content">
             <h2>Install the Android APK</h2>
             <p>
-              Download <code>{releases.android.apkFilename}</code> directly to your Android device from GitHub Releases.
+              Download <code>{releases.android.apkFilename}</code> directly to your Android device from the Downloads page or GitHub Releases.
             </p>
             <p>
               If your browser asks for permission to install apps, enable "Allow from this source" in your Android system settings.
             </p>
             <div class="guide-actions">
-              <a href={releases.android.apkUrl} class="btn btn-primary">
-                <span>Download Android APK</span>
+              <a href="/downloads#android" class="btn btn-primary">
+                <span>Get Android APK</span>
               </a>
             </div>
           </div>
         </section>
 
-        <section class="guide-step surface-card">
-          <div class="step-badge">Step 2</div>
+        <!-- Step 2 -->
+        <section class="guide-step surface-card" data-reveal>
+          <div class="step-badge-col">
+            <span class="step-num">02</span>
+            <div class="step-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+          </div>
           <div class="step-content">
             <h2>Grant Storage Access Framework (SAF) folder permission</h2>
             <p>
               Because Lirune requests zero invasive permissions, it uses Google's standard <strong>Storage Access Framework</strong>:
             </p>
             <ul class="guide-bullets" role="list">
-              <li>Tap <strong>Select Folder</strong> when opening the library.</li>
+              <li>Tap <strong>Select Folder</strong> when opening the library for the first time.</li>
               <li>Choose your device's <code>Books</code>, <code>Documents</code>, or <code>Download</code> folder.</li>
-              <li>Tap <strong>Use this folder</strong> to let Lirune read files within that directory.</li>
+              <li>Tap <strong>Use this folder</strong> to let Lirune index files within that directory locally.</li>
             </ul>
           </div>
         </section>
 
-        <section class="guide-step surface-card">
-          <div class="step-badge">Step 3</div>
+        <!-- Step 3 -->
+        <section class="guide-step surface-card" data-reveal>
+          <div class="step-badge-col">
+            <span class="step-num">03</span>
+            <div class="step-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+          </div>
           <div class="step-content">
-            <h2>Enjoy Scroll Engine v2 & Offline TTS</h2>
+            <h2>Experience Scroll Engine v2</h2>
             <p>
-              Tap any book cover to start reading. Tap the center of the screen to reveal the bottom reading toolbar:
+              Tap any book cover to start reading. Scroll Engine v2 delivers unified 60fps continuous touch scrolling:
             </p>
             <ul class="guide-bullets" role="list">
-              <li>Adjust font size, margins, and line height to match your screen size.</li>
-              <li>Tap the <strong>Headphones</strong> icon to activate offline Text-to-Speech audio narration.</li>
-              <li>Close the app or lock your screen: playback continues in the background.</li>
+              <li>Virtualizes chapter DOM nodes for smooth scrolling without stutter.</li>
+              <li>Consumes minimal CPU and battery, keeping your phone cool even on 2,000+ page documents.</li>
+              <li>Tap the center of the screen to reveal the quick bottom formatting toolbar.</li>
             </ul>
           </div>
         </section>
+
+        <!-- Step 4 -->
+        <section class="guide-step surface-card" data-reveal>
+          <div class="step-badge-col">
+            <span class="step-num">04</span>
+            <div class="step-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="step-content">
+            <h2>Listen with offline Text-to-Speech (TTS)</h2>
+            <p>
+              Transform any ebook into an audio experience without remote cloud audio APIs:
+            </p>
+            <ul class="guide-bullets" role="list">
+              <li>Tap the <strong>Headphones</strong> icon in the reading toolbar.</li>
+              <li>Playback uses Android's local speech synthesizer voices.</li>
+              <li>Lock your phone or switch apps: playback continues smoothly with lock-screen media controls.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Step 5 -->
+        <section class="guide-step surface-card" data-reveal>
+          <div class="step-badge-col">
+            <span class="step-num">05</span>
+            <div class="step-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="step-content">
+            <h2>Night reading & complete privacy</h2>
+            <p>
+              Customize for complete reading comfort with zero security exposure:
+            </p>
+            <ul class="guide-bullets" role="list">
+              <li>Select pure <strong>OLED Black</strong> mode to save battery on AMOLED screens.</li>
+              <li>Network permission is permanently stripped: <code>android.permission.INTERNET</code> is not present.</li>
+              <li>Your reading progress, speed, and library remain 100% private.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- "Now You're Reading" CTA Banner (TASK E requirement) -->
+    <div class="reading-cta-card surface-card text-center" data-reveal>
+      <div class="reading-cta-icon" aria-hidden="true">📖</div>
+      <h2>Now you're reading.</h2>
+      <p>
+        Your digital library is set up, private, and ready whenever you are. Enjoy peaceful reading across all 50+ formats.
+      </p>
+      <div class="reading-cta-actions">
+        <a href="/downloads" class="btn btn-primary btn-lg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Download Lirune Reader Free</span>
+        </a>
+        <a href="/formats" class="btn btn-secondary btn-lg">
+          <span>Explore All 50+ Formats</span>
+        </a>
       </div>
     </div>
   </div>
 </BaseLayout>
 
 <style>
+  /* Tabs Navigation */
   .tabs-container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-8);
+    margin-bottom: var(--sp-12);
   }
 
   .tabs-nav {
     display: flex;
-    align-items: center;
-    gap: var(--sp-2);
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-8);
     border-bottom: 1px solid var(--border-default);
     padding-bottom: var(--sp-2);
   }
@@ -172,11 +342,12 @@ import releases from '../data/releases.json';
   .tab-btn {
     display: inline-flex;
     align-items: center;
-    gap: var(--sp-2);
-    padding: 10px 18px;
-    border-radius: var(--r-md);
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: var(--r-md) var(--r-md) 0 0;
     background: transparent;
     border: none;
+    border-bottom: 2px solid transparent;
     color: var(--text-secondary);
     font-size: 0.95rem;
     font-weight: 600;
@@ -191,7 +362,8 @@ import releases from '../data/releases.json';
 
   .tab-btn.active {
     color: var(--accent);
-    background-color: var(--accent-subtle);
+    border-bottom-color: var(--accent);
+    background-color: var(--bg-surface);
   }
 
   .tab-panel {
@@ -209,18 +381,48 @@ import releases from '../data/releases.json';
     display: flex;
     gap: var(--sp-6);
     align-items: flex-start;
+    border-radius: var(--r-xl);
+    border: 1px solid var(--border-default);
+    background-color: var(--bg-surface);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast);
   }
 
-  .step-badge {
+  .guide-step:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-accent);
+  }
+
+  .step-badge-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--accent-chrome);
     padding: 4px 10px;
-    border-radius: var(--r-sm);
+    border-radius: var(--r-full);
     background-color: var(--accent-chrome-subtle);
     border: 1px solid var(--border-accent);
-    color: var(--accent-chrome);
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: 0.8rem;
-    white-space: nowrap;
+  }
+
+  .step-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-md);
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .step-content {
@@ -232,12 +434,15 @@ import releases from '../data/releases.json';
 
   .step-content h2 {
     font-size: 1.35rem;
+    color: var(--text-primary);
+    margin: 0;
   }
 
   .step-content p {
     font-size: 0.98rem;
     color: var(--text-secondary);
     line-height: 1.6;
+    margin: 0;
   }
 
   .guide-bullets {
@@ -245,22 +450,25 @@ import releases from '../data/releases.json';
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding-left: 4px;
+    padding-left: 0;
+    margin: 0;
   }
 
   .guide-bullets li {
     position: relative;
-    padding-left: 20px;
+    padding-left: 22px;
     font-size: 0.94rem;
     color: var(--text-secondary);
+    line-height: 1.5;
   }
 
   .guide-bullets li::before {
-    content: "•";
+    content: "✓";
     position: absolute;
-    left: 4px;
+    left: 2px;
     top: 0;
-    color: var(--accent-chrome);
+    color: var(--status-success);
+    font-weight: 700;
   }
 
   .guide-bullets strong {
@@ -277,13 +485,58 @@ import releases from '../data/releases.json';
 
   kbd {
     display: inline-block;
-    padding: 2px 6px;
+    padding: 2px 7px;
     border-radius: var(--r-sm);
     background-color: var(--bg-subtle);
-    border: 1px solid var(--border-default);
+    border: 1px solid var(--border-strong);
     font-family: var(--font-mono);
-    font-size: 0.8em;
+    font-size: 0.82em;
     color: var(--text-primary);
+  }
+
+  /* "Now You're Reading" CTA Card */
+  .reading-cta-card {
+    padding: clamp(36px, 6vw, 56px);
+    border-radius: var(--r-2xl);
+    border: 1px solid var(--border-default);
+    background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-card) 100%);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-4);
+    margin-top: var(--sp-12);
+  }
+
+  .reading-cta-icon {
+    font-size: 2.5rem;
+  }
+
+  .reading-cta-card h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .reading-cta-card p {
+    font-size: 1.08rem;
+    color: var(--text-secondary);
+    max-width: 580px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .reading-cta-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+    margin-top: var(--sp-3);
+  }
+
+  .text-center {
+    text-align: center;
   }
 </style>
 

@@ -1,50 +1,74 @@
 [
   {
-    "q": "What is Lirune Reader?",
-    "a": "Lirune Reader is a free, private, and open-source ebook and document reading application for Windows and Android. It is designed as a calm, distraction-free home for your digital library, supporting 50+ formats including ebooks, documents, spreadsheets, presentations, comic archives, images, and structured text."
+    "q": "What is Lirune?",
+    "question": "What is Lirune?",
+    "a": "Lirune Reader is a free, private, and open-source ebook and document reading application built for Windows and Android. It provides a calm, distraction-free home for your digital reading collection with native rendering for 50+ formats.",
+    "answer": "Lirune Reader is a free, private, and open-source ebook and document reading application built for Windows and Android. It provides a calm, distraction-free home for your digital reading collection with native rendering for 50+ formats."
   },
   {
-    "q": "Is Lirune free and open-source?",
-    "a": "Yes. Lirune Reader is 100% free software released under the GNU General Public License v3.0 (GPL-3.0). The full source code is publicly accessible on GitHub. There are no subscriptions, paywalls, or premium tiers."
+    "q": "Is it free?",
+    "question": "Is it free?",
+    "a": "Yes. Lirune Reader is 100% free software released under the GNU General Public License v3.0 (GPL-3.0). There are no paywalls, locked features, subscriptions, or advertisements.",
+    "answer": "Yes. Lirune Reader is 100% free software released under the GNU General Public License v3.0 (GPL-3.0). There are no paywalls, locked features, subscriptions, or advertisements."
   },
   {
-    "q": "Does Lirune require an account or internet connection?",
-    "a": "No. Lirune requires no account creation, no sign-up, and no internet access. The reader operates completely offline. On Android, the application release build permanently strips the `android.permission.INTERNET` permission, guaranteeing that your reading activity and files can never leave your device."
+    "q": "Does it upload my documents?",
+    "question": "Does it upload my documents?",
+    "a": "No. Lirune operates on a strict zero-telemetry, zero-cloud architecture. Your books, annotations, and metadata never leave your physical device. On Android, network permission (android.permission.INTERNET) is permanently stripped from the production application.",
+    "answer": "No. Lirune operates on a strict zero-telemetry, zero-cloud architecture. Your books, annotations, and metadata never leave your physical device. On Android, network permission (android.permission.INTERNET) is permanently stripped from the production application."
   },
   {
-    "q": "Where are my books and reading progress stored?",
-    "a": "All files, reading bookmarks, progress indicators, highlights, and preferences remain strictly on your local device. On Windows, metadata is managed in sandboxed IndexedDB storage and local directories. On Android, data is managed via local SQLite and the Android Storage Access Framework (SAF)."
+    "q": "What formats are supported?",
+    "question": "What formats are supported?",
+    "a": "Lirune supports 50+ document and book formats across 10 major families: E-books (EPUB, KEPUB, MOBI, FB2, FBZ, DJVU, CHM), Documents (PDF, TXT, MD, DOCX, DOC, ODT, RTF, XPS), Spreadsheets (CSV, TSV, XLSX, XLS, ODS, XLSM), Presentations (PPTX, PPT, ODP, PPSX), Comics (CBZ, CBR, CBT, CB7), Images (JPG, PNG, WEBP, GIF, BMP, SVG, TIFF, AVIF, HEIC, HEIF), Structured Text (XML, JSON, YAML, LOG), Communications (EML, VCF, ICS), and Web formats (HTML, MHT).",
+    "answer": "Lirune supports 50+ document and book formats across 10 major families: E-books (EPUB, KEPUB, MOBI, FB2, FBZ, DJVU, CHM), Documents (PDF, TXT, MD, DOCX, DOC, ODT, RTF, XPS), Spreadsheets (CSV, TSV, XLSX, XLS, ODS, XLSM), Presentations (PPTX, PPT, ODP, PPSX), Comics (CBZ, CBR, CBT, CB7), Images (JPG, PNG, WEBP, GIF, BMP, SVG, TIFF, AVIF, HEIC, HEIF), Structured Text (XML, JSON, YAML, LOG), Communications (EML, VCF, ICS), and Web formats (HTML, MHT)."
   },
   {
-    "q": "Which formats are supported?",
-    "a": "Lirune supports 50+ canonical format families across Windows and Android: E-books (EPUB, KEPUB, MOBI, FB2, FBZ, DJVU, CHM), Documents (PDF, TXT, MD, DOCX, DOC, ODT, RTF, XPS), Spreadsheets (CSV, TSV, XLSX, XLS, ODS, XLSM, XLTX, XLSB), Presentations (PPTX, PPT, ODP, PPSX), Comics (CBZ, CBR, CBT, CB7), Images (JPG, PNG, WEBP, GIF, BMP, SVG, TIFF, AVIF, HEIC, HEIF), Web (HTML, MHT), Structured Text (XML, JSON, YAML, LOG), and Communications (EML, VCF, ICS). Container archives (ZIP, RAR, 7Z) are also supported for transparent book inspection."
+    "q": "Where are my files stored?",
+    "question": "Where are my files stored?",
+    "a": "Your documents remain in the directories where you keep them on your local drive. Lirune stores only library metadata, reading bookmarks, progress states, and custom notes in local SQLite and IndexedDB storage on your own device.",
+    "answer": "Your documents remain in the directories where you keep them on your local drive. Lirune stores only library metadata, reading bookmarks, progress states, and custom notes in local SQLite and IndexedDB storage on your own device."
+  },
+  {
+    "q": "Can I use it offline?",
+    "question": "Can I use it offline?",
+    "a": "Yes, completely. Lirune is built offline-first. It requires no internet connection to launch, parse documents, render pages, customize appearance, or run Text-to-Speech audio narration.",
+    "answer": "Yes, completely. Lirune is built offline-first. It requires no internet connection to launch, parse documents, render pages, customize appearance, or run Text-to-Speech audio narration."
+  },
+  {
+    "q": "What's the difference between Windows and Android versions?",
+    "question": "What's the difference between Windows and Android versions?",
+    "a": "Both versions share our hardened local parsing engines and privacy guarantees. The Windows version is optimized for desktop displays with dual-page book spreads, keyboard shortcuts, F11 fullscreen, and multi-window views. The Android version features our virtualized Scroll Engine v2 for 60fps continuous touch scrolling, lockscreen background Text-to-Speech audio narration, and Android Storage Access Framework (SAF) integration.",
+    "answer": "Both versions share our hardened local parsing engines and privacy guarantees. The Windows version is optimized for desktop displays with dual-page book spreads, keyboard shortcuts, F11 fullscreen, and multi-window views. The Android version features our virtualized Scroll Engine v2 for 60fps continuous touch scrolling, lockscreen background Text-to-Speech audio narration, and Android Storage Access Framework (SAF) integration."
+  },
+  {
+    "q": "Is the source code available?",
+    "question": "Is the source code available?",
+    "a": "Yes. The complete source code is publicly accessible on GitHub under GPL-3.0. You are free to inspect the codebase, audit our privacy and security boundaries, contribute enhancements, or compile your own binaries.",
+    "answer": "Yes. The complete source code is publicly accessible on GitHub under GPL-3.0. You are free to inspect the codebase, audit our privacy and security boundaries, contribute enhancements, or compile your own binaries."
+  },
+  {
+    "q": "How do I report a bug?",
+    "question": "How do I report a bug?",
+    "a": "You can report bugs, submit edge-case rendering samples, or propose new features on our GitHub repository at https://github.com/vasanthgajavelly5-sys/Lirune/issues. We welcome community feedback and reproduction steps.",
+    "answer": "You can report bugs, submit edge-case rendering samples, or propose new features on our GitHub repository at https://github.com/vasanthgajavelly5-sys/Lirune/issues. We welcome community feedback and reproduction steps."
+  },
+  {
+    "q": "What are the system requirements?",
+    "question": "What are the system requirements?",
+    "a": "On Windows: Windows 10 (version 1809+) or Windows 11 on 64-bit x86/x64 architecture. On Android: Android 8.0 (Oreo / API level 26) or higher, supporting both phones and tablets.",
+    "answer": "On Windows: Windows 10 (version 1809+) or Windows 11 on 64-bit x86/x64 architecture. On Android: Android 8.0 (Oreo / API level 26) or higher, supporting both phones and tablets."
   },
   {
     "q": "Does Lirune support DRM-protected books?",
-    "a": "No. Lirune Reader respects author and publisher copyright and does not circumvent Digital Rights Management (DRM) or proprietary container encryption (such as Adobe Adept or Kindle KFX DRM). Encrypted files will be cleanly identified and rejected."
-  },
-  {
-    "q": "How do I install Lirune on Windows?",
-    "a": "You can install Lirune Reader directly from the Microsoft Store (Product ID: 9PDNFZ146HDX) for automatic updates and verified installation. Alternatively, you can download the standalone Windows NSIS installer (.exe) or APPX package from our official GitHub Releases page."
-  },
-  {
-    "q": "Why do I see a Windows SmartScreen prompt on direct installers?",
-    "a": "Lirune is an independent open-source project. If Microsoft SmartScreen shows an unrecognized app warning on direct downloads from GitHub, you can click 'More info' and select 'Run anyway', or simply install directly from the Microsoft Store where the application is pre-certified."
-  },
-  {
-    "q": "How do I install Lirune on Android?",
-    "a": "Download the official APK (e.g., Lirune-Reader-v4.9.3-release.apk) from the Downloads page or GitHub Releases. When prompted, permit 'Install unknown apps' in your device settings for your browser or file manager, and tap Install."
+    "question": "Does Lirune support DRM-protected books?",
+    "a": "No. Lirune does not circumvent Digital Rights Management (DRM) or proprietary container encryption (such as Adobe Adept or Amazon KFX). Protected files will be cleanly identified and safely rejected without crashing.",
+    "answer": "No. Lirune does not circumvent Digital Rights Management (DRM) or proprietary container encryption (such as Adobe Adept or Amazon KFX). Protected files will be cleanly identified and safely rejected without crashing."
   },
   {
     "q": "How can I back up my reading data?",
-    "a": "In Lirune Settings under 'Storage & Maintenance', click 'Export Library Backup'. This exports your book metadata, collections, favorites, bookmarks, and notes into a single portable JSON file. You can restore this file at any time on another device."
-  },
-  {
-    "q": "Where can I report bugs or request new features?",
-    "a": "All bug reports, feature discussions, and issue tracking occur on the official GitHub repository at https://github.com/vasanthgajavelly5-sys/Lirune/issues."
-  },
-  {
-    "q": "How can I support Lirune's development?",
-    "a": "Lirune is developed and maintained independently by Vasanth Gajavelly. If Lirune has improved your digital reading experience, you can voluntarily support continued development via Buy Me a Coffee at https://buymeacoffee.com/vasanthgajavelly or by starring the repository on GitHub."
+    "question": "How can I back up my reading data?",
+    "a": "In Lirune Settings under 'Storage & Maintenance', click 'Export Library Backup' to save all book metadata, collections, bookmarks, and notes into a single portable JSON file that can be restored on any device.",
+    "answer": "In Lirune Settings under 'Storage & Maintenance', click 'Export Library Backup' to save all book metadata, collections, bookmarks, and notes into a single portable JSON file that can be restored on any device."
   }
 ]
