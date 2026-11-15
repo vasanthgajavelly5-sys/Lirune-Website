@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-15T11:36:29.814Z",
+  "lastUpdated": "2026-11-15T11:54:34.797Z",
   "windows": {
     "version": "6.0.0",
     "tag": "v6.0.0",
@@ -53,7 +53,7 @@
     "releaseUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/tag/android-v5.0.0",
     "apkUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/android-v5.0.0/app-release.apk",
     "apkFilename": "app-release.apk",
-    "sha256": "4ceaa7d6b999ab23dbe909feaf987cc7d69ca43edfcae5817289ac1b83f27fd1",
+    "sha256": "de223c1d90cee0e0c1c3360569dd84706be4c5d93bbdf00a39c027ba05e7a776",
     "requirements": "Android 7.0 (Nougat) or higher",
     "highlights": [
       "50+ Format Support Milestone: Full cross-platform engine supporting 50 canonical primary formats plus archive containers",
