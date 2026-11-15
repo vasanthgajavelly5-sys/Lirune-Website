@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-15T11:54:34.797Z",
+  "lastUpdated": "2026-11-15T12:12:29.815Z",
   "windows": {
     "version": "6.0.0",
     "tag": "v6.0.0",
@@ -17,32 +17,12 @@
     "storeId": "9PDNFZ146HDX",
     "storeUrl": "https://apps.microsoft.com/detail/9PDNFZ146HDX?gl=IN&hl=en-US",
     "highlights": [
-      "50+ Format Support Milestone: Universal cross-platform engine across all canonical document, ebook, spreadsheet, presentation, comic, and image formats",
-      "Deep Reading-Theme Parity: In-reader Settings and TOC panels strictly inherit active reading palette (all 15 themes)",
-      "Performance & Reader Themes: 15 curated reading themes with zero ancestor style leakage, smooth zoom, and responsive navigation",
-      "Windows Shell Integration: 28 file formats registered with Windows Explorer, single-instance cold/warm launching",
-      "1-click 'Make Lirune my default reader' button connecting to Windows Default Apps",
-      "100% acceptance testing pass rate across 141 real-world test samples in clean profile",
-      "Completely offline-first architecture with zero telemetry and zero external network calls"
-    ]
-  },
-  "windowsBeta": {
-    "version": "5.6.5",
-    "tag": "v5.6.5",
-    "channel": "Beta",
-    "name": "Lirune Reader 5.6.5 (Beta) — Universal 23-Format Engine, Security Hardening & UI Polish",
-    "releaseDate": "2026-11-15",
-    "releaseUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/tag/v5.6.5",
-    "installerUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v5.6.5/Lirune.Reader-5.6.5-Setup.exe",
-    "installerFilename": "Lirune.Reader-5.6.5-Setup.exe",
-    "sha256": "f40ce86469f302760a590ae662e6b8c07b49dfaefb8ae099c04f5c4151b61ea6",
-    "requirements": "Windows 10 / 11 (64-bit)",
-    "highlights": [
-      "Universal 23-format engine with 100% acceptance test pass rate across 57 real-world samples",
-      "Native support for Word 95/97, PowerPoint OLE streams, multi-frame TIFF, CHM, and comic archives",
-      "Redesigned keyboard shortcuts toolbar with inline search and compact reading theme swatches",
-      "Comprehensive Zip-Slip defense and strict decompression safety budget",
-      "Completely offline-first architecture with sandboxed document adapters"
+      "Over 50 Formats Supported: Open books, documents, comics, spreadsheets, and presentations in one simple reader",
+      "15 Beautiful Reading Themes: Seamless reading in dark mode, warm sepia, OLED black, and paper textures",
+      "Windows Explorer Integration: Double-click any book or document to open it immediately",
+      "One-Click Default Reader: Easily set Lirune as your default app in Windows Settings",
+      "Faster & Smoother: Instant book opening, smooth page zooming, and lightning-fast search",
+      "100% Offline & Private: No accounts, no cloud sync, and zero data collection"
     ]
   },
   "android": {
@@ -51,37 +31,17 @@
     "name": "Lirune Reader v5.0.0 — Major Mobile Release: In-Reader Theme Parity & High-Performance Engine",
     "releaseDate": "2026-11-15",
     "releaseUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/tag/android-v5.0.0",
-    "apkUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/android-v5.0.0/app-release.apk",
-    "apkFilename": "app-release.apk",
-    "sha256": "de223c1d90cee0e0c1c3360569dd84706be4c5d93bbdf00a39c027ba05e7a776",
+    "apkUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/android-v5.0.0/Lirune-Reader-v5.0.0-release.apk",
+    "apkFilename": "Lirune-Reader-v5.0.0-release.apk",
+    "sha256": "4ceaa7d6b999ab23dbe909feaf987cc7d69ca43edfcae5817289ac1b83f27fd1",
     "requirements": "Android 7.0 (Nougat) or higher",
     "highlights": [
-      "50+ Format Support Milestone: Full cross-platform engine supporting 50 canonical primary formats plus archive containers",
-      "ExifInterface Fix: Comprehensive EXIF orientation and metadata handling so HEIC/HEIF and modern camera formats are fully supported",
-      "Import Pipeline Hardening: Resilient streaming and sandbox ingestion preventing crashes on corrupted and complex files",
-      "141/141 Sample Acceptance Suite Pass: 100% verified pass rate across all test samples on Android emulator runtime",
-      "In-reader Theme Parity across all 15 reading palettes with dynamic sheet token inheritance",
-      "Pre-compiled Hermes bytecode bundle (1,583 modules) for instant startup and 60fps scrolling",
-      "Zero internet permissions: android.permission.INTERNET permanently stripped from production release builds"
-    ]
-  },
-  "androidBeta": {
-    "version": "4.9.4",
-    "tag": "v4.9.4",
-    "channel": "Beta",
-    "name": "Lirune Reader v4.9.4 (Beta) — Multi-Format Mobile Engine & Hermes Bytecode Optimization",
-    "releaseDate": "2026-11-15",
-    "releaseUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/tag/v4.9.4",
-    "apkUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/v4.9.4/Lirune-Reader-v4.9.4-release.apk",
-    "apkFilename": "Lirune-Reader-v4.9.4-release.apk",
-    "sha256": "46472b2f894f5e3fccfcf20cbeda15ec32c6508a2016717a12eb74089e966e05",
-    "requirements": "Android 8.0 (Oreo) or higher",
-    "highlights": [
-      "Universal 23-format engine for mobile: EPUB, MOBI, DOC, PPT, ODT, RTF, FB2, CBZ, CBR, CBT, TIFF, DJVU",
-      "Pre-compiled Hermes bytecode bundle (13MB) for instant reader launch and fluid navigation",
-      "Full offline isolation: zero internet permissions, local document picking via SAF",
-      "100% acceptance testing pass rate across 57 real-world test samples on Android emulator",
-      "Virtualized 60fps Scroll Engine v2 reading comfort"
+      "Over 50 Formats Supported: Read EPUB, PDF, Kindle books, comics, and Office documents on your phone or tablet",
+      "Full Photo & Comic Support: Seamlessly view comics (CBZ, CBR) and modern camera photos (HEIC, HEIF)",
+      "Rock-Solid Library Import: Add individual books or entire folders quickly without errors",
+      "15 Curated Reading Themes: Beautiful eye-friendly palettes with true dark mode and sepia tones",
+      "Fluid 60fps Reading: Fast page turns, smooth scrolling, and instant startup",
+      "Zero Internet Permissions: Completely offline so your personal documents stay private"
     ]
   }
 }

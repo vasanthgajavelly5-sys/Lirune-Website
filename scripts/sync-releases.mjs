@@ -159,9 +159,9 @@ export async function syncReleases(releasesList, existingData = null, options = 
     }
   }
 
-  // 2. Search for latest Android release with .apk asset
+  // 2. Search for latest Android release with .apk asset (prefer Lirune-Reader-*.apk over generic app-release.apk)
   for (const r of stableReleases) {
-    const apk = (r.assets || []).find(a => /\.apk$/i.test(a.name));
+    const apk = (r.assets || []).find(a => /lirune.*\.apk$/i.test(a.name)) || (r.assets || []).find(a => /\.apk$/i.test(a.name));
     if (apk && apk.size > 0) {
       latestAndroidRelease = r;
       androidApkAsset = apk;
