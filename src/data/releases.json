@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-17T11:34:16.867Z",
+  "lastUpdated": "2026-11-17T16:39:20.732Z",
   "windows": {
     "version": "6.0.0",
     "tag": "v6.0.0",
@@ -33,7 +33,7 @@
     "releaseUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/tag/android-v5.0.0",
     "apkUrl": "https://github.com/vasanthgajavelly5-sys/Lirune/releases/download/android-v5.0.0/Lirune-Reader-v5.0.0-release.apk",
     "apkFilename": "Lirune-Reader-v5.0.0-release.apk",
-    "sha256": "02d7b1c4091c775414c8f30d4371f7b148fc0a90c1cdc8d407d9526d575a0f5b",
+    "sha256": "3b4c74a8f6bba122a37ca735ae2d1c672c0f2c26f1a06c3ed0c8ce8a9a0fd053",
     "requirements": "Android 7.0 (Nougat) or higher",
     "highlights": [
       "Over 50 Formats Supported: Read EPUB, PDF, Kindle books, comics, and Office documents on your phone or tablet",
