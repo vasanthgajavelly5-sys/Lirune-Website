@@ -3,7 +3,7 @@
   "shortName": "Lirune",
   "tagline": "A calm, private home for your library on Windows and Android.",
   "subtitle": "Your books. Your library. Your way.",
-  "description": "The official open-source, offline-focused ebook and document reader for Windows and Android. 50+ formats supported with zero telemetry and total privacy.",
+  "description": "The official open-source, offline-focused ebook and document reader for Windows and Android. Supports 50+ formats with zero telemetry and total privacy.",
   "siteUrl": "https://lirune-reader.web.app",
   "author": "Vasanth Gajavelly",
   "license": "GPL-3.0",

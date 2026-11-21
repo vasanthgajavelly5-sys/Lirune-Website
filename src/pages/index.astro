@@ -3,14 +3,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import FeatureSection from '../components/FeatureSection.astro';
 import TestimonialSection from '../components/TestimonialSection.astro';
+import DownloaderAnnouncement from '../components/DownloaderAnnouncement.astro';
 import config from '../data/config.json';
 import releases from '../data/releases.json';
 import formats from '../data/formats.json';
 ---
 
 <BaseLayout
-  title="Lirune Reader — 50+ formats. One reader. Every document. Your privacy."
-  description="Lirune is a free, open-source, offline ebook and document reader for Windows 6.0.0 and Android 5.0.0. 50+ formats supported with zero telemetry and total privacy."
+  title="Lirune Reader — A calm, private home for your library on Windows and Android"
+  description="Lirune Reader is a free, open-source, offline-first ebook and document reader for Windows and Android. Supports 50+ formats with zero telemetry and total privacy."
   canonicalPath="/"
 >
   <!-- Hero Section -->
@@ -208,6 +209,9 @@ import formats from '../data/formats.json';
       </div>
     </div>
   </section>
+
+  <!-- Lirune Downloader Announcement (Coming Soon) -->
+  <DownloaderAnnouncement />
 
   <!-- Final CTA Section -->
   <section class="final-cta-section section-spacing" aria-label="Call to Action">

@@ -93,11 +93,25 @@ for (const page of expectedPages) {
         const parsed = JSON.parse(jsonLdMatch[1]);
         assert(parsed['@context'] === 'https://schema.org', 'Structured data has schema.org context');
         assert(Array.isArray(parsed['@graph']), 'Structured data contains @graph array');
+        const websiteData = parsed['@graph'].filter(item => item['@type'] === 'WebSite');
+        assert(websiteData.length === 1, 'Homepage has exactly one WebSite structured-data item');
+        if (websiteData.length === 1) {
+          assert(websiteData[0].name === 'Lirune Reader', 'WebSite structured data names Lirune Reader');
+          assert(websiteData[0].alternateName === 'Lirune', 'WebSite structured data has Lirune alternateName');
+          assert(websiteData[0].url === `${CANONICAL_DOMAIN}/`, 'WebSite structured data uses the canonical homepage URL');
+        }
         const jsonText = JSON.stringify(parsed);
         assert(!jsonText.includes('lirune-reader-1aa95.web.app'), 'Structured data does NOT reference 1aa95 domain');
       } catch (err) {
         assert(false, `Structured data JSON parse error: ${err.message}`);
       }
+    }
+
+    if (page === 'index.html') {
+      assert(/<meta\s+property=["']og:site_name["']\s+content=["']Lirune Reader["']/i.test(html), 'Homepage Open Graph site name is Lirune Reader');
+      assert(/<meta\s+property=["']og:type["']\s+content=["']website["']/i.test(html), 'Homepage Open Graph type is website');
+      assert(/<meta\s+property=["']og:url["']\s+content=["']https:\/\/lirune-reader\.web\.app\/["']/i.test(html), 'Homepage Open Graph URL is canonical');
+      assert(/50\+ formats/i.test(html), 'Homepage metadata includes the 50+ formats positioning');
     }
   }
 }
