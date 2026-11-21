@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Lirune Downloader — original monogram symbol</title>
+  <desc id="desc">A geometric L-shaped monogram combined with a downward download arrow, drawn in a cyan-to-blue gradient.</desc>
+  <defs>
+    <linearGradient id="markGradient" x1="300" y1="220" x2="740" y2="760" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8AF0F4"/>
+      <stop offset="0.48" stop-color="#5CC9E8"/>
+      <stop offset="1" stop-color="#438FE2"/>
+    </linearGradient>
+    <linearGradient id="highlightGradient" x1="330" y1="220" x2="500" y2="660" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#D8FFFF" stop-opacity=".82"/>
+      <stop offset="1" stop-color="#D8FFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- The continuous lower turn forms the L monogram. Rounded terminals keep it legible at small sizes. -->
+  <path d="M365 248 V614 C365 669 410 714 465 714 H735"
+        fill="none" stroke="url(#markGradient)" stroke-width="112"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Down arrow sits in the open counter of the L: the symbol communicates downloading without text. -->
+  <path d="M590 354 V552 M492 461 L590 559 L688 461"
+        fill="none" stroke="url(#markGradient)" stroke-width="76"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Restrained edge highlight adds depth without relying on raster effects. -->
+  <path d="M365 248 V614 C365 669 410 714 465 714"
+        fill="none" stroke="url(#highlightGradient)" stroke-width="12"
+        stroke-linecap="round" stroke-linejoin="round" opacity=".42"/>
+</svg>

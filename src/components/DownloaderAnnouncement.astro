@@ -1,132 +1,111 @@
 ---
 // Component: DownloaderAnnouncement.astro
-// Announcing Lirune Downloader - Coming Soon
+// Announcing Lirune Downloader — A New Lirune Experience
 ---
 
 <section class="downloader-section section-spacing" id="downloader" aria-label="Lirune Downloader Announcement">
   <div class="site-container">
-    <div class="downloader-banner surface-card" data-reveal>
-      <div class="downloader-grid">
-        <!-- Content Column -->
-        <div class="downloader-content">
-          <div class="downloader-badge-row">
-            <span class="badge badge-accent">Coming Soon &bull; In Development</span>
-            <span class="badge badge-neutral">Windows & Android</span>
-          </div>
+    <div class="downloader-card surface-card" data-reveal>
+      <!-- Atmospheric decorative glow -->
+      <div class="card-glow" aria-hidden="true"></div>
 
-          <h2 class="downloader-title">
-            Introducing <span class="text-accent">Lirune Downloader</span>
-          </h2>
-
-          <p class="downloader-lead">
-            A new free, privacy-focused BitTorrent downloader for Windows and Android. Built around a download-only approach, it is designed to download directly to your device without seeding or distributing downloaded file pieces.
-          </p>
-
-          <p class="downloader-body">
-            Equipped with <strong>Upload Guard</strong>, the native C++20 engine strictly prevents piece payload egress at the socket and protocol level. Enjoy high-speed multi-peer downloads, full magnet and torrent support, and complete local privacy without passive bandwidth usage or background uploads.
-          </p>
-
-          <!-- Feature Pills -->
-          <div class="downloader-pillars">
-            <div class="pillar-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="pillar-icon" aria-hidden="true">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-              <span>Upload Guard (Zero Piece Seeding)</span>
-            </div>
-            <div class="pillar-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="pillar-icon" aria-hidden="true">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-              </svg>
-              <span>High-Performance Parallel Engine</span>
-            </div>
-            <div class="pillar-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="pillar-icon" aria-hidden="true">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                <line x1="8" y1="21" x2="16" y2="21"></line>
-                <line x1="12" y1="17" x2="12" y2="21"></line>
-              </svg>
-              <span>Native Windows (WPF) & Android (Compose)</span>
-            </div>
-            <div class="pillar-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="pillar-icon" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="15" y1="9" x2="9" y2="15"></line>
-                <line x1="9" y1="9" x2="15" y2="15"></line>
-              </svg>
-              <span>100% Free, Zero Ads & Zero Telemetry</span>
-            </div>
-          </div>
-
-          <!-- Status & Attribution Notice -->
-          <div class="downloader-status-box">
-            <div class="status-indicator">
-              <span class="status-dot"></span>
-              <span class="status-label">Work in Progress &bull; Final Polish</span>
-            </div>
-            <p class="status-desc">
-              We're putting the finishing touches on the app. Get ready to be impressed: a blisteringly fast, beautifully quiet, zero-upload downloading experience is landing here soon.
-            </p>
-            <div class="attribution-note">
-              Created and maintained by <strong>Vasanth Gajavelly</strong> within the Lirune software family.
-            </div>
+      <div class="downloader-layout">
+        <!-- Visual Brand Artwork Column -->
+        <div class="artwork-column">
+          <div class="icon-stage">
+            <div class="icon-ambient-glow" aria-hidden="true"></div>
+            <img
+              src="/images/branding/lirune-downloader-icon.svg"
+              alt="Lirune Downloader app icon"
+              width="180"
+              height="180"
+              class="downloader-hero-icon"
+              loading="lazy"
+            />
+            <span class="status-pill">
+              <span class="status-pulse-dot" aria-hidden="true"></span>
+              COMING SOON
+            </span>
           </div>
         </div>
 
-        <!-- Visual / Graphic Card Column -->
-        <div class="downloader-visual">
-          <div class="preview-card">
-            <div class="preview-header">
-              <img
-                src="/images/branding/lirune-downloader-icon.svg"
-                alt="Lirune Downloader Icon"
-                width="36"
-                height="36"
-                class="downloader-brand-icon"
-              />
-              <div class="preview-meta">
-                <span class="preview-app-name">Lirune Downloader</span>
-                <span class="preview-tag">Native C++20 Core</span>
-              </div>
-              <span class="preview-state-badge">Download Only</span>
-            </div>
-
-            <!-- Visual Simulated Metrics Panel -->
-            <div class="preview-metrics">
-              <div class="metric-row">
-                <span class="metric-label">Download Mode</span>
-                <span class="metric-value metric-value--active">Active (Multi-Peer)</span>
-              </div>
-              <div class="metric-row">
-                <span class="metric-label">Upload Guard</span>
-                <span class="metric-value metric-value--secured">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  </svg>
-                  Enforced (0 B/s Egress)
-                </span>
-              </div>
-              <div class="metric-row">
-                <span class="metric-label">Total Uploaded</span>
-                <span class="metric-value">0 Bytes (Guaranteed)</span>
-              </div>
-              <div class="metric-row">
-                <span class="metric-label">Target Architecture</span>
-                <span class="metric-value">Win x64 & Android ARM64</span>
-              </div>
-            </div>
-
-            <div class="preview-brand-footer">
-              <img
-                src="/images/branding/lirune-downloader-logo.svg"
-                alt="Lirune Downloader Logo"
-                width="280"
-                height="84"
-                class="downloader-full-logo"
-                loading="lazy"
-              />
-            </div>
+        <!-- Editorial Content Column -->
+        <div class="content-column">
+          <!-- Eyebrow Badge -->
+          <div class="eyebrow-wrapper">
+            <span class="badge badge-accent">A NEW LIRUNE EXPERIENCE &middot; COMING SOON</span>
           </div>
+
+          <!-- Headings -->
+          <h2 class="main-heading">Something exciting is on its way.</h2>
+          <h3 class="product-heading">Meet <span class="highlight-text">Lirune Downloader</span>.</h3>
+
+          <!-- Main & Supporting Descriptions -->
+          <p class="main-desc">
+            Your next favourite way to download is getting ready.
+          </p>
+          <p class="supporting-desc">
+            A fresh, beautifully simple downloading experience for Windows and Android. Completely free, with no ads, no subscriptions and no unnecessary complications.
+          </p>
+
+          <!-- Feature Highlights Grid -->
+          <ul class="feature-highlights" role="list">
+            <li class="feature-item">
+              <span class="feature-bullet" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span>Completely free.</span>
+            </li>
+            <li class="feature-item">
+              <span class="feature-bullet" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span>No advertisements.</span>
+            </li>
+            <li class="feature-item">
+              <span class="feature-bullet" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span>No subscriptions.</span>
+            </li>
+            <li class="feature-item">
+              <span class="feature-bullet" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span>Designed for Windows and Android.</span>
+            </li>
+            <li class="feature-item">
+              <span class="feature-bullet" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span>A simple, focused downloading experience.</span>
+            </li>
+          </ul>
+
+          <!-- Closing Callout -->
+          <div class="closing-callout">
+            <p class="closing-lead">Less hassle. More downloading.</p>
+            <p class="closing-sub">
+              We're putting the finishing touches on something we've been excited to build. Stay tuned!
+            </p>
+          </div>
+
+          <!-- Provenance and Attribution -->
+          <footer class="attribution-footer">
+            <span>Created by <strong>Vasanth Gajavelly</strong>.</span>
+            <span class="attribution-sep" aria-hidden="true">&bull;</span>
+            <span>Part of the <strong>Lirune</strong> software family.</span>
+          </footer>
         </div>
       </div>
     </div>
@@ -138,251 +117,249 @@
     position: relative;
   }
 
-  .downloader-banner {
-    background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-subtle) 100%);
-    border: 1px solid var(--border-default);
+  .downloader-card {
+    background: linear-gradient(145deg, #091426 0%, #10243b 50%, #0d1b2a 100%);
+    border: 1px solid rgba(98, 210, 232, 0.22);
     border-radius: var(--r-xl);
-    padding: clamp(28px, 5vw, 48px);
-    box-shadow: var(--shadow-md);
+    padding: clamp(32px, 5vw, 56px);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 24px 64px -12px rgba(9, 20, 38, 0.45);
   }
 
-  .downloader-banner::before {
-    content: '';
+  .card-glow {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #0284c7, #00f0ff, #38bdf8);
+    top: -120px;
+    right: -120px;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, transparent 70%);
+    pointer-events: none;
   }
 
-  .downloader-grid {
+  .downloader-layout {
     display: grid;
-    grid-template-columns: 1.25fr 0.95fr;
-    gap: clamp(32px, 5vw, 56px);
+    grid-template-columns: 240px 1fr;
+    gap: clamp(32px, 5vw, 64px);
     align-items: center;
+    position: relative;
+    z-index: 1;
   }
 
-  @media (max-width: 960px) {
-    .downloader-grid {
+  @media (max-width: 860px) {
+    .downloader-layout {
       grid-template-columns: 1fr;
+      text-align: left;
     }
   }
 
-  .downloader-badge-row {
+  /* Artwork / Icon Stage */
+  .artwork-column {
     display: flex;
-    gap: var(--sp-2);
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: var(--sp-3);
   }
 
-  .downloader-title {
-    font-size: clamp(1.85rem, 3.5vw, 2.6rem);
-    line-height: 1.2;
-    margin-bottom: var(--sp-4);
-    letter-spacing: -0.02em;
-  }
-
-  .text-accent {
-    color: var(--accent-chrome);
-  }
-
-  .downloader-lead {
-    font-size: 1.12rem;
-    line-height: 1.6;
-    color: var(--text-primary);
-    margin-bottom: var(--sp-3);
-    font-weight: 500;
-  }
-
-  .downloader-body {
-    font-size: 0.98rem;
-    line-height: 1.65;
-    color: var(--text-secondary);
-    margin-bottom: var(--sp-6);
-  }
-
-  .downloader-pillars {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: var(--sp-3);
-    margin-bottom: var(--sp-6);
-  }
-
-  .pillar-item {
+  .icon-stage {
+    position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--r-md);
-    font-size: 0.88rem;
-    color: var(--text-primary);
-    font-weight: 500;
+    gap: var(--sp-4);
   }
 
-  .pillar-icon {
-    color: var(--accent-chrome);
-    flex-shrink: 0;
+  .icon-ambient-glow {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.22) 0%, rgba(2, 132, 199, 0.08) 50%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    filter: blur(14px);
+    pointer-events: none;
   }
 
-  .downloader-status-box {
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--r-lg);
-    padding: var(--sp-4);
+  .downloader-hero-icon {
+    position: relative;
+    z-index: 2;
+    border-radius: 36px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(154, 246, 244, 0.25);
+    transition: transform var(--t-normal) ease;
   }
 
-  .status-indicator {
-    display: flex;
+  .downloader-hero-icon:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .status-pill {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background-color: rgba(154, 246, 244, 0.1);
+    border: 1px solid rgba(154, 246, 244, 0.35);
+    color: #9af6f4;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .status-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #00f0ff;
+    box-shadow: 0 0 8px #00f0ff;
+    animation: status-pulse 2s infinite ease-in-out;
+  }
+
+  @keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.85); }
+  }
+
+  /* Content Column */
+  .content-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .eyebrow-wrapper {
+    margin-bottom: var(--sp-3);
+  }
+
+  .main-heading {
+    font-size: clamp(1.85rem, 3.4vw, 2.5rem);
+    line-height: 1.18;
+    color: #ffffff;
+    font-weight: 800;
+    letter-spacing: -0.02em;
     margin-bottom: var(--sp-2);
   }
 
-  .status-dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background-color: #38bdf8;
-    box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
-    animation: pulse-dot 2s infinite ease-in-out;
+  .product-heading {
+    font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+    line-height: 1.25;
+    color: #e2e8f0;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--sp-4);
   }
 
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.9); }
+  .highlight-text {
+    background: linear-gradient(120deg, #9af6f4 0%, #62d2e8 50%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
   }
 
-  .status-label {
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--accent-chrome);
-  }
-
-  .status-desc {
-    font-size: 0.88rem;
-    line-height: 1.55;
-    color: var(--text-secondary);
-    margin-bottom: var(--sp-3);
-  }
-
-  .attribution-note {
-    font-size: 0.82rem;
-    color: var(--text-tertiary);
-    border-top: 1px solid var(--border-subtle);
-    padding-top: var(--sp-2);
-  }
-
-  /* Visual preview card */
-  .preview-card {
-    background-color: #0b132b;
-    border: 1px solid rgba(2, 132, 199, 0.35);
-    border-radius: var(--r-lg);
-    padding: 24px;
+  .main-desc {
+    font-size: 1.18rem;
+    line-height: 1.5;
     color: #ffffff;
-    box-shadow: 0 16px 36px rgba(11, 19, 43, 0.3);
+    font-weight: 600;
+    margin-bottom: var(--sp-2);
   }
 
-  .preview-header {
+  .supporting-desc {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: #cbd5e1;
+    margin-bottom: var(--sp-6);
+    max-width: 62ch;
+  }
+
+  /* Feature Highlights */
+  .feature-highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--sp-6) 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px 16px;
+  }
+
+  .feature-item {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 18px;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: #f1f5f9;
+    font-weight: 500;
   }
 
-  .downloader-brand-icon {
-    border-radius: 8px;
+  .feature-bullet {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: rgba(0, 240, 255, 0.15);
+    color: #00f0ff;
+    flex-shrink: 0;
   }
 
-  .preview-meta {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+  /* Closing Callout */
+  .closing-callout {
+    background: rgba(16, 36, 59, 0.7);
+    border: 1px solid rgba(98, 210, 232, 0.2);
+    border-radius: var(--r-md);
+    padding: 14px 18px;
+    margin-bottom: var(--sp-5);
   }
 
-  .preview-app-name {
-    font-size: 1.05rem;
+  .closing-lead {
+    font-size: 1.02rem;
     font-weight: 700;
-    color: #ffffff;
+    color: #62d2e8;
+    margin-bottom: 4px;
     letter-spacing: -0.01em;
   }
 
-  .preview-tag {
-    font-size: 0.76rem;
+  .closing-sub {
+    font-size: 0.92rem;
+    line-height: 1.5;
     color: #94a3b8;
-    font-family: var(--font-mono);
+    margin: 0;
   }
 
-  .preview-state-badge {
-    font-size: 0.74rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background-color: rgba(0, 240, 255, 0.12);
-    color: #00f0ff;
-    border: 1px solid rgba(0, 240, 255, 0.3);
-  }
-
-  .preview-metrics {
+  /* Footer Attribution */
+  .attribution-footer {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 22px;
-  }
-
-  .metric-row {
-    display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
-    padding: 10px 14px;
-    background-color: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: var(--r-md);
-    font-size: 0.86rem;
-  }
-
-  .metric-label {
+    gap: 8px;
+    font-size: 0.84rem;
     color: #94a3b8;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: var(--sp-3);
   }
 
-  .metric-value {
-    color: #ffffff;
-    font-weight: 600;
-    font-family: var(--font-mono);
+  .attribution-footer strong {
+    color: #e2e8f0;
   }
 
-  .metric-value--active {
-    color: #38bdf8;
+  .attribution-sep {
+    color: #475569;
   }
 
-  .metric-value--secured {
-    color: #34d399;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .preview-brand-footer {
-    display: flex;
-    justify-content: center;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .downloader-full-logo {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
+  @media (prefers-reduced-motion: reduce) {
+    .status-pulse-dot {
+      animation: none;
+    }
+    .downloader-hero-icon {
+      transition: none;
+    }
+    .downloader-hero-icon:hover {
+      transform: none;
+    }
   }
 </style>
