@@ -16,6 +16,6 @@
     "test": "npm run test:release-sync && npm run test:site"
   },
   "dependencies": {
-    "astro": "^4.16.18"
+    "astro": "^7.4.13"
   }
 }

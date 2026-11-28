@@ -79,6 +79,7 @@
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
+    overscroll-behavior: contain;
     transition: opacity var(--t-fast), visibility var(--t-fast);
   }
 
@@ -164,7 +165,7 @@
     border: 1px solid var(--border-default);
     color: var(--text-primary);
     cursor: pointer;
-    transition: all var(--t-fast);
+    transition: background-color var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
   }
 
   .lightbox-btn:hover {
@@ -259,8 +260,13 @@
   let shotsRegistry: ShotData[] = [];
   let currentIndex = 0;
   let lastActiveElement: HTMLElement | null = null;
+  let lightboxAbort: AbortController | null = null;
 
   function initLightbox() {
+    lightboxAbort?.abort();
+    lightboxAbort = new AbortController();
+    const { signal } = lightboxAbort;
+
     const lightbox = document.getElementById('screenshot-lightbox') as HTMLElement | null;
     const scrim = document.getElementById('lightbox-scrim') as HTMLElement | null;
     const closeBtn = document.getElementById('lightbox-close-btn') as HTMLButtonElement | null;
@@ -277,10 +283,10 @@
     // Scan page for clickable screenshots
     const triggers = Array.from(document.querySelectorAll<HTMLElement>('.clickable-shot, [data-shot-src]'));
     shotsRegistry = triggers.map(t => ({
-      src: t.getAttribute('data-shot-src') || (t.querySelector('img') as HTMLImageElement)?.src || '',
-      title: t.getAttribute('data-shot-title') || 'Lirune Interface',
+      src: t.getAttribute('data-shot-src') || t.getAttribute('data-full') || (t.querySelector('img') as HTMLImageElement)?.src || '',
+      title: t.getAttribute('data-shot-title') || t.getAttribute('data-title') || 'Lirune Interface',
       platform: t.getAttribute('data-shot-platform') || 'Lirune',
-      caption: t.getAttribute('data-shot-caption') || ''
+      caption: t.getAttribute('data-shot-caption') || t.getAttribute('data-caption') || ''
     })).filter(s => s.src.length > 0);
 
     function updateView(idx: number) {
@@ -316,31 +322,30 @@
       trigger.addEventListener('click', (e) => {
         e.preventDefault();
         open(idx, trigger);
-      });
+      }, { signal });
       trigger.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           open(idx, trigger);
         }
-      });
+      }, { signal });
     });
 
-    closeBtn?.addEventListener('click', close);
-    scrim?.addEventListener('click', close);
-    prevBtn?.addEventListener('click', () => updateView(currentIndex - 1));
-    nextBtn?.addEventListener('click', () => updateView(currentIndex + 1));
+    closeBtn?.addEventListener('click', close, { signal });
+    scrim?.addEventListener('click', close, { signal });
+    prevBtn?.addEventListener('click', () => updateView(currentIndex - 1), { signal });
+    nextBtn?.addEventListener('click', () => updateView(currentIndex + 1), { signal });
 
     document.addEventListener('keydown', (e) => {
       if (!lightbox.classList.contains('is-open')) return;
       if (e.key === 'Escape') close();
       else if (e.key === 'ArrowLeft') updateView(currentIndex - 1);
       else if (e.key === 'ArrowRight') updateView(currentIndex + 1);
-    });
+    }, { signal });
 
     // Expose global open helper
     (window as any).__openLiruneLightbox = open;
   }
 
-  initLightbox();
   document.addEventListener('astro:page-load', initLightbox);
 </script>

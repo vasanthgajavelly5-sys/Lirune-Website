@@ -127,10 +127,7 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
         </svg>
         <span>Support</span>
       </a>
-    </nav>
 
-    <!-- Header Actions (Theme Selector & Download CTA) -->
-    <div class="header-actions">
       <!-- Theme Segmented Control -->
       <div class="theme-switch" role="group" aria-label="Color Theme Selection">
         <button
@@ -419,7 +416,8 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
     font-weight: 500;
     color: var(--color-secondary);
     text-decoration: none;
-    transition: all var(--duration-fast) var(--easing-default);
+    transition: color var(--duration-fast) var(--easing-default),
+                background-color var(--duration-fast) var(--easing-default);
   }
 
   .nav-link:hover {
@@ -449,7 +447,9 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
     background: transparent;
     border: 1px solid transparent;
     cursor: pointer;
-    transition: all var(--duration-fast) var(--easing-default);
+    transition: color var(--duration-fast) var(--easing-default),
+                background-color var(--duration-fast) var(--easing-default),
+                border-color var(--duration-fast) var(--easing-default);
   }
 
   .nav-trigger:hover {
@@ -555,7 +555,11 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
     background-color: var(--color-coffee-bg);
     border: 1px solid var(--color-coffee-border);
     text-decoration: none;
-    transition: all var(--duration-fast) var(--easing-default);
+    transition: background-color var(--duration-fast) var(--easing-default),
+                color var(--duration-fast) var(--easing-default),
+                border-color var(--duration-fast) var(--easing-default),
+                transform var(--duration-fast) var(--easing-default),
+                box-shadow var(--duration-fast) var(--easing-default);
     white-space: nowrap;
   }
 
@@ -591,7 +595,11 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
     background-color: var(--color-coffee-bg);
     border: 1px solid var(--color-coffee-border);
     text-decoration: none;
-    transition: all var(--duration-fast) var(--easing-default);
+    transition: background-color var(--duration-fast) var(--easing-default),
+                color var(--duration-fast) var(--easing-default),
+                border-color var(--duration-fast) var(--easing-default),
+                transform var(--duration-fast) var(--easing-default),
+                box-shadow var(--duration-fast) var(--easing-default);
     white-space: nowrap;
   }
 
@@ -650,7 +658,9 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
     border: none;
     color: var(--text-tertiary);
     cursor: pointer;
-    transition: all var(--duration-fast) var(--easing-default);
+    transition: color var(--duration-fast) var(--easing-default),
+                background-color var(--duration-fast) var(--easing-default),
+                border-color var(--duration-fast) var(--easing-default);
   }
 
   .theme-btn:hover {
@@ -741,6 +751,7 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    overscroll-behavior: contain;
     box-shadow: var(--shadow-xl);
   }
 
@@ -825,7 +836,8 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
     font-size: 0.95rem;
     font-weight: 600;
     text-decoration: none;
-    transition: all var(--duration-fast) var(--easing-default);
+    transition: color var(--duration-fast) var(--easing-default),
+                background-color var(--duration-fast) var(--easing-default);
   }
 
   .mobile-coffee-link:hover {
@@ -864,18 +876,20 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
 </style>
 
 <script>
+  let headerAbort: AbortController | null = null;
+
   function setupHeader() {
+    headerAbort?.abort();
+    headerAbort = new AbortController();
+    const { signal } = headerAbort;
+
     // 1. Scroll-triggered Header Transition
     const header = document.getElementById('site-header');
     function updateScrollState() {
       if (!header) return;
-      if (window.scrollY > 12) {
-        header.classList.add('is-scrolled');
-      } else {
-        header.classList.remove('is-scrolled');
-      }
+      header.classList.toggle('is-scrolled', window.scrollY > 12);
     }
-    window.addEventListener('scroll', updateScrollState, { passive: true });
+    window.addEventListener('scroll', updateScrollState, { passive: true, signal });
     updateScrollState();
 
     // 2. Theme Setting Sync & Button States
@@ -884,14 +898,9 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
 
     function updateActiveButtons(setting: string) {
       themeButtons.forEach(btn => {
-        const val = btn.getAttribute('data-theme-value');
-        if (val === setting) {
-          btn.classList.add('active');
-          btn.setAttribute('aria-pressed', 'true');
-        } else {
-          btn.classList.remove('active');
-          btn.setAttribute('aria-pressed', 'false');
-        }
+        const isActive = btn.getAttribute('data-theme-value') === setting;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
     }
 
@@ -900,12 +909,13 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
     function applyTheme(setting: string) {
       localStorage.setItem('lirune-theme', setting);
       document.documentElement.setAttribute('data-theme-setting', setting);
-      if (setting === 'system') {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-      } else {
-        document.documentElement.setAttribute('data-theme', setting);
-      }
+      const resolved = setting === 'system'
+        ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        : setting;
+      document.documentElement.setAttribute('data-theme', resolved);
+      document.documentElement.style.colorScheme = resolved;
+      const themeColor = resolved === 'dark' ? '#0F1217' : '#F8F8FA';
+      document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute('content', themeColor));
       updateActiveButtons(setting);
     }
 
@@ -913,11 +923,18 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
       btn.addEventListener('click', () => {
         const setting = btn.getAttribute('data-theme-value');
         if (setting) applyTheme(setting);
-      });
+      }, { signal });
     });
 
     // 3. Desktop Dropdowns (Keyboard Accessible & Click Toggle)
     const dropdownItems = document.querySelectorAll<HTMLElement>('.nav-item.has-dropdown');
+    function closeAllDropdowns() {
+      dropdownItems.forEach(item => {
+        item.classList.remove('is-open');
+        item.querySelector('.nav-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+    }
+
     dropdownItems.forEach(item => {
       const trigger = item.querySelector<HTMLButtonElement>('.nav-trigger');
       if (!trigger) return;
@@ -925,34 +942,23 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
       trigger.addEventListener('click', (e) => {
         e.stopPropagation();
         const isOpen = item.classList.contains('is-open');
-        dropdownItems.forEach(i => {
-          i.classList.remove('is-open');
-          i.querySelector('.nav-trigger')?.setAttribute('aria-expanded', 'false');
-        });
+        closeAllDropdowns();
         if (!isOpen) {
           item.classList.add('is-open');
           trigger.setAttribute('aria-expanded', 'true');
         }
+      }, { signal });
+
+      item.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeAllDropdowns, { signal });
       });
     });
 
     document.addEventListener('click', (e) => {
       if (!(e.target as HTMLElement).closest('.nav-item.has-dropdown')) {
-        dropdownItems.forEach(item => {
-          item.classList.remove('is-open');
-          item.querySelector('.nav-trigger')?.setAttribute('aria-expanded', 'false');
-        });
+        closeAllDropdowns();
       }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        dropdownItems.forEach(item => {
-          item.classList.remove('is-open');
-          item.querySelector('.nav-trigger')?.setAttribute('aria-expanded', 'false');
-        });
-      }
-    });
+    }, { signal });
 
     // 4. Mobile Drawer Open / Close
     const navToggle = document.getElementById('mobile-nav-toggle') as HTMLButtonElement | null;
@@ -968,29 +974,32 @@ const isMoreActive = moreLinks.some(l => cleanPath === l.href);
       closeBtn?.focus();
     }
 
-    function closeDrawer() {
+    function closeDrawer(restoreFocus = true) {
       if (!drawer || !navToggle) return;
       drawer.hidden = true;
       navToggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
-      navToggle.focus();
+      if (restoreFocus) navToggle.focus();
     }
 
     navToggle?.addEventListener('click', () => {
       if (drawer?.hidden) openDrawer();
       else closeDrawer();
-    });
+    }, { signal });
 
-    closeBtn?.addEventListener('click', closeDrawer);
-    scrim?.addEventListener('click', closeDrawer);
+    closeBtn?.addEventListener('click', () => closeDrawer(), { signal });
+    scrim?.addEventListener('click', () => closeDrawer(), { signal });
+    drawer?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => closeDrawer(false), { signal });
+    });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && drawer && !drawer.hidden) {
-        closeDrawer();
+      if (e.key === 'Escape') {
+        closeAllDropdowns();
+        if (drawer && !drawer.hidden) closeDrawer();
       }
-    });
+    }, { signal });
   }
 
-  setupHeader();
   document.addEventListener('astro:page-load', setupHeader);
 </script>

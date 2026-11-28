@@ -36,10 +36,6 @@
   view-transition-name: site-brand-logo;
 }
 
-.site-nav-list {
-  view-transition-name: site-main-nav;
-}
-
 /* =============================================================
    1. SCROLL-TRIGGERED REVEAL ANIMATIONS
    ============================================================= */
@@ -208,11 +204,11 @@
 }
 
 /* Connected Hero Entrance Sequence */
-.hero-badge-wrap {
+.hero-badge-strip {
   animation: hero-fade-rise 400ms var(--easing-enter) 60ms both;
 }
 
-.hero-headline {
+.hero-title {
   animation: hero-fade-rise 450ms var(--easing-enter) 120ms both;
 }
 
@@ -220,12 +216,8 @@
   animation: hero-fade-rise 450ms var(--easing-enter) 180ms both;
 }
 
-.hero-cta-group {
+.hero-actions {
   animation: hero-fade-rise 450ms var(--easing-enter) 240ms both;
-}
-
-.hero-preview-frame {
-  animation: hero-preview-rise 600ms var(--easing-enter) 300ms both;
 }
 
 @keyframes hero-fade-rise {

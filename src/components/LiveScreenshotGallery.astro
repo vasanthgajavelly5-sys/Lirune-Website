@@ -255,78 +255,82 @@ const androidShots = [
 </section>
 
 <script>
-  // Tab switching
-  const tabWindows = document.getElementById('tab-windows');
-  const tabAndroid = document.getElementById('tab-android');
-  const panelWindows = document.getElementById('gallery-windows-panel');
-  const panelAndroid = document.getElementById('gallery-android-panel');
+  function setupLiveGallery() {
+    // Tab switching
+    const tabWindows = document.getElementById('tab-windows');
+    const tabAndroid = document.getElementById('tab-android');
+    const panelWindows = document.getElementById('gallery-windows-panel');
+    const panelAndroid = document.getElementById('gallery-android-panel');
 
-  if (tabWindows && tabAndroid && panelWindows && panelAndroid) {
-    tabWindows.addEventListener('click', () => {
-      tabWindows.classList.add('active');
-      tabWindows.setAttribute('aria-selected', 'true');
-      tabAndroid.classList.remove('active');
-      tabAndroid.setAttribute('aria-selected', 'false');
-      panelWindows.classList.add('active');
-      panelWindows.removeAttribute('hidden');
-      panelAndroid.classList.remove('active');
-      panelAndroid.setAttribute('hidden', '');
-    });
-
-    tabAndroid.addEventListener('click', () => {
-      tabAndroid.classList.add('active');
-      tabAndroid.setAttribute('aria-selected', 'true');
-      tabWindows.classList.remove('active');
-      tabWindows.setAttribute('aria-selected', 'false');
-      panelAndroid.classList.add('active');
-      panelAndroid.removeAttribute('hidden');
-      panelWindows.classList.remove('active');
-      panelWindows.setAttribute('hidden', '');
-    });
-  }
-
-  // Generic carousel controller
-  function setupCarousel(trackId, prevBtnId, nextBtnId, thumbsId) {
-    const track = document.getElementById(trackId);
-    const prevBtn = document.getElementById(prevBtnId);
-    const nextBtn = document.getElementById(nextBtnId);
-    const thumbs = document.getElementById(thumbsId);
-    if (!track) return;
-
-    const slides = Array.from(track.querySelectorAll('.carousel-slide'));
-    const thumbBtns = thumbs ? Array.from(thumbs.querySelectorAll('.thumb-btn')) : [];
-    let currentIndex = 0;
-
-    function goTo(idx) {
-      if (idx < 0) idx = slides.length - 1;
-      if (idx >= slides.length) idx = 0;
-      currentIndex = idx;
-
-      slides.forEach((s, i) => {
-        s.classList.toggle('active', i === currentIndex);
+    if (tabWindows && tabAndroid && panelWindows && panelAndroid) {
+      tabWindows.addEventListener('click', () => {
+        tabWindows.classList.add('active');
+        tabWindows.setAttribute('aria-selected', 'true');
+        tabAndroid.classList.remove('active');
+        tabAndroid.setAttribute('aria-selected', 'false');
+        panelWindows.classList.add('active');
+        panelWindows.removeAttribute('hidden');
+        panelAndroid.classList.remove('active');
+        panelAndroid.setAttribute('hidden', '');
       });
 
-      thumbBtns.forEach((b, i) => {
-        b.classList.toggle('active', i === currentIndex);
+      tabAndroid.addEventListener('click', () => {
+        tabAndroid.classList.add('active');
+        tabAndroid.setAttribute('aria-selected', 'true');
+        tabWindows.classList.remove('active');
+        tabWindows.setAttribute('aria-selected', 'false');
+        panelAndroid.classList.add('active');
+        panelAndroid.removeAttribute('hidden');
+        panelWindows.classList.remove('active');
+        panelWindows.setAttribute('hidden', '');
       });
     }
 
-    if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
-    if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+    // Generic carousel controller
+    function setupCarousel(trackId: string, prevBtnId: string, nextBtnId: string, thumbsId: string) {
+      const track = document.getElementById(trackId);
+      const prevBtn = document.getElementById(prevBtnId);
+      const nextBtn = document.getElementById(nextBtnId);
+      const thumbs = document.getElementById(thumbsId);
+      if (!track) return;
 
-    thumbBtns.forEach((btn, i) => {
-      btn.addEventListener('click', () => goTo(i));
-    });
+      const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+      const thumbBtns = thumbs ? Array.from(thumbs.querySelectorAll('.thumb-btn')) : [];
+      let currentIndex = 0;
 
-    // Keyboard navigation
-    track.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') goTo(currentIndex - 1);
-      if (e.key === 'ArrowRight') goTo(currentIndex + 1);
-    });
+      function goTo(idx: number) {
+        if (idx < 0) idx = slides.length - 1;
+        if (idx >= slides.length) idx = 0;
+        currentIndex = idx;
+
+        slides.forEach((s, i) => {
+          s.classList.toggle('active', i === currentIndex);
+        });
+
+        thumbBtns.forEach((b, i) => {
+          b.classList.toggle('active', i === currentIndex);
+        });
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+      if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+      thumbBtns.forEach((btn, i) => {
+        btn.addEventListener('click', () => goTo(i));
+      });
+
+      // Keyboard navigation
+      track.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goTo(currentIndex - 1);
+        if (e.key === 'ArrowRight') goTo(currentIndex + 1);
+      });
+    }
+
+    setupCarousel('win-carousel-track', 'win-prev-btn', 'win-next-btn', 'win-thumbs');
+    setupCarousel('android-carousel-track', 'android-prev-btn', 'android-next-btn', 'android-thumbs');
   }
 
-  setupCarousel('win-carousel-track', 'win-prev-btn', 'win-next-btn', 'win-thumbs');
-  setupCarousel('android-carousel-track', 'android-prev-btn', 'android-next-btn', 'android-thumbs');
+  document.addEventListener('astro:page-load', setupLiveGallery);
 </script>
 
 <style>
@@ -365,7 +369,7 @@ const androidShots = [
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-secondary);
-    transition: all var(--duration-fast) var(--ease-out);
+    transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
   }
 
   .gallery-tab:hover {
@@ -417,7 +421,7 @@ const androidShots = [
     align-items: center;
     justify-content: center;
     box-shadow: var(--shadow-md);
-    transition: all var(--duration-fast) var(--ease-out);
+    transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
   }
 
   .carousel-nav-btn:hover {
@@ -525,7 +529,7 @@ const androidShots = [
     overflow: hidden;
     padding: 0;
     opacity: 0.6;
-    transition: all var(--duration-fast) var(--ease-out);
+    transition: opacity var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
   }
 
   .thumb-btn:hover {

@@ -97,7 +97,12 @@ for (const page of expectedPages) {
         assert(websiteData.length === 1, 'Homepage has exactly one WebSite structured-data item');
         if (websiteData.length === 1) {
           assert(websiteData[0].name === 'Lirune Reader', 'WebSite structured data names Lirune Reader');
-          assert(websiteData[0].alternateName === 'Lirune', 'WebSite structured data has Lirune alternateName');
+          assert(
+            Array.isArray(websiteData[0].alternateName) &&
+              websiteData[0].alternateName.includes('Lirune') &&
+              websiteData[0].alternateName.includes('lirune-reader.web.app'),
+            'WebSite structured data includes Lirune and hostname alternateNames'
+          );
           assert(websiteData[0].url === `${CANONICAL_DOMAIN}/`, 'WebSite structured data uses the canonical homepage URL');
         }
         const jsonText = JSON.stringify(parsed);
@@ -112,6 +117,13 @@ for (const page of expectedPages) {
       assert(/<meta\s+property=["']og:type["']\s+content=["']website["']/i.test(html), 'Homepage Open Graph type is website');
       assert(/<meta\s+property=["']og:url["']\s+content=["']https:\/\/lirune-reader\.web\.app\/["']/i.test(html), 'Homepage Open Graph URL is canonical');
       assert(/50\+ formats/i.test(html), 'Homepage metadata includes the 50+ formats positioning');
+    }
+  } else {
+    const jsonLdMatch = /<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/i.exec(html);
+    if (jsonLdMatch) {
+      const parsed = JSON.parse(jsonLdMatch[1]);
+      const websiteData = (parsed['@graph'] || []).filter(item => item['@type'] === 'WebSite');
+      assert(websiteData.length === 0, `Subpage ${page} does not emit homepage-only WebSite structured data`);
     }
   }
 }

@@ -5,5 +5,10 @@ export default defineConfig({
   trailingSlash: 'never',
   build: {
     format: 'directory'
+  },
+  vite: {
+    build: {
+      assetsInlineLimit: 0
+    }
   }
 });

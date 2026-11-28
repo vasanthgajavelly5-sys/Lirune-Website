@@ -12,7 +12,7 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
       <input
         type="text"
         id="format-search-input"
-        placeholder="Filter by format or extension (e.g. epub, pdf, mobi, docx, xlsx, pptx)..."
+        placeholder="Filter by format or extension (e.g. epub, pdf, mobi, docx, xlsx, pptx)…"
         aria-label="Filter formats"
         class="format-search-input"
       />
@@ -83,57 +83,59 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
 </div>
 
 <script>
-  const searchInput = document.getElementById('format-search-input') as HTMLInputElement;
-  const categoryPills = document.querySelectorAll('.cat-pill');
-  const rows = document.querySelectorAll('.format-row');
-  const noMsg = document.getElementById('no-formats-msg');
+  function setupFormatTable() {
+    const searchInput = document.getElementById('format-search-input') as HTMLInputElement | null;
+    const categoryPills = document.querySelectorAll('.cat-pill');
+    const rows = document.querySelectorAll('.format-row');
+    const noMsg = document.getElementById('no-formats-msg');
 
-  let activeCategory = 'all';
-  let searchQuery = '';
+    let activeCategory = 'all';
+    let searchQuery = '';
 
-  function filterTable() {
-    let visibleCount = 0;
-    rows.forEach(row => {
-      const el = row as HTMLElement;
-      const name = el.getAttribute('data-name') || '';
-      const exts = el.getAttribute('data-exts') || '';
-      const cat = el.getAttribute('data-category') || '';
+    function filterTable() {
+      let visibleCount = 0;
+      rows.forEach(row => {
+        const el = row as HTMLElement;
+        const name = el.getAttribute('data-name') || '';
+        const exts = el.getAttribute('data-exts') || '';
+        const cat = el.getAttribute('data-category') || '';
 
-      const matchesCat = (activeCategory === 'all' || cat === activeCategory);
-      const matchesSearch = !searchQuery || name.includes(searchQuery) || exts.includes(searchQuery) || cat.toLowerCase().includes(searchQuery);
+        const matchesCat = (activeCategory === 'all' || cat === activeCategory);
+        const matchesSearch = !searchQuery || name.includes(searchQuery) || exts.includes(searchQuery) || cat.toLowerCase().includes(searchQuery);
 
-      if (matchesCat && matchesSearch) {
-        el.style.display = '';
-        visibleCount++;
-      } else {
-        el.style.display = 'none';
+        if (matchesCat && matchesSearch) {
+          el.style.display = '';
+          visibleCount++;
+        } else {
+          el.style.display = 'none';
+        }
+      });
+
+      if (noMsg) {
+        noMsg.classList.toggle('hidden', visibleCount > 0);
       }
-    });
-
-    if (noMsg) {
-      noMsg.classList.toggle('hidden', visibleCount > 0);
     }
-  }
 
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
+    searchInput?.addEventListener('input', (e) => {
       searchQuery = (e.target as HTMLInputElement).value.toLowerCase().trim();
       filterTable();
     });
+
+    categoryPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        categoryPills.forEach(p => {
+          p.classList.remove('active');
+          p.setAttribute('aria-checked', 'false');
+        });
+        pill.classList.add('active');
+        pill.setAttribute('aria-checked', 'true');
+        activeCategory = pill.getAttribute('data-category') || 'all';
+        filterTable();
+      });
+    });
   }
 
-  categoryPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      categoryPills.forEach(p => {
-        p.classList.remove('active');
-        p.setAttribute('aria-checked', 'false');
-      });
-      pill.classList.add('active');
-      pill.setAttribute('aria-checked', 'true');
-      activeCategory = pill.getAttribute('data-category') || 'all';
-      filterTable();
-    });
-  });
+  document.addEventListener('astro:page-load', setupFormatTable);
 </script>
 
 <style>
@@ -193,7 +195,7 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
     background: var(--bg-surface);
     border: 1px solid var(--border-default);
     color: var(--text-secondary);
-    transition: all var(--duration-fast) var(--ease-out);
+    transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
   }
 
   .cat-pill:hover {

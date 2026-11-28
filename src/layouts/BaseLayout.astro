@@ -2,7 +2,7 @@
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import ScreenshotLightbox from '../components/ScreenshotLightbox.astro';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import config from '../data/config.json';
 import releases from '../data/releases.json';
 import '../styles/tokens.css';
@@ -29,26 +29,32 @@ const {
 
 // Normalise canonical URL (no trailing slash for non-root paths)
 const cleanPath = canonicalPath === '/' ? '/' : canonicalPath.replace(/\/+$/, '');
+const isHomePage = cleanPath === '/';
+const siteHostname = new URL(config.siteUrl).hostname;
 const canonicalUrl = new URL(cleanPath, config.siteUrl).href;
 const fullImageUrl = new URL(image, config.siteUrl).href;
 
-// JSON-LD Structured Data
+// JSON-LD Structured Data (WebSite is homepage-only per Google Site Name guidelines)
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
-    {
+    ...(isHomePage ? [{
       "@type": "WebSite",
       "@id": `${config.siteUrl}/#website`,
       "url": `${config.siteUrl}/`,
-      "name": "Lirune Reader",
-      "alternateName": "Lirune",
+      "name": config.name,
+      "alternateName": [config.shortName, siteHostname],
       "description": config.description,
-      "inLanguage": "en-US"
-    },
+      "inLanguage": "en-US",
+      "publisher": {
+        "@id": `${config.siteUrl}/#organization`
+      }
+    }] : []),
     {
       "@type": "Organization",
       "@id": `${config.siteUrl}/#organization`,
-      "name": "Lirune",
+      "name": config.name,
+      "alternateName": config.shortName,
       "url": config.siteUrl,
       "logo": `${config.siteUrl}/images/branding/lirune-icon.png`,
       "sameAs": [
@@ -113,7 +119,7 @@ const jsonLd = {
     <meta name="theme-color" content="#0F1217" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#F8F8FA" media="(prefers-color-scheme: light)" />
 
-    <ViewTransitions />
+    <ClientRouter />
 
     <script is:inline>
       function applySavedTheme() {
@@ -123,17 +129,30 @@ const jsonLd = {
           const theme = stored === 'system' ? (prefersDark ? 'dark' : 'light') : stored;
           document.documentElement.setAttribute('data-theme', theme);
           document.documentElement.setAttribute('data-theme-setting', stored);
+          document.documentElement.style.colorScheme = theme;
+          const themeColor = theme === 'dark' ? '#0F1217' : '#F8F8FA';
+          document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute('content', themeColor));
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'dark');
           document.documentElement.setAttribute('data-theme-setting', 'system');
+          document.documentElement.style.colorScheme = 'dark';
         }
       }
+      if (!window.__liruneThemeBound) {
+        window.__liruneThemeBound = true;
+        document.addEventListener('astro:after-swap', applySavedTheme);
+        try {
+          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if ((localStorage.getItem('lirune-theme') || 'system') === 'system') applySavedTheme();
+          });
+        } catch (err) {}
+      }
       applySavedTheme();
-      document.addEventListener('astro:after-swap', applySavedTheme);
     </script>
 
     <!-- SEO & Metadata -->
     <title>{title}</title>
+    <meta name="application-name" content={config.name} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
     {noindex ? (
@@ -160,7 +179,7 @@ const jsonLd = {
     <meta name="twitter:image" content={fullImageUrl} />
 
     <!-- Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
   </head>
   <body>
     <SiteHeader currentPath={cleanPath} />
@@ -170,97 +189,73 @@ const jsonLd = {
     <SiteFooter />
     <ScreenshotLightbox />
 
-    <!-- Motion & Interaction Runtime (Scroll Reveals, Stagger, and Copy Micro-interactions) -->
-    <script is:inline>
-      (function() {
-        let observer = null;
+    <!-- Motion & Interaction Runtime (Scroll Reveals & Stagger) -->
+    <script>
+      let observer: IntersectionObserver | null = null;
 
-        function initMotionSystem() {
-          if (observer) observer.disconnect();
+      function revealElement(el: Element) {
+        el.classList.add('is-visible');
+        if (el.hasAttribute('data-reveal')) el.setAttribute('data-reveal', 'active');
+        if (el.classList.contains('stagger-children') || el.hasAttribute('data-stagger')) {
+          if (el.hasAttribute('data-stagger')) el.setAttribute('data-stagger', 'active');
+          Array.from(el.children).forEach(child => child.classList.add('is-visible'));
+        }
+      }
 
-          const revealElements = document.querySelectorAll('.reveal, [data-reveal]');
-          const staggerContainers = document.querySelectorAll('.stagger-children, [data-stagger]');
+      function initMotionSystem() {
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
+        document.body.style.overflow = '';
 
-          // Check reduced motion preference
-          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            revealElements.forEach(el => {
-              el.classList.add('is-visible');
-              el.setAttribute('data-reveal', 'active');
-            });
-            staggerContainers.forEach(container => {
-              container.classList.add('is-visible');
-              container.setAttribute('data-stagger', 'active');
-              Array.from(container.children).forEach(child => child.classList.add('is-visible'));
-            });
-            return;
-          }
+        const revealElements = document.querySelectorAll('.reveal, [data-reveal]');
+        const staggerContainers = document.querySelectorAll('.stagger-children, [data-stagger]');
 
-          // Setup stagger indices
-          staggerContainers.forEach(container => {
-            Array.from(container.children).forEach((child, idx) => {
-              child.style.setProperty('--stagger-i', idx);
-            });
-          });
-
-          // IntersectionObserver for scroll reveals
-          observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                entry.target.setAttribute('data-reveal', 'active');
-                if (entry.target.classList.contains('stagger-children') || entry.target.hasAttribute('data-stagger')) {
-                  entry.target.classList.add('is-visible');
-                  entry.target.setAttribute('data-stagger', 'active');
-                  Array.from(entry.target.children).forEach(child => child.classList.add('is-visible'));
-                }
-                observer.unobserve(entry.target);
-              }
-            });
-          }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -40px 0px'
-          });
-
-          revealElements.forEach(el => observer.observe(el));
-          staggerContainers.forEach(el => observer.observe(el));
-
-          // Interactive copy buttons
-          document.querySelectorAll('.copy-checksum-btn').forEach(btn => {
-            btn.addEventListener('click', async () => {
-              const hash = btn.getAttribute('data-hash') || '';
-              if (hash && navigator.clipboard) {
-                try {
-                  await navigator.clipboard.writeText(hash);
-                  const originalText = btn.textContent;
-                  btn.classList.add('copied');
-                  btn.textContent = 'Copied!';
-                  setTimeout(() => {
-                    btn.classList.remove('copied');
-                    btn.textContent = originalText;
-                  }, 2000);
-                } catch (e) {}
-              }
-            });
-          });
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          revealElements.forEach(revealElement);
+          staggerContainers.forEach(revealElement);
+          return;
         }
 
-        document.addEventListener('astro:page-load', initMotionSystem);
-        document.addEventListener('astro:before-swap', () => {
-          if (observer) observer.disconnect();
+        staggerContainers.forEach(container => {
+          Array.from(container.children).forEach((child, idx) => {
+            (child as HTMLElement).style.setProperty('--stagger-i', String(Math.min(idx, 7)));
+          });
         });
 
-        // Listen for OS theme changes
-        try {
-          const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-          mediaQuery.addEventListener('change', function(e) {
-            const currentSetting = localStorage.getItem('lirune-theme') || 'system';
-            if (currentSetting === 'system') {
-              const newTheme = e.matches ? 'dark' : 'light';
-              document.documentElement.setAttribute('data-theme', newTheme);
+        observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              revealElement(entry.target);
+              observer?.unobserve(entry.target);
             }
           });
-        } catch (err) {}
-      })();
+        }, {
+          threshold: 0.01,
+          rootMargin: '0px 0px 40px 0px'
+        });
+
+        const viewportBottom = window.innerHeight + 40;
+        const targets = new Set([...revealElements, ...staggerContainers]);
+        targets.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= viewportBottom && rect.bottom >= -100) {
+            revealElement(el);
+          } else {
+            observer?.observe(el);
+          }
+        });
+      }
+
+      document.addEventListener('astro:page-load', initMotionSystem);
+      document.addEventListener('astro:before-swap', () => {
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
+        document.body.style.overflow = '';
+      });
     </script>
   </body>
 </html>

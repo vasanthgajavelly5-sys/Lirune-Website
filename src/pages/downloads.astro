@@ -499,7 +499,7 @@ import releases from '../data/releases.json';
     border: 1px solid var(--border-default);
     color: var(--text-primary);
     cursor: pointer;
-    transition: all var(--t-fast);
+    transition: background-color var(--t-fast), color var(--t-fast), border-color var(--t-fast);
   }
 
   .copy-checksum-btn:hover {
@@ -603,6 +603,5 @@ import releases from '../data/releases.json';
     });
   }
 
-  setupChecksumCopy();
   document.addEventListener('astro:page-load', setupChecksumCopy);
 </script>

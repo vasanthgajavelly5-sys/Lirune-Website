@@ -27,7 +27,7 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
         <input
           type="search"
           id="format-search-input"
-          placeholder="Filter by format or extension (e.g. epub, pdf, cbz, fb2, docx)..."
+          placeholder="Filter by format or extension (e.g. epub, pdf, cbz, fb2, docx)…"
           class="matrix-search-input"
           aria-label="Filter formats by name or extension"
         />
@@ -143,11 +143,11 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
     border: 1px solid var(--border-default);
     color: var(--text-primary);
     font-size: 0.98rem;
-    outline: none;
-    transition: all var(--t-fast);
+    transition: border-color var(--t-fast), background-color var(--t-fast), box-shadow var(--t-fast);
   }
 
-  .matrix-search-input:focus {
+  .matrix-search-input:focus-visible {
+    outline: none;
     border-color: var(--focus-ring);
     background-color: var(--bg-surface);
     box-shadow: 0 0 0 3px var(--accent-chrome-subtle);
@@ -169,7 +169,7 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
     font-size: 0.82rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all var(--t-fast);
+    transition: background-color var(--t-fast), color var(--t-fast), border-color var(--t-fast);
   }
 
   .category-pill-btn:hover {
@@ -437,6 +437,5 @@ const categories = ['All', ...new Set(formats.map(f => f.category))];
     });
   }
 
-  setupFormatsFilter();
   document.addEventListener('astro:page-load', setupFormatsFilter);
 </script>

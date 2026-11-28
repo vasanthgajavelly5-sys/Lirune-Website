@@ -44,14 +44,18 @@ const faqs = limit ? allFaqs.slice(0, limit) : allFaqs;
 
 <script>
   // Ensure aria-expanded stays synchronized with <details> open states for accessibility
-  document.querySelectorAll<HTMLDetailsElement>('.faq-accordion-component .faq-item').forEach((details) => {
-    const summary = details.querySelector<HTMLElement>('.faq-question');
-    if (!summary) return;
-    
-    details.addEventListener('toggle', () => {
-      summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+  function setupFaqAccordion() {
+    document.querySelectorAll<HTMLDetailsElement>('.faq-accordion-component .faq-item').forEach((details) => {
+      const summary = details.querySelector<HTMLElement>('.faq-question');
+      if (!summary) return;
+
+      details.addEventListener('toggle', () => {
+        summary.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+      });
     });
-  });
+  }
+
+  document.addEventListener('astro:page-load', setupFaqAccordion);
 </script>
 
 <style>

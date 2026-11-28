@@ -335,7 +335,7 @@ const categories = ['All', 'Reader', 'Library', 'Settings'];
     font-size: 0.82rem;
     font-weight: 500;
     cursor: pointer;
-    transition: all var(--t-fast);
+    transition: background-color var(--t-fast), color var(--t-fast), border-color var(--t-fast);
   }
 
   .filter-btn:hover {
@@ -376,7 +376,7 @@ const categories = ['All', 'Reader', 'Library', 'Settings'];
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-subtle);
-    transition: all var(--t-fast);
+    transition: border-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
   }
 
   .shot-card:hover {
@@ -526,6 +526,5 @@ const categories = ['All', 'Reader', 'Library', 'Settings'];
     });
   }
 
-  setupGalleryFilters();
   document.addEventListener('astro:page-load', setupGalleryFilters);
 </script>
